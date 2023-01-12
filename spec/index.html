@@ -1,0 +1,1285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>RDF 1.2 Concepts and Abstract Syntax</title>
+  <script src="https://www.w3.org/Tools/respec/respec-w3c" class="remove"></script>
+  <script src="./common/local-biblio.js" class="remove"></script>
+  <script src="./common/fixup.js" class="remove"></script>
+  <script class='remove'>
+    var respecConfig = {
+      localBiblio:          localBibliography,
+      specStatus:           "ED",
+      edDraftURI:           "https://w3c.github.io/rdf-concepts/spec/",
+      shortName:            "rdf12-concepts",
+      copyrightStart:       "2004",
+
+      previousPublishDate:  "2014-02-25",
+      previousMaturity:     "REC",
+      prevRecShortname:     "rdf11-concepts",
+
+      editors:  [
+          { name: "Richard Cyganiak", url: "http://richard.cyganiak.de/",
+            company: "DERI, NUI Galway", companyURL: "http://www.deri.ie/",
+          },
+          { name: "David Wood", url: "http://about.me/david_wood",
+            company: "3 Round Stones", companyURL: "http://3roundstones.com/",
+          },
+          { name: "Markus Lanthaler", url: "http://www.markus-lanthaler.com/",
+            company: "Graz University of Technology", companyURL: "http://www.tugraz.at/" }
+      ],
+
+      formerEditors: [
+        { name: "Graham Klyne" },
+        { name: "Jeremy J. Carroll" },
+        { name: "Brian McBride" }
+      ],
+
+      github: "https://github.com/w3c/rdf-concepts/",
+      group:           "rdf-star",
+      doJsonLd:     true,
+      wgPublicList: "public-rdf-star-wg"
+    };
+  </script>
+  <style>
+    figure { text-align: center; }
+    table td, table th { border: 1px solid #ddd; padding: 0.2em 0.5em; }
+    ol ol { list-style-type: lower-latin; }
+    code {color: #ff4500;}  /* Old W3C Style */
+  </style>
+</head>
+
+<body>
+<section id="abstract">
+  <p>The Resource Description Framework (RDF) is a framework for
+    representing information in the Web. This document defines an abstract syntax
+    (a data model) which serves to link all RDF-based languages and
+    specifications. The abstract syntax has two key data structures:
+    RDF graphs are sets of subject-predicate-object triples,
+    where the elements may be IRIs, blank nodes, or datatyped literals. They
+    are used to express descriptions of resources. RDF datasets are used
+    to organize collections of RDF graphs, and comprise a default graph
+    and zero or more named graphs.
+    [[[RDF12-CONCEPTS]]] also introduces key concepts and terminology, and discusses
+    datatyping and the handling of <a>fragment identifiers</a> in IRIs within
+    RDF graphs.</p>
+</section>
+
+<section id="sotd">
+  <p>This document is part of the RDF 1.2 document suite. It is the central
+    RDF 1.2 specification and defines the core RDF concepts.
+    Test suites and implementation reports of a number of RDF 1.2
+    specifications that build on this document are available through the  
+    [[[RDF11-TESTCASES]]] document [[RDF11-TESTCASES]].
+    There have been no changes to this document since its publication as
+    Proposed Recommendation.</p>
+
+  <p class="ednote">Determine how to reference 1.2 test cases.</p>
+
+  <section id="related" data-include="./common/related.html"></section>
+</section>
+
+<section id="section-Introduction" class="informative">
+  <h2>Introduction</h2>
+
+  <p>The <em>Resource Description Framework</em> (RDF) is a framework
+  for representing information in the Web.</p>
+
+  <p>This document defines an abstract syntax (a data model)
+  which serves to link all RDF-based languages and specifications,
+  including:</p>
+
+  <ul>
+    <li>the formal model-theoretic semantics for RDF [[RDF12-SEMANTICS]];</li>
+
+    <li>serialization syntaxes for storing and exchanging RDF such as [[[RDF12-TURTLE]]] [[RDF12-TURTLE]]
+      and [[[JSON-LD11]]] [[JSON-LD11]];</li>
+
+    <li>the [[[SPARQL12-QUERY]]] [[SPARQL12-QUERY]];</li>
+
+    <li>the [[[RDF12-SCHEMA]]] [[RDF12-SCHEMA]].</li>
+  </ul>
+
+  <section id="data-model">
+    <h3>Graph-based Data Model</h3>
+
+    <p>The core structure of the abstract syntax is a set of
+      <a data-lt="RDF triple">triples</a>, each consisting of a <a>subject</a>,
+      a <a>predicate</a> and an <a>object</a>. A set of such triples is called
+      an <a>RDF graph</a>. An RDF graph can be visualized as a node and
+      directed-arc diagram, in which each triple is represented as a
+      node-arc-node link.</p>
+
+    <figure>
+      <a href="rdf-graph.svg"><img src="rdf-graph.svg" alt="An RDF graph with two nodes (Subject and Object) and a triple connecting them (Predicate)" /></a>
+      <figcaption>An RDF graph with two nodes (Subject and Object) and a triple connecting them (Predicate)</figcaption>
+    </figure>
+
+    <p>There can be three kinds of <a>nodes</a> in an
+      <a>RDF graph</a>: <a>IRIs</a>, <a>literals</a>,
+      and <a>blank nodes</a>.</p>
+  </section>
+
+
+  <section id="resources-and-statements">
+    <h3>Resources and Statements</h3>
+
+    <p>Any <a>IRI</a> or <a>literal</a> <dfn data-lt="denote" data-local-lt="denoted">denotes</dfn>
+      <span class="ednote">Should this be replaced with a reference to <a data-cite="RDF12-SEMANTICS#denote">denote</a> in [[RDF12-SEMANTICS]]?</span>
+    something in the world (the "universe of discourse").
+    These things are called
+    <dfn data-lt="resource">resources</dfn>. Anything can be a resource,
+    including physical things, documents, abstract concepts, numbers
+    and strings; the term is synonymous with "entity" as it is used in
+    the RDF Semantics specification [[RDF12-SEMANTICS]].
+    The resource denoted by an IRI is called its <a>referent</a>, and the
+    resource denoted by a literal is called its
+    <a>literal value</a>. Literals have
+    <a>datatypes</a> that define the range of possible
+    values, such as strings, numbers, and dates. Special kind of literals,
+    <a>language-tagged strings</a>, denote
+    plain-text strings in a natural language.</p>
+
+    <p>Asserting an <a>RDF triple</a> says that <em>some relationship,
+    indicated by the <a>predicate</a>, holds between the
+    <a>resources</a> <a>denoted</a> by
+    the <a>subject</a> and <a>object</a></em>. This statement corresponding
+    to an RDF triple is known as an <dfn data-lt="statement">RDF statement</dfn>.
+    The predicate itself is an <a>IRI</a> and denotes a <dfn class="export">property</dfn>,
+    that is, a <a>resource</a> that can be thought of as a binary relation.
+    (Relations that involve more than two entities can only be
+    <a data-cite="SWBP-N-ARYRELATIONS#">indirectly
+    expressed in RDF</a> [[SWBP-N-ARYRELATIONS]].)</p>
+
+    <p>Unlike <a>IRIs</a> and <a>literals</a>,
+      <a>blank nodes</a> do not identify specific
+      <a>resources</a>. <a>Statements</a>
+      involving blank nodes say that something with the given relationships
+      exists, without explicitly naming it.</p>
+  </section>
+
+  <section id="referents">
+    <h3>The Referent of an IRI</h3>
+
+    <p>The <a>resource</a> <a>denoted</a> by an <a>IRI</a>
+      is also called its <dfn>referent</dfn>. For some IRIs with particular
+      meanings, such as those identifying XSD datatypes, the referent is
+      fixed by this specification. For all other IRIs, what exactly is
+      <a>denoted</a> by any given IRI is not defined by this specification. Other
+      specifications may fix IRI referents, or apply other constraints on
+      what may be the referent of any IRI.</p>
+
+    <p>Guidelines for determining the <a>referent</a> of an <a>IRI</a> are
+      provided in other documents, like
+      [[[WEBARCH]]] [[WEBARCH]]
+      and [[[COOLURIS]]] [[COOLURIS]].
+      A very brief, informal, and partial account follows:</p>
+
+    <ul>
+      <li>By design, IRIs have global scope. Thus, two different appearances of an IRI
+        <a>denote</a> the same <a>resource</a>. Violating this principle constitutes
+        an <a data-cite="WEBARCH#URI-collision">IRI collision</a> [[WEBARCH]].</li>
+
+      <li>By social convention, the
+        <a data-cite="WEBARCH#uri-ownership">IRI owner</a>
+        [[WEBARCH]] gets to say what the intended (or usual)
+        referent of an <a>IRI</a> is.  Applications and users need not
+        abide by this intended denotation, but there may be a loss of
+        interoperability with other applications and users if they do
+        not do so.</li>
+
+      <li>The IRI owner can establish the intended <a>referent</a>
+        by means of a specification or other document that explains
+        what is denoted. For example, the
+        [[[VOCAB-ORG]]] [[VOCAB-ORG]]
+        specifies the intended referents of various IRIs that start with
+        <code>http://www.w3.org/ns/org#</code>.</li>
+
+      <li>A good way of communicating the intended referent
+        is to set up the IRI so that it
+        <a data-cite="WEBARCH#uri-dereference">dereferences</a> [[WEBARCH]]
+        to such a document.</li>
+
+      <li>Such a document can, in fact, be an <a>RDF document</a>
+        that describes the denoted resource by means of
+        <a>RDF statements</a>.</li>
+    </ul>
+
+    <p>Perhaps the most important characteristic of <a>IRIs</a>
+      in web architecture is that they can be
+      <a data-cite="WEBARCH#uri-dereference">dereferenced</a>,
+      and hence serve as starting points for interactions with a remote server.
+      This specification is not concerned with such interactions.
+      It does not define an interaction model. It only treats IRIs as globally
+      unique identifiers in a graph data model that describes resources.
+      However, those interactions are critical to the concept of
+      [[[LINKED-DATA]]], [[LINKED-DATA]],
+      which makes use of the RDF data model and serialization formats.</p>
+  </section>
+
+  <section id="vocabularies">
+    <h3>RDF Vocabularies and Namespace IRIs</h3>
+
+    <p>An <dfn data-lt="vocabulary">RDF vocabulary</dfn> is a collection of <a>IRIs</a>
+      intended for use in <a>RDF graphs</a>. For example,
+      the IRIs documented in [[RDF12-SCHEMA]] are the RDF Schema vocabulary.
+      RDF Schema can itself be used to define and document additional
+      RDF vocabularies. Some such vocabularies are mentioned in the
+      Primer [[RDF12-PRIMER]].</p>
+
+    <p>The <a>IRIs</a> in an <a>RDF vocabulary</a> often begin with
+      a common substring known as a <dfn>namespace IRI</dfn>.
+      Some namespace IRIs are associated by convention with a short name
+      known as a <dfn>namespace prefix</dfn>. Some examples:
+
+    <table class="simple">
+      <caption>Some example namespace prefixes and IRIs</caption>
+      <tr>
+        <th>Namespace prefix</th>
+        <th>Namespace IRI</th>
+        <th>RDF vocabulary</th>
+      </tr>
+      <tr>
+        <td>rdf</td>
+        <td><a href="http://www.w3.org/1999/02/22-rdf-syntax-ns#"><code>http://www.w3.org/1999/02/22-rdf-syntax-ns#</code></a></td>
+        <td>The RDF built-in vocabulary [[RDF-SYNTAX]]</td>
+      </tr>
+      <tr><td>rdfs</td>
+        <td><a href="http://www.w3.org/2000/01/rdf-schema#"><code>http://www.w3.org/2000/01/rdf-schema#</code></a></td>
+        <td>The RDF Schema vocabulary [[RDF-SCHEMA]]</td>
+      </tr>
+      <tr><td>xsd</td>
+        <td><a href="http://www.w3.org/2001/XMLSchema#"><code>http://www.w3.org/2001/XMLSchema#</code></a></td>
+        <td>The <a>RDF-compatible XSD types</a></td>
+      </tr>
+    </table>
+
+    <p>In some serialization formats it is common to abbreviate <a>IRIs</a>
+      that start with <a>namespace IRIs</a> by using a
+      <a>namespace prefix</a> in order to assist readability. For example, the IRI
+      <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral</code>
+      would be abbreviated as <code>rdf:XMLLiteral</code>.
+      Note however that these abbreviations are <em>not</em> valid IRIs,
+      and must not be used in contexts where IRIs are expected.
+      Namespace IRIs and namespace prefixes are <em>not</em> a formal part of the
+      RDF data model. They are merely a syntactic convenience for
+      abbreviating IRIs.</p>
+
+    <p>The term “<dfn class="lint-ignore">namespace</dfn>” on its own does not have a
+      well-defined meaning in the context of RDF, but is sometimes informally
+      used to mean “<a>namespace IRI</a>” or “<a>RDF vocabulary</a>”.</p>
+  </section>
+
+  <section id="change-over-time">
+    <h2>RDF and Change over Time</h2>
+
+    <p>The RDF data model is <em>atemporal</em>: <a>RDF graphs</a>
+      are static snapshots of information.</p>
+
+    <p>However, <a>RDF graphs</a> can express information
+      about events and about temporal aspects of other entities,
+      given appropriate <a>vocabulary</a> terms.</p>
+
+    <p>Since <a>RDF graphs</a> are defined as mathematical
+      sets, adding or removing <a>triples</a> from an
+      RDF graph yields a different RDF graph.</p>
+
+    <p>We informally use the term <dfn>RDF source</dfn> to refer to a
+      persistent yet mutable source or container of
+      <a>RDF graphs</a>. An RDF source is a <a>resource</a>
+      that may be said to have a state that can change over time.
+      A snapshot of the state can be expressed as an RDF graph.
+      For example, any web document that has an RDF-bearing representation
+      may be considered an RDF source. Like all resources, RDF sources may
+      be named with <a>IRIs</a> and therefore described in
+      other RDF graphs.</p>
+
+    <p>Intuitively speaking, changes in the universe of discourse
+      can be reflected in the following ways:</p>
+
+    <ul>
+      <li>An <a>IRI</a>, once minted, should never
+        change its intended <a>referent</a>. (See
+        <a data-cite="WEBARCH#URI-persistence">URI persistence</a>
+        [[WEBARCH]].)</li>
+      <li><a>Literals</a>, by design, are constants and
+        never change their <a data-lt="literal value">value</a>.</li>
+      <li>A relationship that holds between two <a>resources</a>
+        at one time may not hold at another time.</li>
+      <li><a>RDF sources</a> may change their state over time.
+        That is, they may provide different <a>RDF graphs</a>
+        at different times.</li>
+      <li>Some <a>RDF sources</a> may, however, be immutable
+        snapshots of another RDF source, archiving its state at some
+        point in time.</li>
+    </ul>
+  </section>
+
+  <section id="managing-graphs">
+    <h3>Working with Multiple RDF Graphs</h3>
+
+    <p>As RDF graphs are sets of triples, they can be
+      combined easily, supporting the use of data from
+      multiple sources. Nevertheless, it is sometimes desirable to work
+      with multiple RDF graphs while keeping their contents separate.
+      <a>RDF datasets</a> support this requirement.</p>
+
+    <p>An <a>RDF dataset</a> is a collection of
+      <a>RDF graphs</a>. All but one of these graphs have
+      an associated <a>IRI</a> or blank node. They are called
+      <a>named graphs</a>, and the IRI or blank node
+      is called the <a>graph name</a>.
+      The remaining graph does not have an associated IRI, and is called
+      the <a>default graph</a> of the RDF dataset.</p>
+
+    <p>There are many possible uses for <a>RDF datasets</a>.
+      One such use is to hold snapshots of multiple
+      <a>RDF sources</a>.</p>
+  </section>
+
+  <section id="entailment">
+    <h3>Equivalence, Entailment and Inconsistency</h3>
+
+    <p>An <a>RDF triple</a> encodes a <a>statement</a>—a
+      simple <dfn class="export">logical expression</dfn>, or claim about the world.
+      An <a>RDF graph</a> is the conjunction (logical <em>AND</em>) of
+      its triples.   The precise details of this meaning of RDF triples and graphs are
+      the subject of the RDF Semantics specification [[RDF12-SEMANTICS]], which yields the
+      following relationships between <a>RDF graph</a>s:</p>
+
+    <dl>
+      <dt><dfn>Entailment</dfn></dt>
+      <dd>An <a>RDF graph</a> <em>A</em> entails another RDF graph <em>B</em>
+        if every possible arrangement of the world
+        that makes <em>A</em> true also makes <em>B</em> true. When <em>A</em>
+        entails <em>B</em>, if the truth of <em>A</em> is presumed or demonstrated
+        then the truth of <em>B</em> is established.
+        <div class="ednote">Should this be a reference to, or replace
+          <a data-cite="RDF12-SEMANTICS#entail">entail</a> in [[RDF12-SEMANTICS]]?
+        </div>
+      </dd>
+
+      <dt><dfn data-local-lt="equivalent">Equivalence</dfn></dt>
+      <dd>Two <a>RDF graphs</a> <em>A</em> and <em>B</em>
+        are equivalent if they make the same claim about the world.
+        <em>A</em> is equivalent to <em>B</em> if and only if
+        <em>A</em> <a data-lt="entailment">entails</a> <em>B</em> and
+        <em>B</em> entails <em>A</em>.
+        <div class="ednote">Should this be a reference to, or replace
+          <a data-cite="RDF12-SEMANTICS#equivalent">equivalent</a> in [[RDF12-SEMANTICS]]?
+        </div>
+      </dd>
+
+      <dt><dfn data-lt="inconsistent">Inconsistency</dfn><span id="dfn-inconsistency"><!-- obsolete term --></span></dt>
+      <dd>An <a>RDF graph</a> is inconsistent if it contains
+        an internal contradiction. There is no possible arrangement
+        of the world that would make the expression true.</dd>
+    </dl>
+
+    <p>An <span id="dfn-entailment-regime"><!-- obsolete term --></span><dfn data-cite="RDF12-SEMANTICS#entailment-regime">entailment regime</dfn> [[RDF12-SEMANTICS]] is a specification that
+      defines precise conditions that make these relationships hold.
+      RDF itself recognizes only some basic cases of entailment, <a>equivalence</a>
+      and inconsistency. Other specifications, such as
+      [[[RDF-SCHEMA]]] [[RDF-SCHEMA]]
+      and <a data-cite="owl2-overview#">OWL 2</a>
+      [[OWL2-OVERVIEW]], add more powerful entailment regimes,
+      as do some domain-specific <a>vocabularies</a>.</p>
+
+    <p>This specification does not constrain how implementations
+      use the logical relationships defined by
+      <a>entailment regimes</a>.
+      Implementations may or may not detect
+      <a>inconsistencies</a>, and may make all,
+      some or no <a data-cite="RDF12-SEMANTICS#dfn-entailment">entailed</a> information
+      available to users.</p>
+  </section>
+
+  <section id="rdf-documents">
+    <h2>RDF Documents and Syntaxes</h2>
+
+    <p>An <dfn>RDF document</dfn> is a document that encodes an
+      <a>RDF graph</a> or <a>RDF dataset</a> in a <dfn>concrete RDF syntax</dfn>,
+      such as Turtle [[RDF12-TURTLE]], RDFa [[RDFA-PRIMER]], JSON-LD [[JSON-LD11]], or
+      TriG [[RDF12-TRIG]]. RDF documents enable the exchange of RDF graphs and RDF
+      datasets between systems.</p>
+
+    <p>A <a>concrete RDF syntax</a> may offer
+      many different ways to encode the same <a>RDF graph</a> or
+      <a>RDF dataset</a>, for example through the use of
+      <a>namespace prefixes</a>,
+      <a>relative IRIs</a>, <a>blank node identifiers</a>,
+      and different ordering of statements. While these aspects can have great
+      effect on the convenience of working with the <a>RDF document</a>,
+      they are not significant for its meaning.</p>
+  </section>
+</section>
+
+<section id="conformance">
+  <p>This specification, <em>RDF 1.1 Concepts and Abstract Syntax</em>,
+    defines a data model and related terminology for use in
+    other specifications, such as
+    <a>concrete RDF syntaxes</a>,
+    API specifications, and query languages.
+    Implementations cannot directly conform to
+    <em>RDF 1.1 Concepts and Abstract Syntax</em>,
+    but can conform to such other specifications that normatively
+    reference terms defined here.</p>
+</section>
+
+
+<section id="section-rdf-graph">
+  <h2>RDF Graphs</h2>
+
+  <p>An <dfn>RDF graph</dfn> is a set of
+  <a>RDF triples</a>.</p>
+
+  <section id="section-triples">
+    <h3>Triples</h3>
+
+    <p>An <dfn data-lt="triple">RDF triple</dfn> consists of three components:</p>
+
+    <ul>
+      <li>the <dfn>subject</dfn>, which is an
+      <a>IRI</a> or a <a>blank node</a></li>
+
+      <li>the <dfn>predicate</dfn>, which is an <a>IRI</a></li>
+
+      <li>the <dfn>object</dfn>, which is an <a>IRI</a>,
+      a <a>literal</a> or a <a>blank node</a></li>
+    </ul>
+
+    <p>An RDF triple is conventionally written in the order subject,
+      predicate, object.</p>
+
+    <p>The set of <span id="dfn-nodes"><!-- obsolete term--></span><dfn data-lt="node">nodes</dfn> of an <a>RDF graph</a>
+      is the set of subjects and objects of triples in the graph.
+      It is possible for a predicate IRI to also occur as a node in
+      the same graph.</p>
+
+    <p><a>IRIs</a>, <a>literals</a> and
+      <a>blank nodes</a> are collectively known as
+      <span id="dfn-rdf-terms"><!-- obsolete term--></span><dfn data-lt="rdf term">RDF terms</dfn>.</p>
+
+    <p><a>IRIs</a>, <a>literals</a>
+      and <a>blank nodes</a> are distinct and distinguishable.
+      For example, <code>http://example.org/</code> as a string literal
+      is neither equal to <code>http://example.org/</code> as an IRI,
+      nor to a blank node with the <a>blank node identifier</a>
+      <code>http://example.org/</code>.</p>
+  </section>
+
+  <section id="section-IRIs">
+    <h3>IRIs</h3>
+
+    <p>An <dfn><abbr title="Internationalized Resource Identifier">IRI</abbr></dfn>
+      (Internationalized Resource Identifier) within an RDF graph
+      is a Unicode string [[!UNICODE]] that conforms to the syntax
+      defined in RFC 3987 [[!RFC3987]].</p>
+
+    <p>IRIs in the RDF abstract syntax MUST be absolute, and MAY
+      contain a fragment identifier.</p>
+
+    <p><dfn>IRI equality</dfn>:
+      Two IRIs are equal if and only if they are <a>equivalent</a>
+      under Simple String Comparison according to
+      <a data-cite="rfc3987#section-5.1">section 5.1</a>
+      of [[!RFC3987]]. Further normalization MUST NOT be performed when
+      comparing IRIs for equality.</p>
+
+    <div class="note" id="note-iris">
+      <p><strong>URIs and IRIs:</strong>
+        IRIs are a generalization of
+        <dfn data-lt="URI" data-lt-noDefault><abbr title="Uniform Resource Identifier">URI</abbr>s</dfn>
+        [[RFC3986]] that permits a wider range of Unicode characters.
+        Every absolute URI and URL is an IRI, but not every IRI is an URI.
+        When IRIs are used in operations that are only
+        defined for URIs, they must first be converted according to
+        the mapping defined in
+        <a data-cite="rfc3987#section-3.1">section 3.1</a>
+        of [[!RFC3987]]. A notable example is retrieval over the HTTP
+        protocol. The mapping involves UTF-8 encoding of non-ASCII
+        characters, %-encoding of octets not allowed in URIs, and
+        Punycode-encoding of domain names.</p>
+
+      <p><strong>Relative IRIs:</strong>
+        Some <a>concrete RDF syntaxes</a> permit
+        <span id="dfn-relative-iris"><!-- obsolete term--></span><dfn data-lt="relative iri">relative IRIs</dfn> as a convenient shorthand
+        that allows authoring of documents independently from their final
+        publishing location. Relative IRIs must be
+        <a data-cite="rfc3986#section-5.2">resolved
+        against</a> a <dfn class="export">base IRI</dfn> to make them absolute.
+        Therefore, the RDF graph serialized in such syntaxes is well-defined only
+        if a <a data-cite="rfc3986#section-5.1">base IRI
+        can be established</a> [[RFC3986]].</p>
+
+      <p><strong>IRI normalization:</strong>
+        Interoperability problems can be avoided by minting
+        only IRIs that are normalized according to
+        <a data-cite="rfc3987#section-5">Section 5</a>
+        of [[!RFC3987]]. Non-normalized forms that are best avoided
+        include:</p>
+
+      <ul>
+        <li>Uppercase characters in scheme names and domain names</li>
+        <li>Percent-encoding of characters where it is not
+          required by IRI syntax</li>
+        <li>Explicitly stated HTTP default port
+          (<code>http://example.com:80/</code>);
+          <code>http://example.com/</code> is preferable</li>
+        <li>Completely empty path in HTTP IRIs
+          (<code>http://example.com</code>);
+          <code>http://example.com/</code> is preferable</li>
+        <li>“<code>/./</code>” or “<code>/../</code>” in the path
+          component of an IRI</li>
+        <li>Lowercase hexadecimal letters within percent-encoding
+          triplets (“<code>%3F</code>” is preferable over
+          “<code>%3f</code>”)</li>
+        <li>Punycode-encoding of Internationalized Domain Names
+          in IRIs</li>
+        <li>IRIs that are not in Unicode Normalization
+          Form C [[NFC]]</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="section-Graph-Literal">
+    <h2>Literals</h2>
+
+    <p>Literals are used for values such as strings, numbers, and dates.</p>
+
+    <p>A <dfn data-lt="RDF literal">literal</dfn> in an <a>RDF graph</a> consists of two or three
+      elements:</p>
+
+    <ul>
+      <li>a <dfn>lexical form</dfn>, being a Unicode [[!UNICODE]] string,
+        which SHOULD be in Normal Form&nbsp;C [[!NFC]],</li>
+      <li>a <dfn>datatype IRI</dfn>, being an <a>IRI</a>
+        identifying a datatype that determines how the lexical form maps
+        to a <a>literal value</a>, and</li>
+      <li>if and only if the <a>datatype IRI</a> is
+        <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#langString</code>, a
+        non-empty <dfn>language tag</dfn> as defined by [[!BCP47]]. The
+        language tag MUST be well-formed according to
+        <a data-cite="bcp47#section-2.2.9">section 2.2.9</a>
+        of [[!BCP47]].</li>
+    </ul>
+
+    <p>A literal is a <dfn>language-tagged string</dfn> if the third element
+      is present. Lexical representations of language tags MAY be converted
+      to lower case. The value space of language tags is always in lower
+      case.</p>
+
+    <p>Please note that concrete syntaxes MAY support
+      <dfn data-lt="simple literal" class="export">simple literals</dfn> consisting of only a
+      <a>lexical form</a> without any <a>datatype IRI</a> or <a>language tag</a>.
+      Simple literals are syntactic sugar for abstract syntax
+      <a>literals</a>
+      with the <a>datatype IRI</a>
+      <code>http://www.w3.org/2001/XMLSchema#string</code>. Similarly, most
+      concrete syntaxes represent
+      <a>language-tagged strings</a> without
+      the <a>datatype IRI</a> because it always equals
+      <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#langString</code>.</p>
+
+    <p>The <dfn>literal value</dfn> associated with a <a>literal</a> is:</p>
+
+    <ol>
+      <li>If the literal is a <a>language-tagged string</a>,
+        then the literal value is a pair consisting of its <a>lexical form</a>
+        and its <a>language tag</a>, in that order.</li>
+
+      <li>If the literal's <a>datatype IRI</a> is in the set of
+        <a>recognized datatype IRIs</a>, let <var>d</var> be the
+        <a>referent</a> of the datatype IRI.
+        <ol>
+          <li>If the literal's <a>lexical form</a> is in the <a>lexical space</a>
+            of <var>d</var>, then the literal value is the result of applying
+            the <a>lexical-to-value mapping</a> of <var>d</var> to the
+            <a>lexical form</a>.</li>
+          <li>Otherwise, the literal is ill-typed and no literal value can be
+             associated with the literal. Such a case produces a semantic
+             inconsistency but is not <em>syntactically</em> ill-formed.
+             Implementations MUST accept ill-typed literals and produce RDF
+             graphs from them. Implementations MAY produce warnings when
+             encountering ill-typed literals.</li>
+        </ol>
+      </li>
+      <li>If the literal's <a>datatype IRI</a> is <em>not</em> in the set of
+        <a>recognized datatype IRIs</a>, then the literal value is
+        not defined by this specification.</li>
+    </ol>
+
+    <p><dfn data-lt="term-equal">Literal term equality</dfn>: Two literals are term-equal (the same
+      RDF literal) if and only if the two <a>lexical forms</a>,
+      the two <a>datatype IRIs</a>, and the two
+      <a>language tags</a> (if any) compare equal,
+      character by character. Thus, two literals can have the same value
+      without being the same RDF term. For example:</p>
+
+    <pre>
+      `"1"^^xs:integer`
+      `"01"^^xs:integer`
+    </pre>
+
+    <p>denote the same <a data-lt="literal value">value</a>, but are not the
+      same literal <a>RDF terms</a> and are not
+      <a>term-equal</a> because their
+      <a>lexical form</a> differs.</p>
+  </section>
+
+  <section id="section-blank-nodes">
+    <h2>Blank Nodes</h2>
+
+    <p><dfn data-lt="blank node">Blank nodes</dfn> are disjoint from
+      <a>IRIs</a> and <a>literals</a>.  Otherwise,
+      the set of possible blank nodes is arbitrary.  RDF makes no reference to
+      any internal structure of blank nodes.</p>
+
+    <p class="note" id="note-bnode-id">
+      <span id="dfn-blank-node-identifiers"><!-- obsolete term--></span><dfn data-lt="blank node identifier">Blank node identifiers</dfn>
+      are local identifiers that are used in some
+      <a>concrete RDF syntaxes</a>
+      or RDF store implementations.
+      They are always locally scoped to the file or RDF store,
+      and are <em>not</em> persistent or portable identifiers
+      for blank nodes. Blank node identifiers are <em>not</em>
+      part of the RDF abstract syntax, but are entirely dependent
+      on the concrete syntax or implementation. The syntactic restrictions
+      on blank node identifiers, if any, therefore also depend on
+      the concrete RDF syntax or implementation.  Implementations that handle blank node
+      identifiers in concrete syntaxes need to be careful not to create the
+      same blank node from multiple occurrences of the same blank node identifier
+      except in situations where this is supported by the syntax.</p>
+  </section>
+
+  <section id="section-skolemization">
+    <h3>Replacing Blank Nodes with IRIs</h3>
+
+    <p>Blank nodes do not have identifiers in the RDF abstract syntax. The
+      <a>blank node identifiers</a> introduced
+      by some concrete syntaxes have only
+      local scope and are purely an artifact of the serialization.</p>
+
+    <p>In situations where stronger identification is needed, systems MAY
+      systematically replace some or all of the blank nodes in an RDF graph
+      with <a>IRIs</a>.  Systems wishing to do this SHOULD
+      mint a new, globally
+      unique IRI (a <dfn class="export">Skolem IRI</dfn>) for each blank node so replaced.</p>
+
+    <p>This transformation does not appreciably change the meaning of an
+      RDF graph, provided that the Skolem IRIs do not occur anywhere else.
+      It does however permit the possibility of other graphs
+      subsequently using the Skolem IRIs, which is not possible
+      for blank nodes.</p>
+
+    <p>Systems may wish to mint Skolem IRIs in such a way that they can
+      recognize the IRIs as having been introduced solely to replace blank
+      nodes. This allows a system to map IRIs back to blank nodes
+      if needed.</p>
+
+    <p>Systems that want Skolem IRIs to be recognizable outside of the system
+      boundaries SHOULD use a well-known IRI [[RFC5785]] with the registered
+      name <code>genid</code>. This is an IRI that uses the HTTP or HTTPS scheme,
+      or another scheme that has been specified to use well-known IRIs; and whose
+      path component starts with <code>/.well-known/genid/</code>.
+
+    <p>For example, the authority responsible for the domain
+      <code>example.com</code> could mint the following recognizable Skolem IRI:</p>
+
+    <pre>http://example.com/.well-known/genid/d26a2d0e98334696f4ad70a677abc1f6</pre>
+
+    <p class="note">RFC 5785 [[RFC5785]] only specifies well-known URIs,
+      not IRIs. For the purpose of this document, a well-known IRI is any
+      IRI that results in a well-known <a>URI</a> after IRI-to-URI mapping [[!RFC3987]].</p>
+  </section>
+
+  <section id="graph-isomorphism">
+    <h3>Graph Comparison</h3>
+
+    <p id="section-graph-equality">Two
+      <a>RDF graphs</a> <var>G</var> and <var>G'</var> are
+      <dfn data-lt="graph isomorphism|isomorphic" data-lt-noDefault class="export">isomorphic</dfn> (that is, they have an identical
+      form) if there is a bijection <var>M</var> between the sets of nodes of the two
+      graphs, such that:</p>
+
+    <ol>
+      <li><var>M</var> maps blank nodes to blank nodes.</li>
+      <li><var>M(lit)=lit</var> for all <a>RDF literals</a> <var>lit</var> which
+        are nodes of <var>G</var>.</li>
+
+      <li><var>M(iri)=iri</var> for all <a>IRIs</a> <var>iri</var>
+        which are nodes of <var>G</var>.</li>
+
+      <li>The triple <var>( s, p, o )</var> is in <var>G</var> if and
+        only if the triple <var>( M(s), p, M(o) )</var> is in
+        <var>G'</var></li>
+    </ol>
+
+    <p>See also: <a>IRI equality</a>, <a>literal term equality</a>.</p>
+
+    <p>With this definition, <var>M</var> shows how each blank node
+      in <var>G</var> can be replaced with
+      a new blank node to give <var>G'</var>. Graph isomorphism
+      is needed to support the RDF Test Cases [[RDF11-TESTCASES]] specification.</p>
+  </section>
+</section>
+
+<section id="section-dataset">
+  <h2>RDF Datasets</h2>
+
+  <p>An <dfn>RDF dataset</dfn> is a collection of
+    <a>RDF graphs</a>, and comprises:</p>
+
+  <ul>
+    <li>Exactly one <dfn>default graph</dfn>, being an <a>RDF graph</a>.
+      The default graph does not have a name and MAY be empty.</li>
+    <li>Zero or more <span id="dfn-named-graphs"><!-- obsolete term--></span><dfn data-lt="named graph">named graphs</dfn>.
+      Each named graph is a pair consisting of an <a>IRI</a> or a blank node
+      (the <dfn>graph name</dfn>), and an <a>RDF graph</a>.
+      Graph names are unique within an RDF dataset.</li>
+  </ul>
+
+  <p><a>Blank nodes</a> can be shared between graphs
+    in an <a>RDF dataset</a>.</p>
+
+  <div class="note" id="note-datasets">
+    <p>Despite the use of the word “name” in “<a>named graph</a>”, the
+      <a>graph name</a> is not required to <a>denote</a> the graph. It is
+      merely syntactically paired with the graph. RDF does not place any
+      formal restrictions on what <a>resource</a> the graph name may denote,
+      nor on the relationship between that resource and the graph.
+      A discussion of different RDF dataset semantics can be found in
+      [[RDF11-DATASETS]].</p>
+
+    <p>Some <a>RDF dataset</a> implementations do not
+      track empty <a>named graphs</a>. Applications
+      can avoid interoperability issues by not ascribing importance to
+      the presence or absence of empty named graphs.</p>
+
+    <p>SPARQL 1.2 [[SPARQL12-CONCEPTS]] also defines the concept of an RDF
+			Dataset.  The definition of an RDF Dataset in SPARQL 1.1 and this
+			specification differ slightly in that this specification allows RDF
+			Graphs to be identified using either an IRI or a blank node.  SPARQL 1.1
+			Query Language only allows RDF Graphs to be identified using an IRI.
+			Existing SPARQL implementations might not allow blank nodes to be used
+			to identify RDF Graphs for some time, so their use can cause
+			interoperability problems.
+      <a href="#section-skolemization">Skolemizing</a> blank nodes used as
+      graph names can be used to overcome these interoperability problems.</p>
+  </div>
+
+  <section id="section-dataset-isomorphism">
+    <h3>RDF Dataset Comparison</h3>
+
+    <p id="section-dataset-equality">Two <a>RDF datasets</a>
+      (the RDF dataset <var>D1</var> with default graph <var>DG1</var> and any named
+      graph <var>NG1</var> and the RDF dataset <var>D2</var> with default graph
+      <var>DG2</var> and any named graph <var>NG2</var>)
+      are <dfn data-lt="dataset isomorphism" class="export">dataset-isomorphic</dfn> if and only if
+      there is a bijection <var>M</var> between the nodes, triples and graphs in
+      <var>D1</var> and those in <var>D2</var> such that:</p>
+
+    <ol>
+      <li><var>M</var> maps <a>blank nodes</a> to blank nodes;</li>
+      <li><var>M</var> is the identity map on <a>literals</a> and URIs;</li>
+      <li>For every triple &lt;s p o&gt;, <var>M</var>(&lt;s, p, o&gt;)=
+        &lt;<var>M(s)</var>, <var>M(p)</var>, <var>M(o)</var>&gt;;</li>
+      <li>For every graph <var>G</var>={t1, ..., tn},
+        <var>M(G)</var>={<var>M(t1)</var>, ..., <var>M(tn)</var>};</li>
+      <li><var>DG2</var> = <var>M(DG1)</var>; and</li>
+      <li>&lt;n, G&gt; is in <var>NG1</var> if and only if
+        &lt;<var>M(n)</var>, <var>M(G)</var>&gt; is in <var>NG2</var>.
+    </ol>
+
+  </section>
+
+  <section id="section-dataset-conneg" class="informative">
+    <h3>Content Negotiation of RDF Datasets</h3>
+
+    <p>Web resources may have multiple representations that are made available via
+      <a data-cite="webarch#frag-coneg">content negotiation</a>
+      [[WEBARCH]].  A representation may be returned in an RDF serialization
+      format that supports the expression of both <a>RDF datasets</a> and
+      <a>RDF graphs</a>.  If an <a>RDF dataset</a>
+      is returned and the consumer is expecting an <a>RDF graph</a>,
+      the consumer is expected to use the <a data-lt="rdf dataset">RDF dataset's</a> default graph.</p>
+
+    </section>
+</section>
+
+<section id="section-Datatypes">
+  <h2>Datatypes</h2>
+
+  <p>Datatypes are used with RDF <a>literals</a>
+    to represent values such as strings, numbers and dates.
+    The datatype abstraction used in RDF is compatible with XML Schema
+    [[!XMLSCHEMA11-2]]. Any datatype definition that conforms
+    to this abstraction MAY be used in RDF, even if not defined
+    in terms of XML Schema. RDF re-uses many of the XML Schema
+    built-in datatypes, and defines two additional non-normative datatypes,
+    <code><a>rdf:HTML</a></code> and <code><a>rdf:XMLLiteral</a></code>.
+    The list of datatypes supported by an implementation is determined
+    by its <a>recognized datatype IRIs</a>.</p>
+
+  <p>A <dfn>datatype</dfn> consists of a <a>lexical space</a>,
+    a <a>value space</a> and a <a>lexical-to-value mapping</a>, and
+    is denoted by one or more <a>IRIs</a>.</p>
+
+  <p>The <dfn>lexical space</dfn> of a datatype is a set of Unicode [[!UNICODE]] strings.</p>
+
+  <p>The <dfn>lexical-to-value mapping</dfn> of a datatype is a set of
+    pairs whose first element belongs to the <a>lexical space</a>,
+    and the second element belongs to the <dfn>value space</dfn>
+    of the datatype. Each member of the lexical space is paired with exactly
+    one value, and is a <em>lexical representation</em>
+    of that value. The mapping can be seen as a function
+    from the lexical space to the value space.</p>
+
+  <p class="note"><a>Language-tagged strings</a> have the <a>datatype IRI</a>
+    <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#langString</code>.
+    No datatype is formally defined for this IRI because the definition
+    of <a>datatypes</a> does not accommodate
+    <a>language tags</a> in the <a>lexical space</a>.
+    The <a>value space</a> associated with this datatype IRI is the set
+    of all pairs of strings and language tags.</p>
+
+  <p>For example, the XML Schema datatype <code>xsd:boolean</code>,
+    where each member of the <a>value space</a> has two lexical
+    representations, is defined as follows:</p>
+
+  <dl>
+    <dt>Lexical space:</dt>
+    <dd>{“<code>true</code>”, “<code>false</code>”, “<code>1</code>”, “<code>0</code>”}</dd>
+    <dt>Value space:</dt>
+    <dd>{<em><strong>true</strong></em>, <em><strong>false</strong></em>}</dd>
+    <dt>Lexical-to-value mapping</dt>
+    <dd>{
+        &lt;“<code>true</code>”, <em><strong>true</strong></em>&gt;,
+        &lt;“<code>false</code>”, <em><strong>false</strong></em>&gt;,
+        &lt;“<code>1</code>”, <em><strong>true</strong></em>&gt;,
+        &lt;“<code>0</code>”, <em><strong>false</strong></em>&gt;,
+        }</dd>
+  </dl>
+
+  <p>The <a>literals</a> that can be defined using this
+    datatype are:</p>
+
+  <table class="simple">
+    <caption>This table lists the literals of type xsd:boolean.</caption>
+    <tr>
+      <th>Literal</th>
+      <th>Value</th>
+    </tr>
+    <tr>
+      <td>&lt;“<code>true</code>”, <code>xsd:boolean</code>&gt;</td>
+      <td><em><strong>true</strong></em></td>
+    </tr>
+    <tr>
+      <td>&lt;“<code>false</code>”, <code>xsd:boolean</code>&gt;</td>
+      <td><em><strong>false</strong></em></td>
+    </tr>
+    <tr>
+      <td>&lt;“<code>1</code>”, <code>xsd:boolean</code>&gt;</td>
+      <td><em><strong>true</strong></em></td>
+    </tr>
+    <tr>
+      <td>&lt;“<code>0</code>”, <code>xsd:boolean</code>&gt;</td>
+      <td><em><strong>false</strong></em></td>
+    </tr>
+  </table>
+
+  <section id="xsd-datatypes">
+    <h3>The XML Schema Built-in Datatypes</h3>
+
+    <p><a>IRIs</a> of the form
+      <code>http://www.w3.org/2001/XMLSchema#<em>xxx</em></code>,
+      where <code><em>xxx</em></code>
+      is the name of a datatype, denote the built-in datatypes defined in
+      <em>[[[XMLSCHEMA11-2]]]</em> [[!XMLSCHEMA11-2]]. The XML Schema built-in types
+      listed in the following table are the
+      <dfn>RDF-compatible XSD types</dfn>. Their use is RECOMMENDED.</p>
+
+    <p>Readers might note that the xsd:hexBinary and xsd:base64Binary
+      datatypes are the only safe datatypes for transferring binary
+      information.</p>
+
+    <table class="simple">
+      <caption>A list of the RDF-compatible XSD types, with short descriptions"</caption>
+      <tr><th></th><th>Datatype</th><th>Value space (informative)</th></tr>
+
+      <tr><th rowspan="4">Core types</th><td><a data-cite="xmlschema11-2#string"><code>xsd:string</code></a></td><td>Character strings (but not all Unicode character strings)</td></tr>
+      <tr><td><a data-cite="xmlschema11-2#boolean"><code>xsd:boolean</code></a></td><td>true, false</td></tr>
+      <tr><td><a data-cite="xmlschema11-2#decimal"><code>xsd:decimal</code></a></td><td>Arbitrary-precision decimal numbers</td></tr>
+      <tr><td><a data-cite="xmlschema11-2#integer"><code>xsd:integer</code></a></td><td>Arbitrary-size integer numbers</td></tr>
+
+      <tr><th rowspan="2">IEEE floating-point<br />numbers</th>
+          <td><a data-cite="xmlschema11-2#double"><code>xsd:double</code></a></td><td>64-bit floating point numbers incl. ±Inf, ±0, NaN</td></tr>
+      <tr><td><a data-cite="xmlschema11-2#float"><code>xsd:float</code></a></td><td>32-bit floating point numbers incl. ±Inf, ±0, NaN</td></tr>
+
+      <tr><th rowspan="4">Time and date</th>
+          <td><a data-cite="xmlschema11-2#date"><code>xsd:date</code></a></td><td>Dates (yyyy-mm-dd) with or without timezone</td></tr>
+      <tr><td><a data-cite="xmlschema11-2#time"><code>xsd:time</code></a></td><td>Times (hh:mm:ss.sss…) with or without timezone</td></tr>
+      <tr><td><a data-cite="xmlschema11-2#dateTime"><code>xsd:dateTime</code></a></td><td>Date and time with or without timezone</td></tr>
+      <tr><td><a data-cite="xmlschema11-2#dateTimeStamp"><code>xsd:dateTimeStamp</code></a></td><td>Date and time with required timezone</td></tr>
+
+      <tr><th rowspan="8">Recurring and<br />partial dates</th>
+          <td><a data-cite="xmlschema11-2#gYear"><code>xsd:gYear</code></a></td><td>Gregorian calendar year</td></tr>
+      <tr><td><a data-cite="xmlschema11-2#gMonth"><code>xsd:gMonth</code></a></td><td>Gregorian calendar month</td></tr>
+      <tr><td><a data-cite="xmlschema11-2#gDay"><code>xsd:gDay</code></a></td><td>Gregorian calendar day of the month</td></tr>
+      <tr><td><a data-cite="xmlschema11-2#gYearMonth"><code>xsd:gYearMonth</code></a></td><td>Gregorian calendar year and month</td></tr>
+      <tr><td><a data-cite="xmlschema11-2#gMonthDay"><code>xsd:gMonthDay</code></a></td><td>Gregorian calendar month and day</td></tr>
+      <tr><td><a data-cite="xmlschema11-2#duration"><code>xsd:duration</code></a></td><td>Duration of time</td></tr>
+      <tr><td><a data-cite="xmlschema11-2#yearMonthDuration"><code>xsd:yearMonthDuration</code></a></td><td>Duration of time (months and years only)</td></tr>
+      <tr><td><a data-cite="xmlschema11-2#dayTimeDuration"><code>xsd:dayTimeDuration</code></a></td><td>Duration of time (days, hours, minutes, seconds only)</td></tr>
+
+      <tr><th rowspan="12">Limited-range<br />integer numbers</th>
+          <td><a data-cite="xmlschema11-2#byte"><code>xsd:byte</code></a></td><td>-128…+127 (8 bit)</td></tr>
+      <tr><td><a data-cite="xmlschema11-2#short"><code>xsd:short</code></a></td><td>-32768…+32767 (16 bit)</td></tr>
+      <tr><td><a data-cite="xmlschema11-2#int"><code>xsd:int</code></a></td><td>-2147483648…+2147483647 (32 bit)</td></tr>
+      <tr><td><a data-cite="xmlschema11-2#long"><code>xsd:long</code></a></td><td>-9223372036854775808…+9223372036854775807 (64 bit)</td></tr>
+
+      <tr><td><a data-cite="xmlschema11-2#unsignedByte"><code>xsd:unsignedByte</code></a></td><td>0…255 (8 bit)</td></tr>
+      <tr><td><a data-cite="xmlschema11-2#unsignedShort"><code>xsd:unsignedShort</code></a></td><td>0…65535 (16 bit)</td></tr>
+      <tr><td><a data-cite="xmlschema11-2#unsignedInt"><code>xsd:unsignedInt</code></a></td><td>0…4294967295 (32 bit)</td></tr>
+      <tr><td><a data-cite="xmlschema11-2#unsignedLong"><code>xsd:unsignedLong</code></a></td><td>0…18446744073709551615 (64 bit)</td></tr>
+
+      <tr><td><a data-cite="xmlschema11-2#positiveInteger"><code>xsd:positiveInteger</code></a></td><td>Integer numbers &gt;0</td></tr>
+      <tr><td><a data-cite="xmlschema11-2#nonNegativeInteger"><code>xsd:nonNegativeInteger</code></a></td><td>Integer numbers ≥0</td></tr>
+      <tr><td><a data-cite="xmlschema11-2#negativeInteger"><code>xsd:negativeInteger</code></a></td><td>Integer numbers &lt;0</td></tr>
+      <tr><td><a data-cite="xmlschema11-2#nonPositiveInteger"><code>xsd:nonPositiveInteger</code></a></td><td>Integer numbers ≤0</td></tr>
+
+      <tr><th rowspan="2">Encoded binary data</th>
+          <td><a data-cite="xmlschema11-2#hexBinary"><code>xsd:hexBinary</code></a></td><td>Hex-encoded binary data</td></tr>
+      <tr><td><a data-cite="xmlschema11-2#base64Binary"><code>xsd:base64Binary</code></a></td><td>Base64-encoded binary data</td></tr>
+
+      <tr><th rowspan="7">Miscellaneous<br />XSD types</th>
+          <td><a data-cite="xmlschema11-2#anyURI"><code>xsd:anyURI</code></a></td><td>Absolute or relative URIs and IRIs</td></tr>
+      <tr><td><a data-cite="xmlschema11-2#language"><code>xsd:language</code></a></td><td>Language tags per [[BCP47]]</td></tr>
+      <tr><td><a data-cite="xmlschema11-2#normalizedString"><code>xsd:normalizedString</code></a></td><td>Whitespace-normalized strings</td></tr>
+      <tr><td><a data-cite="xmlschema11-2#token"><code>xsd:token</code></a></td><td>Tokenized strings</td></tr>
+      <tr><td><a data-cite="xmlschema11-2#NMTOKEN"><code>xsd:NMTOKEN</code></a></td><td>XML NMTOKENs</td></tr>
+      <tr><td><a data-cite="xmlschema11-2#Name"><code>xsd:Name</code></a></td><td>XML Names</td></tr>
+      <tr><td><a data-cite="xmlschema11-2#NCName"><code>xsd:NCName</code></a></td><td>XML NCNames</td></tr>
+    </table>
+
+    <p>The other built-in XML Schema datatypes are unsuitable
+      for various reasons and SHOULD NOT be used:</p>
+
+    <ul>
+      <li><a data-cite="xmlschema11-2#QName"><code>xsd:QName</code></a>
+        and <a data-cite="xmlschema11-2#ENTITY"><code>xsd:ENTITY</code></a>
+        require an enclosing XML document context.</li>
+      <li><a data-cite="xmlschema11-2#ID"><code>xsd:ID</code></a>
+        and <a data-cite="xmlschema11-2#IDREF"><code>xsd:IDREF</code></a>
+        are for cross references within an XML document.</li>
+      <li><a data-cite="xmlschema11-2#NOTATION"><code>xsd:NOTATION</code></a>
+        is not intended for direct use.</li>
+      <li><a data-cite="xmlschema11-2#IDREFS"><code>xsd:IDREFS</code></a>,
+        <a data-cite="xmlschema11-2#ENTITIES"><code>xsd:ENTITIES</code></a>
+        and <a data-cite="xmlschema11-2#NMTOKENS"><code>xsd:NMTOKENS</code></a>
+        are sequence-valued datatypes which do not fit the RDF <a>datatype</a>
+        model.</li>
+    </ul>
+
+  </section>
+
+  <section id="section-html" class="informative">
+    <h3>The <code>rdf:HTML</code> Datatype</h3>
+
+    <p>RDF provides for HTML content as a possible <a>literal value</a>.
+      This allows markup in literal values. Such content is indicated
+      in an <a>RDF graph</a> using a <a>literal</a> whose <a>datatype</a>
+      is set to <code><dfn>rdf:HTML</dfn></code>. This datatype is defined
+      as non-normative because it depends on [[DOM4]], a specification that
+      has not yet reached W3C Recommendation status.</p>
+
+    <p>The <code>rdf:HTML</code> datatype is defined as follows:</p>
+
+    <dl>
+      <dt>The IRI denoting this datatype</dt>
+      <dd>is <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#HTML</code>.</dd>
+
+      <dt>The lexical space</dt>
+      <dd>is the set of Unicode [[UNICODE]] strings.</dd>
+
+      <dt>The value space</dt>
+      <dd>is a set of DOM
+        <a data-cite="DOM4#interface-documentfragment"><code>DocumentFragment</code></a>
+        nodes [[DOM4]]. Two
+        <a data-cite="DOM4#interface-documentfragment"><code>DocumentFragment</code></a>
+        nodes <em>A</em> and <em>B</em> are considered equal if and only if
+        the DOM method
+        <code><em>A</em>.<a data-cite="DOM4#dom-node-isequalnode">isEqualNode</a>(<em>B</em>)</code>
+        [[DOM4]] returns <code>true</code>.</dd>
+
+      <dt>The lexical-to-value mapping</dt>
+      <dd>
+        <p>Each member of the lexical space is associated with the result
+          of applying the following algorithm:</p>
+        <ul>
+          <li>Let <code>domnodes</code> be the list of <a data-cite="DOM4#node">DOM nodes</a> [[DOM4]]
+            that result from applying the
+            <a data-cite="HTML5#parsing-html-fragments">HTML fragment parsing algorithm</a> [[HTML5]]
+            to the input string, without a context element.</li>
+          <li>Let <code>domfrag</code> be a DOM
+            <a data-cite="DOM4#interface-documentfragment"><code>DocumentFragment</code></a> [[DOM4]]
+            whose <code>childNodes</code> attribute is equal to <code>domnodes</code></li>
+            <li>Return <code>domfrag.<a data-cite="DOM4#dom-node-normalize">normalize</a>()</code></li>
+        </ul>
+      </dd>
+    </dl>
+
+    <p class="note" id="note-html">
+      Any language annotation (<code>lang="…"</code>) or
+      XML namespaces (<code>xmlns</code>) desired in the HTML content
+      must be included explicitly in the HTML literal. Relative URLs
+      in attributes such as <code>href</code> do not have a well-defined
+      base URL and are best avoided.
+      RDF applications may use additional equivalence relations,
+      such as that which relates an <code>xsd:string</code> with an
+      <code>rdf:HTML</code> literal corresponding to a single text node
+      of the same string.</p>
+  </section>
+
+  <section id="section-XMLLiteral" class="informative">
+    <h3>The <code>rdf:XMLLiteral</code> Datatype</h3>
+
+    <p>RDF provides for XML content as a possible <a>literal value</a>.
+      Such content is indicated in an <a>RDF graph</a> using a <a>literal</a>
+      whose <a>datatype</a> is set to <code><dfn>rdf:XMLLiteral</dfn></code>.
+      This datatype is defined as non-normative because it depends on [[DOM4]],
+      a specification that has not yet reached W3C Recommendation status.</p>
+
+    <p>The <code>rdf:XMLLiteral</code> datatype is defined as follows:</p>
+
+    <dl>
+      <dt id="XMLLiteral-uri">The IRI denoting this <a>datatype</a></dt>
+      <dd>is <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral</code>.</dd>
+
+      <dt id="XMLLiteral-lexical-space">The <a>lexical space</a></dt>
+      <dd>is the set of all strings which are well-balanced, self-contained
+        <a data-cite="XML10#NT-content">XML content</a>
+        [[XML10]]; and for which embedding between an arbitrary
+        XML start tag and an end tag yields a document conforming to
+       [[[XML-NAMES]]] [[XML-NAMES]].</dd>
+
+      <dt id="XMLLiteral-value-space">The <a>value space</a></dt>
+        <dd>is a set of DOM
+        <a data-cite="DOM4#interface-documentfragment"><code>DocumentFragment</code></a>
+        nodes [[DOM4]]. Two
+        <a data-cite="DOM4#interface-documentfragment"><code>DocumentFragment</code></a>
+        nodes <em>A</em> and <em>B</em> are considered equal if and only if the DOM method
+        <code><em>A</em>.<a data-cite="DOM4#dom-node-isequalnode">isEqualNode</a>(<em>B</em>)</code>
+        returns <code>true</code>.</dd>
+
+      <dt id="XMLLiteral-mapping">The <a>lexical-to-value mapping</a></dt>
+      <dd>
+        <p>Each member of the lexical space is associated with the result of applying the following algorithm:</p>
+        <ul>
+          <li>Let <code>domfrag</code> be a DOM
+            <a data-cite="DOM4#interface-documentfragment"><code>DocumentFragment</code></a>
+            node [[DOM4]] corresponding to the input string</li>
+          <li>Return <code>domfrag.<a data-cite="DOM4#dom-node-normalize">normalize</a>()</code></li>
+        </ul>
+      </dd>
+
+      <dt id="XMLLiteral-canonical">The canonical mapping</dt>
+      <dd>defines a
+        <a data-cite="xmlschema11-2#dt-canonical-mapping">canonical lexical form</a> [[XMLSCHEMA11-2]]
+        for each member of the value space. The <code>rdf:XMLLiteral</code> canonical mapping is the
+        <a data-cite="XML-EXC-C14N#def-exclusive-XML-canonicalization-method">exclusive XML canonicalization method</a>
+        (<em>with comments, with empty
+        <a data-cite="XML-EXC-C14N#def-InclusiveNamespaces-PrefixList">InclusiveNamespaces PrefixList</a></em>)
+        [[XML-EXC-C14N]].</dd>
+    </dl>
+
+    <p class="note">Any XML namespace declarations (<code>xmlns</code>),
+      language annotation (<code>xml:lang</code>) or base URI declarations
+      (<code>xml:base</code>) desired in the XML content must be included
+      explicitly in the XML literal. Note that some concrete RDF syntaxes
+      may define mechanisms for inheriting them from the context (e.g.,
+      <a data-cite="RDF12-XML#parseTypeLiteralPropertyElt"><code>@parseType="literal"</code></a>
+      in RDF/XML [[RDF12-XML]].</p>
+  </section>
+
+  <section>
+    <h3>Datatype IRIs</h3>
+
+    <p>Datatypes are identified by <a>IRIs</a>. If
+      <var>D</var> is a set of IRIs which are used to refer to
+      datatypes, then the elements of <var>D</var> are called
+      <span id="dfn-recognized-datatype-iris"><!-- obsolete term--></span><dfn data-lt="recognized datatype IRI">recognized datatype IRIs</dfn>.
+      Recognized IRIs have fixed
+      <a href="#referents">referents</a>. If any IRI of the form
+      <code>http://www.w3.org/2001/XMLSchema#xxx</code> is recognized, it
+      MUST refer to the RDF-compatible XSD type named <code>xsd:xxx</code> for
+      every XSD type listed in <a href="#xsd-datatypes">section 5.1</a>.
+      Furthermore, the following IRIs are allocated for non-normative
+      datatypes:
+
+    <ul>
+      <li>The IRI <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral</code>
+        refers to the datatype <code><a>rdf:XMLLiteral</a></code></li>
+      <li>The IRI <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#HTML</code>
+        refers to the datatype <code><a>rdf:HTML</a></code></li>
+    </ul>
+
+    <p class="note">Semantic extensions of RDF might choose to
+      recognize other datatype IRIs
+      and require them to refer to a fixed datatype.  See the RDF
+      Semantics specification [[RDF12-SEMANTICS]] for more information on
+      semantic extensions.</p>
+
+    <p>RDF processors are not required to recognize datatype IRIs.
+      Any literal typed with an unrecognized IRI is treated just like
+      an unknown IRI, i.e. as referring to an unknown thing. Applications
+      MAY give a warning message if they are unable to determine the
+      referent of an IRI used in a typed literal, but they SHOULD NOT
+      reject such RDF as either a syntactic or semantic error.<p>
+
+    <p>Other specifications MAY impose additional constraints on
+      <a>datatype IRIs</a>, for example, require support
+      for certain datatypes.</p>
+
+    <p class="note" id="note-custom-datatypes">The Web Ontology Language
+      [[OWL2-OVERVIEW]] offers facilities for formally defining
+      <a data-cite="OWL2-SYNTAX#Datatype_Definitions">custom
+      datatypes</a> that can be used with RDF. Furthermore, a practice for
+      identifying
+      <a data-cite="swbp-xsch-datatypes#sec-userDefined">
+      user-defined simple XML Schema datatypes</a>
+      is suggested in [[SWBP-XSCH-DATATYPES]]. RDF implementations
+      are not required to support either of these facilities.</p>
+  </section>
+</section>
+
+<section id="section-fragID" class="informative">
+  <h2>Fragment Identifiers</h2>
+
+  <p>RDF uses <a>IRIs</a>, which may include
+    <span id="dfn-fragment-identifiers"><!-- obsolete term--></span>
+    <dfn data-lt="fragment identifier" class="no-export">fragment identifiers</dfn>,
+    as resource identifiers.
+    The semantics of fragment identifiers is
+    <a data-cite="rfc3986#section-3.5">defined in
+    RFC 3986</a> [[RFC3986]]: They identify a secondary resource
+    that is usually a part of, view of, defined in, or described in
+    the primary resource, and the precise semantics depend on the set
+    of representations that might result from a retrieval action
+    on the primary resource.</p>
+  <p class="ednote">Should this instead be a reference to </p>
+
+  <p>This section discusses the handling of fragment identifiers
+    in representations that encode <a>RDF graphs</a>.</p>
+
+  <p>In RDF-bearing representations of a primary resource
+    <code>&lt;foo&gt;</code>,
+    the secondary resource identified by a fragment <code>bar</code>
+    is the <a>resource</a> <a>denoted</a> by the
+    full <a>IRI</a> <code>&lt;foo#bar&gt;</code> in the <a>RDF graph</a>.
+    Since IRIs in RDF graphs can denote anything, this can be
+    something external to the representation, or even external
+    to the web.</p>
+
+  <p>In this way, the RDF-bearing representation acts as an intermediary
+    between the web-accessible primary resource, and some set of possibly
+    non-web or abstract entities that the <a>RDF graph</a> may describe.</p>
+
+  <p>In cases where other specifications constrain the semantics of
+    <a>fragment identifiers</a> in RDF-bearing representations, the encoded
+    <a>RDF graph</a> should use fragment identifiers in a way that is consistent
+    with these constraints. For example, in an HTML+RDFa document [[HTML-RDFA]],
+    the fragment <code>chapter1</code> may identify a document section
+    via the semantics of HTML's <code>@name</code> or <code>@id</code>
+    attributes. The <a>IRI</a> <code>&lt;#chapter1&gt;</code> should
+    then be taken to <a>denote</a> that same section in any RDFa-encoded
+    <a>triples</a> within the same document.
+    Similarly, fragment identifiers should be used consistently in resources
+    with multiple representations that are made available via
+    <a data-cite="webarch/#frag-coneg">content negotiation</a>
+    [[WEBARCH]]. For example, if the fragment <code>chapter1</code> identifies a
+    document section in an HTML representation of the primary resource, then the
+    <a>IRI</a> <code>&lt;#chapter1&gt;</code> should be taken to
+    <a>denote</a> that same section in all RDF-bearing representations of the
+    same primary resource.</p>
+</section>
+
+<section id="section-generalized-rdf" class="informative">
+  <h2>Generalized RDF Triples, Graphs, and Datasets</h2>
+
+  <p>It is sometimes convenient to loosen the requirements
+    on <a>RDF triple</a>s.  For example, the completeness
+    of the RDFS entailment rules is easier to show with a
+    generalization of RDF triples.</p>
+
+  <p>A <dfn class="export">generalized RDF triple</dfn> is a triple having a subject,
+    a predicate, and object, where each can be an <a>IRI</a>, a
+    <a>blank node</a> or a
+    <a>literal</a>. A
+    <dfn class="export">generalized RDF graph</dfn>
+    is a set of generalized RDF triples. A
+    <dfn class="export">generalized RDF dataset</dfn>
+    comprises a distinguished generalized RDF graph, and zero
+    or more pairs each associating an IRI, a blank node or a literal
+    to a generalized RDF graph.</p>
+
+
+  <p>Generalized RDF triples, graphs, and datasets differ
+    from normative RDF <a>triples</a>,
+    <a data-lt="RDF graph">graphs</a>, and
+    <a data-lt="RDF dataset">datasets</a> only
+    by allowing <a>IRIs</a>,
+    <a>blank nodes</a> and
+    <a>literals</a> to appear
+    in any position, i.e., as subject, predicate, object or graph names.</p>
+
+  <p class="note" id="note-generalized-rdf"> Any users of
+    generalized RDF triples, graphs or datasets need to be
+    aware that these notions are non-standard extensions of
+    RDF and their use may cause interoperability problems.
+    There is no requirement on the part of any RDF tool to
+    accept, process, or produce anything beyond standard RDF
+    triples, graphs, and datasets. </p>
+
+</section>
+
+<section id="section-Acknowledgments" class="informative">
+  <h2>Acknowledgments</h2>
+
+  <p>The editors acknowledge valuable contributions from Thomas Baker,
+    Tim Berners-Lee, David Booth, Dan Brickley, Gavin Carothers, Jeremy Carroll,
+    Pierre-Antoine Champin, Dan Connolly, John Cowan, Martin J. Dürst,
+    Alex Hall, Steve Harris, Sandro Hawke, Pat Hayes, Ivan Herman, Peter F. Patel-Schneider,
+    Addison Phillips, Eric Prud'hommeaux, Nathan Rixham, Andy Seaborne, Leif Halvard Silli,
+    Guus Schreiber, Dominik Tomaszuk, and Antoine Zimmermann.</p>
+
+  <p>The membership of the RDF Working Group included Thomas Baker,
+    Scott Bauer, Dan Brickley, Gavin Carothers, Pierre-Antoine Champin,
+    Olivier Corby, Richard Cyganiak, Souripriya Das, Ian Davis, Lee Feigenbaum,
+    Fabien Gandon, Charles Greer, Alex Hall, Steve Harris, Sandro Hawke,
+    Pat Hayes, Ivan Herman, Nicholas Humfrey, Kingsley Idehen, Gregg Kellogg,
+    Markus Lanthaler, Arnaud Le Hors, Peter F. Patel-Schneider,
+    Eric Prud'hommeaux, Yves Raimond, Nathan Rixham, Guus Schreiber,
+    Andy Seaborne, Manu Sporny, Thomas Steiner, Ted Thibodeau, Mischa Tuffield,
+    William Waites, Jan Wielemaker, David Wood, Zhe Wu, and Antoine Zimmermann.</p>
+</section>
+
+<section class="appendix informative" id="changes">
+  <h2>Changes between RDF 1.0 and RDF 1.1</h2>
+
+  <p>A detailed overview of the differences between RDF versions&nbsp;1.0
+    and 1.1 can be found in [[[RDF11-NEW-20140225]]] [[RDF11-NEW-20140225]].</p>
+</section>
+
+<section class="appendix informative" id="changes">
+  <h2>Changes between RDF 1.1 and RDF 1.2</h2>
+
+  <p>A detailed overview of the differences between RDF versions&nbsp;1.1
+    and 1.2 can be found in [[[RDF12-NEW]]] [[RDF12-NEW]].</p>
+</section>
+
+<section id="index"></section>
+
+</body>
+</html>
+
