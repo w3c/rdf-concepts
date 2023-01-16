@@ -1,26 +1,26 @@
 # Example: Override respecConfig for W3C deployment and validators.
-#name: Echidna Auto-publish
-#on:
-#  pull_request:
-#    paths: ["spec/**"]
-#  push:
-#    branches: [main]
-#    paths: ["spec/**"]
-#jobs:
-#  main:
-#    name: Echidna Auto-publish WD
-#    runs-on: ubuntu-20.04
-#    steps:
-#      - uses: actions/checkout@v3
-#      - uses: w3c/spec-prod@v2
-#        with:
-#          TOOLCHAIN: respec
-#          SOURCE: spec/index.html
-#          W3C_ECHIDNA_TOKEN: ${{ secrets.ECHIDNA_TOKEN }}
-#          VALIDATE_LINKS: false
-#          VALIDATE_MARKUP: true
-#          ACTIONS_STEP_DEBUG: true
-#          # W3C_WG_DECISION_URL: https://www.w3.org/2022/11/09-rch-minutes#r03
-#          W3C_BUILD_OVERRIDE: |
-#            specStatus: WD
-#            shortName: rdf12-concepts
+name: Echidna Auto-publish
+on:
+  pull_request:
+    paths: ["spec/**"]
+  push:
+    branches: [main]
+    paths: ["spec/**"]
+jobs:
+  main:
+    name: Echidna Auto-publish WD
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: w3c/spec-prod@v2
+        with:
+          TOOLCHAIN: respec
+          SOURCE: spec/index.html
+          VALIDATE_LINKS: false
+          VALIDATE_MARKUP: true
+          ACTIONS_STEP_DEBUG: true
+          # W3C_ECHIDNA_TOKEN: ${{ secrets.ECHIDNA_TOKEN }}
+          # W3C_WG_DECISION_URL: https://www.w3.org/2022/11/09-rch-minutes#r03
+          W3C_BUILD_OVERRIDE: |
+            specStatus: WD
+            shortName: rdf12-concepts
