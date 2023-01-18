@@ -268,7 +268,7 @@ var localBibliography = {
     "authors": [
         "Chimezie Ogbuji"
     ],
-    "href": "https://w3c.github.io/sparql-http-rdf-update/spec/",
+    "href": "https://w3c.github.io/sparql-graph-store-protocol/spec/",
     "title": "SPARQL 1.2 Graph Store HTTP Protocol",
     "rawDate": "2022-01-01",
     "status": "WD",
