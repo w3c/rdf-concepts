@@ -52,28 +52,34 @@
 <body>
 <section id="abstract">
   <p>The Resource Description Framework (RDF) is a framework for
-    representing information in the Web. This document defines an abstract syntax
-    (a data model) which serves to link all RDF-based languages and
-    specifications. The abstract syntax has two key data structures:
-    RDF graphs are sets of subject-predicate-object triples,
-    where the elements may be IRIs, blank nodes, or datatyped literals. They
-    are used to express descriptions of resources. RDF datasets are used
-    to organize collections of RDF graphs, and comprise a default graph
-    and zero or more named graphs.
-    [[[RDF12-CONCEPTS]]] also introduces key concepts and terminology, and discusses
+    representing information in the Web.
+    This document defines an abstract syntax (a data model)
+    which serves to link all RDF-based languages and specifications.
+    The abstract syntax has two key data structures:</p>
+  <ul>
+    <li>RDF graphs are sets of subject-predicate-object triples,
+      where the elements may be IRIs, blank nodes, or datatyped literals.
+      They are used to express descriptions of resources.</li>
+    <li>RDF datasets are used to organize collections of RDF graphs,
+      and comprise a default graph and zero or more named graphs.</li>
+  </ul>
+
+  <p>RDF 1.2 Concepts also introduces key concepts and terminology, and discusses
     datatyping and the handling of <a>fragment identifiers</a> in IRIs within
     RDF graphs.</p>
 </section>
 
 <section id="sotd">
-  <p>This document is part of the RDF 1.2 document suite. It is the central
-    RDF 1.2 specification and defines the core RDF concepts.
+  <p>This document is part of the RDF 1.2 document suite.
+    It is the central RDF 1.2 specification and defines the core RDF concepts.
     Test suites and implementation reports of a number of RDF 1.2
     specifications that build on this document are available through the  
     [[[RDF11-TESTCASES]]] document [[RDF11-TESTCASES]].
     There have been no changes to this document since its publication as
     Proposed Recommendation.</p>
 
+  <p>RDF 1.2 Concepts is an update to [[RDF11-CONCEPTS]],
+    which was itself, an update to [[RDF-CONCEPTS-20040210]].</p>
   <p class="ednote">Determine how to reference 1.2 test cases.</p>
 
   <section id="related" data-include="./common/related.html"></section>
@@ -415,13 +421,13 @@
 </section>
 
 <section id="conformance">
-  <p>This specification, <em>RDF 1.1 Concepts and Abstract Syntax</em>,
+  <p>This specification, <em>RDF 1.2 Concepts and Abstract Syntax</em>,
     defines a data model and related terminology for use in
     other specifications, such as
     <a>concrete RDF syntaxes</a>,
     API specifications, and query languages.
     Implementations cannot directly conform to
-    <em>RDF 1.1 Concepts and Abstract Syntax</em>,
+    <em>RDF 1.2 Concepts and Abstract Syntax</em>,
     but can conform to such other specifications that normatively
     reference terms defined here.</p>
 </section>
