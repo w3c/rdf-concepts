@@ -1,3 +1,0 @@
-[submodule "spec/common"]
-	path = spec/common
-	url = git@github.com:w3c/rdf-common.git
