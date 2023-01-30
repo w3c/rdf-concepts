@@ -1254,6 +1254,65 @@
 
 </section>
 
+<section id="privacy">
+  <h2>Privacy Considerations</h2>
+  <p>TODO</p>
+</section>
+
+<section id="security">
+  <h2>Security Considerations</h2>
+
+  <p>The RDF Abstract Syntax is not used directly for conveying information,
+    although concrete serialization forms are specifically intended to do so.</p>
+
+  <p>Applications MAY evaluate given data to infer more assertions or to dereference IRIs,
+    invoking the security considerations of the scheme for that IRI.
+    Note in particular, the privacy issues in [[RFC3023]] section 10 for HTTP IRIs.
+    Data obtained from an inaccurate or malicious data source may lead to inaccurate or misleading conclusions,
+    as well as the dereferencing of unintended IRIs.
+    Care must be taken to align the trust in consulted resources with the sensitivity of the intended use of the data;
+    inferences of potential medical treatments would likely require
+    different trust than inferences for trip planning.</p>
+
+  <p>RDF is used to express arbitrary application data;
+    security considerations will vary by domain of use.
+    Security tools and protocols applicable to text
+    (e.g. PGP encryption, MD5 sum validation, password-protected compression)
+    may also be used on RDF documents.
+    Security/privacy protocols must be imposed which reflect the sensitivity of the embedded information.</p>
+
+  <p>RDF can express data which is presented to the user, for example, RDF Schema labels.
+    Application rendering strings retrieved from untrusted RDF documents must ensure
+    that malignant strings may not be used to mislead the reader.
+    The security considerations in the media type registration for
+    XML ([[RFC3023]] section 10) provide additional guidance around the
+    expression of arbitrary data and markup.</p>
+
+  <p>RDF uses IRIs as term identifiers.
+    Applications interpreting data expressed in RDF SHOULD address the security issues of
+    [[[RFC3987]]] [[RFC3987]] Section 8,
+    as well as[[[RFC3986]]] [[RFC3986]] Section 7.</p>
+
+  <p>Multiple IRIs may have the same appearance
+     Characters in different scripts may look similar
+     (a Cyrillic &quot;о&quot; may appear similar to a Latin &quot;o&quot;).
+     A character followed by combining characters may have the same visual representation
+     as another character (LATIN SMALL LETTER "E" followed by COMBINING ACUTE ACCENT
+     has the same visual representation as LATIN SMALL LETTER "E" WITH ACUTE).
+     Any person or application that is writing or interpreting data in RDF
+     must take care to use the IRI that matches the intended semantics,
+     and avoid IRIs that make look similar.
+     Further information about matching of similar characters can be found
+     in [[[UNICODE-SECURITY]]] [[UNICODE-SECURITY]] and
+     [[[RFC3987]]] [[RFC3987]] Section 8.
+  </p>
+</section>
+
+<section id="internationalization">
+  <h2>Internationalization Considerations</h2>
+  <p>TODO</p>                
+</section>
+
 <section id="section-Acknowledgments" class="informative appendix">
   <h2>Acknowledgments</h2>
 
