@@ -26,3 +26,7 @@ jobs:
           W3C_BUILD_OVERRIDE: |
             specStatus: WD
             shortName: rdf12-concepts
+      - name: "Verify common files are consistent"
+        run: |
+          git submodule add https://github.com/w3c/rdf-common.git spec/rdf-common
+          diff --exclude .git -r spec/rdf-common spec/common
