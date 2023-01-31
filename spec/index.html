@@ -1310,21 +1310,21 @@
 
 <section id="internationalization">
   <h2>Internationalization Considerations</h2>
-  <p>RDF is restricted to representing string values with -to-right or right-to-left direction indicators.
+  <p>RDF is restricted to representing string values with left-to-right or right-to-left direction indicators.
     RDF provides a mechanism for specifying the language associated with
     a string (<a>language-tagged string</a>),
     but does not provide a means of indicating the base direction of the string.</p> 
 
   <p>Unicode provides a mechanism for signaling direction within a string
     (see [[[UAX9]]] [[UAX9]]),
-    however, when a string has an overall <a>base direction</a> which cannot be determined by the
+    however, when a string has an overall base direction which cannot be determined by the
     beginning of the string, an external indicator is required,
     such as the [[HTML]] <a data-cite="HTML/dom.html#the-dir-attribute">dir attribute</a>,
     which currently has no counterpart for <a>RDF literals</a>.</p>
 
   <p>[[[JSON-LD11]]] [[JSON-LD11]] introduced the
     <a data-cite="JSON-LD11#the-i18n-namespace">i18n namespace</a> to use
-    a datatype to specify both the base direction an <a>language-tag</a>
+    a datatype to specify both the base direction an <a>language tag</a>
     of an <a>RDF literal</a>.</p>
 
   <p class="issue" data-number="9"></p>
