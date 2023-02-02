@@ -818,24 +818,25 @@
     </section>
 
     <section id="section-dataset-quad" class="informative">
-      <h3>Dataset as a set of quads</h3>
+      <h3>Dataset as a Set of Quads</h3>
 
-      <p>A <dfn>quad</dfn> is a conceptual projection of a <a>triple</a> with
-        either the <a>default graph</a> or a <a>named graph</a>.
-        A <a>quad</a> is the generalization of a <a>triple</a>
-        along with an optional <a>graph name</a>,
-        indicating a named graph containing that <a>triple</a>.
+      <p>A <dfn>quad</dfn> is a <a>triple</a> associated with an optional <a>graph name</a>
+        and is used when referring to triples within an <a>RDF dataset</a>.
       </p>
 
       <p>A <a>quad</a> can be represented as a tuple composed of <a>subject</a>, <a>predicate</a>, <a>object</a>,
         and an optional <a>graph name</a>.</p>
 
-      <p>An <a>RDF dataset</a> can informally be considered to be a set of <a>quads</a>.</p>
+      <p>An <a>RDF dataset</a> can be considered to be a set of <a>quads</a>
+        where quads with no <a>graph name</a> supply the <a>triples</a> of the <a>default graph</a>
+        and quads with the same graph name,
+        supply the triples of the <a>named graph</a> with that name.</p>
 
-      <p class="note">Although a <a>quad</a> in the <a>default graph</a> shares
-        the same components as a <a>triple</a>,
-        it is a distinct concept, as it is specifically
-        a triple within the <a>default graph</a> of an <a>RDF dataset</a>.</p>
+      <p class="note">Although a <a>quad</a> without a <a>graph name</a>
+        consists of the same three components as a <a>triple</a>,
+        it is a distinct concept,
+        as it specifically captures the notion of a triple within the <a>default graph</a>
+        of an <a>RDF dataset</a>.</p>
     </section>
 </section>
 
