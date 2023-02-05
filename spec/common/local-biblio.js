@@ -285,4 +285,14 @@ var localBibliography = {
     "status": "WD",
     "publisher": "W3C"
   },
+  "CBD": {
+    "title": "CBD - Concise Bounded Description",
+    "href": "https://www.w3.org/Submission/CBD/",
+    "authors": [
+      "Patrick Stickler, Nokia"
+    ],
+    "rawDate": "2005-06-03",
+    "publisher": "W3C",
+    "status": "W3C Member Submission"
+  },
 };

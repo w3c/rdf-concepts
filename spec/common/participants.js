@@ -13,8 +13,8 @@ const process = require('process');
 const APIKEY = process.env.APIKEY || process.argv[2];
 const GROUP = process.env.GROUP || process.argv[3] || "wg/rdf-star";
 
-if (!APIKEY || !GROUP) {
-  console.error('Error: APIKEY and GROUP must be specified as either environment variables or command-line arguments.');
+if (!APIKEY) {
+  console.error('Error: APIKEY must be specified as either an environment variable or a command-line argument.');
   process.exit(1);
 }
 
