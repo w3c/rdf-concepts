@@ -59,7 +59,17 @@
     <tr id="grammar-production-IP-literal">
       <td><code>IP-literal</code></td>
       <td>=</td>
-      <td>"<code class="grammar-literal">[</code>" <code>(</code> <a href="#grammar-production-IPv6address">IPv6address</a> <code>/</code><a href="#grammar-production-IPvFuture">IPvFuture</a><code>)</code>  "<code class="grammar-literal">]</code>"</td>
+      <td>"<code class="grammar-literal">[</code>" <code>(</code> <a href="#grammar-production-IPv6address">IPv6address</a> <code>/</code><a href="#grammar-production-IPv6addrz">IPv6addrz</a> <code>/</code><a href="#grammar-production-IPvFuture">IPvFuture</a><code>)</code>  "<code class="grammar-literal">]</code>"</td>
+    </tr>
+    <tr id="grammar-production-ZoneID">
+      <td><code>ZoneID</code></td>
+      <td>=</td>
+      <td><code>+</code><code>(</code> <a href="#grammar-production-unreserved">unreserved</a> <code>/</code><a href="#grammar-production-pct-encoded">pct-encoded</a><code>)</code> </td>
+    </tr>
+    <tr id="grammar-production-IPv6addrz">
+      <td><code>IPv6addrz</code></td>
+      <td>=</td>
+      <td><a href="#grammar-production-IPv6address">IPv6address</a> %25 <a href="#grammar-production-ZoneID">ZoneID</a></td>
     </tr>
     <tr id="grammar-production-IPvFuture">
       <td><code>IPvFuture</code></td>

@@ -23,7 +23,11 @@ iuserinfo      = *( iunreserved / pct-encoded / sub-delims / ":" )
 ihost          = IP-literal / IPv4address / ireg-name
 port           = *DIGIT
 
-IP-literal     = "[" ( IPv6address / IPvFuture  ) "]"
+IP-literal     = "[" ( IPv6address / IPv6addrz / IPvFuture  ) "]"
+
+ZoneID         = 1*( unreserved / pct-encoded )
+
+IPv6addrz      = IPv6address "%25" ZoneID
 
 IPvFuture      = "v" 1*HEXDIG "." 1*( unreserved / sub-delims / ":" )
 
