@@ -41,8 +41,10 @@
   </script>
   <style>
     figure { text-align: center; }
-    table td, table th { border: 1px solid #ddd; padding: 0.2em 0.5em; }
+    table.simple td, table th { border: 1px solid #ddd; padding: 0.2em 0.5em; }
     ol ol { list-style-type: lower-latin; }
+    .grammar td { font-family: monospace;}
+    .grammar-literal { color: gray;}
     code {color: #ff4500;}  /* Old W3C Style */
   </style>
 </head>
@@ -481,6 +483,9 @@
       (Internationalized Resource Identifier) within an RDF graph
       is a Unicode string [[!UNICODE]] that conforms to the syntax
       defined in RFC 3987 [[!RFC3987]].</p>
+
+    <p class="note">For convenience, a complete [[ABNF]] grammar
+      from [[RFC3987]] is provided in <a href="#iri-abnf" class="sectionRef"></a>.</p>
 
     <p>IRIs in the RDF abstract syntax MUST be absolute, and MAY
       contain a fragment identifier.</p>
@@ -1359,6 +1364,16 @@
     of an <a>RDF literal</a>.</p>
 
   <p class="issue" data-number="9"></p>
+</section>
+
+<section id="iri-abnf" class="appendix informative">
+  <h2>IRI Grammar</h2>
+
+  <p>The following [[ABNF]] grammar is from [[RFC3987]] and includes the referenced
+    productions from [[RFC3986]].</p>
+
+  <div data-include="iri-grammar.html"></div>
+
 </section>
 
 <section id="section-Acknowledgments" class="informative appendix">
