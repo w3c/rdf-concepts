@@ -1306,7 +1306,7 @@
   <p>RDF can express data which is presented to the user, such as RDF Schema labels.
     Applications rendering strings retrieved from untrusted RDF documents,
     or using unescaped characters,
-    SHOULD prevent such strings from being used to mislead the reader,
+    SHOULD ensure that malignant strings may not be used to mislead the reader.
     The security considerations in the media type registration for XML ([[!RFC3023]] section 10)
     provide additional guidance around the expression of arbitrary data and markup.</p>
 
