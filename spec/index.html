@@ -134,7 +134,6 @@
     <h3>Resources and Statements</h3>
 
     <p>Any <a>IRI</a> or <a>literal</a> <dfn data-lt="denote" data-local-lt="denoted">denotes</dfn>
-      <span class="ednote">Should this be replaced with a reference to <a data-cite="RDF12-SEMANTICS#denote">denote</a> in [[RDF12-SEMANTICS]]?</span>
     something in the world (the "universe of discourse").
     These things are called
     <span id="dfn-resources"><!-- obsolete term --></span>
@@ -364,9 +363,6 @@
         that makes <em>A</em> true also makes <em>B</em> true. When <em>A</em>
         entails <em>B</em>, if the truth of <em>A</em> is presumed or demonstrated
         then the truth of <em>B</em> is established.
-        <div class="ednote">Should this be a reference to, or replace
-          <a data-cite="RDF12-SEMANTICS#entail">entail</a> in [[RDF12-SEMANTICS]]?
-        </div>
       </dd>
 
       <dt><dfn data-local-lt="equivalent">Equivalence</dfn></dt>
@@ -375,9 +371,6 @@
         <em>A</em> is equivalent to <em>B</em> if and only if
         <em>A</em> <a data-lt="entailment">entails</a> <em>B</em> and
         <em>B</em> entails <em>A</em>.
-        <div class="ednote">Should this be a reference to, or replace
-          <a data-cite="RDF12-SEMANTICS#equivalent">equivalent</a> in [[RDF12-SEMANTICS]]?
-        </div>
       </dd>
 
       <dt><dfn data-lt="inconsistent">Inconsistency</dfn><span id="dfn-inconsistency"><!-- obsolete term --></span></dt>
@@ -386,7 +379,7 @@
         of the world that would make the expression true.</dd>
     </dl>
 
-    <p>An <span id="dfn-entailment-regime"><!-- obsolete term --></span><dfn data-cite="RDF12-SEMANTICS#entailment-regime">entailment regime</dfn> [[RDF12-SEMANTICS]] is a specification that
+    <p>An <span id="dfn-entailment-regime"><!-- obsolete term --></span><dfn data-cite="RDF12-SEMANTICS#dfn-entailment-regime">entailment regime</dfn> [[RDF12-SEMANTICS]] is a specification that
       defines precise conditions that make these relationships hold.
       RDF itself recognizes only some basic cases of entailment, <a>equivalence</a>
       and inconsistency. Other specifications, such as
@@ -400,7 +393,7 @@
       <a>entailment regimes</a>.
       Implementations may or may not detect
       <a>inconsistencies</a>, and may make all,
-      some or no <a data-cite="RDF12-SEMANTICS#dfn-entailment">entailed</a> information
+      some or no <a data-lt="entailment">entailed</a> information
       available to users.</p>
   </section>
 
@@ -1206,7 +1199,6 @@
     the primary resource, and the precise semantics depend on the set
     of representations that might result from a retrieval action
     on the primary resource.</p>
-  <p class="ednote">Should this instead be a reference to </p>
 
   <p>This section discusses the handling of fragment identifiers
     in representations that encode <a>RDF graphs</a>.</p>
