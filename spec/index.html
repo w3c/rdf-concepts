@@ -137,6 +137,7 @@
       <span class="ednote">Should this be replaced with a reference to <a data-cite="RDF12-SEMANTICS#denote">denote</a> in [[RDF12-SEMANTICS]]?</span>
     something in the world (the "universe of discourse").
     These things are called
+    <span id="dfn-resources"><!-- obsolete term --></span>
     <dfn data-lt="resource">resources</dfn>. Anything can be a resource,
     including physical things, documents, abstract concepts, numbers
     and strings; the term is synonymous with "entity" as it is used in
@@ -153,7 +154,7 @@
     indicated by the <a>predicate</a>, holds between the
     <a>resources</a> <a>denoted</a> by
     the <a>subject</a> and <a>object</a></em>. This statement corresponding
-    to an RDF triple is known as an <dfn data-lt="statement">RDF statement</dfn>.
+    to an RDF triple is known as an <dfn data-local-lt="statement">RDF statement</dfn>.
     The predicate itself is an <a>IRI</a> and denotes a <dfn class="export">property</dfn>,
     that is, a <a>resource</a> that can be thought of as a binary relation.
     (Relations that involve more than two entities can only be
@@ -229,7 +230,7 @@
   <section id="vocabularies">
     <h3>RDF Vocabularies and Namespace IRIs</h3>
 
-    <p>An <dfn data-lt="vocabulary">RDF vocabulary</dfn> is a collection of <a>IRIs</a>
+    <p>An <dfn data-local-lt="vocabulary">RDF vocabulary</dfn> is a collection of <a>IRIs</a>
       intended for use in <a>RDF graphs</a>. For example,
       the IRIs documented in [[RDF12-SCHEMA]] are the RDF Schema vocabulary.
       RDF Schema can itself be used to define and document additional
@@ -445,7 +446,7 @@
   <section id="section-triples">
     <h3>Triples</h3>
 
-    <p>An <dfn data-lt="triple">RDF triple</dfn> consists of three components:</p>
+    <p>An <dfn data-local-lt="triple">RDF triple</dfn> consists of three components:</p>
 
     <ul>
       <li>the <dfn>subject</dfn>, which is an
@@ -563,7 +564,7 @@
 
     <p>Literals are used for values such as strings, numbers, and dates.</p>
 
-    <p>A <dfn data-lt="RDF literal">literal</dfn> in an <a>RDF graph</a> consists of two or three
+    <p>A <dfn data-local-lt="RDF literal">literal</dfn> in an <a>RDF graph</a> consists of two or three
       elements:</p>
 
     <ul>
@@ -625,7 +626,7 @@
         not defined by this specification.</li>
     </ol>
 
-    <p><dfn data-lt="term-equal">Literal term equality</dfn>: Two literals are term-equal (the same
+    <p><dfn data-local-lt="term-equal">Literal term equality</dfn>: Two literals are term-equal (the same
       RDF literal) if and only if the two <a>lexical forms</a>,
       the two <a>datatype IRIs</a>, and the two
       <a>language tags</a> (if any) compare equal,
