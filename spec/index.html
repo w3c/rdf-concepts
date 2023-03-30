@@ -41,9 +41,12 @@
   </script>
   <style>
     figure { text-align: center; }
-    table td, table th { border: 1px solid #ddd; padding: 0.2em 0.5em; }
+    table.simple td, table th { border: 1px solid #ddd; padding: 0.2em 0.5em; }
     ol ol { list-style-type: lower-latin; }
+    .grammar td { font-family: monospace;}
+    .grammar-literal { color: gray;}
     code {color: #ff4500;}  /* Old W3C Style */
+    div.abnf {margin-left: 1em;}
   </style>
 </head>
 
@@ -134,6 +137,7 @@
       <span class="ednote">Should this be replaced with a reference to <a data-cite="RDF12-SEMANTICS#denote">denote</a> in [[RDF12-SEMANTICS]]?</span>
     something in the world (the "universe of discourse").
     These things are called
+    <span id="dfn-resources"><!-- obsolete term --></span>
     <dfn data-lt="resource">resources</dfn>. Anything can be a resource,
     including physical things, documents, abstract concepts, numbers
     and strings; the term is synonymous with "entity" as it is used in
@@ -150,7 +154,7 @@
     indicated by the <a>predicate</a>, holds between the
     <a>resources</a> <a>denoted</a> by
     the <a>subject</a> and <a>object</a></em>. This statement corresponding
-    to an RDF triple is known as an <dfn data-lt="statement">RDF statement</dfn>.
+    to an RDF triple is known as an <dfn data-local-lt="statement">RDF statement</dfn>.
     The predicate itself is an <a>IRI</a> and denotes a <dfn class="export">property</dfn>,
     that is, a <a>resource</a> that can be thought of as a binary relation.
     (Relations that involve more than two entities can only be
@@ -226,7 +230,7 @@
   <section id="vocabularies">
     <h3>RDF Vocabularies and Namespace IRIs</h3>
 
-    <p>An <dfn data-lt="vocabulary">RDF vocabulary</dfn> is a collection of <a>IRIs</a>
+    <p>An <dfn data-local-lt="vocabulary">RDF vocabulary</dfn> is a collection of <a>IRIs</a>
       intended for use in <a>RDF graphs</a>. For example,
       the IRIs documented in [[RDF12-SCHEMA]] are the RDF Schema vocabulary.
       RDF Schema can itself be used to define and document additional
@@ -442,7 +446,7 @@
   <section id="section-triples">
     <h3>Triples</h3>
 
-    <p>An <dfn data-lt="triple">RDF triple</dfn> consists of three components:</p>
+    <p>An <dfn data-local-lt="triple">RDF triple</dfn> consists of three components:</p>
 
     <ul>
       <li>the <dfn>subject</dfn>, which is an
@@ -477,10 +481,13 @@
   <section id="section-IRIs">
     <h3>IRIs</h3>
 
-    <p>An <dfn><abbr title="Internationalized Resource Identifier">IRI</abbr></dfn>
+    <p>An <dfn data-lt="iri"><abbr title="Internationalized Resource Identifier">IRI</abbr></dfn>
       (Internationalized Resource Identifier) within an RDF graph
       is a Unicode string [[!UNICODE]] that conforms to the syntax
       defined in RFC 3987 [[!RFC3987]].</p>
+
+    <p class="note">For convenience, a complete [[ABNF]] grammar
+      from [[RFC3987]] is provided in <a href="#iri-abnf" class="sectionRef"></a>.</p>
 
     <p>IRIs in the RDF abstract syntax MUST be absolute, and MAY
       contain a fragment identifier.</p>
@@ -557,7 +564,7 @@
 
     <p>Literals are used for values such as strings, numbers, and dates.</p>
 
-    <p>A <dfn data-lt="RDF literal">literal</dfn> in an <a>RDF graph</a> consists of two or three
+    <p>A <dfn data-local-lt="RDF literal">literal</dfn> in an <a>RDF graph</a> consists of two or three
       elements:</p>
 
     <ul>
@@ -619,7 +626,7 @@
         not defined by this specification.</li>
     </ol>
 
-    <p><dfn data-lt="term-equal">Literal term equality</dfn>: Two literals are term-equal (the same
+    <p><dfn data-local-lt="term-equal">Literal term equality</dfn>: Two literals are term-equal (the same
       RDF literal) if and only if the two <a>lexical forms</a>,
       the two <a>datatype IRIs</a>, and the two
       <a>language tags</a> (if any) compare equal,
@@ -1354,6 +1361,28 @@
     of an <a>RDF literal</a>.</p>
 
   <p class="issue" data-number="9"></p>
+</section>
+
+<section id="iri-abnf" class="appendix informative">
+  <h2>IRI Grammar</h2>
+
+  <p>
+    The following [[ABNF]] grammar applies the changes from [[RFC3987]] and [[RFC6874]] to the section
+    <a data-cite="RFC3986#appendix-A">Collected ABNF for URI</a> of
+    [[RFC3986]] to give a consolidated grammar for IRIs.
+   </p>
+   <p>
+    This is provided for convenience only.
+    If it differs from definitions in [[RFC3986]], [[RFC3987]], or any subsequent updates,
+    then those definitions should be used.
+    </p>
+
+  <div class="abnf">
+    <pre data-include="iri-grammar.abnf"></pre>
+  </div>
+
+  <p>The ABNF can also be accessed directly from <a href="iri-grammar.abnf">iri-grammar.abnf</a>.</p>
+
 </section>
 
 <section id="section-Acknowledgments" class="informative appendix">
