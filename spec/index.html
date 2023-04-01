@@ -574,7 +574,7 @@
         identifying a datatype that determines how the lexical form maps
         to a <a>literal value</a>, and</li>
       <li>if and only if the <a>datatype IRI</a> is
-        <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#langString</code>, a
+        <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#langString</code> (<code>rdf:langString</code>), a
         non-empty <dfn>language tag</dfn> as defined by [[!BCP47]]. The
         language tag MUST be well-formed according to
         <a data-cite="bcp47#section-2.2.9">section 2.2.9</a>
@@ -592,11 +592,11 @@
       Simple literals are syntactic sugar for abstract syntax
       <a>literals</a>
       with the <a>datatype IRI</a>
-      <code>http://www.w3.org/2001/XMLSchema#string</code>. Similarly, most
-      concrete syntaxes represent
+      <code>http://www.w3.org/2001/XMLSchema#string</code> (<code>xsd:string</code>).
+      Similarly, most concrete syntaxes represent
       <a>language-tagged strings</a> without
       the <a>datatype IRI</a> because it always equals
-      <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#langString</code>.</p>
+      <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#langString</code> (<code>rdf:langString</code>).</p>
 
     <p>The <dfn>literal value</dfn> associated with a <a>literal</a> is:</p>
 
@@ -875,7 +875,7 @@
     from the lexical space to the value space.</p>
 
   <p class="note"><a>Language-tagged strings</a> have the <a>datatype IRI</a>
-    <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#langString</code>.
+    <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#langString</code> (<code>rdf:langString</code>).
     No datatype is formally defined for this IRI because the definition
     of <a>datatypes</a> does not accommodate
     <a>language tags</a> in the <a>lexical space</a>.
