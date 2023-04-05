@@ -10,7 +10,7 @@ on:
 
 jobs:
   add-to-project:
-    name: Add PR to project
+    name: Add PR and issues to project
     runs-on: ubuntu-latest
     steps:
       - uses: actions/add-to-project@v0.4.1
