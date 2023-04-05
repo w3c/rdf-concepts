@@ -1,7 +1,10 @@
-name: Add needs-review and size/XL pull requests to projects
+name: Add pull requests and issues to projects
 
 on:
   pull_request:
+    types:
+      - opened
+  issues:
     types:
       - opened
 
