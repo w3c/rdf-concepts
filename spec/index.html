@@ -1286,12 +1286,12 @@
 
 </section>
 
-<section id="privacy">
+<section id="privacy" class="appendix informative">
   <h2>Privacy Considerations</h2>
   <p>TODO</p>
 </section>
 
-<section id="security">
+<section id="security" class="appendix informative">
   <h2>Security Considerations</h2>
 
   <p>The RDF Abstract Syntax is not used directly for conveying information,
@@ -1319,13 +1319,13 @@
     or using unescaped characters,
     SHOULD use warnings and other appropriate means to limit the possibility
     that malignant strings might be used to mislead the reader.
-    The security considerations in the media type registration for XML ([[!RFC3023]] section 10)
+    The security considerations in the media type registration for XML ([[RFC3023]] section 10)
     provide additional guidance around the expression of arbitrary data and markup.</p>
 
   <p>RDF uses <a>IRIs</a> as term identifiers.
     Applications interpreting data expressed in RDF SHOULD address the security issues of
-    [[[!RFC3987]]] [[!RFC3987]] Section 8, as well as
-    [[[!RFC3986]]] [[!RFC3986]] Section 7.</p>
+    [[[RFC3987]]] [[RFC3987]] Section 8, as well as
+    [[[RFC3986]]] [[RFC3986]] Section 7.</p>
 
   <p>Multiple <a>IRIs</a> may have the same appearance.
      Characters in different scripts may look similar (for instance,
@@ -1345,7 +1345,7 @@
     and [[RDF12-N-QUADS]].</p>
 </section>
 
-<section id="internationalization">
+<section id="internationalization" class="appendix informative">
   <h2>Internationalization Considerations</h2>
   <p>RDF is restricted to representing string values with left-to-right or right-to-left direction indicators.
     RDF provides a mechanism for specifying the language associated with
