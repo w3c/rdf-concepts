@@ -75,9 +75,7 @@
     It is the central RDF 1.2 specification and defines the core RDF concepts.
     Test suites and implementation reports of a number of RDF 1.2
     specifications that build on this document are available through the  
-    [[[RDF11-TESTCASES]]] document [[RDF11-TESTCASES]].
-    There have been no changes to this document since its publication as
-    Proposed Recommendation.</p>
+    [[[RDF11-TESTCASES]]] document [[RDF11-TESTCASES]].</p>
 
   <p>RDF 1.2 Concepts is an update to [[RDF11-CONCEPTS]],
     which was itself, an update to [[RDF-CONCEPTS-20040210]].</p>
@@ -1017,6 +1015,56 @@
 
   </section>
 
+  <section>
+    <h3>Datatype IRIs</h3>
+
+    <p>Datatypes are identified by <a>IRIs</a>. If
+      <var>D</var> is a set of IRIs which are used to refer to
+      datatypes, then the elements of <var>D</var> are called
+      <span id="dfn-recognized-datatype-iris"><!-- obsolete term--></span><dfn data-lt="recognized datatype IRI">recognized datatype IRIs</dfn>.
+      Recognized IRIs have fixed
+      <a href="#referents">referents</a>. If any IRI of the form
+      <code>http://www.w3.org/2001/XMLSchema#xxx</code> is recognized, it
+      MUST refer to the RDF-compatible XSD type named <code>xsd:xxx</code> for
+      every XSD type listed in <a href="#xsd-datatypes">section 5.1</a>.
+      Furthermore, the following IRIs are allocated for non-normative
+      datatypes:
+
+    <ul>
+      <li>The IRI <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral</code>
+        refers to the datatype <code><a>rdf:XMLLiteral</a></code></li>
+      <li>The IRI <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#HTML</code>
+        refers to the datatype <code><a>rdf:HTML</a></code></li>
+    </ul>
+
+    <p class="note">Semantic extensions of RDF might choose to
+      recognize other datatype IRIs
+      and require them to refer to a fixed datatype.  See the RDF
+      Semantics specification [[RDF12-SEMANTICS]] for more information on
+      semantic extensions.</p>
+
+    <p>RDF processors are not required to recognize datatype IRIs.
+      Any literal typed with an unrecognized IRI is treated just like
+      an unknown IRI, i.e. as referring to an unknown thing. Applications
+      MAY give a warning message if they are unable to determine the
+      referent of an IRI used in a typed literal, but they SHOULD NOT
+      reject such RDF as either a syntactic or semantic error.<p>
+
+    <p>Other specifications MAY impose additional constraints on
+      <a>datatype IRIs</a>, for example, require support
+      for certain datatypes.</p>
+
+    <p class="note" id="note-custom-datatypes">The Web Ontology Language
+      [[OWL2-OVERVIEW]] offers facilities for formally defining
+      <a data-cite="OWL2-SYNTAX#Datatype_Definitions">custom
+      datatypes</a> that can be used with RDF. Furthermore, a practice for
+      identifying
+      <a data-cite="swbp-xsch-datatypes#sec-userDefined">
+      user-defined simple XML Schema datatypes</a>
+      is suggested in [[SWBP-XSCH-DATATYPES]]. RDF implementations
+      are not required to support either of these facilities.</p>
+  </section>
+
   <section id="section-html" class="informative">
     <h3>The <code>rdf:HTML</code> Datatype</h3>
 
@@ -1145,56 +1193,6 @@
       in [[?JSON-LD11]].
     </p>
   </section>
-
-  <section>
-    <h3>Datatype IRIs</h3>
-
-    <p>Datatypes are identified by <a>IRIs</a>. If
-      <var>D</var> is a set of IRIs which are used to refer to
-      datatypes, then the elements of <var>D</var> are called
-      <span id="dfn-recognized-datatype-iris"><!-- obsolete term--></span><dfn data-lt="recognized datatype IRI">recognized datatype IRIs</dfn>.
-      Recognized IRIs have fixed
-      <a href="#referents">referents</a>. If any IRI of the form
-      <code>http://www.w3.org/2001/XMLSchema#xxx</code> is recognized, it
-      MUST refer to the RDF-compatible XSD type named <code>xsd:xxx</code> for
-      every XSD type listed in <a href="#xsd-datatypes">section 5.1</a>.
-      Furthermore, the following IRIs are allocated for non-normative
-      datatypes:
-
-    <ul>
-      <li>The IRI <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral</code>
-        refers to the datatype <code><a>rdf:XMLLiteral</a></code></li>
-      <li>The IRI <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#HTML</code>
-        refers to the datatype <code><a>rdf:HTML</a></code></li>
-    </ul>
-
-    <p class="note">Semantic extensions of RDF might choose to
-      recognize other datatype IRIs
-      and require them to refer to a fixed datatype.  See the RDF
-      Semantics specification [[RDF12-SEMANTICS]] for more information on
-      semantic extensions.</p>
-
-    <p>RDF processors are not required to recognize datatype IRIs.
-      Any literal typed with an unrecognized IRI is treated just like
-      an unknown IRI, i.e. as referring to an unknown thing. Applications
-      MAY give a warning message if they are unable to determine the
-      referent of an IRI used in a typed literal, but they SHOULD NOT
-      reject such RDF as either a syntactic or semantic error.<p>
-
-    <p>Other specifications MAY impose additional constraints on
-      <a>datatype IRIs</a>, for example, require support
-      for certain datatypes.</p>
-
-    <p class="note" id="note-custom-datatypes">The Web Ontology Language
-      [[OWL2-OVERVIEW]] offers facilities for formally defining
-      <a data-cite="OWL2-SYNTAX#Datatype_Definitions">custom
-      datatypes</a> that can be used with RDF. Furthermore, a practice for
-      identifying
-      <a data-cite="swbp-xsch-datatypes#sec-userDefined">
-      user-defined simple XML Schema datatypes</a>
-      is suggested in [[SWBP-XSCH-DATATYPES]]. RDF implementations
-      are not required to support either of these facilities.</p>
-  </section>
 </section>
 
 <section id="section-fragID" class="informative">
@@ -1286,12 +1284,12 @@
 
 </section>
 
-<section id="privacy">
+<section id="privacy" class="appendix informative">
   <h2>Privacy Considerations</h2>
   <p>TODO</p>
 </section>
 
-<section id="security">
+<section id="security" class="appendix informative">
   <h2>Security Considerations</h2>
 
   <p>The RDF Abstract Syntax is not used directly for conveying information,
@@ -1319,13 +1317,13 @@
     or using unescaped characters,
     SHOULD use warnings and other appropriate means to limit the possibility
     that malignant strings might be used to mislead the reader.
-    The security considerations in the media type registration for XML ([[!RFC3023]] section 10)
+    The security considerations in the media type registration for XML ([[RFC3023]] section 10)
     provide additional guidance around the expression of arbitrary data and markup.</p>
 
   <p>RDF uses <a>IRIs</a> as term identifiers.
     Applications interpreting data expressed in RDF SHOULD address the security issues of
-    [[[!RFC3987]]] [[!RFC3987]] Section 8, as well as
-    [[[!RFC3986]]] [[!RFC3986]] Section 7.</p>
+    [[[RFC3987]]] [[RFC3987]] Section 8, as well as
+    [[[RFC3986]]] [[RFC3986]] Section 7.</p>
 
   <p>Multiple <a>IRIs</a> may have the same appearance.
      Characters in different scripts may look similar (for instance,
@@ -1345,7 +1343,7 @@
     and [[RDF12-N-QUADS]].</p>
 </section>
 
-<section id="internationalization">
+<section id="internationalization" class="appendix informative">
   <h2>Internationalization Considerations</h2>
   <p>RDF is restricted to representing string values with left-to-right or right-to-left direction indicators.
     RDF provides a mechanism for specifying the language associated with
@@ -1492,13 +1490,6 @@
   </section>
 </section>
 
-<section class="appendix informative" id="changes-11">
-  <h2>Changes between RDF 1.0 and RDF 1.1</h2>
-
-  <p>A detailed overview of the differences between RDF versions&nbsp;1.0
-    and 1.1 can be found in [[[RDF11-NEW]]] [[RDF11-NEW]].</p>
-</section>
-
 <section class="appendix informative" id="changes-12">
   <h2>Changes between RDF 1.1 and RDF 1.2</h2>
 
@@ -1506,6 +1497,9 @@
     <li>Added <a href="#section-dataset-quad" class="sectionRef"></a>
       for informative definition of a <a>quad</a>.</li>
   </ul>
+
+  <p class="note">A detailed overview of the differences between RDF versions&nbsp;1.0
+    and 1.1 can be found in [[[RDF11-NEW]]] [[RDF11-NEW]].</p>
 </section>
 
 <section id="index"></section>
