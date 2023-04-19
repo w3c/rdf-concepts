@@ -8,7 +8,24 @@
   <script src="./common/fixup.js" class="remove"></script>
   <script class='remove'>
     var respecConfig = {
-      localBiblio:          localBibliography,
+      localBiblio:          {...localBibliography,
+        ///  Hacktemporary bib entry for RDF-star CG report
+        ...{
+          "RDF-STAR-CG": {
+            title: "RDF-star and SPARQL-star",
+            href: "https://w3c.github.io/rdf-star/cg-spec/2021-12-17.html",
+            authors: [
+              "Olaf Hartig",
+              "Pierre-Antoine Champin",
+              "Gregg Kellogg",
+              "Andy Seaborne"
+            ],
+            rawDate: "2021-12-17",
+            status: "Final Community Group Report",
+            publisher: "W3C"
+          }
+        }
+      },
       specStatus:           "ED",
       edDraftURI:           "https://w3c.github.io/rdf-concepts/spec/",
       shortName:            "rdf12-concepts",
@@ -65,8 +82,11 @@
       are comprised of a default graph and zero or more named graphs.</li>
   </ul>
 
-  <p>RDF 1.2 Concepts also introduces key concepts and terminology, and discusses
-    datatyping and the handling of <a>fragment identifiers</a> in IRIs within
+  <p>RDF 1.2 introduces <a>quoted triples</a> as another kind of <a>RDF term</a>
+    which can be used as the <a>subject</a> or <a>object</a> of another <a>triple</a>.</p>
+
+  <p>RDF 1.2 Concepts introduces key concepts and terminology for RDF 1.2, discusses
+    datatyping, and the handling of <a>fragment identifiers</a> in IRIs within
     RDF graphs.</p>
 </section>
 
@@ -115,18 +135,16 @@
       directed-arc diagram, in which each triple is represented as a
       node-arc-node link.</p>
 
-    <figure>
+    <figure id="fig-rdf-graph">
       <a href="rdf-graph.svg"><img src="rdf-graph.svg" alt="An RDF graph with two nodes (Subject and Object) and a triple connecting them (Predicate)" /></a>
       <figcaption>An RDF graph with two nodes (Subject and Object) and a triple connecting them (Predicate)</figcaption>
     </figure>
 
-    <p>There can be three kinds of <a>nodes</a> in an
+    <p>There can be four kinds of <a>nodes</a> in an
       <a>RDF graph</a>: <a>IRIs</a>, <a>literals</a>,
-      and <a>blank nodes</a>.</p>
+      <a>blank nodes</a>, and <a>quoted triples</a>.</p>
 
-    <p class="ednote">Four kinds of nodes now, including quoted triples.</p>
   </section>
-
 
   <section id="resources-and-statements">
     <h3>Resources and Statements</h3>
@@ -163,6 +181,58 @@
       <a>resources</a>. <a>Statements</a>
       involving blank nodes say that something with the given relationships
       exists, without explicitly naming it.</p>
+  </section>
+
+  <section id="section-quoted-triples">
+    <h3>Quoted Triples</h3>
+
+    <p>A <a>quoted triple</a> is an <a>RDF term</a> with the components of
+      an <a>RDF triple</a>, which can be used as the <a>subject</a> or <a>object</a>
+      of another triple.</p>
+
+    <p>A <a>quoted triple</a> is not necessarily asserted, allowing
+      statements to be made about other statements that may not be
+      asserted within an <a>RDF graph</a>.
+      This allows statements to be made about relationships that may be contradictory.
+      For a <a>quoted triple</a> to be asserted,
+      it must also appear in a graph as an <a>asserted triple</a>.</p>
+
+    <p>The following diagram represents a statement with an unasserted <a>quoted triple</a>
+      as the subject.</p>
+
+    <figure id="fig-quoted-triple">
+      <a href="quoted-triple.svg">
+        <!-- Source for this file is at https://docs.google.com/drawings/d/1I_QxbUgnQXumXzb8c0WNJHIQ-mtRs2S80dDG6i9aOD8 -->
+        <img src="quoted-triple.svg"
+             alt="An RDF graph containing an triple referencing an unasserted quoted triple as the subject"
+             style="width:70%"
+             aria-describedby="fig-quoted-triple-alt"/>
+      </a>
+      <figcaption id="fig-quoted-triple-alt">
+        An RDF graph containing an triple referencing an unasserted quoted triple (with grey background) as the subject.
+      </figcaption>
+    </figure>
+
+    <p>A variation on the graph shown in <a href="#fig-quoted-triple"></a> can be described where the <a>quoted triple</a> is also <a data-lt="asserted triple">asserted</a>.</p>
+
+    <figure id="fig-quoted-asserted-triple">
+      <a href="quoted-asserted-triple.svg">
+        <!-- Source for this file is at https://docs.google.com/drawings/d/1aoUEsb07P-nu5rvPRob7O07CRKgnf7tBw2CmRJNuaQ0 -->
+        <img src="quoted-asserted-triple.svg"
+             alt="An RDF graph containing an triple referencing a triple which is both quoted and asserted"
+             style="width:70%"
+             aria-describedby="fig-quoted-asserted-triple-alt"/>
+      </a>
+      <figcaption id="fig-quoted-asserted-triple-alt">
+        An RDF graph containing an triple referencing a triple which is both quoted and asserted.
+      </figcaption>
+    </figure>
+
+    <p>Note that a <a>quoted triple</a> may also have a quoted triple as a subject or object.</p>
+
+    <p class="issue" data-number="34">
+      This issue considers the potential for additional terminology related to <a>quoted triples</a>.
+    </p>
   </section>
 
   <section id="referents">
@@ -425,14 +495,30 @@
     <em>RDF 1.2 Concepts and Abstract Syntax</em>,
     but can conform to such other specifications that normatively
     reference terms defined here.</p>
+
+  <p>This specification establishes two conformance levels:</p>
+
+  <ul>
+    <li><dfn class="no-export lint-ignore">Full</dfn> conformance
+      supports <a data-lt="RDF graph">graphs</a> and <a data-lt="RDF dataset">datasets</a>
+      containing <a>quoted triples</a>.
+      Concrete syntaxes in which such graphs and datasets can be expressed include
+      [[RDF12-N-TRIPLES]], [[RDF12-N-QUADS]], [[RDF12-TURTLE]], and [[RDF12-TRIG]].</li>
+    <li><dfn class="no-export lint-ignore">Classic</dfn> conformance
+      only supports <a data-lt="RDF graph">graphs</a> or <a data-lt="RDF dataset">datasets</a>,
+      that do not include <a>quoted triples</a>.</li>
+  </ul>
+  <p class="ednote">The conformance levels described above are tentative,
+    and still the subject of group discussion. An alternative to conformance
+    levels, "profiles", may be adopted instead, abandoned, or described in 
+    another specification.</p>
 </section>
 
 
 <section id="section-rdf-graph">
   <h2>RDF Graphs</h2>
 
-  <p>An <dfn>RDF graph</dfn> is a set of
-  <a>RDF triples</a>.</p>
+  <p>An <dfn>RDF graph</dfn> is a set of <a>RDF triples</a>.</p>
 
   <section id="section-triples">
     <h3>Triples</h3>
@@ -441,32 +527,50 @@
 
     <ul>
       <li>the <dfn>subject</dfn>, which is an
-      <a>IRI</a> or a <a>blank node</a></li>
+      <a>IRI</a>, a <a>blank node</a>, or a <a>quoted triple</a></li>
 
       <li>the <dfn>predicate</dfn>, which is an <a>IRI</a></li>
 
       <li>the <dfn>object</dfn>, which is an <a>IRI</a>,
-      a <a>literal</a> or a <a>blank node</a></li>
+      a <a>literal</a>, a <a>blank node</a>, or a <a>quoted triple</a></li>
     </ul>
 
     <p>An RDF triple is conventionally written in the order subject,
       predicate, object.</p>
 
+    <p>"RDF triple" is usually written "<a>triple</a>".<p>
+
+    <p>A <dfn data-local-lt="quoted">quoted triple</dfn> is an <a>RDF term</a> representing a <a>triple</a>
+      used as the <a>subject</a> or <a>object</a> of another triple.</p>
+
+    <p>An <dfn data-local-lt="asserted">asserted triple</dfn>
+      is an <a>RDF triple</a> that is an element of an <a>RDF graph</a>.</p>
+
     <p>The set of <span id="dfn-nodes"><!-- obsolete term--></span><dfn data-lt="node">nodes</dfn> of an <a>RDF graph</a>
-      is the set of subjects and objects of triples in the graph.
+      is the set of <a>subjects</a> and <a>objects</a> of <a>triples</a> in the graph
+      plus all the <a>nodes</a> of those <a>subjects</a> and/or its <a>objects</a>,
+      recursively, for <a>quoted triples</a>.
       It is possible for a predicate IRI to also occur as a node in
       the same graph.</p>
 
-    <p><a>IRIs</a>, <a>literals</a> and
-      <a>blank nodes</a> are collectively known as
+    <p><a>IRIs</a>, <a>literals</a>,
+      <a>blank nodes</a>, and <a>quoted triples</a> are collectively known as
       <span id="dfn-rdf-terms"><!-- obsolete term--></span><dfn data-lt="rdf term">RDF terms</dfn>.</p>
 
-    <p><a>IRIs</a>, <a>literals</a>
-      and <a>blank nodes</a> are distinct and distinguishable.
+    <p><a>IRIs</a>, <a>literals</a>,
+      <a>blank nodes</a>, and <a>quoted triples</a> are distinct and distinguishable.
       For example, <code>http://example.org/</code> as a string literal
-      is neither equal to <code>http://example.org/</code> as an IRI,
-      nor to a blank node with the <a>blank node identifier</a>
+      is equal to neither <code>http://example.org/</code> as an IRI,
+      nor a blank node with the <a>blank node identifier</a>
       <code>http://example.org/</code>.</p>
+
+    <p class="note">In an <a>RDF graph</a>,
+      a <a>triple</a> may occur as both a <a>quoted</a> triple term and as an <a>asserted</a> triple.</p>
+
+    <p class="note">The definition of <a>quoted triple</a> is recursive.
+      That is, a <a>quoted triple</a> can itself have a
+      <a>subject</a> or <a>object</a> component which is another <a>quoted triple</a>.
+      However, by their nature, cycles of <a>quoted triples</a> cannot be created.</p>
   </section>
 
   <section id="section-IRIs">
@@ -1348,7 +1452,7 @@
   <p>RDF is restricted to representing string values with left-to-right or right-to-left direction indicators.
     RDF provides a mechanism for specifying the language associated with
     a string (<a>language-tagged string</a>),
-    but does not provide a means of indicating the base direction of the string.</p> 
+    but does not provide a means of indicating the base direction of the string.</p>
 
   <p>Unicode provides a mechanism for signaling direction within a string
     (see [[[UAX9]]] [[UAX9]]),
@@ -1496,6 +1600,8 @@
   <ul>
     <li>Added <a href="#section-dataset-quad" class="sectionRef"></a>
       for informative definition of a <a>quad</a>.</li>
+    <li>Added <a href="#section-quoted-triples" class="sectionRef"></a>
+      and definitions for <a>quoted triple</a> and <a>asserted triple</a>.</li>
   </ul>
 
   <p class="note">A detailed overview of the differences between RDF versions&nbsp;1.0
