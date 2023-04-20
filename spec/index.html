@@ -204,12 +204,12 @@
       <a href="quoted-triple.svg">
         <!-- Source for this file is at https://docs.google.com/drawings/d/1I_QxbUgnQXumXzb8c0WNJHIQ-mtRs2S80dDG6i9aOD8 -->
         <img src="quoted-triple.svg"
-             alt="An RDF graph containing an triple referencing an unasserted quoted triple as the subject"
+             alt="An RDF graph containing a triple that references an unasserted quoted triple (with grey background) as the subject"
              style="width:70%"
              aria-describedby="fig-quoted-triple-alt"/>
       </a>
       <figcaption id="fig-quoted-triple-alt">
-        An RDF graph containing an triple referencing an unasserted quoted triple (with grey background) as the subject.
+        An RDF graph containing a triple that references an unasserted quoted triple (with grey background) as the subject.
       </figcaption>
     </figure>
 
@@ -219,16 +219,16 @@
       <a href="quoted-asserted-triple.svg">
         <!-- Source for this file is at https://docs.google.com/drawings/d/1aoUEsb07P-nu5rvPRob7O07CRKgnf7tBw2CmRJNuaQ0 -->
         <img src="quoted-asserted-triple.svg"
-             alt="An RDF graph containing an triple referencing a triple which is both quoted and asserted"
+             alt="An RDF graph containing two triples where one of them contains the other as the subject; hence, that other triple is both quoted and asserted"
              style="width:70%"
              aria-describedby="fig-quoted-asserted-triple-alt"/>
       </a>
       <figcaption id="fig-quoted-asserted-triple-alt">
-        An RDF graph containing an triple referencing a triple which is both quoted and asserted.
+        An RDF graph containing two triples where one of them contains the other as the subject; hence, that other triple is both quoted and asserted.
       </figcaption>
     </figure>
 
-    <p>Note that a <a>quoted triple</a> may also have a quoted triple as a subject or object.</p>
+    <p>Note that a <a>quoted triple</a> may also have a quoted triple as its subject or object.</p>
 
     <p class="issue" data-number="34">
       This issue considers the potential for additional terminology related to <a>quoted triples</a>.
@@ -506,7 +506,7 @@
       [[RDF12-N-TRIPLES]], [[RDF12-N-QUADS]], [[RDF12-TURTLE]], and [[RDF12-TRIG]].</li>
     <li><dfn class="no-export lint-ignore">Classic</dfn> conformance
       only supports <a data-lt="RDF graph">graphs</a> or <a data-lt="RDF dataset">datasets</a>,
-      that do not include <a>quoted triples</a>.</li>
+      that do not contain <a>quoted triples</a>.</li>
   </ul>
   <p class="ednote">The conformance levels described above are tentative,
     and still the subject of group discussion. An alternative to conformance
@@ -540,7 +540,7 @@
 
     <p>"RDF triple" is usually written "<a>triple</a>".<p>
 
-    <p>A <dfn data-local-lt="quoted">quoted triple</dfn> is an <a>RDF term</a> representing a <a>triple</a>
+    <p>A <dfn data-local-lt="quoted">quoted triple</dfn> is an <a>RDF triple</a> that is
       used as the <a>subject</a> or <a>object</a> of another triple.</p>
 
     <p>An <dfn data-local-lt="asserted">asserted triple</dfn>
@@ -565,12 +565,13 @@
       <code>http://example.org/</code>.</p>
 
     <p class="note">In an <a>RDF graph</a>,
-      a <a>triple</a> may occur as both a <a>quoted</a> triple term and as an <a>asserted</a> triple.</p>
+      a <a>triple</a> may occur as either a <a>quoted triple</a>, an 
+      <a>asserted triple</a>, or both.</p>
 
     <p class="note">The definition of <a>quoted triple</a> is recursive.
       That is, a <a>quoted triple</a> can itself have a
       <a>subject</a> or <a>object</a> component which is another <a>quoted triple</a>.
-      However, by their nature, cycles of <a>quoted triples</a> cannot be created.</p>
+      However, by this definition, cycles of <a>quoted triples</a> cannot be created.</p>
   </section>
 
   <section id="section-IRIs">
