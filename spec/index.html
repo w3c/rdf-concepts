@@ -523,22 +523,31 @@
   <section id="section-triples">
     <h3>Triples</h3>
 
-    <p>An <dfn data-local-lt="triple">RDF triple</dfn> consists of three components:</p>
+    <p>An <dfn data-local-lt="triple">RDF triple</dfn> is a 3-tuple that is defined recursively as follows:</p>
 
     <ul>
-      <li>the <dfn>subject</dfn>, which is an
-      <a>IRI</a>, a <a>blank node</a>, or a <a>quoted triple</a></li>
+      <li>
+        If |s| is an <a>IRI</a> or a <a>blank node</a>,
+        |p| is an <a>IRI</a>, and
+        |o| is an <a>IRI</a>, a <a>blank node</a>, or a <a>literal</a>,
+        then (|s|, |p|, |o|) is an RDF triple.
+      </li>
 
-      <li>the <dfn>predicate</dfn>, which is an <a>IRI</a></li>
-
-      <li>the <dfn>object</dfn>, which is an <a>IRI</a>,
-      a <a>literal</a>, a <a>blank node</a>, or a <a>quoted triple</a></li>
+      <li>
+        If |t| and <var>t'</var> are <a>RDF triples</a>,
+        |s| is an <a>IRI</a> or a <a>blank node</a>,
+        |p| is an <a>IRI</a>, and
+        |o| is an <a>IRI</a>, a <a>blank node</a>, or a <a>literal</a>,
+        then (|t|, |p|, |o|), (|s|, |p|, |t|), and (|t|, |p|, <var>t'</var>) are RDF triples.
+      </li>
     </ul>
 
-    <p>An RDF triple is conventionally written in the order subject,
-      predicate, object.</p>
-
     <p>"RDF triple" is usually written "<a>triple</a>".<p>
+
+    <p>Given a <a>triple</a> (|s|, |p|, |o|),
+      |s| is called the <dfn>subject</dfn> of the triple,
+      |p| is called the <dfn>predicate</dfn> of the triple, and
+      |o| is called the <dfn>object</dfn> of the triple.</p>
 
     <p>A <dfn data-local-lt="quoted">quoted triple</dfn> is an <a>RDF triple</a> that is
       used as the <a>subject</a> or <a>object</a> of another triple.</p>
@@ -561,6 +570,13 @@
       is equal to neither <code>http://example.org/</code> as an IRI,
       nor a blank node with the <a>blank node identifier</a>
       <code>http://example.org/</code>.</p>
+
+    <p class="note">By the given definitions,
+      the <a>subject</a> of an <a>RDF triple</a> may be either an <a>IRI</a>,
+      a <a>blank node</a>, or a <a>quoted triple</a>;
+      the <a>predicate</a> of an <a>RDF triple</a> may only be an <a>IRI</a>;
+      the <a>object</a> of an <a>RDF triple</a> may be either an <a>IRI</a>,
+      a <a>blank node</a>, a <a>literal</a> or a <a>quoted triple</a>.</p>
 
     <p class="note">In an <a>RDF graph</a>,
       a <a>triple</a> may occur as either a <a>quoted triple</a>, an 
