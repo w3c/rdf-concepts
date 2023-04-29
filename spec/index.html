@@ -552,13 +552,17 @@
     <p>A <dfn data-local-lt="quoted">quoted triple</dfn> is an <a>RDF triple</a> that is
       used as the <a>subject</a> or <a>object</a> of another triple.</p>
 
-    <p>An <dfn data-local-lt="asserted">asserted triple</dfn>
-      is an <a>RDF triple</a> that is an element of an <a>RDF graph</a>.</p>
+    <p class="note">By the given definitions,
+      the <a>subject</a> of an <a>RDF triple</a> may be either an <a>IRI</a>,
+      a <a>blank node</a>, or a <a>quoted triple</a>;
+      the <a>predicate</a> of an <a>RDF triple</a> may only be an <a>IRI</a>;
+      the <a>object</a> of an <a>RDF triple</a> may be either an <a>IRI</a>,
+      a <a>blank node</a>, a <a>literal</a> or a <a>quoted triple</a>.</p>
 
-    <p>The set of <span id="dfn-nodes"><!-- obsolete term--></span><dfn data-lt="node">nodes</dfn> of an <a>RDF graph</a>
-      is the set of <a>subjects</a> and <a>objects</a> of <a>triples</a> in the graph.
-      It is possible for a predicate IRI to also occur as a node in
-      the same graph.</p>
+    <p class="note">The definition of <a>quoted triple</a> is recursive.
+      That is, a <a>quoted triple</a> can itself have a
+      <a>subject</a> or <a>object</a> component which is another <a>quoted triple</a>.
+      However, by this definition, cycles of <a>quoted triples</a> cannot be created.</p>
 
     <p><a>IRIs</a>, <a>literals</a>,
       <a>blank nodes</a>, and <a>quoted triples</a> are collectively known as
@@ -571,21 +575,17 @@
       nor a blank node with the <a>blank node identifier</a>
       <code>http://example.org/</code>.</p>
 
-    <p class="note">By the given definitions,
-      the <a>subject</a> of an <a>RDF triple</a> may be either an <a>IRI</a>,
-      a <a>blank node</a>, or a <a>quoted triple</a>;
-      the <a>predicate</a> of an <a>RDF triple</a> may only be an <a>IRI</a>;
-      the <a>object</a> of an <a>RDF triple</a> may be either an <a>IRI</a>,
-      a <a>blank node</a>, a <a>literal</a> or a <a>quoted triple</a>.</p>
+    <p>The set of <span id="dfn-nodes"><!-- obsolete term--></span><dfn data-lt="node">nodes</dfn> of an <a>RDF graph</a>
+      is the set of <a>subjects</a> and <a>objects</a> of <a>triples</a> in the graph.
+      It is possible for a predicate IRI to also occur as a node in
+      the same graph.</p>
+
+    <p>An <dfn data-local-lt="asserted">asserted triple</dfn>
+      is an <a>RDF triple</a> that is an element of an <a>RDF graph</a>.</p>
 
     <p class="note">In an <a>RDF graph</a>,
       a <a>triple</a> may occur as either a <a>quoted triple</a>, an 
       <a>asserted triple</a>, or both.</p>
-
-    <p class="note">The definition of <a>quoted triple</a> is recursive.
-      That is, a <a>quoted triple</a> can itself have a
-      <a>subject</a> or <a>object</a> component which is another <a>quoted triple</a>.
-      However, by this definition, cycles of <a>quoted triples</a> cannot be created.</p>
   </section>
 
   <section id="section-IRIs">
