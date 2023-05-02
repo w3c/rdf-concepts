@@ -2283,40 +2283,40 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
     <p>A <dfn data-local-lt="quoted" data-lt="quoted triple|quoted" data-plurals="quoted triples" id="dfn-quoted-triple" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">quoted triple</dfn> is an <a href="#dfn-rdf-triple" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-rdf-triple-11">RDF triple</a> that is
       used as the <a href="#dfn-subject" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-subject-5">subject</a> or <a href="#dfn-object" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-object-5">object</a> of another triple.</p>
 
-    <p>An <dfn data-local-lt="asserted" data-lt="asserted triple|asserted" id="dfn-asserted-triple" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">asserted triple</dfn>
-      is an <a href="#dfn-rdf-triple" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-rdf-triple-12">RDF triple</a> that is an element of an <a href="#dfn-rdf-graph" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-rdf-graph-20">RDF graph</a>.</p>
+    <div class="note" role="note" id="issue-container-generatedID-1"><div role="heading" class="note-title marker" id="h-note" aria-level="4"><span>Note</span></div><p class="">By the given definitions,
+      the <a href="#dfn-subject" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-subject-6">subject</a> of an <a href="#dfn-rdf-triple" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-rdf-triple-12">RDF triple</a> may be either an <a href="#dfn-iri" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-iri-21"><abbr title="Internationalized Resource Identifier">IRI</abbr></a>,
+      a <a href="#dfn-blank-node" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-blank-node-7">blank node</a>, or a <a href="#dfn-quoted-triple" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-quoted-triple-12">quoted triple</a>;
+      the <a href="#dfn-predicate" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-predicate-3">predicate</a> of an <a href="#dfn-rdf-triple" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-rdf-triple-13">RDF triple</a> may only be an <a href="#dfn-iri" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-iri-22"><abbr title="Internationalized Resource Identifier">IRI</abbr></a>;
+      the <a href="#dfn-object" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-object-6">object</a> of an <a href="#dfn-rdf-triple" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-rdf-triple-14">RDF triple</a> may be either an <a href="#dfn-iri" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-iri-23"><abbr title="Internationalized Resource Identifier">IRI</abbr></a>,
+      a <a href="#dfn-blank-node" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-blank-node-8">blank node</a>, a <a href="#dfn-literal" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-literal-7">literal</a> or a <a href="#dfn-quoted-triple" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-quoted-triple-13">quoted triple</a>.</p></div>
 
-    <p>The set of <span id="dfn-nodes"></span><dfn data-lt="node|nodes" id="dfn-node" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">nodes</dfn> of an <a href="#dfn-rdf-graph" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-rdf-graph-21">RDF graph</a>
-      is the set of <a href="#dfn-subject" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-subject-6">subjects</a> and <a href="#dfn-object" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-object-6">objects</a> of <a href="#dfn-rdf-triple" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-rdf-triple-13">triples</a> in the graph.
-      It is possible for a predicate <abbr title="Internationalized Resource Identifier">IRI</abbr> to also occur as a node in
-      the same graph.</p>
+    <div class="note" role="note" id="issue-container-generatedID-2"><div role="heading" class="note-title marker" id="h-note-0" aria-level="4"><span>Note</span></div><p class="">The definition of <a href="#dfn-quoted-triple" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-quoted-triple-14">quoted triple</a> is recursive.
+      That is, a <a href="#dfn-quoted-triple" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-quoted-triple-15">quoted triple</a> can itself have a
+      <a href="#dfn-subject" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-subject-7">subject</a> or <a href="#dfn-object" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-object-7">object</a> component which is another <a href="#dfn-quoted-triple" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-quoted-triple-16">quoted triple</a>.
+      However, by this definition, cycles of <a href="#dfn-quoted-triple" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-quoted-triple-17">quoted triples</a> cannot be created.</p></div>
 
-    <p><a href="#dfn-iri" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-iri-21">IRIs</a>, <a href="#dfn-literal" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-literal-7">literals</a>,
-      <a href="#dfn-blank-node" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-blank-node-7">blank nodes</a>, and <a href="#dfn-quoted-triple" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-quoted-triple-12">quoted triples</a> are collectively known as
+    <p><a href="#dfn-iri" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-iri-24">IRIs</a>, <a href="#dfn-literal" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-literal-8">literals</a>,
+      <a href="#dfn-blank-node" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-blank-node-9">blank nodes</a>, and <a href="#dfn-quoted-triple" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-quoted-triple-18">quoted triples</a> are collectively known as
       <span id="dfn-rdf-terms"></span><dfn data-lt="rdf term|RDF terms" id="dfn-rdf-term" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">RDF terms</dfn>.</p>
 
-    <p><a href="#dfn-iri" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-iri-22">IRIs</a>, <a href="#dfn-literal" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-literal-8">literals</a>,
-      <a href="#dfn-blank-node" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-blank-node-8">blank nodes</a>, and <a href="#dfn-quoted-triple" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-quoted-triple-13">quoted triples</a> are distinct and distinguishable.
+    <p><a href="#dfn-iri" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-iri-25">IRIs</a>, <a href="#dfn-literal" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-literal-9">literals</a>,
+      <a href="#dfn-blank-node" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-blank-node-10">blank nodes</a>, and <a href="#dfn-quoted-triple" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-quoted-triple-19">quoted triples</a> are distinct and distinguishable.
       For example, <code>http://example.org/</code> as a string literal
       is equal to neither <code>http://example.org/</code> as an <abbr title="Internationalized Resource Identifier">IRI</abbr>,
       nor a blank node with the <a href="#dfn-blank-node-identifier" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-blank-node-identifier-2">blank node identifier</a>
       <code>http://example.org/</code>.</p>
 
-    <div class="note" role="note" id="issue-container-generatedID-1"><div role="heading" class="note-title marker" id="h-note" aria-level="4"><span>Note</span></div><p class="">By the given definitions,
-      the <a href="#dfn-subject" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-subject-7">subject</a> of an <a href="#dfn-rdf-triple" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-rdf-triple-14">RDF triple</a> may be either an <a href="#dfn-iri" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-iri-23"><abbr title="Internationalized Resource Identifier">IRI</abbr></a>,
-      a <a href="#dfn-blank-node" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-blank-node-9">blank node</a>, or a <a href="#dfn-quoted-triple" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-quoted-triple-14">quoted triple</a>;
-      the <a href="#dfn-predicate" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-predicate-3">predicate</a> of an <a href="#dfn-rdf-triple" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-rdf-triple-15">RDF triple</a> may only be an <a href="#dfn-iri" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-iri-24"><abbr title="Internationalized Resource Identifier">IRI</abbr></a>;
-      the <a href="#dfn-object" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-object-7">object</a> of an <a href="#dfn-rdf-triple" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-rdf-triple-16">RDF triple</a> may be either an <a href="#dfn-iri" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-iri-25"><abbr title="Internationalized Resource Identifier">IRI</abbr></a>,
-      a <a href="#dfn-blank-node" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-blank-node-10">blank node</a>, a <a href="#dfn-literal" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-literal-9">literal</a> or a <a href="#dfn-quoted-triple" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-quoted-triple-15">quoted triple</a>.</p></div>
+    <p>The set of <span id="dfn-nodes"></span><dfn data-lt="node|nodes" id="dfn-node" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">nodes</dfn> of an <a href="#dfn-rdf-graph" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-rdf-graph-20">RDF graph</a>
+      is the set of <a href="#dfn-subject" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-subject-8">subjects</a> and <a href="#dfn-object" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-object-8">objects</a> of <a href="#dfn-rdf-triple" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-rdf-triple-15">triples</a> in the graph.
+      It is possible for a predicate <abbr title="Internationalized Resource Identifier">IRI</abbr> to also occur as a node in
+      the same graph.</p>
 
-    <div class="note" role="note" id="issue-container-generatedID-2"><div role="heading" class="note-title marker" id="h-note-0" aria-level="4"><span>Note</span></div><p class="">In an <a href="#dfn-rdf-graph" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-rdf-graph-22">RDF graph</a>,
-      a <a href="#dfn-rdf-triple" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-rdf-triple-17">triple</a> may occur as either a <a href="#dfn-quoted-triple" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-quoted-triple-16">quoted triple</a>, an 
+    <p>An <dfn data-local-lt="asserted" data-lt="asserted triple|asserted" id="dfn-asserted-triple" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">asserted triple</dfn>
+      is an <a href="#dfn-rdf-triple" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-rdf-triple-16">RDF triple</a> that is an element of an <a href="#dfn-rdf-graph" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-rdf-graph-21">RDF graph</a>.</p>
+
+    <div class="note" role="note" id="issue-container-generatedID-3"><div role="heading" class="note-title marker" id="h-note-1" aria-level="4"><span>Note</span></div><p class="">In an <a href="#dfn-rdf-graph" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-rdf-graph-22">RDF graph</a>,
+      a <a href="#dfn-rdf-triple" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-rdf-triple-17">triple</a> may occur as either a <a href="#dfn-quoted-triple" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-quoted-triple-20">quoted triple</a>, an 
       <a href="#dfn-asserted-triple" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-asserted-triple-3">asserted triple</a>, or both.</p></div>
-
-    <div class="note" role="note" id="issue-container-generatedID-3"><div role="heading" class="note-title marker" id="h-note-1" aria-level="4"><span>Note</span></div><p class="">The definition of <a href="#dfn-quoted-triple" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-quoted-triple-17">quoted triple</a> is recursive.
-      That is, a <a href="#dfn-quoted-triple" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-quoted-triple-18">quoted triple</a> can itself have a
-      <a href="#dfn-subject" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-subject-8">subject</a> or <a href="#dfn-object" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-object-8">object</a> component which is another <a href="#dfn-quoted-triple" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-quoted-triple-19">quoted triple</a>.
-      However, by this definition, cycles of <a href="#dfn-quoted-triple" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-quoted-triple-20">quoted triples</a> cannot be created.</p></div>
   </section>
 
   <section id="section-IRIs"><div class="header-wrapper"><h3 id="x3-2-iris"><bdi class="secno">3.2 </bdi>IRIs</h3><a class="self-link" href="#section-IRIs" aria-label="Permalink for Section 3.2"></a></div>
@@ -4372,34 +4372,6 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
     <a href="#ref-for-dfn-quoted-triple-21" title="§ F. Changes between RDF 1.1 and RDF 1.2">§ F. Changes between RDF 1.1 and RDF 1.2</a> 
   </li>
   </ul>
-    </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-asserted-triple" aria-label="Links in this document to definition: asserted triple">
-      <span class="caret"></span>
-      <div>
-        <a class="self-link" href="#dfn-asserted-triple" aria-label="Permalink for definition: asserted triple. Activate to close this dialog.">Permalink</a>
-         
-      </div>
-      <p><b>Referenced in:</b></p>
-      <ul>
-    <li>
-    <a href="#ref-for-dfn-asserted-triple-1" title="§ 1.3 Quoted Triples">§ 1.3 Quoted Triples</a> <a href="#ref-for-dfn-asserted-triple-2" title="Reference 2">(2)</a> 
-  </li><li>
-    <a href="#ref-for-dfn-asserted-triple-3" title="§ 3.1 Triples">§ 3.1 Triples</a> 
-  </li><li>
-    <a href="#ref-for-dfn-asserted-triple-4" title="§ F. Changes between RDF 1.1 and RDF 1.2">§ F. Changes between RDF 1.1 and RDF 1.2</a> 
-  </li>
-  </ul>
-    </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-node" aria-label="Links in this document to definition: nodes">
-      <span class="caret"></span>
-      <div>
-        <a class="self-link" href="#dfn-node" aria-label="Permalink for definition: nodes. Activate to close this dialog.">Permalink</a>
-         
-      </div>
-      <p><b>Referenced in:</b></p>
-      <ul>
-    <li>
-    <a href="#ref-for-dfn-node-1" title="§ 1.1 Graph-based Data Model">§ 1.1 Graph-based Data Model</a> 
-  </li>
-  </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-rdf-term" aria-label="Links in this document to definition: RDF terms">
       <span class="caret"></span>
       <div>
@@ -4414,6 +4386,34 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
     <a href="#ref-for-dfn-rdf-term-2" title="§ 1.3 Quoted Triples">§ 1.3 Quoted Triples</a> 
   </li><li>
     <a href="#ref-for-dfn-rdf-term-3" title="§ 3.3 Literals">§ 3.3 Literals</a> 
+  </li>
+  </ul>
+    </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-node" aria-label="Links in this document to definition: nodes">
+      <span class="caret"></span>
+      <div>
+        <a class="self-link" href="#dfn-node" aria-label="Permalink for definition: nodes. Activate to close this dialog.">Permalink</a>
+         
+      </div>
+      <p><b>Referenced in:</b></p>
+      <ul>
+    <li>
+    <a href="#ref-for-dfn-node-1" title="§ 1.1 Graph-based Data Model">§ 1.1 Graph-based Data Model</a> 
+  </li>
+  </ul>
+    </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-asserted-triple" aria-label="Links in this document to definition: asserted triple">
+      <span class="caret"></span>
+      <div>
+        <a class="self-link" href="#dfn-asserted-triple" aria-label="Permalink for definition: asserted triple. Activate to close this dialog.">Permalink</a>
+         
+      </div>
+      <p><b>Referenced in:</b></p>
+      <ul>
+    <li>
+    <a href="#ref-for-dfn-asserted-triple-1" title="§ 1.3 Quoted Triples">§ 1.3 Quoted Triples</a> <a href="#ref-for-dfn-asserted-triple-2" title="Reference 2">(2)</a> 
+  </li><li>
+    <a href="#ref-for-dfn-asserted-triple-3" title="§ 3.1 Triples">§ 3.1 Triples</a> 
+  </li><li>
+    <a href="#ref-for-dfn-asserted-triple-4" title="§ F. Changes between RDF 1.1 and RDF 1.2">§ F. Changes between RDF 1.1 and RDF 1.2</a> 
   </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-iri" aria-label="Links in this document to definition: IRI">
