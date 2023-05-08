@@ -625,6 +625,15 @@
         characters, %-encoding of octets not allowed in URIs, and
         Punycode-encoding of domain names.</p>
 
+      <p><strong>URLs:</strong>
+        The [[[URL]]] is largely compatible with [[RFC3987]] IRIs,
+        but is based on a processing model important for implementation
+        within Web browers and cannot be easily described using an [[ABNF]] grammar.
+        Additionally, URLs are processed,
+        for example, by replacing percent-encoded characters with their unencoded values.
+        Within RDF, IRIs are unprocessed.
+      </p>
+
       <p><strong>Relative IRI references:</strong>
         Some <a>concrete RDF syntaxes</a> permit
         <span id="dfn-relative-iris"><!-- obsolete term--></span>
