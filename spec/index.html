@@ -64,7 +64,9 @@
     .grammar-literal { color: gray; }
     code { color: #ff4500; }  /* Old W3C Style */
     div.abnf { margin-left: 1em; }
-    table { word-break: break-all; max-width: 80vw; }
+    @media (max-width: 767px) {
+        table { word-break: break-all; max-width: 80vw; }
+    }
   </style>
 </head>
 
