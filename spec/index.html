@@ -478,7 +478,7 @@
       many different ways to encode the same <a>RDF graph</a> or
       <a>RDF dataset</a>, for example through the use of
       <a>namespace prefixes</a>,
-      <a>relative IRIs</a>, <a>blank node identifiers</a>,
+      <a>relative IRI references</a>, <a>blank node identifiers</a>,
       and different ordering of statements. While these aspects can have great
       effect on the convenience of working with the <a>RDF document</a>,
       they are not significant for its meaning.</p>
@@ -599,8 +599,8 @@
     <p class="note">For convenience, a complete [[ABNF]] grammar
       from [[RFC3987]] is provided in <a href="#iri-abnf" class="sectionRef"></a>.</p>
 
-    <p>IRIs in the RDF abstract syntax MUST be absolute, and MAY
-      contain a fragment identifier.</p>
+    <p>IRIs in the RDF abstract syntax MUST be absolute,
+      and MAY contain a fragment identifier.</p>
 
     <p><dfn>IRI equality</dfn>:
       Two IRIs are equal if and only if they are <a>equivalent</a>
@@ -609,16 +609,13 @@
       of [[!RFC3987]]. Further normalization MUST NOT be performed when
       comparing IRIs for equality.</p>
 
-      <p class="issue" data-number="15">
-        The group is updating IRI terminology to more closer follow the current RFCs.
-      </p>
-
     <div class="note" id="note-iris">
       <p><strong>URIs and IRIs:</strong>
         IRIs are a generalization of
         <dfn data-lt="URI" data-lt-noDefault><abbr title="Uniform Resource Identifier">URI</abbr>s</dfn>
         [[RFC3986]] that permits a wider range of Unicode characters.
         Every absolute URI and URL is an IRI, but not every IRI is an URI.
+        In RDF, IRIs are used as <em>IRI references</em>, as defined in [[RFC3987]].
         When IRIs are used in operations that are only
         defined for URIs, they must first be converted according to
         the mapping defined in
@@ -628,13 +625,15 @@
         characters, %-encoding of octets not allowed in URIs, and
         Punycode-encoding of domain names.</p>
 
-      <p><strong>Relative IRIs:</strong>
+      <p><strong>Relative IRI references:</strong>
         Some <a>concrete RDF syntaxes</a> permit
-        <span id="dfn-relative-iris"><!-- obsolete term--></span><dfn data-lt="relative iri">relative IRIs</dfn> as a convenient shorthand
+        <span id="dfn-relative-iris"><!-- obsolete term--></span>
+        <dfn data-lt="relative iri reference">relative IRI references</dfn> as a convenient shorthand
         that allows authoring of documents independently from their final
-        publishing location. Relative IRIs must be
-        <a data-cite="rfc3986#section-5.2">resolved
-        against</a> a <dfn class="export">base IRI</dfn> to make them absolute.
+        publishing location.
+        Relative IRI references must be
+        <a data-cite="rfc3986#section-5.2">resolved against</a> a
+        <dfn class="export">base IRI</dfn> to make them absolute.
         Therefore, the RDF graph serialized in such syntaxes is well-defined only
         if a <a data-cite="rfc3986#section-5.1">base IRI
         can be established</a> [[RFC3986]].</p>
