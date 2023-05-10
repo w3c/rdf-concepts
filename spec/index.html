@@ -763,8 +763,8 @@
       the set of possible blank nodes is arbitrary.  RDF makes no reference to
       any internal structure of blank nodes.</p>
 
-    <p class="note" id="note-bnode-id">
-      <span id="dfn-blank-node-identifiers"><!-- obsolete term--></span><dfn data-lt="blank node identifier">Blank node identifiers</dfn>
+    <div class="note" id="note-bnode-id">
+      <p><span id="dfn-blank-node-identifiers"><!-- obsolete term--></span><dfn data-lt="blank node identifier">Blank node identifiers</dfn>
       are local identifiers that are used in some
       <a>concrete RDF syntaxes</a>
       or RDF store implementations.
@@ -778,6 +778,14 @@
       identifiers in concrete syntaxes need to be careful not to create the
       same blank node from multiple occurrences of the same blank node identifier
       except in situations where this is supported by the syntax.</p>
+
+      <p>The term "blank node label" is sometimes used informally
+      as an alternative to the term <a>blank node identifier</a>.
+      This alternative was also used in earlier versions of
+      some RDF-related specifications such as [[SPARQL11-QUERY]].
+      In the interest of consistency, the use of this alternative
+      term is discouraged now.</p>
+    </div>
   </section>
 
   <section id="section-skolemization">
