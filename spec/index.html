@@ -64,8 +64,12 @@
     .grammar-literal { color: gray; }
     code { color: #ff4500; }  /* Old W3C Style */
     div.abnf { margin-left: 1em; }
+    @media (max-width: 850px) {
+        table { overflow-wrap: anywhere !important; }
+        .simple th, .simple td { font-size: 14px; }
+    }    
     @media (max-width: 767px) {
-        table { word-break: break-all; max-width: 80vw; }
+        table { word-break: normal; max-width: 80vw;}
     }
   </style>
 </head>
