@@ -1084,8 +1084,8 @@
       <tr><td><a data-cite="xmlschema11-2#integer"><code>xsd:integer</code></a></td><td>Arbitrary-size integer numbers</td></tr>
 
       <tr><th rowspan="2">IEEE floating-point<br />numbers</th>
-          <td><a data-cite="xmlschema11-2#double"><code>xsd:double</code></a></td><td>64-bit floating point numbers incl. ±Inf, ±0, NaN</td></tr>
-      <tr><td><a data-cite="xmlschema11-2#float"><code>xsd:float</code></a></td><td>32-bit floating point numbers incl. ±Inf, ±0, NaN</td></tr>
+          <td><a data-cite="xmlschema11-2#double"><code>xsd:double</code></a></td><td>64-bit floating point numbers incl. ±Inf, ±0, NaN (note that this does <em>not</em> include all decimal numbers)</td></tr>
+      <tr><td><a data-cite="xmlschema11-2#float"><code>xsd:float</code></a></td><td>32-bit floating point numbers incl. ±Inf, ±0, NaN (note that this does <em>not</em> include all decimal numbers)</td></tr>
 
       <tr><th rowspan="4">Time and date</th>
           <td><a data-cite="xmlschema11-2#date"><code>xsd:date</code></a></td><td>Dates (yyyy-mm-dd) with or without timezone</td></tr>
@@ -1151,6 +1151,23 @@
         are sequence-valued datatypes which do not fit the RDF <a>datatype</a>
         model.</li>
     </ul>
+
+    <p class="note">As mentioned in the table above, the <a>value spaces</a>
+      of <a data-cite="xmlschema11-2#double"><code>xsd:double</code></a> and
+      <a data-cite="xmlschema11-2#float"><code>xsd:float</code></a> do not
+      include all decimal numbers. The reason is that, for every literal of
+      any of these two datatypes, the value given as the <a>lexical form</a>
+      of the literal is rounded to a value that can be represented as an
+      <a href="http://ieeexplore.ieee.org/servlet/opac?punumber=4610933">IEEE 754-2008</a>
+      binary floating point representation of the corresponding precision.
+      As a consequence, many decimal numbers are not accurately captured by
+      using these two datatypes. For instance, the value of the literal with
+      lexical value `"0.1"` and datatype <a data-cite="xmlschema11-2#float"><code>xsd:float</code></a>
+      is rounded to the floating point number 0.100000001490116119384765625.
+      As an alternative to <a data-cite="xmlschema11-2#double"><code>xsd:double</code></a>
+      and <a data-cite="xmlschema11-2#float"><code>xsd:float</code></a>, the
+      datatype <a data-cite="xmlschema11-2#decimal"><code>xsd:decimal</code></a>
+      can be used to accurately capture arbitrary decimal numbers.</p>
 
   </section>
 
