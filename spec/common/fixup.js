@@ -46,7 +46,7 @@ function unComment(utils, content) {
 // If content is a self-citation, replace it with the document name
 function noSelfCite(utils, content) {
   if (content.toUpperCase() === `[[[${respecConfig.shortName}]]]`.toUpperCase()) {
-    return respecConfig.title + '(this document)';
+    return respecConfig.title + ' (this document)';
   } else {
     return content;
   }

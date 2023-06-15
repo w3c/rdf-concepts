@@ -1,14 +1,4 @@
 var localBibliography = {
-  CBD: {
-    "title": "CBD - Concise Bounded Description",
-    "href": "https://www.w3.org/Submission/CBD/",
-    "authors": [
-      "Patrick Stickler, Nokia"
-    ],
-    "rawDate": "2005-06-03",
-    "publisher": "W3C",
-    "status": "W3C Member Submission"
-  },
   ISO24707: {
     id: "ISO24707",
     title: "Information technology — Common Logic (CL) — A framework for a family of logic-based languages",
