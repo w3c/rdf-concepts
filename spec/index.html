@@ -74,7 +74,7 @@
 
   <p>RDF 1.2 introduces <a>quoted triples</a> as another kind of <a>RDF term</a>
     which can be used as the <a>subject</a> or <a>object</a> of another <a>triple</a>.
-    RDF 1.2 also introduces a <a>text direction</a> element to <a>language-tagged strings</a>,
+    RDF 1.2 also introduces a <a>base text direction</a> element to <a>directional language-tagged strings</a>,
     allowing the initial text direction to be specified when
     presented in a user agent.</p>
 
@@ -698,7 +698,7 @@
       case.
       The fourth element, <a>text direction</a> MUST NOT be
       present unless the <a>language tag</a> element is present.
-      The value space of <a>text direction</a> is either empty, or one of `ltr` or `rtl`.</p>
+      The value space of <a>base text direction</a> is either empty, or one of `ltr` or `rtl`.</p>
 
     <p>Please note that concrete syntaxes MAY support
       <dfn data-lt="simple literal" class="export">simple literals</dfn> consisting of only a
@@ -717,8 +717,10 @@
 
     <ol>
       <li>If the literal is a <a>language-tagged string</a>,
-        then the literal value is a tuple consisting of its <a>lexical form</a>,
-        its <a>language tag</a>, and its <a>text direction</a>, in that order.</li>
+        then the literal value is a pair consisting of its <a>lexical form</a>
+        and its <a>language tag</a>, in that order.</li>
+      <li>if the literal is a <a>directional language string</a>, then the literal value is
+      a tuple of its <a>lexical form</a>, its <a>language tag</a>, and its <a>base text direction</a>, likewise in that order.</li>
 
       <li>If the literal's <a>datatype IRI</a> is in the set of
         <a>recognized datatype IRIs</a>, let <var>d</var> be the
@@ -764,20 +766,20 @@
     <section id="section-text-direction" class="informative">
       <h3>Text Direction</h3>
 
-      <p>The <a>text direction</a> of a <a>language-tagged string</a>
-        provides means of establishing the initial direction of text,
+      <p>The <a>base text direction</a> of a <a>directional language string</a>
+        provides a means of establishing the initial direction of text,
         including text which is mixture of right-to-left and left-to-right scripts.
         The [[[?UAX9]]] [[?UAX9]] provides support for automatically rendering
         a sequence of characters in logical order,
         so that they are visually ordered as expected.
         However, this is not sufficient to correctly render bidirectional text.</p>
 
-      <p>For example, the text `"פעילות הבינאום, W3C"` with language tag "he" may be displayed
-        incorrectly unless the <a>text direction</a> of `rtl` (for right-to-left)
+      <p>For example, the text `"פעילות הבינאום, W3C"` with language tag "he" (for Hebrew) may be displayed
+        incorrectly unless the <a>base text direction</a> of `rtl` (for right-to-left)
         is also provided.
         When this is provided to a user agent,
         for example using the HTML `dir` attribute,
-        this would be correctly presented as <br/><span lang="he" dir="rtl">פעילות הבינאום, W3C</span>.</p>
+        it would be correctly presented as <br/><span lang="he" dir="rtl">פעילות הבינאום, W3C</span>.</p>
     </section>
   </section>
 
@@ -1667,7 +1669,7 @@
       for informative definition of a <a>quad</a>.</li>
     <li>Added <a href="#section-quoted-triples" class="sectionRef"></a>
       and definitions for <a>quoted triple</a> and <a>asserted triple</a>.</li>
-    <li>Added the <a>text direction</a> element as part of 
+    <li>Added the <a>base text direction</a> element as part of 
       a <a>literal</a>,
       and a description of its use in <a href="#section-text-direction" class="sectionRef"></a>.</li>
   </ul>
