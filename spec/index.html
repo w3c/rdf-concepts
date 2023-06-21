@@ -74,7 +74,7 @@
 
   <p>RDF 1.2 introduces <a>quoted triples</a> as another kind of <a>RDF term</a>
     which can be used as the <a>subject</a> or <a>object</a> of another <a>triple</a>.
-    RDF 1.2 also introduces a <a>base text direction</a> element to <a>directional language-tagged strings</a>,
+    RDF 1.2 also introduces a <a>base text direction</a> element to <a>language-tagged strings</a>,
     allowing the initial text direction to be specified when
     presented in a user agent.</p>
 
@@ -689,14 +689,14 @@
         of [[!BCP47]].</li>
       <li>if and only if the <a>datatype IRI</a> is
         <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#langString</code>,
-        <dfn>text direction</dfn> MUST be empty, `ltr` or `rtl`.</li>
+        <dfn>base text direction</dfn> MUST be empty, `ltr` or `rtl`.</li>
     </ul>
 
     <p>A literal is a <dfn>language-tagged string</dfn> if the third element
       is present. Lexical representations of language tags MAY be converted
       to lower case. The value space of language tags is always in lower
       case.
-      The fourth element, <a>text direction</a> MUST NOT be
+      The fourth element, <a>base text direction</a> MUST NOT be
       present unless the <a>language tag</a> element is present.
       The value space of <a>base text direction</a> is either empty, or one of `ltr` or `rtl`.</p>
 
@@ -719,7 +719,7 @@
       <li>If the literal is a <a>language-tagged string</a>,
         then the literal value is a pair consisting of its <a>lexical form</a>
         and its <a>language tag</a>, in that order.</li>
-      <li>if the literal is a <a>directional language string</a>, then the literal value is
+      <li>if the literal is a <a>language-tagged string</a>, then the literal value is
       a tuple of its <a>lexical form</a>, its <a>language tag</a>, and its <a>base text direction</a>, likewise in that order.</li>
 
       <li>If the literal's <a>datatype IRI</a> is in the set of
@@ -748,7 +748,7 @@
       if and only if the two <a>lexical forms</a>,
       the two <a>datatype IRIs</a>,
       the two <a>language tags</a> (if any), and
-      the two <a>text directions</a> (if any)
+      the two <a>base text directions</a> (if any)
       compare equal, character by character.
       Thus, two literals can have the same value
       without being the same <a>RDF term</a>. For example:</p>
@@ -766,7 +766,7 @@
     <section id="section-text-direction" class="informative">
       <h3>Text Direction</h3>
 
-      <p>The <a>base text direction</a> of a <a>directional language string</a>
+      <p>The <a>base text direction</a> of a <a>language-tagged string</a>
         provides a means of establishing the initial direction of text,
         including text which is mixture of right-to-left and left-to-right scripts.
         The [[[?UAX9]]] [[?UAX9]] provides support for automatically rendering
