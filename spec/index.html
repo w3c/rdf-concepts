@@ -593,11 +593,13 @@
       and MAY contain a fragment identifier.</p>
 
     <p><dfn>IRI equality</dfn>:
-      Two IRIs are equal if and only if they are <a>equivalent</a>
-      under Simple String Comparison according to
-      <a data-cite="rfc3987#section-5.1">section 5.1</a>
-      of [[!RFC3987]]. Further normalization MUST NOT be performed when
-      comparing IRIs for equality.</p>
+      Two IRIs are the same if and only if they compare as identical when
+      considered as character strings, as in Simple String Comparison in
+      section <a data-cite="rfc3987#section-5.3.1">section 5.3.1</a>
+      of [[!RFC3987]].
+      (This is done in the abstract syntax, so the IRIs are absolute
+      IRIs with no escaping or encoding.)
+      Further normalization MUST NOT be performed before this comparison. </p>
 
     <div class="note" id="note-iris">
       <p><strong>URIs and IRIs:</strong>
