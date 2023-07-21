@@ -692,9 +692,9 @@
       <li>if and only if the <a>datatype IRI</a> is
         <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#dirLangString</code>,
         a non-empty <a>language tag</a>
-        MUST be well-formed according to <a data-cite="bcp47#section-2.2.9">section 2.2.9</a>
+        that MUST be well-formed according to <a data-cite="bcp47#section-2.2.9">section 2.2.9</a>
         of [[!BCP47]].
-        and <dfn>base direction</dfn> MUST be either `ltr` or `rtl`.</li>
+        and a <dfn>base direction</dfn> that MUST be either `ltr` or `rtl`.</li>
     </ul>
 
     <p>A literal is a <dfn>language-tagged string</dfn> if the third element
@@ -707,7 +707,7 @@
     <p>A literal is a <dfn id="dfn-dir-lang-string">directional language-tagged string</dfn>
       if both the third element and fourth elements are present.
       Language tags are treated identically to <a>language-tagged string</a>,
-      and the fourth element , <a>base direction</a> MUST BE either `ltr` or `rtl`.</p>
+      and the fourth element , <a>base direction</a> MUST BE either `ltr` or `rtl` in lower case.</p>
 
     <p>Please note that concrete syntaxes MAY support
       <dfn data-lt="simple literal" class="export">simple literals</dfn> consisting of only a
@@ -721,7 +721,7 @@
       <a>language-tagged strings</a> and <a>directional language-tagged strings</a> without
       the <a>datatype IRI</a> because it always equals either
       <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#langString</code> (<code>rdf:langString</code>)
-      or <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#dirLangString</code> (<code>rdf:dirLangString</code>).</p>
+      or <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#dirLangString</code> (<code>rdf:dirLangString</code>), respectively.</p>
 
     <p>The <dfn>literal value</dfn> associated with a <a>literal</a> is:</p>
 
@@ -772,7 +772,7 @@
     <p>denote the same <a data-lt="literal value">value</a>, but are not the
       same literal <a>RDF terms</a> and are not
       <a>term-equal</a> because their
-      <a>lexical form</a> differs.</p>
+      <a>lexical forms</a> differ.</p>
 
     <section id="section-text-direction" class="informative">
       <h3>Initial Text Direction</h3>
@@ -790,10 +790,10 @@
         is also provided.
         When this is provided to a user agent,
         for example using the HTML `dir` attribute,
-        it would be correctly presented as <br/><span lang="he" dir="rtl">פעילות הבינאום, W3C</span>.</p>
+        it would be correctly presented as follows: <div lang="he" dir="rtl">פעילות הבינאום, W3C</div></p>
 
       <p class="note">The absence of a <a>base direction</a> does not necessarily imply that
-        the text has no initial text direct;
+        the text has no initial text direction;
         as described in [[[?UAX9]]],
         strings may be embedded within structures which establish an <em>embedding direction</em>,
         which determines the default bidirectional orientation of text.</p>
@@ -1535,7 +1535,7 @@
   <h2>Internationalization Considerations</h2>
   <p>Unicode provides a mechanism for signaling direction within a string
     (see [[[UAX9]]] [[UAX9]]).
-    RDF provides a machnism for specifying the <a>base direction</a>
+    RDF provides a mechanism for specifying the <a>base direction</a>
     of a <a>directional language-tagged string</a>
     to signal the initial text direction of a string.
     When a string has an overall base direction which cannot be determined by the
