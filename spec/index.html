@@ -757,9 +757,10 @@
     <p><dfn data-local-lt="term-equal">Literal term equality</dfn>:
       Two literals are term-equal (the same <a>RDF literal</a>)
       if and only if the two <a>lexical forms</a>,
-      the two <a>datatype IRIs</a> compare equal, character by character,
-      the two <a>language tags</a> (if any) compare equal, as if normalized to lower case, and
-      the two <a>base directions</a> (if any) compare equal, character by character.
+      the two <a>datatype IRIs</a>,
+      the two <a>language tags</a> (if any) normalized to lower case, and
+      the two <a>base directions</a> (if any),
+      all compare equal, character by character.
       Thus, two literals can have the same value
       without being the same <a>RDF term</a>.
       For example:</p>
