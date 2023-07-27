@@ -700,8 +700,7 @@
     <p>A literal is a <dfn>language-tagged string</dfn> if the third element
       is present and the fourth element is not present.
       Lexical representations of language tags MAY be converted
-      to lower case or formatted according to  the recommendation for formatting language tags
-      as described in <a data-cite="BCP47#section-2.1.1">section 2.1.1</a> of [[BCP47]].
+      to lower case.
       The value of language tags is always treated as being in lower case.</p>
 
     <p>A literal is a <dfn id="dfn-dir-lang-string">directional language-tagged string</dfn>
@@ -758,7 +757,7 @@
       Two literals are term-equal (the same <a>RDF literal</a>)
       if and only if the two <a>lexical forms</a>,
       the two <a>datatype IRIs</a>,
-      the two <a>language tags</a> (if any) normalized to lower case, and
+      the two <a>language tags</a> (if any), and
       the two <a>base directions</a> (if any),
       all compare equal, character by character.
       Thus, two literals can have the same value
