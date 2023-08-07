@@ -1198,15 +1198,13 @@
       are not required to support either of these facilities.</p>
   </section>
 
-  <section id="section-html" class="informative">
+  <section id="section-html">
     <h3>The <code>rdf:HTML</code> Datatype</h3>
 
     <p>RDF provides for HTML content as a possible <a>literal value</a>.
       This allows markup in literal values. Such content is indicated
       in an <a>RDF graph</a> using a <a>literal</a> whose <a>datatype</a>
-      is set to <code><dfn>rdf:HTML</dfn></code>. This datatype is defined
-      as non-normative because it depends on [[DOM4]], a specification that
-      has not yet reached W3C Recommendation status.</p>
+      is set to <code><dfn>rdf:HTML</dfn></code>.</p>
 
     <p>The <code>rdf:HTML</code> datatype is defined as follows:</p>
 
@@ -1219,27 +1217,27 @@
 
       <dt>The value space</dt>
       <dd>is a set of DOM
-        <a data-cite="DOM4#interface-documentfragment"><code>DocumentFragment</code></a>
-        nodes [[DOM4]]. Two
-        <a data-cite="DOM4#interface-documentfragment"><code>DocumentFragment</code></a>
-        nodes <em>A</em> and <em>B</em> are considered equal if and only if
+        <a data-cite="DOM#interface-documentfragment"><code>DocumentFragment</code></a>
+        nodes [[DOM]]. Two
+        <a data-cite="DOM#interface-documentfragment"><code>DocumentFragment</code></a>
+        nodes <var>node</var> and <var>otherNode</var> are considered equal if and only if
         the DOM method
-        <code><em>A</em>.<a data-cite="DOM4#dom-node-isequalnode">isEqualNode</a>(<em>B</em>)</code>
-        [[DOM4]] returns <code>true</code>.</dd>
+        <code><var>node</var>.{{Node/isEqualNode(otherNode)}}</code>
+        [[DOM]] returns <code>true</code>.</dd>
 
       <dt>The lexical-to-value mapping</dt>
       <dd>
         <p>Each member of the lexical space is associated with the result
           of applying the following algorithm:</p>
         <ul>
-          <li>Let <code>domnodes</code> be the list of <a data-cite="DOM4#node">DOM nodes</a> [[DOM4]]
+          <li>Let <code>domnodes</code> be the list of <a data-cite="DOM#node">DOM nodes</a> [[DOM]]
             that result from applying the
             <a data-cite="HTML5#parsing-html-fragments">HTML fragment parsing algorithm</a> [[HTML5]]
             to the input string, without a context element.</li>
           <li>Let <code>domfrag</code> be a DOM
-            <a data-cite="DOM4#interface-documentfragment"><code>DocumentFragment</code></a> [[DOM4]]
+            <a data-cite="DOM#interface-documentfragment"><code>DocumentFragment</code></a> [[DOM]]
             whose <code>childNodes</code> attribute is equal to <code>domnodes</code></li>
-            <li>Return <code>domfrag.<a data-cite="DOM4#dom-node-normalize">normalize</a>()</code></li>
+            <li>Return <code>domfrag.{{Node/normalize()}}</code></li>
         </ul>
       </dd>
     </dl>
@@ -1256,14 +1254,12 @@
       of the same string.</p>
   </section>
 
-  <section id="section-XMLLiteral" class="informative">
+  <section id="section-XMLLiteral">
     <h3>The <code>rdf:XMLLiteral</code> Datatype</h3>
 
     <p>RDF provides for XML content as a possible <a>literal value</a>.
       Such content is indicated in an <a>RDF graph</a> using a <a>literal</a>
-      whose <a>datatype</a> is set to <code><dfn>rdf:XMLLiteral</dfn></code>.
-      This datatype is defined as non-normative because it depends on [[DOM4]],
-      a specification that has not yet reached W3C Recommendation status.</p>
+      whose <a>datatype</a> is set to <code><dfn>rdf:XMLLiteral</dfn></code>.</p>
 
     <p>The <code>rdf:XMLLiteral</code> datatype is defined as follows:</p>
 
@@ -1280,11 +1276,11 @@
 
       <dt id="XMLLiteral-value-space">The <a>value space</a></dt>
         <dd>is a set of DOM
-        <a data-cite="DOM4#interface-documentfragment"><code>DocumentFragment</code></a>
-        nodes [[DOM4]]. Two
-        <a data-cite="DOM4#interface-documentfragment"><code>DocumentFragment</code></a>
-        nodes <em>A</em> and <em>B</em> are considered equal if and only if the DOM method
-        <code><em>A</em>.<a data-cite="DOM4#dom-node-isequalnode">isEqualNode</a>(<em>B</em>)</code>
+        <a data-cite="DOM#interface-documentfragment"><code>DocumentFragment</code></a>
+        nodes [[DOM]]. Two
+        <a data-cite="DOM#interface-documentfragment"><code>DocumentFragment</code></a>
+        nodes <var>node</var> and <em>otherNode</em> are considered equal if and only if the DOM method
+        <code><var>node</var>.{{Node/isEqualNode(otherNode)}}</code>
         returns <code>true</code>.</dd>
 
       <dt id="XMLLiteral-mapping">The <a>lexical-to-value mapping</a></dt>
@@ -1292,9 +1288,9 @@
         <p>Each member of the lexical space is associated with the result of applying the following algorithm:</p>
         <ul>
           <li>Let <code>domfrag</code> be a DOM
-            <a data-cite="DOM4#interface-documentfragment"><code>DocumentFragment</code></a>
-            node [[DOM4]] corresponding to the input string</li>
-          <li>Return <code>domfrag.<a data-cite="DOM4#dom-node-normalize">normalize</a>()</code></li>
+            <a data-cite="DOM#interface-documentfragment"><code>DocumentFragment</code></a>
+            node [[DOM]] corresponding to the input string</li>
+          <li>Return <code>domfrag.{{Node/normalize()}}</code></li>
         </ul>
       </dd>
 
