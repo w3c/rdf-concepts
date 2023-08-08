@@ -1159,22 +1159,18 @@
       <a href="#referents">referents</a>. If any IRI of the form
       <code>http://www.w3.org/2001/XMLSchema#xxx</code> is recognized, it
       MUST refer to the RDF-compatible XSD type named <code>xsd:xxx</code> for
-      every XSD type listed in <a href="#xsd-datatypes">section 5.1</a>.
-      Furthermore, the following IRIs are allocated for non-normative
-      datatypes:
+      every XSD type listed in <a href="#xsd-datatypes">section 5.1</a>.</p>
+
+    <p>The following three datatype IRIs are defined in this section:</p>
 
     <ul>
       <li>The IRI <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral</code>
         refers to the datatype <code><a>rdf:XMLLiteral</a></code></li>
       <li>The IRI <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#HTML</code>
         refers to the datatype <code><a>rdf:HTML</a></code></li>
+      <li>The IRI <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#JSON</code>
+        refers to the datatype <code><a>rdf:JSON</a></code></li>
     </ul>
-
-    <p class="note">Semantic extensions of RDF might choose to
-      recognize other datatype IRIs
-      and require them to refer to a fixed datatype.  See the RDF
-      Semantics specification [[RDF12-SEMANTICS]] for more information on
-      semantic extensions.</p>
 
     <p>RDF processors are not required to recognize datatype IRIs.
       Any literal typed with an unrecognized IRI is treated just like
@@ -1186,6 +1182,12 @@
     <p>Other specifications MAY impose additional constraints on
       <a>datatype IRIs</a>, for example, require support
       for certain datatypes.</p>
+
+    <p class="note">Semantic extensions of RDF might choose to
+      recognize other datatype IRIs
+      and require them to refer to a fixed datatype.  See the RDF
+      Semantics specification [[RDF12-SEMANTICS]] for more information on
+      semantic extensions.</p>
 
     <p class="note" id="note-custom-datatypes">The Web Ontology Language
       [[OWL2-OVERVIEW]] offers facilities for formally defining
@@ -1317,7 +1319,7 @@
     <h3>The <code>rdf:JSON</code> Datatype</h3>
 
     <p class="issue" data-number="14">
-      The `rdf:JSON` datatype is originally defined in
+      The <code><dfn>rdf:JSON</dfn></code> datatype is originally defined in
       <a data-cite="?JSON-LD11#the-rdf-json-datatype">Section 10.2 The `rdf:JSON` Datatype</a>
       in [[?JSON-LD11]].
     </p>
