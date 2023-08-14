@@ -603,10 +603,9 @@
         In RDF, IRIs are used as <dfn data-lt="iri reference">IRI references</dfn>, as defined in [[RFC3987]]
         <a data-cite="RFC3987#section-1.3">section 1.3</a>.
         An IRI reference is common usage of an Internationalized Resource Identifier.
-        An IRI reference may be absolute or relative.
-        However, the <a>IRI</a> that results from such a reference
-        only includes absolute IRIs; any <a>relative IRI references</a> are
-        resolved to their absolute form.
+        An IRI reference refers to either <a>IRI</a> or <a>relative IRI reference</a>,
+        as described by the <em>IRI-reference</em> production in <a href="#iri-abnf" class="sectionRef"></a>.
+        The abstract syntax uses only fully resolved <a>IRIs</a>.
         When IRIs are used in operations that are only
         defined for URIs, they must first be converted according to
         the mapping defined in
