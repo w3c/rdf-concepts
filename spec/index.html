@@ -576,7 +576,7 @@
 
     <p>An <dfn data-lt="iri"><abbr title="Internationalized Resource Identifier">IRI</abbr></dfn>
       (Internationalized Resource Identifier) within an RDF graph
-      is a Unicode string [[!UNICODE]] that conforms to the syntax
+      is a unicode string [[!UNICODE]] that conforms to the syntax
       defined in RFC 3987 [[!RFC3987]].</p>
 
     <p class="note">For convenience, a complete [[ABNF]] grammar
@@ -598,7 +598,7 @@
       <p><strong>URIs and IRIs:</strong>
         IRIs are a generalization of
         <dfn data-lt="URI" data-lt-noDefault><abbr title="Uniform Resource Identifier">URI</abbr>s</dfn>
-        [[RFC3986]] that permits a wider range of Unicode characters.
+        [[RFC3986]] that permits a wider range from the Unicode <a data-cite="i18n-glossary#dfn-unicode">universal character set</a> [[UNICODE]].
         Every absolute URI and URL is an IRI, but not every IRI is an URI.
         In RDF, IRIs are used as <dfn data-lt="iri reference">IRI references</dfn>, as defined in [[RFC3987]]
         <a data-cite="RFC3987#section-1.3">section 1.3</a>.
@@ -658,8 +658,7 @@
           “<code>%3f</code>”)</li>
         <li>Punycode-encoding of Internationalized Domain Names
           in IRIs</li>
-        <li>IRIs that are not in Unicode Normalization
-          Form C [[NFC]]</li>
+        <li>IRIs that are not in Unicode <a data-cite="i18n-glossary#dfn-unicode-normalization-form-c">Normalization Form&nbsp;C</a> [[UNICODE]]</li>
       </ul>
     </div>
   </section>
@@ -673,8 +672,11 @@
       elements:</p>
 
     <ul>
-      <li>a <dfn>lexical form</dfn>, being a Unicode [[!UNICODE]] string,
-        which SHOULD be in Normal Form&nbsp;C [[!NFC]],</li>
+      <li>a <dfn>lexical form</dfn>, being a unicode string [[!UNICODE]],
+        which SHOULD be in <a data-cite="i18n-glossary#dfn-unicode-normalization-form-c">Normalization Form&nbsp;C</a> [[!UNICODE]]
+        and where all <a data-cite="i18n-glossary#dfn-code-point">code points</a> MUST be
+        <a data-cite="i18n-glossary#dfn-scalar-value">Unicode scalar values</a>
+        (i.e., not include <a data-cite="i18n-glossary#dfn-surrogate">surrogate code points</a>).</li>
       <li>a <dfn>datatype IRI</dfn>, being an <a>IRI</a>
         identifying a datatype that determines how the lexical form maps
         to a <a>literal value</a>, and</li>
@@ -978,7 +980,7 @@
     a <a>value space</a> and a <a>lexical-to-value mapping</a>, and
     is denoted by one or more <a>IRIs</a>.</p>
 
-  <p>The <dfn>lexical space</dfn> of a datatype is a set of Unicode [[!UNICODE]] strings.</p>
+  <p>The <dfn>lexical space</dfn> of a datatype is a set of unicode strings [[!UNICODE]].</p>
 
   <p>The <dfn>lexical-to-value mapping</dfn> of a datatype is a set of
     pairs whose first element belongs to the <a>lexical space</a>,
@@ -1061,7 +1063,7 @@
       <caption>A list of the RDF-compatible XSD types, with short descriptions</caption>
       <tr><th></th><th>Datatype</th><th>Value space (informative)</th></tr>
 
-      <tr><th rowspan="4">Core types</th><td><a data-cite="xmlschema11-2#string"><code>xsd:string</code></a></td><td>Character strings (but not all Unicode character strings)</td></tr>
+      <tr><th rowspan="4">Core types</th><td><a data-cite="xmlschema11-2#string"><code>xsd:string</code></a></td><td>Character strings (but not all unicode strings [[UNICODE]])</td></tr>
       <tr><td><a data-cite="xmlschema11-2#boolean"><code>xsd:boolean</code></a></td><td>true, false</td></tr>
       <tr><td><a data-cite="xmlschema11-2#decimal"><code>xsd:decimal</code></a></td><td>Arbitrary-precision decimal numbers</td></tr>
       <tr><td><a data-cite="xmlschema11-2#integer"><code>xsd:integer</code></a></td><td>Arbitrary-size integer numbers</td></tr>
@@ -1220,7 +1222,7 @@
       <dd>is <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#HTML</code>.</dd>
 
       <dt>The lexical space</dt>
-      <dd>is the set of Unicode [[UNICODE]] strings.</dd>
+      <dd>is the set of unicode strings [[!UNICODE]].</dd>
 
       <dt>The value space</dt>
       <dd>is a set of DOM
@@ -1646,6 +1648,7 @@
       and definitions for <a>quoted triple</a> and <a>asserted triple</a>.</li>
     <li>Changed reference from DOM4, which was not a recommendation at the time, to [[DOM]],
       making the <a>rdf:HTML</a> and <a>rdf:XMLLiteral</a> datatypes normative.</li>
+    <li>Clarify Unicode terminology.</li>
   </ul>
 
   <p class="note">A detailed overview of the differences between RDF versions&nbsp;1.0
