@@ -587,7 +587,7 @@
 
     <p><dfn>IRI equality</dfn>:
       Two IRIs are the same if and only if they compare as identical when
-      considered as character strings, as in Simple String Comparison in
+      considered as character strings (unicode strings), as in Simple String Comparison in
       <a data-cite="rfc3987#section-5.3.1">section 5.3.1</a>
       of [[!RFC3987]].
       (This is done in the abstract syntax, so the IRIs are absolute
@@ -738,7 +738,8 @@
       RDF literal) if and only if the two <a>lexical forms</a>,
       the two <a>datatype IRIs</a>, and the two
       <a>language tags</a> (if any) compare equal,
-      character by character. Thus, two literals can have the same value
+      using <a data-cite="i18n-glossary#dfn-case-sensitive">character sensitive matching</a>.
+      Thus, two literals can have the same value
       without being the same RDF term. For example:</p>
 
     <pre>
