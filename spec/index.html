@@ -576,7 +576,7 @@
 
     <p>An <dfn data-lt="iri"><abbr title="Internationalized Resource Identifier">IRI</abbr></dfn>
       (Internationalized Resource Identifier) within an RDF graph
-      is a unicode string [[!UNICODE]] that conforms to the syntax
+      is a Unicode string [[!UNICODE]] that conforms to the syntax
       defined in RFC 3987 [[!RFC3987]].</p>
 
     <p class="note">For convenience, a complete [[ABNF]] grammar
@@ -587,7 +587,7 @@
 
     <p><dfn>IRI equality</dfn>:
       Two IRIs are the same if and only if they compare as identical when
-      considered as character strings (unicode strings), as in Simple String Comparison in
+      considered as character strings (Unicode strings), as in Simple String Comparison in
       <a data-cite="rfc3987#section-5.3.1">section 5.3.1</a>
       of [[!RFC3987]].
       (This is done in the abstract syntax, so the IRIs are absolute
@@ -672,7 +672,7 @@
       elements:</p>
 
     <ul>
-      <li>a <dfn>lexical form</dfn>, being a unicode string [[!UNICODE]],
+      <li>a <dfn>lexical form</dfn>, being a Unicode string [[!UNICODE]],
         which SHOULD be in <a data-cite="i18n-glossary#dfn-unicode-normalization-form-c">Normalization Form&nbsp;C</a> [[!UNICODE]]
         and where all <a data-cite="i18n-glossary#dfn-code-point">code points</a> MUST be
         <a data-cite="i18n-glossary#dfn-scalar-value">Unicode scalar values</a>
@@ -981,7 +981,7 @@
     a <a>value space</a> and a <a>lexical-to-value mapping</a>, and
     is denoted by one or more <a>IRIs</a>.</p>
 
-  <p>The <dfn>lexical space</dfn> of a datatype is a set of unicode strings [[!UNICODE]].</p>
+  <p>The <dfn>lexical space</dfn> of a datatype is a set of Unicode strings [[!UNICODE]].</p>
 
   <p>The <dfn>lexical-to-value mapping</dfn> of a datatype is a set of
     pairs whose first element belongs to the <a>lexical space</a>,
@@ -1064,7 +1064,7 @@
       <caption>A list of the RDF-compatible XSD types, with short descriptions</caption>
       <tr><th></th><th>Datatype</th><th>Value space (informative)</th></tr>
 
-      <tr><th rowspan="4">Core types</th><td><a data-cite="xmlschema11-2#string"><code>xsd:string</code></a></td><td>Character strings (but not all unicode strings [[UNICODE]])</td></tr>
+      <tr><th rowspan="4">Core types</th><td><a data-cite="xmlschema11-2#string"><code>xsd:string</code></a></td><td>Character strings (but not all Unicode strings [[UNICODE]])</td></tr>
       <tr><td><a data-cite="xmlschema11-2#boolean"><code>xsd:boolean</code></a></td><td>true, false</td></tr>
       <tr><td><a data-cite="xmlschema11-2#decimal"><code>xsd:decimal</code></a></td><td>Arbitrary-precision decimal numbers</td></tr>
       <tr><td><a data-cite="xmlschema11-2#integer"><code>xsd:integer</code></a></td><td>Arbitrary-size integer numbers</td></tr>
@@ -1223,7 +1223,7 @@
       <dd>is <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#HTML</code>.</dd>
 
       <dt>The lexical space</dt>
-      <dd>is the set of unicode strings [[!UNICODE]].</dd>
+      <dd>is the set of Unicode strings [[!UNICODE]].</dd>
 
       <dt>The value space</dt>
       <dd>is a set of DOM
@@ -1278,7 +1278,7 @@
       <dd>is <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral</code>.</dd>
 
       <dt id="XMLLiteral-lexical-space">The <a>lexical space</a></dt>
-      <dd>is the set of all strings which are well-balanced, self-contained
+      <dd>is the set of all Unicode strings [[UNICODE]] which are well-balanced, self-contained
         <a data-cite="XML10#NT-content">XML content</a>
         [[XML10]]; and for which embedding between an arbitrary
         XML start tag and an end tag yields a document conforming to
@@ -1494,12 +1494,12 @@
 
 <section id="internationalization" class="appendix informative">
   <h2>Internationalization Considerations</h2>
-  <p>RDF is restricted to representing string values with left-to-right or right-to-left direction indicators.
+  <p>RDF is restricted to representing Unicode string [[UNICODE]] values with left-to-right or right-to-left direction indicators.
     RDF provides a mechanism for specifying the language associated with
     a string (<a>language-tagged string</a>),
     but does not provide a means of indicating the base direction of the string.</p>
 
-  <p>Unicode provides a mechanism for signaling direction within a string
+  <p>Unicode [[UNICODE]] provides a mechanism for signaling direction within a string
     (see [[[UAX9]]] [[UAX9]]),
     however, when a string has an overall base direction which cannot be determined by the
     beginning of the string, an external indicator is required,
