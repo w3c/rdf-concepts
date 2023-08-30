@@ -43,17 +43,10 @@
     figure { text-align: center; }
     table.simple td, table th { border: 1px solid #ddd; padding: 0.2em 0.5em; }
     ol ol { list-style-type: lower-latin; }
-    .grammar td { font-family: monospace; }
-    .grammar-literal { color: gray; }
-    code { color: #ff4500; }  /* Old W3C Style */
-    div.abnf { margin-left: 1em; }
-    @media (max-width: 850px) {
-        table { overflow-wrap: anywhere !important; }
-        .simple th, .simple td { font-size: 14px; }
-    }    
-    @media (max-width: 767px) {
-        table { word-break: normal; /*max-width: 80vw;*/}
-    }
+    .grammar td { font-family: monospace;}
+    .grammar-literal { color: gray;}
+    code {color: #ff4500;}  /* Old W3C Style */
+    div.abnf {margin-left: 1em;}
   </style>
 </head>
 
@@ -473,8 +466,8 @@
       many different ways to encode the same <a>RDF graph</a> or
       <a>RDF dataset</a>, for example through the use of
       <a>namespace prefixes</a>,
-      <a>relative IRI references</a>, <a>blank node identifiers</a>,
-      and different ordering of statements. While these aspects can have great
+      <a>IRI references</a>, <a>blank node identifiers</a>,
+      and different ordering of triples. While these aspects can have great
       effect on the convenience of working with the <a>RDF document</a>,
       they are not significant for its meaning.</p>
   </section>
@@ -598,11 +591,13 @@
       and MAY contain a fragment identifier.</p>
 
     <p><dfn>IRI equality</dfn>:
-      Two IRIs are equal if and only if they are <a>equivalent</a>
-      under Simple String Comparison according to
-      <a data-cite="rfc3987#section-5.1">section 5.1</a>
-      of [[!RFC3987]]. Further normalization MUST NOT be performed when
-      comparing IRIs for equality.</p>
+      Two IRIs are the same if and only if they compare as identical when
+      considered as character strings, as in Simple String Comparison in
+      <a data-cite="rfc3987#section-5.3.1">section 5.3.1</a>
+      of [[!RFC3987]].
+      (This is done in the abstract syntax, so the IRIs are absolute
+      IRIs with no escaping or encoding.)
+      Further normalization MUST NOT be performed before this comparison. </p>
 
     <div class="note" id="note-iris">
       <p><strong>URIs and IRIs:</strong>
@@ -610,7 +605,12 @@
         <dfn data-lt="URI" data-lt-noDefault><abbr title="Uniform Resource Identifier">URI</abbr>s</dfn>
         [[RFC3986]] that permits a wider range of Unicode characters.
         Every absolute URI and URL is an IRI, but not every IRI is an URI.
-        In RDF, IRIs are used as <em>IRI references</em>, as defined in [[RFC3987]].
+        In RDF, IRIs are used as <dfn data-lt="iri reference">IRI references</dfn>, as defined in [[RFC3987]]
+        <a data-cite="RFC3987#section-1.3">section 1.3</a>.
+        An IRI reference is common usage of an Internationalized Resource Identifier.
+        An IRI reference refers to either <a>IRI</a> or <a>relative IRI reference</a>,
+        as described by the <em>IRI-reference</em> production in <a href="#iri-abnf" class="sectionRef"></a>.
+        The abstract syntax uses only fully resolved <a>IRIs</a>.
         When IRIs are used in operations that are only
         defined for URIs, they must first be converted according to
         the mapping defined in
@@ -765,8 +765,8 @@
       For example:</p>
 
     <pre>
-      `"1"^^xs:integer`
-      `"01"^^xs:integer`
+      "1"^^xs:integer
+      "01"^^xs:integer
     </pre>
 
     <p>denote the same <a data-lt="literal value">value</a>, but are not the
@@ -1214,22 +1214,18 @@
       <a href="#referents">referents</a>. If any IRI of the form
       <code>http://www.w3.org/2001/XMLSchema#xxx</code> is recognized, it
       MUST refer to the RDF-compatible XSD type named <code>xsd:xxx</code> for
-      every XSD type listed in <a href="#xsd-datatypes">section 5.1</a>.
-      Furthermore, the following IRIs are allocated for non-normative
-      datatypes:
+      every XSD type listed in <a href="#xsd-datatypes">section 5.1</a>.</p>
+
+    <p>The following three datatype IRIs are defined in this section:</p>
 
     <ul>
       <li>The IRI <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral</code>
         refers to the datatype <code><a>rdf:XMLLiteral</a></code></li>
       <li>The IRI <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#HTML</code>
         refers to the datatype <code><a>rdf:HTML</a></code></li>
+      <li>The IRI <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#JSON</code>
+        refers to the datatype <code><a>rdf:JSON</a></code></li>
     </ul>
-
-    <p class="note">Semantic extensions of RDF might choose to
-      recognize other datatype IRIs
-      and require them to refer to a fixed datatype.  See the RDF
-      Semantics specification [[RDF12-SEMANTICS]] for more information on
-      semantic extensions.</p>
 
     <p>RDF processors are not required to recognize datatype IRIs.
       Any literal typed with an unrecognized IRI is treated just like
@@ -1242,6 +1238,12 @@
       <a>datatype IRIs</a>, for example, require support
       for certain datatypes.</p>
 
+    <p class="note">Semantic extensions of RDF might choose to
+      recognize other datatype IRIs
+      and require them to refer to a fixed datatype.  See the RDF
+      Semantics specification [[RDF12-SEMANTICS]] for more information on
+      semantic extensions.</p>
+
     <p class="note" id="note-custom-datatypes">The Web Ontology Language
       [[OWL2-OVERVIEW]] offers facilities for formally defining
       <a data-cite="OWL2-SYNTAX#Datatype_Definitions">custom
@@ -1253,15 +1255,13 @@
       are not required to support either of these facilities.</p>
   </section>
 
-  <section id="section-html" class="informative">
+  <section id="section-html">
     <h3>The <code>rdf:HTML</code> Datatype</h3>
 
     <p>RDF provides for HTML content as a possible <a>literal value</a>.
       This allows markup in literal values. Such content is indicated
       in an <a>RDF graph</a> using a <a>literal</a> whose <a>datatype</a>
-      is set to <code><dfn>rdf:HTML</dfn></code>. This datatype is defined
-      as non-normative because it depends on [[DOM4]], a specification that
-      has not yet reached W3C Recommendation status.</p>
+      is set to <code><dfn>rdf:HTML</dfn></code>.</p>
 
     <p>The <code>rdf:HTML</code> datatype is defined as follows:</p>
 
@@ -1274,27 +1274,27 @@
 
       <dt>The value space</dt>
       <dd>is a set of DOM
-        <a data-cite="DOM4#interface-documentfragment"><code>DocumentFragment</code></a>
-        nodes [[DOM4]]. Two
-        <a data-cite="DOM4#interface-documentfragment"><code>DocumentFragment</code></a>
-        nodes <em>A</em> and <em>B</em> are considered equal if and only if
+        <a data-cite="DOM#interface-documentfragment"><code>DocumentFragment</code></a>
+        nodes [[DOM]]. Two
+        <a data-cite="DOM#interface-documentfragment"><code>DocumentFragment</code></a>
+        nodes <var>node</var> and <var>otherNode</var> are considered equal if and only if
         the DOM method
-        <code><em>A</em>.<a data-cite="DOM4#dom-node-isequalnode">isEqualNode</a>(<em>B</em>)</code>
-        [[DOM4]] returns <code>true</code>.</dd>
+        <code><var>node</var>.{{Node/isEqualNode(otherNode)}}</code>
+        [[DOM]] returns <code>true</code>.</dd>
 
       <dt>The lexical-to-value mapping</dt>
       <dd>
         <p>Each member of the lexical space is associated with the result
           of applying the following algorithm:</p>
         <ul>
-          <li>Let <code>domnodes</code> be the list of <a data-cite="DOM4#node">DOM nodes</a> [[DOM4]]
+          <li>Let <code>domnodes</code> be the list of <a data-cite="DOM#node">DOM nodes</a> [[DOM]]
             that result from applying the
             <a data-cite="HTML5#parsing-html-fragments">HTML fragment parsing algorithm</a> [[HTML5]]
             to the input string, without a context element.</li>
           <li>Let <code>domfrag</code> be a DOM
-            <a data-cite="DOM4#interface-documentfragment"><code>DocumentFragment</code></a> [[DOM4]]
+            <a data-cite="DOM#interface-documentfragment"><code>DocumentFragment</code></a> [[DOM]]
             whose <code>childNodes</code> attribute is equal to <code>domnodes</code></li>
-            <li>Return <code>domfrag.<a data-cite="DOM4#dom-node-normalize">normalize</a>()</code></li>
+            <li>Return <code>domfrag.{{Node/normalize()}}</code></li>
         </ul>
       </dd>
     </dl>
@@ -1311,14 +1311,12 @@
       of the same string.</p>
   </section>
 
-  <section id="section-XMLLiteral" class="informative">
+  <section id="section-XMLLiteral">
     <h3>The <code>rdf:XMLLiteral</code> Datatype</h3>
 
     <p>RDF provides for XML content as a possible <a>literal value</a>.
       Such content is indicated in an <a>RDF graph</a> using a <a>literal</a>
-      whose <a>datatype</a> is set to <code><dfn>rdf:XMLLiteral</dfn></code>.
-      This datatype is defined as non-normative because it depends on [[DOM4]],
-      a specification that has not yet reached W3C Recommendation status.</p>
+      whose <a>datatype</a> is set to <code><dfn>rdf:XMLLiteral</dfn></code>.</p>
 
     <p>The <code>rdf:XMLLiteral</code> datatype is defined as follows:</p>
 
@@ -1335,11 +1333,11 @@
 
       <dt id="XMLLiteral-value-space">The <a>value space</a></dt>
         <dd>is a set of DOM
-        <a data-cite="DOM4#interface-documentfragment"><code>DocumentFragment</code></a>
-        nodes [[DOM4]]. Two
-        <a data-cite="DOM4#interface-documentfragment"><code>DocumentFragment</code></a>
-        nodes <em>A</em> and <em>B</em> are considered equal if and only if the DOM method
-        <code><em>A</em>.<a data-cite="DOM4#dom-node-isequalnode">isEqualNode</a>(<em>B</em>)</code>
+        <a data-cite="DOM#interface-documentfragment"><code>DocumentFragment</code></a>
+        nodes [[DOM]]. Two
+        <a data-cite="DOM#interface-documentfragment"><code>DocumentFragment</code></a>
+        nodes <var>node</var> and <em>otherNode</em> are considered equal if and only if the DOM method
+        <code><var>node</var>.{{Node/isEqualNode(otherNode)}}</code>
         returns <code>true</code>.</dd>
 
       <dt id="XMLLiteral-mapping">The <a>lexical-to-value mapping</a></dt>
@@ -1347,9 +1345,9 @@
         <p>Each member of the lexical space is associated with the result of applying the following algorithm:</p>
         <ul>
           <li>Let <code>domfrag</code> be a DOM
-            <a data-cite="DOM4#interface-documentfragment"><code>DocumentFragment</code></a>
-            node [[DOM4]] corresponding to the input string</li>
-          <li>Return <code>domfrag.<a data-cite="DOM4#dom-node-normalize">normalize</a>()</code></li>
+            <a data-cite="DOM#interface-documentfragment"><code>DocumentFragment</code></a>
+            node [[DOM]] corresponding to the input string</li>
+          <li>Return <code>domfrag.{{Node/normalize()}}</code></li>
         </ul>
       </dd>
 
@@ -1376,7 +1374,7 @@
     <h3>The <code>rdf:JSON</code> Datatype</h3>
 
     <p class="issue" data-number="14">
-      The `rdf:JSON` datatype is originally defined in
+      The <code><dfn>rdf:JSON</dfn></code> datatype was originally defined in
       <a data-cite="?JSON-LD11#the-rdf-json-datatype">Section 10.2 The `rdf:JSON` Datatype</a>
       in [[?JSON-LD11]].
     </p>
@@ -1474,7 +1472,17 @@
 
 <section id="privacy" class="appendix informative">
   <h2>Privacy Considerations</h2>
-  <p>TODO</p>
+  <p>RDF is used to express arbitrary application data,
+    which may include the expression of personally identifiable information (PII)
+    or other information which could be considered sensitive.
+    Authors publishing such information are advised to carefully
+    consider the needs and use of publishing such information,
+    as well as the applicable regulations for the regions where the data is
+    expected to be consumed and potentially revealed (e.g., 
+    <a href="https://gdpr.eu/">GDPR</a>, 
+    <a href="https://oag.ca.gov/privacy/ccpa">CCPA</a>,
+    <a href="https://termly.io/resources/infographics/privacy-laws-around-the-world/">others</a>),
+    particularly whether authorization measures are needed for access to the data.</p>
 </section>
 
 <section id="security" class="appendix informative">
@@ -1686,6 +1694,8 @@
     <li>Added the <a>base direction</a> element as part of 
       a <a>literal</a>,
       and a description of its use in <a href="#section-text-direction" class="sectionRef"></a>.</li>
+    <li>Changed reference from DOM4, which was not a recommendation at the time, to [[DOM]],
+      making the <a>rdf:HTML</a> and <a>rdf:XMLLiteral</a> datatypes normative.</li>
   </ul>
 
   <p class="note">A detailed overview of the differences between RDF versions&nbsp;1.0
