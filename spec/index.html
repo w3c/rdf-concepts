@@ -583,7 +583,8 @@
     <p class="note">For convenience, a complete [[ABNF]] grammar
       from [[RFC3987]] is provided in <a href="#iri-abnf" class="sectionRef"></a>.</p>
 
-    <p>IRIs in the RDF abstract syntax MUST be absolute,
+    <p>IRIs in the RDF abstract syntax MUST be <a data-cite="RFC3986#section-5">resolved</a>
+      per [[RFC3986]],
       and MAY contain a fragment identifier.</p>
 
     <p><dfn>IRI equality</dfn>:
@@ -591,7 +592,7 @@
       <a data-lt="code point" class="lint-ignore">Unicode code points</a>,
       as in Simple String Comparison in
       <a data-cite="rfc3987#section-5.3.1">section 5.3.1</a> of [[!RFC3987]].
-      (This is done in the abstract syntax, so the IRIs are absolute
+      (This is done in the abstract syntax, so the IRIs are resolved
       IRIs with no escaping or encoding.)
       Further normalization MUST NOT be performed before this comparison. </p>
 
@@ -600,11 +601,11 @@
         IRIs are a generalization of
         <dfn data-lt="URI" data-lt-noDefault><abbr title="Uniform Resource Identifier">URI</abbr>s</dfn>
         [[RFC3986]] that permits a wider range of Unicode characters [[UNICODE]].
-        Every absolute URI and URL is an IRI, but not every IRI is an URI.
+        Every URI and URL is an IRI, but not every IRI is an URI.
         In RDF, IRIs are used as <dfn data-lt="iri reference">IRI references</dfn>, as defined in [[RFC3987]]
         <a data-cite="RFC3987#section-1.3">section 1.3</a>.
         An IRI reference is common usage of an Internationalized Resource Identifier.
-        An IRI reference refers to either <a>IRI</a> or <a>relative IRI reference</a>,
+        An IRI reference refers to either a resolved <a>IRI</a> or <a>relative IRI reference</a>,
         as described by the <em>IRI-reference</em> production in <a href="#iri-abnf" class="sectionRef"></a>.
         The abstract syntax uses only fully resolved <a>IRIs</a>.
         When IRIs are used in operations that are only
@@ -630,7 +631,7 @@
         publishing location.
         Relative IRI references must be
         <a data-cite="rfc3986#section-5.2">resolved against</a> a
-        <dfn class="export">base IRI</dfn> to make them absolute.
+        <dfn class="export">base IRI</dfn>.
         Therefore, the RDF graph serialized in such syntaxes is well-defined only
         if a <a data-cite="rfc3986#section-5.1">base IRI
         can be established</a> [[RFC3986]].</p>
@@ -1109,7 +1110,7 @@
       <tr><td><a data-cite="xmlschema11-2#base64Binary"><code>xsd:base64Binary</code></a></td><td>Base64-encoded binary data</td></tr>
 
       <tr><th rowspan="7">Miscellaneous<br />XSD types</th>
-          <td><a data-cite="xmlschema11-2#anyURI"><code>xsd:anyURI</code></a></td><td>Absolute or relative URIs and IRIs</td></tr>
+          <td><a data-cite="xmlschema11-2#anyURI"><code>xsd:anyURI</code></a></td><td>Resolved or relative URI and IRI references</td></tr>
       <tr><td><a data-cite="xmlschema11-2#language"><code>xsd:language</code></a></td><td>Language tags per [[BCP47]]</td></tr>
       <tr><td><a data-cite="xmlschema11-2#normalizedString"><code>xsd:normalizedString</code></a></td><td>Whitespace-normalized strings</td></tr>
       <tr><td><a data-cite="xmlschema11-2#token"><code>xsd:token</code></a></td><td>Tokenized strings</td></tr>
@@ -1646,6 +1647,11 @@
       for informative definition of a <a>quad</a>.</li>
     <li>Added <a href="#section-quoted-triples" class="sectionRef"></a>
       and definitions for <a>quoted triple</a> and <a>asserted triple</a>.</li>
+    <li>Improved the use of IRI terminology,
+      and added <a href="#iri-abnf" class="sectionRef"></a>.
+      This improves the language using <a>relative IRI references</a>
+      and clarifies that, in the abstract syntax, IRIs are resolved,
+      avoiding the incorrect use of "absolute IRI".</li>
     <li>Changed reference from DOM4, which was not a recommendation at the time, to [[DOM]],
       making the <a>rdf:HTML</a> and <a>rdf:XMLLiteral</a> datatypes normative.</li>
     <li>Clarify Unicode terminology,
