@@ -33,6 +33,7 @@
         { name: "Brian McBride" }
       ],
 
+      xref: ["i18n-glossary", "infra"],
       github: "https://github.com/w3c/rdf-concepts/",
       group:           "rdf-star",
       doJsonLd:     true,
@@ -142,7 +143,7 @@
     <dfn data-lt="resource">resources</dfn>. Anything can be a resource,
     including physical things, documents, abstract concepts, numbers
     and strings; the term is synonymous with "entity" as it is used in
-    the RDF Semantics specification [[RDF12-SEMANTICS]].
+    [[[RDF12-SEMANTICS]]] [[RDF12-SEMANTICS]].
     The resource denoted by an IRI is called its <a>referent</a>, and the
     resource denoted by a literal is called its
     <a>literal value</a>. Literals have
@@ -201,7 +202,8 @@
       </figcaption>
     </figure>
 
-    <p>A variation on the graph shown in <a href="#fig-quoted-triple"></a> can be described where the <a>quoted triple</a> is also <a data-lt="asserted triple">asserted</a>.</p>
+    <p>A variation on the graph shown in <a href="#fig-quoted-triple"></a> can be described
+      where the <a>quoted triple</a> is also <a data-lt="asserted triple">asserted</a>.</p>
 
     <figure id="fig-quoted-asserted-triple">
       <a href="quoted-asserted-triple.svg">
@@ -212,7 +214,8 @@
              aria-describedby="fig-quoted-asserted-triple-alt"/>
       </a>
       <figcaption id="fig-quoted-asserted-triple-alt">
-        An RDF graph containing two triples where one of them contains the other as the subject; hence, that other triple is both quoted and asserted.
+        An RDF graph containing two triples where one of them contains the other as the subject;
+        hence, that other triple is both quoted and asserted.
       </figcaption>
     </figure>
 
@@ -409,7 +412,7 @@
       simple <dfn class="export">logical expression</dfn>, or claim about the world.
       An <a>RDF graph</a> is the conjunction (logical <em>AND</em>) of
       its triples.   The precise details of this meaning of RDF triples and graphs are
-      the subject of the RDF Semantics specification [[RDF12-SEMANTICS]], which yields the
+      the subject of [[[RDF12-SEMANTICS]]] [[RDF12-SEMANTICS]], which yields the
       following relationships between <a>RDF graph</a>s:</p>
 
     <dl>
@@ -500,6 +503,30 @@
     and still the subject of group discussion. An alternative to conformance
     levels, "profiles", may be adopted instead, abandoned, or described in 
     another specification.</p>
+
+  <section id="rdf-strings">
+    <h2>Strings in RDF</h2>
+
+    <p>RDF uses Unicode [[Unicode]] as the fundamental representation for string values.
+      Within this, and related specifications, the term <dfn id="dfn-rdf-string">string</dfn>,
+      or <a data-lt="string">RDF string</a>,
+      is used to describe an ordered sequence of zero or more
+      <a data-cite="i18n-glossary#dfn-code-point" class="lint-ignore">Unicode code points</a>
+      which are <a data-cite="i18n-glossary#dfn-scalar-value" class="lint-ignore">Unicode scalar values</a>.
+      Unicode scalar values do not include the
+      <a data-cite="i18n-glossary#dfn-surrogate" class="lint-ignore">surrogate code points</a>.
+      Note that most <a>concrete RDF syntaxes</a> require the use
+      of the UTF-8 character encoding [[!RFC3629]], 
+      and use the `\u0000` or `\U00000000` forms to express certain non-character values.
+</p>
+
+    <p>A string is identical to another string if it consists of the same sequence of code points.
+      An implementation MAY determine string equality by comparing the
+      <a data-cite="i18n-glossary#dfn-code-unit">code units</a> of two strings
+      that use the same <a data-cite="i18n-glossary#dfn-character-encoding">Unicode character encoding</a>
+      (UTF-8 or UTF-16) without decoding the string into a
+      <a data-cite="i18n-glossary#dfn-code-point" class="lint-ignore">Unicode code point</a> sequence.</p>
+  </section>
 </section>
 
 
@@ -537,8 +564,8 @@
       |p| is called the <dfn>predicate</dfn> of the triple, and
       |o| is called the <dfn>object</dfn> of the triple.</p>
 
-    <p>A <dfn data-local-lt="quoted">quoted triple</dfn> is an <a>RDF triple</a> that is
-      used as the <a>subject</a> or <a>object</a> of another triple.</p>
+    <p>When an <a>RDF triple</a> is used as the <a>subject</a> or <a>object</a> of a triple, this occurrence of
+      the triple is called a <dfn data-local-lt="quoted">quoted triple</dfn>.</p>
 
     <p class="note">By the given definitions,
       the <a>subject</a> of an <a>RDF triple</a> may be either an <a>IRI</a>,
@@ -581,21 +608,22 @@
 
     <p>An <dfn data-lt="iri"><abbr title="Internationalized Resource Identifier">IRI</abbr></dfn>
       (Internationalized Resource Identifier) within an RDF graph
-      is a Unicode string [[!UNICODE]] that conforms to the syntax
+      is a <a>string</a> that conforms to the syntax
       defined in RFC 3987 [[!RFC3987]].</p>
 
     <p class="note">For convenience, a complete [[ABNF]] grammar
       from [[RFC3987]] is provided in <a href="#iri-abnf" class="sectionRef"></a>.</p>
 
-    <p>IRIs in the RDF abstract syntax MUST be absolute,
+    <p>IRIs in the RDF abstract syntax MUST be <a data-cite="RFC3986#section-5">resolved</a>
+      per [[RFC3986]],
       and MAY contain a fragment identifier.</p>
 
     <p><dfn>IRI equality</dfn>:
-      Two IRIs are the same if and only if they compare as identical when
-      considered as character strings, as in Simple String Comparison in
-      <a data-cite="rfc3987#section-5.3.1">section 5.3.1</a>
-      of [[!RFC3987]].
-      (This is done in the abstract syntax, so the IRIs are absolute
+      Two IRIs are the same if and only if they consist of the same sequence of
+      <a data-cite="i18n-glossary#dfn-code-point" class="lint-ignore">Unicode code points</a>,
+      as in Simple String Comparison in
+      <a data-cite="rfc3987#section-5.3.1">section 5.3.1</a> of [[!RFC3987]].
+      (This is done in the abstract syntax, so the IRIs are resolved
       IRIs with no escaping or encoding.)
       Further normalization MUST NOT be performed before this comparison. </p>
 
@@ -603,12 +631,12 @@
       <p><strong>URIs and IRIs:</strong>
         IRIs are a generalization of
         <dfn data-lt="URI" data-lt-noDefault><abbr title="Uniform Resource Identifier">URI</abbr>s</dfn>
-        [[RFC3986]] that permits a wider range of Unicode characters.
-        Every absolute URI and URL is an IRI, but not every IRI is an URI.
+        [[RFC3986]] that permits a wider range of Unicode characters [[UNICODE]].
+        Every URI and URL is an IRI, but not every IRI is an URI.
         In RDF, IRIs are used as <dfn data-lt="iri reference">IRI references</dfn>, as defined in [[RFC3987]]
         <a data-cite="RFC3987#section-1.3">section 1.3</a>.
         An IRI reference is common usage of an Internationalized Resource Identifier.
-        An IRI reference refers to either <a>IRI</a> or <a>relative IRI reference</a>,
+        An IRI reference refers to either a resolved <a>IRI</a> or <a>relative IRI reference</a>,
         as described by the <em>IRI-reference</em> production in <a href="#iri-abnf" class="sectionRef"></a>.
         The abstract syntax uses only fully resolved <a>IRIs</a>.
         When IRIs are used in operations that are only
@@ -634,7 +662,7 @@
         publishing location.
         Relative IRI references must be
         <a data-cite="rfc3986#section-5.2">resolved against</a> a
-        <dfn class="export">base IRI</dfn> to make them absolute.
+        <dfn class="export">base IRI</dfn>.
         Therefore, the RDF graph serialized in such syntaxes is well-defined only
         if a <a data-cite="rfc3986#section-5.1">base IRI
         can be established</a> [[RFC3986]].</p>
@@ -662,9 +690,8 @@
           triplets (“<code>%3F</code>” is preferable over
           “<code>%3f</code>”)</li>
         <li>Punycode-encoding of Internationalized Domain Names
-          in IRIs</li>
-        <li>IRIs that are not in Unicode Normalization
-          Form C [[NFC]]</li>
+          in IRIs [[RFC3492]]</li>
+        <li>IRIs that are not in Unicode <a class="lint-ignore">Normalization Form C</a> [[UAX15]]</li>
       </ul>
     </div>
   </section>
@@ -678,8 +705,11 @@
       two, three, or four elements:</p>
 
     <ul>
-      <li>a <dfn>lexical form</dfn>, being a Unicode [[!UNICODE]] string,
-        which SHOULD be in Normal Form&nbsp;C [[!NFC]],</li>
+      <li>a <dfn>lexical form</dfn> consisting of a sequence of
+        <a data-cite="i18n-glossary#dfn-code-point" class="lint-ignore">Unicode code points</a> [[!UNICODE]]
+        which are <a data-cite="i18n-glossary#dfn-scalar-value">Unicode scalar values</a>,
+        and therefore do not contain
+        <a data-cite="i18n-glossary#dfn-surrogate" class="lint-ignore">Unicode surrogate code points</a>.</li>
       <li>a <dfn>datatype IRI</dfn>, being an <a>IRI</a>
         identifying a datatype that determines how the lexical form maps
         to a <a>literal value</a>, and</li>
@@ -758,8 +788,9 @@
       if and only if the two <a>lexical forms</a>,
       the two <a>datatype IRIs</a>,
       the two <a>language tags</a> (if any), and
-      the two <a>base directions</a> (if any),
-      all compare equal, character by character.
+      the two <a>base directions</a> (if any) compare equal,
+      using <a data-cite="i18n-glossary#dfn-case-sensitive">case sensitive matching</a>
+      (see description of string comparison in <a href="#rdf-strings" class="sectionRef"></a>).
       Thus, two literals can have the same value
       without being the same <a>RDF term</a>.
       For example:</p>
@@ -879,8 +910,9 @@
 
     <p id="section-graph-equality">Two
       <a>RDF graphs</a> <var>G</var> and <var>G'</var> are
-      <dfn data-lt="graph isomorphism|isomorphic" data-lt-noDefault class="export">isomorphic</dfn> (that is, they have an identical
-      form) if there is a bijection <var>M</var> between the sets of nodes of the two
+      <dfn data-lt="graph isomorphism|isomorphic" data-lt-noDefault class="export">isomorphic</dfn>
+      (that is, they have an identical form)
+      if there is a bijection <var>M</var> between the sets of nodes of the two
       graphs, such that:</p>
 
     <ol>
@@ -1019,8 +1051,8 @@
     [[!XMLSCHEMA11-2]]. Any datatype definition that conforms
     to this abstraction MAY be used in RDF, even if not defined
     in terms of XML Schema. RDF re-uses many of the XML Schema
-    built-in datatypes, and defines two additional non-normative datatypes,
-    <code><a>rdf:HTML</a></code> and <code><a>rdf:XMLLiteral</a></code>.
+    built-in datatypes, and defines three additional datatypes,
+    <code><a>rdf:JSON</a></code>, <code><a>rdf:HTML</a></code>, and <code><a>rdf:XMLLiteral</a></code>.
     The list of datatypes supported by an implementation is determined
     by its <a>recognized datatype IRIs</a>.</p>
 
@@ -1028,7 +1060,7 @@
     a <a>value space</a> and a <a>lexical-to-value mapping</a>, and
     is denoted by one or more <a>IRIs</a>.</p>
 
-  <p>The <dfn>lexical space</dfn> of a datatype is a set of Unicode [[!UNICODE]] strings.</p>
+  <p>The <dfn>lexical space</dfn> of a datatype is a set of <a>strings</a>.</p>
 
   <p>The <dfn>lexical-to-value mapping</dfn> of a datatype is a set of
     pairs whose first element belongs to the <a>lexical space</a>,
@@ -1103,15 +1135,14 @@
       listed in the following table are the
       <dfn>RDF-compatible XSD types</dfn>. Their use is RECOMMENDED.</p>
 
-    <p>Readers might note that the xsd:hexBinary and xsd:base64Binary
-      datatypes are the only safe datatypes for transferring binary
-      information.</p>
+    <p>Readers might note that the only safe datatypes for transferring
+      binary information are `xsd:hexBinary` and `xsd:base64Binary`.</p>
 
     <table id="tab-xsd-datatypes" class="simple">
       <caption>A list of the RDF-compatible XSD types, with short descriptions</caption>
       <tr><th></th><th>Datatype</th><th>Value space (informative)</th></tr>
 
-      <tr><th rowspan="4">Core types</th><td><a data-cite="xmlschema11-2#string"><code>xsd:string</code></a></td><td>Character strings (but not all Unicode character strings)</td></tr>
+      <tr><th rowspan="4">Core types</th><td><a data-cite="xmlschema11-2#string"><code>xsd:string</code></a></td><td>Character strings</td></tr>
       <tr><td><a data-cite="xmlschema11-2#boolean"><code>xsd:boolean</code></a></td><td>true, false</td></tr>
       <tr><td><a data-cite="xmlschema11-2#decimal"><code>xsd:decimal</code></a></td><td>Arbitrary-precision decimal numbers</td></tr>
       <tr><td><a data-cite="xmlschema11-2#integer"><code>xsd:integer</code></a></td><td>Arbitrary-size integer numbers</td></tr>
@@ -1157,7 +1188,7 @@
       <tr><td><a data-cite="xmlschema11-2#base64Binary"><code>xsd:base64Binary</code></a></td><td>Base64-encoded binary data</td></tr>
 
       <tr><th rowspan="7">Miscellaneous<br />XSD types</th>
-          <td><a data-cite="xmlschema11-2#anyURI"><code>xsd:anyURI</code></a></td><td>Absolute or relative URIs and IRIs</td></tr>
+          <td><a data-cite="xmlschema11-2#anyURI"><code>xsd:anyURI</code></a></td><td>Resolved or relative URI and IRI references</td></tr>
       <tr><td><a data-cite="xmlschema11-2#language"><code>xsd:language</code></a></td><td>Language tags per [[BCP47]]</td></tr>
       <tr><td><a data-cite="xmlschema11-2#normalizedString"><code>xsd:normalizedString</code></a></td><td>Whitespace-normalized strings</td></tr>
       <tr><td><a data-cite="xmlschema11-2#token"><code>xsd:token</code></a></td><td>Tokenized strings</td></tr>
@@ -1216,7 +1247,8 @@
       MUST refer to the RDF-compatible XSD type named <code>xsd:xxx</code> for
       every XSD type listed in <a href="#xsd-datatypes">section 5.1</a>.</p>
 
-    <p>The following three datatype IRIs are defined in this section:</p>
+    <p>The datatypes identified by the three IRIs below are defined in
+    Appendix&nbsp;<a href="#section-additional-datatypes" class="sectionRef"></a>:</p>
 
     <ul>
       <li>The IRI <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral</code>
@@ -1240,8 +1272,8 @@
 
     <p class="note">Semantic extensions of RDF might choose to
       recognize other datatype IRIs
-      and require them to refer to a fixed datatype.  See the RDF
-      Semantics specification [[RDF12-SEMANTICS]] for more information on
+      and require each of them to refer to a fixed datatype.
+      See [[[RDF12-SEMANTICS]]] [[RDF12-SEMANTICS]] for more information on
       semantic extensions.</p>
 
     <p class="note" id="note-custom-datatypes">The Web Ontology Language
@@ -1254,6 +1286,101 @@
       is suggested in [[SWBP-XSCH-DATATYPES]]. RDF implementations
       are not required to support either of these facilities.</p>
   </section>
+</section>
+
+<section id="section-fragID" class="informative">
+  <h2>Fragment Identifiers</h2>
+
+  <p>RDF uses <a>IRIs</a>, which may include
+    <span id="dfn-fragment-identifiers"><!-- obsolete term--></span>
+    <dfn data-lt="fragment identifier" class="no-export">fragment identifiers</dfn>,
+    as resource identifiers.
+    The semantics of fragment identifiers is
+    <a data-cite="rfc3986#section-3.5">defined in
+    RFC 3986</a> [[RFC3986]]: They identify a secondary resource
+    that is usually a part of, a view of, defined in, or described in
+    the primary resource, and the precise semantics depend on the set
+    of representations that might result from a retrieval action
+    on the primary resource.</p>
+
+  <p>This section discusses the handling of fragment identifiers
+    in representations that encode <a>RDF graphs</a>.</p>
+
+  <p>In RDF-bearing representations of a primary resource, e.g.,
+    <code>&lt;https://example.com/foo&gt;</code>,
+    the secondary resource identified by a fragment identifier, e.g., <code>bar</code>,
+    is the <a>resource</a> <a>denoted</a> by the
+    full <a>IRI</a> in the <a>RDF graph</a>, which would be <code>&lt;https://example.com/foo#bar&gt;</code> in this case.
+    Since IRIs in RDF graphs can denote anything, this can be
+    something external to the representation, or even external
+    to the web.</p>
+
+  <p>In this way, the RDF-bearing representation acts as an intermediary
+    between the web-accessible primary resource, and some set of possibly
+    non-web or abstract entities that the <a>RDF graph</a> may describe.</p>
+
+  <p>In cases where other specifications constrain the semantics of
+    <a>fragment identifiers</a> in RDF-bearing representations, the encoded
+    <a>RDF graph</a> should use fragment identifiers in a way that is consistent
+    with these constraints. For example, in an HTML+RDFa document [[HTML-RDFA]],
+    a fragment identifier such as <code>chapter1</code> may identify a document section
+    via the semantics of HTML's <code>@name</code> or <code>@id</code>
+    attributes. Such an <a>IRI</a>, e.g., <code>&lt;#chapter1&gt;</code>, should
+    then be taken to <a>denote</a> that same section in any RDFa-encoded
+    <a>triples</a> within the same document.
+    Similarly, fragment identifiers should be used consistently in resources
+    with multiple representations that are made available via
+    <a data-cite="webarch/#frag-coneg">content negotiation</a>
+    [[WEBARCH]]. For example, if the fragment identifier <code>chapter1</code> identifies a
+    document section in an HTML representation of the primary resource, then the
+    <a>IRI</a> <code>&lt;#chapter1&gt;</code> should be taken to
+    <a>denote</a> that same section in all RDF-bearing representations of the
+    same primary resource.</p>
+</section>
+
+<section id="section-generalized-rdf" class="informative">
+  <h2>Generalized RDF Triples, Graphs, and Datasets</h2>
+
+  <p>It is sometimes convenient to loosen the requirements
+    on <a>RDF triples</a>.  For example, the completeness
+    of the RDFS entailment rules is easier to show with a
+    generalization of RDF triples.</p>
+
+  <p>A <dfn class="export">generalized RDF triple</dfn> is a triple having a subject,
+    a predicate, and an object, where each can be an <a>IRI</a>, a
+    <a>blank node</a> or a
+    <a>literal</a>. A
+    <dfn class="export">generalized RDF graph</dfn>
+    is a set of generalized RDF triples. A
+    <dfn class="export">generalized RDF dataset</dfn>
+    comprises a distinguished generalized RDF graph, and zero
+    or more pairs each associating an IRI, a blank node, or a literal
+    to a generalized RDF graph.</p>
+
+
+  <p>Generalized RDF triples, graphs, and datasets differ
+    from standard normative RDF <a>triples</a>,
+    <a data-lt="RDF graph">graphs</a>, and
+    <a data-lt="RDF dataset">datasets</a> only
+    by allowing <a>IRIs</a>,
+    <a>blank nodes</a>, and
+    <a>literals</a> to appear
+    in any position, i.e., as subject, predicate, object, or graph name.</p>
+
+  <p class="note" id="note-generalized-rdf">Any user of
+    generalized RDF triples, graphs, or datasets needs to be
+    aware that these notions are non-standard extensions of
+    RDF, and their use may cause interoperability problems.
+    There is no requirement for any RDF tool to
+    accept, process, or produce anything beyond standard
+    normative RDF triples, graphs, and datasets. </p>
+
+</section>
+
+
+<section id="section-additional-datatypes" class="appendix">
+  <h2>Additional Datatypes</h2>
+  <p>This section defines additional <a>datatypes</a> that RDF processors MAY support.</p>
 
   <section id="section-html">
     <h3>The <code>rdf:HTML</code> Datatype</h3>
@@ -1266,13 +1393,10 @@
     <p>The <code>rdf:HTML</code> datatype is defined as follows:</p>
 
     <dl>
-      <dt>The IRI denoting this datatype</dt>
+      <dt id="HTML-uri">The IRI denoting this datatype</dt>
       <dd>is <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#HTML</code>.</dd>
 
-      <dt>The lexical space</dt>
-      <dd>is the set of Unicode [[UNICODE]] strings.</dd>
-
-      <dt>The value space</dt>
+      <dt id="HTML-value-space">The <a>value space</a></dt>
       <dd>is a set of DOM
         <a data-cite="DOM#interface-documentfragment"><code>DocumentFragment</code></a>
         nodes [[DOM]]. Two
@@ -1282,7 +1406,7 @@
         <code><var>node</var>.{{Node/isEqualNode(otherNode)}}</code>
         [[DOM]] returns <code>true</code>.</dd>
 
-      <dt>The lexical-to-value mapping</dt>
+      <dt id="HTML-mapping">The lexical-to-value mapping</dt>
       <dd>
         <p>Each member of the lexical space is associated with the result
           of applying the following algorithm:</p>
@@ -1325,11 +1449,11 @@
       <dd>is <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral</code>.</dd>
 
       <dt id="XMLLiteral-lexical-space">The <a>lexical space</a></dt>
-      <dd>is the set of all strings which are well-balanced, self-contained
-        <a data-cite="XML10#NT-content">XML content</a>
-        [[XML10]]; and for which embedding between an arbitrary
-        XML start tag and an end tag yields a document conforming to
-       [[[XML-NAMES]]] [[XML-NAMES]].</dd>
+      <dd>is the set of all <a>strings</a> which are well-balanced,
+        self-contained <a data-cite="XML11#NT-content">XML content</a> [[XML11]];
+        and for which embedding between an arbitrary
+        XML start tag and an end tag yields
+        a document conforming to [[[XML-NAMES]]] [[XML-NAMES]].</dd>
 
       <dt id="XMLLiteral-value-space">The <a>value space</a></dt>
         <dd>is a set of DOM
@@ -1370,105 +1494,80 @@
       in RDF/XML [[RDF12-XML]].</p>
   </section>
 
-  <section id="section-json" class="informative">
+  <section id="section-json">
     <h3>The <code>rdf:JSON</code> Datatype</h3>
 
-    <p class="issue" data-number="14">
-      The <code><dfn>rdf:JSON</dfn></code> datatype was originally defined in
-      <a data-cite="?JSON-LD11#the-rdf-json-datatype">Section 10.2 The `rdf:JSON` Datatype</a>
-      in [[?JSON-LD11]].
-    </p>
+    <p>RDF provides for JSON content as a possible <a>literal value</a>.
+      This includes allowing markup in literal values. Such content is indicated in an
+      <a>RDF graph</a> as a <a>literal</a> whose <a>datatype</a> is set
+      to <code><dfn>rdf:JSON</dfn></code>.</p>
+
+    <p>The <code>rdf:JSON</code> datatype is defined as follows:</p>
+
+    <dl>
+      <dt id="JSON-uri">The IRI denoting this <a>datatype</a></dt>
+      <dd>is <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#JSON</code>.</dd>
+
+      <dt id="JSON-lexical-space">The <a>lexical space</a></dt>
+      <dd>is the set of all <a data-lt="string">RDF strings</a> that conform to the
+        <a data-cite="RFC8259#section-2">JSON Grammar</a> as described in
+        <a data-cite="RFC8259#section-2">Section&nbsp;2 JSON Grammar</a> of
+        [[RFC8259]].</dd>
+
+      <dt id="JSON-value-space">The <a>value space</a></dt>
+      <dd>
+        is the set of all <a data-lt="string">RDF strings</a> that conform to the
+        <a data-cite="RFC8259#section-2">JSON Grammar</a> as described in
+        <a data-cite="RFC8259#section-2">Section&nbsp;2 JSON Grammar</a> of
+        [[RFC8259]], and furthermore comply with the following constraints:
+        <ul>
+          <li>They MUST NOT contain any unnecessary whitespace.</li>
+          <li>Keys in objects MUST be ordered lexicographically.</li>
+          <li>Native Numeric values MUST be serialized according to
+            <a data-cite="ECMASCRIPT#sec-tostring-applied-to-the-number-type">Section&nbsp;7.1.12.1</a>
+            of [[ECMASCRIPT]].</li>
+          <li>Strings MUST be serialized with Unicode code points from <code class="codepoint">U+0000</code>
+            through <code class="codepoint">U+001F</code> using lower case hexadecimal Unicode notation
+            (`\uhhhh`) except for the set of predefined JSON control characters —
+            `U+0008`, `U+0009`, `U+000A`, `U+000C`, and `U+000D` — which SHOULD be
+            serialized as `\b`, `\t`, `\n`, `\f`, and `\r`, respectively. All
+            other Unicode characters SHOULD be serialized "as is", except
+            `U+005C` (`\`) and `U+0022` (`"`), which SHOULD be serialized as
+            `\\` and `\"`, respectively.</li>
+        </ul>
+        <div class="issue">The JSON Canonicalization Scheme (JCS) [[RFC8785]]
+          is an emerging standard for JSON canonicalization. This <code>rdf:JSON</code> specification
+          will likely be updated to require such a canonical representation.
+          Users are cautioned against depending on the lexical representation of
+          literals with the <code>rdf:JSON</code> datatype as RDF literals,
+          as the specifics of serialization may change in a future revision of
+          this document.</div>
+        Despite being defined as a set of strings, this value space is
+        considered distinct from the value space of <code>xsd:string</code>,
+        in order to avoid side effects with existing specifications.
+      </dd>
+ 
+      <dt id="JSON-mapping">The <a>lexical-to-value mapping</a></dt>
+      <dd>
+        maps every element of the lexical space to the result of
+         <ol>
+          <li>parsing it into an internal representation consistent with the
+            [[ECMASCRIPT]] representation created by using the <code>JSON.parse</code>
+            function as defined in <a data-cite="ECMASCRIPT#sec-json-object">Section&nbsp;24.5 The JSON Object</a>
+            of [[ECMASCRIPT]],</li>
+          <li>then serializing it into the JSON format [[RFC8259]] in compliance
+            with the constraints of the value space described above.</li>
+        </ol>
+      </dd>
+
+      <dt id="JSON-canonical">The canonical mapping</dt>
+      <dd>maps any element of the value space to the identical string in the
+        lexical space.</dd>
+    </dl>
   </section>
-</section>
-
-<section id="section-fragID" class="informative">
-  <h2>Fragment Identifiers</h2>
-
-  <p>RDF uses <a>IRIs</a>, which may include
-    <span id="dfn-fragment-identifiers"><!-- obsolete term--></span>
-    <dfn data-lt="fragment identifier" class="no-export">fragment identifiers</dfn>,
-    as resource identifiers.
-    The semantics of fragment identifiers is
-    <a data-cite="rfc3986#section-3.5">defined in
-    RFC 3986</a> [[RFC3986]]: They identify a secondary resource
-    that is usually a part of, view of, defined in, or described in
-    the primary resource, and the precise semantics depend on the set
-    of representations that might result from a retrieval action
-    on the primary resource.</p>
-
-  <p>This section discusses the handling of fragment identifiers
-    in representations that encode <a>RDF graphs</a>.</p>
-
-  <p>In RDF-bearing representations of a primary resource
-    <code>&lt;foo&gt;</code>,
-    the secondary resource identified by a fragment <code>bar</code>
-    is the <a>resource</a> <a>denoted</a> by the
-    full <a>IRI</a> <code>&lt;foo#bar&gt;</code> in the <a>RDF graph</a>.
-    Since IRIs in RDF graphs can denote anything, this can be
-    something external to the representation, or even external
-    to the web.</p>
-
-  <p>In this way, the RDF-bearing representation acts as an intermediary
-    between the web-accessible primary resource, and some set of possibly
-    non-web or abstract entities that the <a>RDF graph</a> may describe.</p>
-
-  <p>In cases where other specifications constrain the semantics of
-    <a>fragment identifiers</a> in RDF-bearing representations, the encoded
-    <a>RDF graph</a> should use fragment identifiers in a way that is consistent
-    with these constraints. For example, in an HTML+RDFa document [[HTML-RDFA]],
-    the fragment <code>chapter1</code> may identify a document section
-    via the semantics of HTML's <code>@name</code> or <code>@id</code>
-    attributes. The <a>IRI</a> <code>&lt;#chapter1&gt;</code> should
-    then be taken to <a>denote</a> that same section in any RDFa-encoded
-    <a>triples</a> within the same document.
-    Similarly, fragment identifiers should be used consistently in resources
-    with multiple representations that are made available via
-    <a data-cite="webarch/#frag-coneg">content negotiation</a>
-    [[WEBARCH]]. For example, if the fragment <code>chapter1</code> identifies a
-    document section in an HTML representation of the primary resource, then the
-    <a>IRI</a> <code>&lt;#chapter1&gt;</code> should be taken to
-    <a>denote</a> that same section in all RDF-bearing representations of the
-    same primary resource.</p>
-</section>
-
-<section id="section-generalized-rdf" class="informative">
-  <h2>Generalized RDF Triples, Graphs, and Datasets</h2>
-
-  <p>It is sometimes convenient to loosen the requirements
-    on <a>RDF triple</a>s.  For example, the completeness
-    of the RDFS entailment rules is easier to show with a
-    generalization of RDF triples.</p>
-
-  <p>A <dfn class="export">generalized RDF triple</dfn> is a triple having a subject,
-    a predicate, and object, where each can be an <a>IRI</a>, a
-    <a>blank node</a> or a
-    <a>literal</a>. A
-    <dfn class="export">generalized RDF graph</dfn>
-    is a set of generalized RDF triples. A
-    <dfn class="export">generalized RDF dataset</dfn>
-    comprises a distinguished generalized RDF graph, and zero
-    or more pairs each associating an IRI, a blank node or a literal
-    to a generalized RDF graph.</p>
-
-
-  <p>Generalized RDF triples, graphs, and datasets differ
-    from normative RDF <a>triples</a>,
-    <a data-lt="RDF graph">graphs</a>, and
-    <a data-lt="RDF dataset">datasets</a> only
-    by allowing <a>IRIs</a>,
-    <a>blank nodes</a> and
-    <a>literals</a> to appear
-    in any position, i.e., as subject, predicate, object or graph names.</p>
-
-  <p class="note" id="note-generalized-rdf"> Any users of
-    generalized RDF triples, graphs or datasets need to be
-    aware that these notions are non-standard extensions of
-    RDF and their use may cause interoperability problems.
-    There is no requirement on the part of any RDF tool to
-    accept, process, or produce anything beyond standard RDF
-    triples, graphs, and datasets. </p>
 
 </section>
+
 
 <section id="privacy" class="appendix informative">
   <h2>Privacy Considerations</h2>
@@ -1509,7 +1608,7 @@
     Security/privacy protocols must be imposed which reflect the sensitivity of the embedded information.</p>
 
   <p>RDF can express data which is presented to the user, such as RDF Schema labels.
-    Applications rendering strings retrieved from untrusted RDF documents,
+    Applications rendering <a>strings</a> retrieved from untrusted RDF documents,
     or using unescaped characters,
     SHOULD use warnings and other appropriate means to limit the possibility
     that malignant strings might be used to mislead the reader.
@@ -1541,7 +1640,7 @@
 
 <section id="internationalization" class="appendix informative">
   <h2>Internationalization Considerations</h2>
-  <p>Unicode provides a mechanism for signaling direction within a string
+  <p>Unicode [[UNICODE]] provides a mechanism for signaling direction within a string
     (see [[[UAX9]]] [[UAX9]]).
     RDF provides a mechanism for specifying the <a>base direction</a>
     of a <a>directional language-tagged string</a>
@@ -1694,8 +1793,24 @@
     <li>Added the <a>base direction</a> element as part of 
       a <a>literal</a>,
       and a description of its use in <a href="#section-text-direction" class="sectionRef"></a>.</li>
+    <li>Improved the use of IRI terminology,
+      and added <a href="#iri-abnf" class="sectionRef"></a>.
+      This improves the language using <a>relative IRI references</a>
+      and clarifies that, in the abstract syntax, IRIs are resolved,
+      avoiding the incorrect use of "absolute IRI".</li>
     <li>Changed reference from DOM4, which was not a recommendation at the time, to [[DOM]],
       making the <a>rdf:HTML</a> and <a>rdf:XMLLiteral</a> datatypes normative.</li>
+    <li>Added <a href="#section-additional-datatypes" class="sectionRef"></a>
+      and moved the sections about the <a>rdf:HTML</a> and <a>rdf:XMLLiteral</a>
+      datatypes to this appendix.</li>
+    <li>Added the <a>rdf:JSON</a> datatype, the definition of which is adopted
+      from <a data-cite="?JSON-LD11#the-rdf-json-datatype">Section&nbsp;10.2 The `rdf:JSON` Datatype</a>
+      in [[?JSON-LD11]].</li>
+    <li>Clarify Unicode terminology,
+      using <a data-cite="i18n-glossary#dfn-code-point" class="lint-ignore">Unicode code points</a>,
+      and restriction to the XML <a data-cite="XML11#charsets">Char</a> production.
+      Also removes obsolete recommendations for the use of Normalization Form C in literals.
+      Adds a definition of <a>string</a> that can be used in other RDF documents.</li>
   </ul>
 
   <p class="note">A detailed overview of the differences between RDF versions&nbsp;1.0
