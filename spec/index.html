@@ -504,7 +504,9 @@
       Within this, and related specifications, the term <dfn id="dfn-rdf-string">string</dfn>
       is used to describe an ordered sequence of zero or more <a data-lt="code point" class="lint-ignore">Unicode code points</a>
       in any <a data-cite="i18n-glossary#dfn-character-encoding">character encoding</a>.
-      However, note that most <a>concrete RDF syntaxes</a>
+Note that most <a>concrete RDF syntaxes</a> require the use
+of the UTF-8 character encoding [[!RFC3629]], 
+which also prevents the use of certain non-character values.
       are restricted to the UTF-8 character encoding [[!RFC3629]].
       Strings are further restricted to those matching the
       <a data-cite="XML10#charsets">Char</a> production [[XML10]].</p>
@@ -1083,7 +1085,7 @@
       <caption>A list of the RDF-compatible XSD types, with short descriptions</caption>
       <tr><th></th><th>Datatype</th><th>Value space (informative)</th></tr>
 
-      <tr><th rowspan="4">Core types</th><td><a data-cite="xmlschema11-2#string"><code>xsd:string</code></a></td><td>Character strings (but not all Unicode <a>strings</a> [[UNICODE]])</td></tr>
+      <tr><th rowspan="4">Core types</th><td><a data-cite="xmlschema11-2#string"><code>xsd:string</code></a></td><td>Character strings (see <a>string</a>)</td></tr>
       <tr><td><a data-cite="xmlschema11-2#boolean"><code>xsd:boolean</code></a></td><td>true, false</td></tr>
       <tr><td><a data-cite="xmlschema11-2#decimal"><code>xsd:decimal</code></a></td><td>Arbitrary-precision decimal numbers</td></tr>
       <tr><td><a data-cite="xmlschema11-2#integer"><code>xsd:integer</code></a></td><td>Arbitrary-size integer numbers</td></tr>
