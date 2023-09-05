@@ -696,7 +696,8 @@ which also prevents the use of certain non-character values.
     <ul>
       <li>a <dfn>lexical form</dfn> consisting of a sequence of
         <a data-lt="code point" class="lint-ignore">Unicode code points</a> [[!UNICODE]]
-        matching the <a data-cite="XML10#charsets">Char</a> production [[XML10]].</li>
+        matching the <a data-cite="XML11#charsets">Char</a> production [[XML11]].</li>
+       Because RDF lexical forms match the Char production of XML they do not contain Unicode surrogate code points.
       <li>a <dfn>datatype IRI</dfn>, being an <a>IRI</a>
         identifying a datatype that determines how the lexical form maps
         to a <a>literal value</a>, and</li>
