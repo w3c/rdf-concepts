@@ -506,15 +506,15 @@
       in any <a data-cite="i18n-glossary#dfn-character-encoding">character encoding</a>.
       Note that most <a>concrete RDF syntaxes</a> require the use
       of the UTF-8 character encoding [[!RFC3629]], 
-      which also prevents the use of certain non-character values.
+      which requires that certain non-character values be expressed
+      using the `\u0000` or `\U00000000` forms.
       are restricted to the UTF-8 character encoding [[!RFC3629]].
-      Strings are further restricted to those matching the
-      <a data-cite="XML11#charsets">Char</a> production [[XML11]].</p>
+</p>
 
     <p>A string is identical to another string if it consists of the same sequence of code points.
       An implementation MAY determine string equality by comparing the <a data-cite="i18n-glossary#dfn-code-unit">code units</a> of two strings
       using the same <a data-cite="i18n-glossary#dfn-character-encoding">Unicode character encoding</a> form
-      (UTF-8 or UTF-16) without decoding the string into a <a data-cite="i18n-glossary#dfn-scalar-value">scalar value</a> sequence.</p>
+      (UTF-8 or UTF-16) without decoding the string into a <a data-lt="code point" class="lint-ignore">Unicode code point</a> sequence.</p>
   </section>
 </section>
 
