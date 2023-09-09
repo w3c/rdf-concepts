@@ -197,7 +197,8 @@
       </figcaption>
     </figure>
 
-    <p>A variation on the graph shown in <a href="#fig-quoted-triple"></a> can be described where the <a>quoted triple</a> is also <a data-lt="asserted triple">asserted</a>.</p>
+    <p>A variation on the graph shown in <a href="#fig-quoted-triple"></a> can be described
+      where the <a>quoted triple</a> is also <a data-lt="asserted triple">asserted</a>.</p>
 
     <figure id="fig-quoted-asserted-triple">
       <a href="quoted-asserted-triple.svg">
@@ -208,7 +209,8 @@
              aria-describedby="fig-quoted-asserted-triple-alt"/>
       </a>
       <figcaption id="fig-quoted-asserted-triple-alt">
-        An RDF graph containing two triples where one of them contains the other as the subject; hence, that other triple is both quoted and asserted.
+        An RDF graph containing two triples where one of them contains the other as the subject;
+        hence, that other triple is both quoted and asserted.
       </figcaption>
     </figure>
 
@@ -503,7 +505,11 @@
     <p>RDF uses Unicode [[Unicode]] as the fundamental representation for string values.
       Within this, and related specifications, the term <dfn id="dfn-rdf-string">string</dfn>,
       or <a data-lt="string">RDF string</a>,
-      `is used to describe an ordered` sequence of zero or more <a data-lt="code point" class="lint-ignore">Unicode code points</a> which are <a data-cite="i18n-glossary#dfn-scalar-value" class="lint-ignore">Unicode scalar values</a>. Unicode scalar values do not include the <a data-cite="i18n-glossary#dfn-surrogate"  class="lint-ignore">surrogate code points</a>.
+      `is used to describe an ordered` sequence of zero or more
+      <a data-lt="code point" class="lint-ignore">Unicode code points</a>
+      which are <a data-cite="i18n-glossary#dfn-scalar-value" class="lint-ignore">Unicode scalar values</a>.
+      Unicode scalar values do not include the
+      <a data-cite="i18n-glossary#dfn-surrogate" class="lint-ignore">surrogate code points</a>.
       Note that most <a>concrete RDF syntaxes</a> require the use
       of the UTF-8 character encoding [[!RFC3629]], 
       which requires that certain non-character values be expressed
@@ -511,9 +517,11 @@
 </p>
 
     <p>A string is identical to another string if it consists of the same sequence of code points.
-      An implementation MAY determine string equality by comparing the <a data-cite="i18n-glossary#dfn-code-unit">code units</a> of two strings
+      An implementation MAY determine string equality by comparing the
+      <a data-cite="i18n-glossary#dfn-code-unit">code units</a> of two strings
       that use the same <a data-cite="i18n-glossary#dfn-character-encoding">Unicode character encoding</a>
-      (UTF-8 or UTF-16) without decoding the string into a <a data-lt="code point" class="lint-ignore">Unicode code point</a> sequence.</p>
+      (UTF-8 or UTF-16) without decoding the string into a
+      <a data-lt="code point" class="lint-ignore">Unicode code point</a> sequence.</p>
   </section>
 </section>
 
@@ -695,7 +703,9 @@
     <ul>
       <li>a <dfn>lexical form</dfn> consisting of a sequence of
         <a data-lt="code point" class="lint-ignore">Unicode code points</a> [[!UNICODE]]
-        which are <a data-cite="i18n-glossary#dfn-scalar-value">Unicode scalar values</a>, and therefore do not contain <a data-cite="i18n-glossary#dfn-surrogate"  class="lint-ignore">Unicode surrogate code points</a>.</li>
+        which are <a data-cite="i18n-glossary#dfn-scalar-value">Unicode scalar values</a>,
+        and therefore do not contain
+        <a data-cite="i18n-glossary#dfn-surrogate" class="lint-ignore">Unicode surrogate code points</a>.</li>
       <li>a <dfn>datatype IRI</dfn>, being an <a>IRI</a>
         identifying a datatype that determines how the lexical form maps
         to a <a>literal value</a>, and</li>
@@ -852,8 +862,9 @@
 
     <p id="section-graph-equality">Two
       <a>RDF graphs</a> <var>G</var> and <var>G'</var> are
-      <dfn data-lt="graph isomorphism|isomorphic" data-lt-noDefault class="export">isomorphic</dfn> (that is, they have an identical
-      form) if there is a bijection <var>M</var> between the sets of nodes of the two
+      <dfn data-lt="graph isomorphism|isomorphic" data-lt-noDefault class="export">isomorphic</dfn>
+      (that is, they have an identical form)
+      if there is a bijection <var>M</var> between the sets of nodes of the two
       graphs, such that:</p>
 
     <ol>
