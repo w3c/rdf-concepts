@@ -1199,7 +1199,7 @@
       MUST refer to the RDF-compatible XSD type named <code>xsd:xxx</code> for
       every XSD type listed in <a href="#xsd-datatypes">section 5.1</a>.</p>
 
-    <p>The following three datatype IRIs are defined in this section:</p>
+    <p>The following three datatype IRIs are defined in Appendix&nbsp;<a href="#section-additional-datatypes" class="sectionRef"></a>:</p>
 
     <ul>
       <li>The IRI <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral</code>
@@ -1237,6 +1237,101 @@
       is suggested in [[SWBP-XSCH-DATATYPES]]. RDF implementations
       are not required to support either of these facilities.</p>
   </section>
+</section>
+
+<section id="section-fragID" class="informative">
+  <h2>Fragment Identifiers</h2>
+
+  <p>RDF uses <a>IRIs</a>, which may include
+    <span id="dfn-fragment-identifiers"><!-- obsolete term--></span>
+    <dfn data-lt="fragment identifier" class="no-export">fragment identifiers</dfn>,
+    as resource identifiers.
+    The semantics of fragment identifiers is
+    <a data-cite="rfc3986#section-3.5">defined in
+    RFC 3986</a> [[RFC3986]]: They identify a secondary resource
+    that is usually a part of, view of, defined in, or described in
+    the primary resource, and the precise semantics depend on the set
+    of representations that might result from a retrieval action
+    on the primary resource.</p>
+
+  <p>This section discusses the handling of fragment identifiers
+    in representations that encode <a>RDF graphs</a>.</p>
+
+  <p>In RDF-bearing representations of a primary resource
+    <code>&lt;foo&gt;</code>,
+    the secondary resource identified by a fragment <code>bar</code>
+    is the <a>resource</a> <a>denoted</a> by the
+    full <a>IRI</a> <code>&lt;foo#bar&gt;</code> in the <a>RDF graph</a>.
+    Since IRIs in RDF graphs can denote anything, this can be
+    something external to the representation, or even external
+    to the web.</p>
+
+  <p>In this way, the RDF-bearing representation acts as an intermediary
+    between the web-accessible primary resource, and some set of possibly
+    non-web or abstract entities that the <a>RDF graph</a> may describe.</p>
+
+  <p>In cases where other specifications constrain the semantics of
+    <a>fragment identifiers</a> in RDF-bearing representations, the encoded
+    <a>RDF graph</a> should use fragment identifiers in a way that is consistent
+    with these constraints. For example, in an HTML+RDFa document [[HTML-RDFA]],
+    the fragment <code>chapter1</code> may identify a document section
+    via the semantics of HTML's <code>@name</code> or <code>@id</code>
+    attributes. The <a>IRI</a> <code>&lt;#chapter1&gt;</code> should
+    then be taken to <a>denote</a> that same section in any RDFa-encoded
+    <a>triples</a> within the same document.
+    Similarly, fragment identifiers should be used consistently in resources
+    with multiple representations that are made available via
+    <a data-cite="webarch/#frag-coneg">content negotiation</a>
+    [[WEBARCH]]. For example, if the fragment <code>chapter1</code> identifies a
+    document section in an HTML representation of the primary resource, then the
+    <a>IRI</a> <code>&lt;#chapter1&gt;</code> should be taken to
+    <a>denote</a> that same section in all RDF-bearing representations of the
+    same primary resource.</p>
+</section>
+
+<section id="section-generalized-rdf" class="informative">
+  <h2>Generalized RDF Triples, Graphs, and Datasets</h2>
+
+  <p>It is sometimes convenient to loosen the requirements
+    on <a>RDF triple</a>s.  For example, the completeness
+    of the RDFS entailment rules is easier to show with a
+    generalization of RDF triples.</p>
+
+  <p>A <dfn class="export">generalized RDF triple</dfn> is a triple having a subject,
+    a predicate, and object, where each can be an <a>IRI</a>, a
+    <a>blank node</a> or a
+    <a>literal</a>. A
+    <dfn class="export">generalized RDF graph</dfn>
+    is a set of generalized RDF triples. A
+    <dfn class="export">generalized RDF dataset</dfn>
+    comprises a distinguished generalized RDF graph, and zero
+    or more pairs each associating an IRI, a blank node or a literal
+    to a generalized RDF graph.</p>
+
+
+  <p>Generalized RDF triples, graphs, and datasets differ
+    from normative RDF <a>triples</a>,
+    <a data-lt="RDF graph">graphs</a>, and
+    <a data-lt="RDF dataset">datasets</a> only
+    by allowing <a>IRIs</a>,
+    <a>blank nodes</a> and
+    <a>literals</a> to appear
+    in any position, i.e., as subject, predicate, object or graph names.</p>
+
+  <p class="note" id="note-generalized-rdf"> Any users of
+    generalized RDF triples, graphs or datasets need to be
+    aware that these notions are non-standard extensions of
+    RDF and their use may cause interoperability problems.
+    There is no requirement on the part of any RDF tool to
+    accept, process, or produce anything beyond standard RDF
+    triples, graphs, and datasets. </p>
+
+</section>
+
+
+<section id="section-additional-datatypes" class="appendix">
+  <h2>Additional Datatypes</h2>
+  <p>This section defines additional <a>datatypes</a> that RDF processors MAY support.</p>
 
   <section id="section-html">
     <h3>The <code>rdf:HTML</code> Datatype</h3>
@@ -1359,96 +1454,9 @@
       in [[?JSON-LD11]].
     </p>
   </section>
-</section>
-
-<section id="section-fragID" class="informative">
-  <h2>Fragment Identifiers</h2>
-
-  <p>RDF uses <a>IRIs</a>, which may include
-    <span id="dfn-fragment-identifiers"><!-- obsolete term--></span>
-    <dfn data-lt="fragment identifier" class="no-export">fragment identifiers</dfn>,
-    as resource identifiers.
-    The semantics of fragment identifiers is
-    <a data-cite="rfc3986#section-3.5">defined in
-    RFC 3986</a> [[RFC3986]]: They identify a secondary resource
-    that is usually a part of, view of, defined in, or described in
-    the primary resource, and the precise semantics depend on the set
-    of representations that might result from a retrieval action
-    on the primary resource.</p>
-
-  <p>This section discusses the handling of fragment identifiers
-    in representations that encode <a>RDF graphs</a>.</p>
-
-  <p>In RDF-bearing representations of a primary resource
-    <code>&lt;foo&gt;</code>,
-    the secondary resource identified by a fragment <code>bar</code>
-    is the <a>resource</a> <a>denoted</a> by the
-    full <a>IRI</a> <code>&lt;foo#bar&gt;</code> in the <a>RDF graph</a>.
-    Since IRIs in RDF graphs can denote anything, this can be
-    something external to the representation, or even external
-    to the web.</p>
-
-  <p>In this way, the RDF-bearing representation acts as an intermediary
-    between the web-accessible primary resource, and some set of possibly
-    non-web or abstract entities that the <a>RDF graph</a> may describe.</p>
-
-  <p>In cases where other specifications constrain the semantics of
-    <a>fragment identifiers</a> in RDF-bearing representations, the encoded
-    <a>RDF graph</a> should use fragment identifiers in a way that is consistent
-    with these constraints. For example, in an HTML+RDFa document [[HTML-RDFA]],
-    the fragment <code>chapter1</code> may identify a document section
-    via the semantics of HTML's <code>@name</code> or <code>@id</code>
-    attributes. The <a>IRI</a> <code>&lt;#chapter1&gt;</code> should
-    then be taken to <a>denote</a> that same section in any RDFa-encoded
-    <a>triples</a> within the same document.
-    Similarly, fragment identifiers should be used consistently in resources
-    with multiple representations that are made available via
-    <a data-cite="webarch/#frag-coneg">content negotiation</a>
-    [[WEBARCH]]. For example, if the fragment <code>chapter1</code> identifies a
-    document section in an HTML representation of the primary resource, then the
-    <a>IRI</a> <code>&lt;#chapter1&gt;</code> should be taken to
-    <a>denote</a> that same section in all RDF-bearing representations of the
-    same primary resource.</p>
-</section>
-
-<section id="section-generalized-rdf" class="informative">
-  <h2>Generalized RDF Triples, Graphs, and Datasets</h2>
-
-  <p>It is sometimes convenient to loosen the requirements
-    on <a>RDF triple</a>s.  For example, the completeness
-    of the RDFS entailment rules is easier to show with a
-    generalization of RDF triples.</p>
-
-  <p>A <dfn class="export">generalized RDF triple</dfn> is a triple having a subject,
-    a predicate, and object, where each can be an <a>IRI</a>, a
-    <a>blank node</a> or a
-    <a>literal</a>. A
-    <dfn class="export">generalized RDF graph</dfn>
-    is a set of generalized RDF triples. A
-    <dfn class="export">generalized RDF dataset</dfn>
-    comprises a distinguished generalized RDF graph, and zero
-    or more pairs each associating an IRI, a blank node or a literal
-    to a generalized RDF graph.</p>
-
-
-  <p>Generalized RDF triples, graphs, and datasets differ
-    from normative RDF <a>triples</a>,
-    <a data-lt="RDF graph">graphs</a>, and
-    <a data-lt="RDF dataset">datasets</a> only
-    by allowing <a>IRIs</a>,
-    <a>blank nodes</a> and
-    <a>literals</a> to appear
-    in any position, i.e., as subject, predicate, object or graph names.</p>
-
-  <p class="note" id="note-generalized-rdf"> Any users of
-    generalized RDF triples, graphs or datasets need to be
-    aware that these notions are non-standard extensions of
-    RDF and their use may cause interoperability problems.
-    There is no requirement on the part of any RDF tool to
-    accept, process, or produce anything beyond standard RDF
-    triples, graphs, and datasets. </p>
 
 </section>
+
 
 <section id="privacy" class="appendix informative">
   <h2>Privacy Considerations</h2>
@@ -1681,6 +1689,9 @@
       avoiding the incorrect use of "absolute IRI".</li>
     <li>Changed reference from DOM4, which was not a recommendation at the time, to [[DOM]],
       making the <a>rdf:HTML</a> and <a>rdf:XMLLiteral</a> datatypes normative.</li>
+    <li>Added <a href="#section-additional-datatypes" class="sectionRef"></a>
+      and moved the sections about the <a>rdf:HTML</a> and <a>rdf:XMLLiteral</a>
+      datatypes to this appendix.</li>
     <li>Clarify Unicode terminology,
       using <a data-lt="code point" class="lint-ignore">Unicode code points</a>,
       and restriction to the XML <a data-cite="XML11#charsets">Char</a> production.
