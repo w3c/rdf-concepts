@@ -1445,14 +1445,76 @@
       in RDF/XML [[RDF12-XML]].</p>
   </section>
 
-  <section id="section-json" class="informative">
+  <section id="section-json">
     <h3>The <code>rdf:JSON</code> Datatype</h3>
 
-    <p class="issue" data-number="14">
-      The <code><dfn>rdf:JSON</dfn></code> datatype was originally defined in
-      <a data-cite="?JSON-LD11#the-rdf-json-datatype">Section 10.2 The `rdf:JSON` Datatype</a>
-      in [[?JSON-LD11]].
-    </p>
+    <p>RDF provides for JSON content as a possible <a>literal value</a>.
+      This allows markup in literal values. Such content is indicated in an
+      <a>RDF graph</a> using a <a>literal</a> whose <a>datatype</a> is set
+      to <code><dfn>rdf:JSON</dfn></code>.</p>
+
+    <p>The <code>rdf:JSON</code> datatype is defined as follows:</p>
+
+    <dl>
+      <dt>The IRI denoting this <a>datatype</a></dt>
+      <dd>is <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#JSON</code>.</dd>
+
+      <dt>The <a>lexical space</a></dt>
+      <dd>is the set of all UNICODE [[UNICODE]] strings that conform to the
+        <a data-cite="RFC4627#section-2">JSON Grammar</a> as described in
+        <a data-cite="RFC8259#section-2">Section&nbsp;2 JSON Grammar</a> of
+        [[RFC8259]].</dd>
+
+      <dt id="XMLLiteral-value-space">The <a>value space</a></dt>
+      <dd>
+        is the set of all UNICODE [[UNICODE]] strings that conform to the
+        <a data-cite="RFC4627#section-2">JSON Grammar</a> as described in
+        <a data-cite="RFC8259#section-2">Section&nbsp;2 JSON Grammar</a> of
+        [[RFC8259]], and furthermore comply with the following constraints:
+        <ul>
+          <li>It MUST NOT contain any unnecessary whitespace,</li>
+          <li>Keys in objects MUST be ordered lexicographically,</li>
+          <li>Native Numeric values MUST be serialized according to
+            <a data-cite="ECMASCRIPT#sec-tostring-applied-to-the-number-type">Section&nbsp;7.1.12.1</a>
+            of [[ECMASCRIPT]],</li>
+          <li>Strings MUST be serialized with Unicode codepoints from `U+0000`
+            through `U+001F` using lower case hexadecimal Unicode notation
+            (`\uhhhh`) unless in the set of predefined JSON control characters
+            `U+0008`, `U+0009`, `U+000A`, `U+000C` or `U+000D` which SHOULD be
+            serialized as `\b`, `\t`, `\n`, `\f` and `\r`, respectively. All
+            other Unicode characters SHOULD be serialized "as is", other than
+            `U+005C` (`\`) and `U+0022` (`"`) which SHOULD be serialized as
+            `\\` and `\"`, respectively.</li>
+        </ul>
+        <div class="issue">The JSON Canonicalization Scheme (JCS) [[RFC8785]]
+          is an emerging standard for JSON canonicalization. This specification
+          will likely be updated to require such a canonical representation.
+          Users are cautioned from depending on the lexical representation of
+          literals with the <code>rdf:JSON</code> datatype as an RDF literal,
+          as the specifics of serialization may change in a future revision of
+          this document.</div>
+        Despite being defined as a set of strings, this value space is
+        considered distinct from the value space of <code>xsd:string</code>,
+        in order to avoid side effects with existing specifications.
+      </dd>
+
+      <dt>The <a>lexical-to-value mapping</a></dt>
+      <dd>
+        maps every element of the lexical space to the result of
+        <ol>
+          <li>parsing it into an internal representation consistent with the
+            [[ECMASCRIPT]] representation created by using the <code>JSON.parse</code>
+            function as defined in <a data-cite="ECMASCRIPT#sec-json-object">Section&nbsp;24.5 The JSON Object</a>
+            of [[ECMASCRIPT]],</li>
+          <li>then serializing it in the JSON format [[RFC8259]] in compliance
+            with the constraints of the value space described above.</li>
+        </ol>
+      </dd>
+
+      <dt id="XMLLiteral-canonical">The canonical mapping</dt>
+      <dd>maps any element of the value space to the identical string in the
+        lexical space.</dd>
+    </dl>
   </section>
 
 </section>
@@ -1692,6 +1754,9 @@
     <li>Added <a href="#section-additional-datatypes" class="sectionRef"></a>
       and moved the sections about the <a>rdf:HTML</a> and <a>rdf:XMLLiteral</a>
       datatypes to this appendix.</li>
+    <li>Added the <a>rdf:JSON</a> datatype, the definition of which is adopted
+      from <a data-cite="?JSON-LD11#the-rdf-json-datatype">Section&nbsp;10.2 The `rdf:JSON` Datatype</a>
+      in [[?JSON-LD11]].</li>
     <li>Clarify Unicode terminology,
       using <a data-lt="code point" class="lint-ignore">Unicode code points</a>,
       and restriction to the XML <a data-cite="XML11#charsets">Char</a> production.
