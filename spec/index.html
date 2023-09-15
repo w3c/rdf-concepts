@@ -1449,8 +1449,8 @@
     <h3>The <code>rdf:JSON</code> Datatype</h3>
 
     <p>RDF provides for JSON content as a possible <a>literal value</a>.
-      This allows markup in literal values. Such content is indicated in an
-      <a>RDF graph</a> using a <a>literal</a> whose <a>datatype</a> is set
+      This includes allowing markup in literal values. Such content is indicated in an
+      <a>RDF graph</a> as a <a>literal</a> whose <a>datatype</a> is set
       to <code><dfn>rdf:JSON</dfn></code>.</p>
 
     <p>The <code>rdf:JSON</code> datatype is defined as follows:</p>
@@ -1472,25 +1472,25 @@
         <a data-cite="RFC8259#section-2">Section&nbsp;2 JSON Grammar</a> of
         [[RFC8259]], and furthermore comply with the following constraints:
         <ul>
-          <li>It MUST NOT contain any unnecessary whitespace,</li>
-          <li>Keys in objects MUST be ordered lexicographically,</li>
+          <li>They MUST NOT contain any unnecessary whitespace.</li>
+          <li>Keys in objects MUST be ordered lexicographically.</li>
           <li>Native Numeric values MUST be serialized according to
             <a data-cite="ECMASCRIPT#sec-tostring-applied-to-the-number-type">Section&nbsp;7.1.12.1</a>
-            of [[ECMASCRIPT]],</li>
+            of [[ECMASCRIPT]].</li>
           <li>Strings MUST be serialized with Unicode codepoints from `U+0000`
             through `U+001F` using lower case hexadecimal Unicode notation
-            (`\uhhhh`) unless in the set of predefined JSON control characters
-            `U+0008`, `U+0009`, `U+000A`, `U+000C` or `U+000D` which SHOULD be
-            serialized as `\b`, `\t`, `\n`, `\f` and `\r`, respectively. All
-            other Unicode characters SHOULD be serialized "as is", other than
-            `U+005C` (`\`) and `U+0022` (`"`) which SHOULD be serialized as
+            (`\uhhhh`) except for the set of predefined JSON control characters —
+            `U+0008`, `U+0009`, `U+000A`, `U+000C`, and `U+000D` — which SHOULD be
+            serialized as `\b`, `\t`, `\n`, `\f`, and `\r`, respectively. All
+            other Unicode characters SHOULD be serialized "as is", except
+            `U+005C` (`\`) and `U+0022` (`"`), which SHOULD be serialized as
             `\\` and `\"`, respectively.</li>
         </ul>
         <div class="issue">The JSON Canonicalization Scheme (JCS) [[RFC8785]]
-          is an emerging standard for JSON canonicalization. This specification
+          is an emerging standard for JSON canonicalization. This <code>rdf:JSON</code> specification
           will likely be updated to require such a canonical representation.
-          Users are cautioned from depending on the lexical representation of
-          literals with the <code>rdf:JSON</code> datatype as an RDF literal,
+          Users are cautioned against depending on the lexical representation of
+          literals with the <code>rdf:JSON</code> datatype as RDF literals,
           as the specifics of serialization may change in a future revision of
           this document.</div>
         Despite being defined as a set of strings, this value space is
@@ -1506,7 +1506,7 @@
             [[ECMASCRIPT]] representation created by using the <code>JSON.parse</code>
             function as defined in <a data-cite="ECMASCRIPT#sec-json-object">Section&nbsp;24.5 The JSON Object</a>
             of [[ECMASCRIPT]],</li>
-          <li>then serializing it in the JSON format [[RFC8259]] in compliance
+          <li>then serializing it into the JSON format [[RFC8259]] in compliance
             with the constraints of the value space described above.</li>
         </ol>
       </dd>
