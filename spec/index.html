@@ -1003,7 +1003,7 @@
     to this abstraction MAY be used in RDF, even if not defined
     in terms of XML Schema. RDF re-uses many of the XML Schema
     built-in datatypes, and defines two additional non-normative datatypes,
-    <code><a>rdf:HTML</a></code> and <code><a>rdf:XMLLiteral</a></code>.
+    <code><a>rdf:JSON</a></code>, <code><a>rdf:HTML</a></code>, and <code><a>rdf:XMLLiteral</a></code>.
     The list of datatypes supported by an implementation is determined
     by its <a>recognized datatype IRIs</a>.</p>
 
@@ -1344,10 +1344,10 @@
     <p>The <code>rdf:HTML</code> datatype is defined as follows:</p>
 
     <dl>
-      <dt>The IRI denoting this datatype</dt>
+      <dt id="HTML-uri">The IRI denoting this datatype</dt>
       <dd>is <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#HTML</code>.</dd>
 
-      <dt>The value space</dt>
+      <dt id="HTML-value-space">The <a>value space</a></dt>
       <dd>is a set of DOM
         <a data-cite="DOM#interface-documentfragment"><code>DocumentFragment</code></a>
         nodes [[DOM]]. Two
@@ -1357,7 +1357,7 @@
         <code><var>node</var>.{{Node/isEqualNode(otherNode)}}</code>
         [[DOM]] returns <code>true</code>.</dd>
 
-      <dt>The lexical-to-value mapping</dt>
+      <dt id="HTML-mapping">The lexical-to-value mapping</dt>
       <dd>
         <p>Each member of the lexical space is associated with the result
           of applying the following algorithm:</p>
@@ -1456,16 +1456,16 @@
     <p>The <code>rdf:JSON</code> datatype is defined as follows:</p>
 
     <dl>
-      <dt>The IRI denoting this <a>datatype</a></dt>
+      <dt id="JSON-uri">The IRI denoting this <a>datatype</a></dt>
       <dd>is <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#JSON</code>.</dd>
 
-      <dt>The <a>lexical space</a></dt>
+      <dt id="JSON-lexical-space">The <a>lexical space</a></dt>
       <dd>is the set of all UNICODE [[UNICODE]] strings that conform to the
         <a data-cite="RFC4627#section-2">JSON Grammar</a> as described in
         <a data-cite="RFC8259#section-2">Section&nbsp;2 JSON Grammar</a> of
         [[RFC8259]].</dd>
 
-      <dt id="XMLLiteral-value-space">The <a>value space</a></dt>
+      <dt id="JSON-value-space">The <a>value space</a></dt>
       <dd>
         is the set of all UNICODE [[UNICODE]] strings that conform to the
         <a data-cite="RFC4627#section-2">JSON Grammar</a> as described in
@@ -1511,7 +1511,7 @@
         </ol>
       </dd>
 
-      <dt id="XMLLiteral-canonical">The canonical mapping</dt>
+      <dt id="JSON-canonical">The canonical mapping</dt>
       <dd>maps any element of the value space to the identical string in the
         lexical space.</dd>
     </dl>
