@@ -33,7 +33,7 @@
         { name: "Brian McBride" }
       ],
 
-      xref: ["i18n-glossary"],
+      xref: ["i18n-glossary", "infra"],
       github: "https://github.com/w3c/rdf-concepts/",
       group:           "rdf-star",
       doJsonLd:     true,
@@ -140,7 +140,7 @@
     <dfn data-lt="resource">resources</dfn>. Anything can be a resource,
     including physical things, documents, abstract concepts, numbers
     and strings; the term is synonymous with "entity" as it is used in
-    the RDF Semantics specification [[RDF12-SEMANTICS]].
+    [[[RDF12-SEMANTICS]]] [[RDF12-SEMANTICS]].
     The resource denoted by an IRI is called its <a>referent</a>, and the
     resource denoted by a literal is called its
     <a>literal value</a>. Literals have
@@ -407,7 +407,7 @@
       simple <dfn class="export">logical expression</dfn>, or claim about the world.
       An <a>RDF graph</a> is the conjunction (logical <em>AND</em>) of
       its triples.   The precise details of this meaning of RDF triples and graphs are
-      the subject of the RDF Semantics specification [[RDF12-SEMANTICS]], which yields the
+      the subject of [[[RDF12-SEMANTICS]]] [[RDF12-SEMANTICS]], which yields the
       following relationships between <a>RDF graph</a>s:</p>
 
     <dl>
@@ -506,7 +506,7 @@
       Within this, and related specifications, the term <dfn id="dfn-rdf-string">string</dfn>,
       or <a data-lt="string">RDF string</a>,
       is used to describe an ordered sequence of zero or more
-      <a data-lt="code point" class="lint-ignore">Unicode code points</a>
+      <a data-cite="i18n-glossary#dfn-code-point" class="lint-ignore">Unicode code points</a>
       which are <a data-cite="i18n-glossary#dfn-scalar-value" class="lint-ignore">Unicode scalar values</a>.
       Unicode scalar values do not include the
       <a data-cite="i18n-glossary#dfn-surrogate" class="lint-ignore">surrogate code points</a>.
@@ -520,7 +520,7 @@
       <a data-cite="i18n-glossary#dfn-code-unit">code units</a> of two strings
       that use the same <a data-cite="i18n-glossary#dfn-character-encoding">Unicode character encoding</a>
       (UTF-8 or UTF-16) without decoding the string into a
-      <a data-lt="code point" class="lint-ignore">Unicode code point</a> sequence.</p>
+      <a data-cite="i18n-glossary#dfn-code-point" class="lint-ignore">Unicode code point</a> sequence.</p>
   </section>
 </section>
 
@@ -615,7 +615,7 @@
 
     <p><dfn>IRI equality</dfn>:
       Two IRIs are the same if and only if they consist of the same sequence of
-      <a data-lt="code point" class="lint-ignore">Unicode code points</a>,
+      <a data-cite="i18n-glossary#dfn-code-point" class="lint-ignore">Unicode code points</a>,
       as in Simple String Comparison in
       <a data-cite="rfc3987#section-5.3.1">section 5.3.1</a> of [[!RFC3987]].
       (This is done in the abstract syntax, so the IRIs are resolved
@@ -701,7 +701,7 @@
 
     <ul>
       <li>a <dfn>lexical form</dfn> consisting of a sequence of
-        <a data-lt="code point" class="lint-ignore">Unicode code points</a> [[!UNICODE]]
+        <a data-cite="i18n-glossary#dfn-code-point" class="lint-ignore">Unicode code points</a> [[!UNICODE]]
         which are <a data-cite="i18n-glossary#dfn-scalar-value">Unicode scalar values</a>,
         and therefore do not contain
         <a data-cite="i18n-glossary#dfn-surrogate" class="lint-ignore">Unicode surrogate code points</a>.</li>
@@ -1002,7 +1002,7 @@
     [[!XMLSCHEMA11-2]]. Any datatype definition that conforms
     to this abstraction MAY be used in RDF, even if not defined
     in terms of XML Schema. RDF re-uses many of the XML Schema
-    built-in datatypes, and defines two additional non-normative datatypes,
+    built-in datatypes, and defines three additional datatypes,
     <code><a>rdf:JSON</a></code>, <code><a>rdf:HTML</a></code>, and <code><a>rdf:XMLLiteral</a></code>.
     The list of datatypes supported by an implementation is determined
     by its <a>recognized datatype IRIs</a>.</p>
@@ -1086,7 +1086,7 @@
       listed in the following table are the
       <dfn>RDF-compatible XSD types</dfn>. Their use is RECOMMENDED.</p>
 
-    <p>Readers might note that the xsd:hexBinary and xsd:base64Binary
+    <p>Readers might note that the `xsd:hexBinary` and `xsd:base64Binary`
       datatypes are the only safe datatypes for transferring binary
       information.</p>
 
@@ -1223,8 +1223,8 @@
 
     <p class="note">Semantic extensions of RDF might choose to
       recognize other datatype IRIs
-      and require them to refer to a fixed datatype.  See the RDF
-      Semantics specification [[RDF12-SEMANTICS]] for more information on
+      and require them to refer to a fixed datatype.
+      See [[[RDF12-SEMANTICS]]] [[RDF12-SEMANTICS]] for more information on
       semantic extensions.</p>
 
     <p class="note" id="note-custom-datatypes">The Web Ontology Language
@@ -1460,60 +1460,56 @@
       <dd>is <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#JSON</code>.</dd>
 
       <dt id="JSON-lexical-space">The <a>lexical space</a></dt>
-      <dd>is the set of all UNICODE [[UNICODE]] strings that conform to the
+      <dd>is the set of all <a>strings</a> that conform to the
         <a data-cite="RFC4627#section-2">JSON Grammar</a> as described in
         <a data-cite="RFC8259#section-2">Section&nbsp;2 JSON Grammar</a> of
         [[RFC8259]].</dd>
 
       <dt id="JSON-value-space">The <a>value space</a></dt>
       <dd>
-        is the set of all UNICODE [[UNICODE]] strings that conform to the
-        <a data-cite="RFC4627#section-2">JSON Grammar</a> as described in
-        <a data-cite="RFC8259#section-2">Section&nbsp;2 JSON Grammar</a> of
-        [[RFC8259]], and furthermore comply with the following constraints:
+        is the space defined by
+        the <a data-cite="JSON-LD11#dfn-internal-representation">JSON-LD internal representation</a> [[JSON-LD11]],
+        being the <a data-cite="RFC4627#section-3">JSON values</a> <a data-lt="list">array</a>,
+        <a>map</a>,
+        <a>string</a>,
+        <a data-cite="ECMASCRIPT#sec-terms-and-definitions-number-value">number</a>,
+        <a>boolean</a>, or
+        <a data-cite="INFRA#nulls">null</a>.
         <ul>
-          <li>They MUST NOT contain any unnecessary whitespace.</li>
-          <li>Keys in objects MUST be ordered lexicographically.</li>
-          <li>Native Numeric values MUST be serialized according to
-            <a data-cite="ECMASCRIPT#sec-tostring-applied-to-the-number-type">Section&nbsp;7.1.12.1</a>
-            of [[ECMASCRIPT]].</li>
-          <li>Strings MUST be serialized with Unicode codepoints from `U+0000`
-            through `U+001F` using lower case hexadecimal Unicode notation
-            (`\uhhhh`) except for the set of predefined JSON control characters —
-            `U+0008`, `U+0009`, `U+000A`, `U+000C`, and `U+000D` — which SHOULD be
-            serialized as `\b`, `\t`, `\n`, `\f`, and `\r`, respectively. All
-            other Unicode characters SHOULD be serialized "as is", except
-            `U+005C` (`\`) and `U+0022` (`"`), which SHOULD be serialized as
-            `\\` and `\"`, respectively.</li>
+          <li><a data-lt="list">Array</a> <a data-cite="INFRA#list-item">entries</a> may be
+            <a>map</a>,
+            <a>string</a>,
+            <a data-cite="ECMASCRIPT#sec-terms-and-definitions-number-value">number</a>,
+            <a>boolean</a>, or
+            <a data-cite="INFRA#nulls">null</a>.</li>
+          <li><a>Map</a> <a data-cite="INFRA#map-key">keys</a> are <a>strings</a> with
+            <a data-cite="INFRA#map-value">values</a> may be any of the above
+            <a data-cite="RFC4627#section-3">JSON values</a>.</li>
         </ul>
-        <div class="issue">The JSON Canonicalization Scheme (JCS) [[RFC8785]]
-          is an emerging standard for JSON canonicalization. This <code>rdf:JSON</code> specification
-          will likely be updated to require such a canonical representation.
-          Users are cautioned against depending on the lexical representation of
-          literals with the <code>rdf:JSON</code> datatype as RDF literals,
-          as the specifics of serialization may change in a future revision of
-          this document.</div>
-        Despite being defined as a set of strings, this value space is
-        considered distinct from the value space of <code>xsd:string</code>,
-        in order to avoid side effects with existing specifications.
+
+        Two <a data-cite="RFC4627#section-3">JSON values</a> are considered equal
+        if they are the same if they are the same <a>string</a>,
+        <a data-cite="ECMASCRIPT#sec-terms-and-definitions-number-value">number</a>,
+        <a>boolean</a>, or
+        <a data-cite="INFRA#nulls">null</a>,
+        if they are both an <a data-lt="list">array</a> with equal <a data-cite="INFRA#list-item">entries</a>, or
+        if they are both a <a>map</a> with equal <a data-cite="INFRA#map-entry">map entries</a>.
       </dd>
 
       <dt id="JSON-mapping">The <a>lexical-to-value mapping</a></dt>
       <dd>
-        maps every element of the lexical space to the result of
-        <ol>
-          <li>parsing it into an internal representation consistent with the
-            [[ECMASCRIPT]] representation created by using the <code>JSON.parse</code>
-            function as defined in <a data-cite="ECMASCRIPT#sec-json-object">Section&nbsp;24.5 The JSON Object</a>
-            of [[ECMASCRIPT]],</li>
-          <li>then serializing it into the JSON format [[RFC8259]] in compliance
-            with the constraints of the value space described above.</li>
-        </ol>
+        maps every element of the lexical space to the result of parsing it into an
+        <a data-cite="JSON-LD11#dfn-internal-representation">internal representation</a>
+        consistent with the [[ECMASCRIPT]] representation created by using the <code>JSON.parse</code>
+        function as defined in <a data-cite="ECMASCRIPT#sec-json-object">Section&nbsp;24.5 The JSON Object</a>
+        of [[ECMASCRIPT]].
       </dd>
 
       <dt id="JSON-canonical">The canonical mapping</dt>
-      <dd>maps any element of the value space to the identical string in the
-        lexical space.</dd>
+      <dd>maps the <a data-cite="JSON-LD11#dfn-internal-representation">internal representation</a>
+        to a <a>string</a> conforming to the <a data-cite="RFC4627#section-2">JSON Grammar</a>
+        using the mechanism described in [[[RFC8785]] [[RFC8785]].
+      </dd>
     </dl>
   </section>
 
@@ -1758,7 +1754,7 @@
       from <a data-cite="?JSON-LD11#the-rdf-json-datatype">Section&nbsp;10.2 The `rdf:JSON` Datatype</a>
       in [[?JSON-LD11]].</li>
     <li>Clarify Unicode terminology,
-      using <a data-lt="code point" class="lint-ignore">Unicode code points</a>,
+      using <a data-cite="i18n-glossary#dfn-code-point" class="lint-ignore">Unicode code points</a>,
       and restriction to the XML <a data-cite="XML11#charsets">Char</a> production.
       Also removes obsolete recommendations for the use of Normalization Form C in literals.
       Adds a definition of <a>string</a> that can be used in other RDF documents.</li>
