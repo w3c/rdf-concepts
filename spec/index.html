@@ -1467,9 +1467,7 @@
 
       <dt id="JSON-value-space">The <a>value space</a></dt>
       <dd>
-        is the space defined by
-        the <a data-cite="JSON-LD11#dfn-internal-representation">JSON-LD internal representation</a> [[JSON-LD11]],
-        being the <a data-cite="RFC4627#section-3">JSON values</a> <a data-lt="list">array</a>,
+        is a single <a data-cite="RFC4627#section-3">JSON value</a> in the form of an <a data-lt="list">array</a>,
         <a>map</a>,
         <a>string</a>,
         <a data-cite="ECMASCRIPT#sec-terms-and-definitions-number-value">number</a>,
@@ -1498,15 +1496,15 @@
 
       <dt id="JSON-mapping">The <a>lexical-to-value mapping</a></dt>
       <dd>
-        maps every element of the lexical space to the result of parsing it into an
-        <a data-cite="JSON-LD11#dfn-internal-representation">internal representation</a>
+        maps every element of the lexical space to the result of parsing it into a
+        <a data-cite="RFC4627#section-3">JSON value</a>
         consistent with the [[ECMASCRIPT]] representation created by using the <code>JSON.parse</code>
         function as defined in <a data-cite="ECMASCRIPT#sec-json-object">Section&nbsp;24.5 The JSON Object</a>
         of [[ECMASCRIPT]].
       </dd>
 
       <dt id="JSON-canonical">The canonical mapping</dt>
-      <dd>maps the <a data-cite="JSON-LD11#dfn-internal-representation">internal representation</a>
+      <dd>maps a <a data-cite="RFC4627#section-3">JSON value</a>
         to a <a>string</a> conforming to the <a data-cite="RFC4627#section-2">JSON Grammar</a>
         using the mechanism described in [[[RFC8785]] [[RFC8785]].
       </dd>
@@ -1752,7 +1750,10 @@
       datatypes to this appendix.</li>
     <li>Added the <a>rdf:JSON</a> datatype, the definition of which is adopted
       from <a data-cite="?JSON-LD11#the-rdf-json-datatype">Section&nbsp;10.2 The `rdf:JSON` Datatype</a>
-      in [[?JSON-LD11]].</li>
+      in [[?JSON-LD11]].
+      Note that the <a href="#JSON-value-space">value space</a> defined here
+      updates the <a>value space</a> of the
+      <a data-cite="JSON-LD11#the-rdf-json-datatype">`rdf:JSON`</a> datatype defined in [[[JSON-LD11]]] [[JSON-LD11]]</li>
     <li>Clarify Unicode terminology,
       using <a data-cite="i18n-glossary#dfn-code-point" class="lint-ignore">Unicode code points</a>,
       and restriction to the XML <a data-cite="XML11#charsets">Char</a> production.
