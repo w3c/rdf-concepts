@@ -1249,7 +1249,7 @@
     The semantics of fragment identifiers is
     <a data-cite="rfc3986#section-3.5">defined in
     RFC 3986</a> [[RFC3986]]: They identify a secondary resource
-    that is usually a part of, view of, defined in, or described in
+    that is usually a part of, a view of, defined in, or described in
     the primary resource, and the precise semantics depend on the set
     of representations that might result from a retrieval action
     on the primary resource.</p>
@@ -1257,11 +1257,11 @@
   <p>This section discusses the handling of fragment identifiers
     in representations that encode <a>RDF graphs</a>.</p>
 
-  <p>In RDF-bearing representations of a primary resource
-    <code>&lt;foo&gt;</code>,
-    the secondary resource identified by a fragment <code>bar</code>
+  <p>In RDF-bearing representations of a primary resource,
+    <code>&lt;https://example.com/foo&gt;</code>,
+    the secondary resource identified by a fragment identifier, <code>bar</code>,
     is the <a>resource</a> <a>denoted</a> by the
-    full <a>IRI</a> <code>&lt;foo#bar&gt;</code> in the <a>RDF graph</a>.
+    full <a>IRI</a> <code>&lt;https://example.com/foo#bar&gt;</code> in the <a>RDF graph</a>.
     Since IRIs in RDF graphs can denote anything, this can be
     something external to the representation, or even external
     to the web.</p>
@@ -1274,7 +1274,7 @@
     <a>fragment identifiers</a> in RDF-bearing representations, the encoded
     <a>RDF graph</a> should use fragment identifiers in a way that is consistent
     with these constraints. For example, in an HTML+RDFa document [[HTML-RDFA]],
-    the fragment <code>chapter1</code> may identify a document section
+    a fragment identifier such as <code>chapter1</code> may identify a document section
     via the semantics of HTML's <code>@name</code> or <code>@id</code>
     attributes. The <a>IRI</a> <code>&lt;#chapter1&gt;</code> should
     then be taken to <a>denote</a> that same section in any RDFa-encoded
@@ -1282,7 +1282,7 @@
     Similarly, fragment identifiers should be used consistently in resources
     with multiple representations that are made available via
     <a data-cite="webarch/#frag-coneg">content negotiation</a>
-    [[WEBARCH]]. For example, if the fragment <code>chapter1</code> identifies a
+    [[WEBARCH]]. For example, if the fragment identifier <code>chapter1</code> identifies a
     document section in an HTML representation of the primary resource, then the
     <a>IRI</a> <code>&lt;#chapter1&gt;</code> should be taken to
     <a>denote</a> that same section in all RDF-bearing representations of the
@@ -1293,19 +1293,19 @@
   <h2>Generalized RDF Triples, Graphs, and Datasets</h2>
 
   <p>It is sometimes convenient to loosen the requirements
-    on <a>RDF triple</a>s.  For example, the completeness
+    on <a>RDF triples</a>.  For example, the completeness
     of the RDFS entailment rules is easier to show with a
     generalization of RDF triples.</p>
 
   <p>A <dfn class="export">generalized RDF triple</dfn> is a triple having a subject,
-    a predicate, and object, where each can be an <a>IRI</a>, a
+    a predicate, and an object, where each can be an <a>IRI</a>, a
     <a>blank node</a> or a
     <a>literal</a>. A
     <dfn class="export">generalized RDF graph</dfn>
     is a set of generalized RDF triples. A
     <dfn class="export">generalized RDF dataset</dfn>
     comprises a distinguished generalized RDF graph, and zero
-    or more pairs each associating an IRI, a blank node or a literal
+    or more pairs each associating an IRI, a blank node, or a literal
     to a generalized RDF graph.</p>
 
 
@@ -1314,14 +1314,14 @@
     <a data-lt="RDF graph">graphs</a>, and
     <a data-lt="RDF dataset">datasets</a> only
     by allowing <a>IRIs</a>,
-    <a>blank nodes</a> and
+    <a>blank nodes</a>, and
     <a>literals</a> to appear
-    in any position, i.e., as subject, predicate, object or graph names.</p>
+    in any position, i.e., as subject, predicate, object, or graph name.</p>
 
-  <p class="note" id="note-generalized-rdf"> Any users of
-    generalized RDF triples, graphs or datasets need to be
+  <p class="note" id="note-generalized-rdf">Any user of
+    generalized RDF triples, graphs, or datasets needs to be
     aware that these notions are non-standard extensions of
-    RDF and their use may cause interoperability problems.
+    RDF, and their use may cause interoperability problems.
     There is no requirement on the part of any RDF tool to
     accept, process, or produce anything beyond standard RDF
     triples, graphs, and datasets. </p>
