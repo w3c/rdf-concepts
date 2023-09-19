@@ -1460,52 +1460,49 @@
       <dd>is <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#JSON</code>.</dd>
 
       <dt id="JSON-lexical-space">The <a>lexical space</a></dt>
-      <dd>is the set of all <a>strings</a> that conform to the
+      <dd>is the set of all <a data-lt="string">RDF strings</a> that conform to the
         <a data-cite="RFC4627#section-2">JSON Grammar</a> as described in
         <a data-cite="RFC8259#section-2">Section&nbsp;2 JSON Grammar</a> of
         [[RFC8259]].</dd>
 
       <dt id="JSON-value-space">The <a>value space</a></dt>
       <dd>
-        is a single <a data-cite="RFC4627#section-3">JSON value</a> in the form of an <a data-lt="list">array</a>,
-        <a>map</a>,
-        <a>string</a>,
+        is a single <a data-cite="RFC4627#section-2.1">JSON value</a> in the form of an <a data-cite="INFRA#list">array</a>,
+        <a data-cite="INFRA#ordered-map">map</a>,
+        <a data-cite="INFRA#string">string</a>,
         <a data-cite="ECMASCRIPT#sec-terms-and-definitions-number-value">number</a>,
-        <a>boolean</a>, or
+        <a data-cite="INFRA#boolean">boolean</a>, or
         <a data-cite="INFRA#nulls">null</a>.
         <ul>
-          <li><a data-lt="list">Array</a> <a data-cite="INFRA#list-item">entries</a> may be
-            <a>map</a>,
-            <a>string</a>,
-            <a data-cite="ECMASCRIPT#sec-terms-and-definitions-number-value">number</a>,
-            <a>boolean</a>, or
-            <a data-cite="INFRA#nulls">null</a>.</li>
-          <li><a>Map</a> <a data-cite="INFRA#map-key">keys</a> are <a>strings</a> with
-            <a data-cite="INFRA#map-value">values</a> may be any of the above
-            <a data-cite="RFC4627#section-3">JSON values</a>.</li>
+          <li><a data-cite="INFRA#list">Array</a> <a data-cite="INFRA#list-item">entries</a> may be
+            any of the above <a data-cite="RFC4627#section-2.1">JSON values</a>.</li>
+          <li><a data-cite="INFRA#ordered-map">Map</a> <a data-cite="INFRA#map-key">keys</a> are <a data-cite="INFRA#string">strings</a> with
+            <a data-cite="INFRA#map-value">values</a>, which may be any of the above
+            <a data-cite="RFC4627#section-2.1">JSON values</a>.</li>
         </ul>
 
-        Two <a data-cite="RFC4627#section-3">JSON values</a> are considered equal
-        if they are the same if they are the same <a>string</a>,
+        Two <a data-cite="RFC4627#section-2.1">JSON values</a> are considered equal
+        if they are the same if they are the same <a data-cite="INFRA#string">string</a>,
         <a data-cite="ECMASCRIPT#sec-terms-and-definitions-number-value">number</a>,
-        <a>boolean</a>, or
+        <a data-cite="INFRA#boolean">boolean</a>, or
         <a data-cite="INFRA#nulls">null</a>,
-        if they are both an <a data-lt="list">array</a> with equal <a data-cite="INFRA#list-item">entries</a>, or
-        if they are both a <a>map</a> with equal <a data-cite="INFRA#map-entry">map entries</a>.
+        if they are both <a data-cite="INFRA#list">arrays</a> with <a data-cite="INFRA#list-item">entries</a>
+        which are pairwise equal,
+        or if they are both a <a data-cite="INFRA#ordered-map">map</a> with equal <a data-cite="INFRA#map-entry">map entries</a>.
       </dd>
 
       <dt id="JSON-mapping">The <a>lexical-to-value mapping</a></dt>
       <dd>
         maps every element of the lexical space to the result of parsing it into a
-        <a data-cite="RFC4627#section-3">JSON value</a>
+        <a data-cite="RFC4627#section-2.1">JSON value</a>
         consistent with the [[ECMASCRIPT]] representation created by using the <code>JSON.parse</code>
         function as defined in <a data-cite="ECMASCRIPT#sec-json-object">Section&nbsp;24.5 The JSON Object</a>
         of [[ECMASCRIPT]].
       </dd>
 
       <dt id="JSON-canonical">The canonical mapping</dt>
-      <dd>maps a <a data-cite="RFC4627#section-3">JSON value</a>
-        to a <a>string</a> conforming to the <a data-cite="RFC4627#section-2">JSON Grammar</a>
+      <dd>maps a <a data-cite="RFC4627#section-2.1">JSON value</a>
+        to an <a data-lt="string">RDF string</a> conforming to the <a data-cite="RFC4627#section-2">JSON Grammar</a>
         using the mechanism described in [[[RFC8785]] [[RFC8785]].
       </dd>
     </dl>
