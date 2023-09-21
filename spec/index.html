@@ -1199,7 +1199,8 @@
       MUST refer to the RDF-compatible XSD type named <code>xsd:xxx</code> for
       every XSD type listed in <a href="#xsd-datatypes">section 5.1</a>.</p>
 
-    <p>The following three datatype IRIs are defined in Appendix&nbsp;<a href="#section-additional-datatypes" class="sectionRef"></a>:</p>
+    <p>The datatypes identified by the three IRIs below are defined in
+    Appendix&nbsp;<a href="#section-additional-datatypes" class="sectionRef"></a>:</p>
 
     <ul>
       <li>The IRI <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral</code>
@@ -1257,11 +1258,11 @@
   <p>This section discusses the handling of fragment identifiers
     in representations that encode <a>RDF graphs</a>.</p>
 
-  <p>In RDF-bearing representations of a primary resource,
+  <p>In RDF-bearing representations of a primary resource, e.g.,
     <code>&lt;https://example.com/foo&gt;</code>,
-    the secondary resource identified by a fragment identifier, <code>bar</code>,
+    the secondary resource identified by a fragment identifier, e.g., <code>bar</code>,
     is the <a>resource</a> <a>denoted</a> by the
-    full <a>IRI</a> <code>&lt;https://example.com/foo#bar&gt;</code> in the <a>RDF graph</a>.
+    full <a>IRI</a> in the <a>RDF graph</a>, which would be <code>&lt;https://example.com/foo#bar&gt;</code> in this case.
     Since IRIs in RDF graphs can denote anything, this can be
     something external to the representation, or even external
     to the web.</p>
@@ -1276,7 +1277,7 @@
     with these constraints. For example, in an HTML+RDFa document [[HTML-RDFA]],
     a fragment identifier such as <code>chapter1</code> may identify a document section
     via the semantics of HTML's <code>@name</code> or <code>@id</code>
-    attributes. The <a>IRI</a> <code>&lt;#chapter1&gt;</code> should
+    attributes. Such an <a>IRI</a>, e.g., <code>&lt;#chapter1&gt;</code>, should
     then be taken to <a>denote</a> that same section in any RDFa-encoded
     <a>triples</a> within the same document.
     Similarly, fragment identifiers should be used consistently in resources
@@ -1322,7 +1323,7 @@
     generalized RDF triples, graphs, or datasets needs to be
     aware that these notions are non-standard extensions of
     RDF, and their use may cause interoperability problems.
-    There is no requirement on the part of any RDF tool to
+    There is no requirement for any RDF tool to
     accept, process, or produce anything beyond standard RDF
     triples, graphs, and datasets. </p>
 
