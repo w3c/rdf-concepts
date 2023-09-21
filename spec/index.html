@@ -1086,9 +1086,8 @@
       listed in the following table are the
       <dfn>RDF-compatible XSD types</dfn>. Their use is RECOMMENDED.</p>
 
-    <p>Readers might note that the `xsd:hexBinary` and `xsd:base64Binary`
-      datatypes are the only safe datatypes for transferring binary
-      information.</p>
+    <p>Readers might note that the only safe datatypes for transferring
+      binary information are `xsd:hexBinary` and `xsd:base64Binary`.</p>
 
     <table id="tab-xsd-datatypes" class="simple">
       <caption>A list of the RDF-compatible XSD types, with short descriptions</caption>
@@ -1224,7 +1223,7 @@
 
     <p class="note">Semantic extensions of RDF might choose to
       recognize other datatype IRIs
-      and require them to refer to a fixed datatype.
+      and require each of them to refer to a fixed datatype.
       See [[[RDF12-SEMANTICS]]] [[RDF12-SEMANTICS]] for more information on
       semantic extensions.</p>
 
@@ -1311,7 +1310,7 @@
 
 
   <p>Generalized RDF triples, graphs, and datasets differ
-    from normative RDF <a>triples</a>,
+    from standard normative RDF <a>triples</a>,
     <a data-lt="RDF graph">graphs</a>, and
     <a data-lt="RDF dataset">datasets</a> only
     by allowing <a>IRIs</a>,
@@ -1324,8 +1323,8 @@
     aware that these notions are non-standard extensions of
     RDF, and their use may cause interoperability problems.
     There is no requirement for any RDF tool to
-    accept, process, or produce anything beyond standard RDF
-    triples, graphs, and datasets. </p>
+    accept, process, or produce anything beyond standard
+    normative RDF triples, graphs, and datasets. </p>
 
 </section>
 
