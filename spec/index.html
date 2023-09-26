@@ -1516,58 +1516,37 @@
       <dt id="JSON-lexical-space">The <a>lexical space</a></dt>
       <dd>is the set of all <a data-lt="string">RDF strings</a> that conform to the
         <a data-cite="RFC8259#section-2">JSON Grammar</a> as described in
-        <a data-cite="RFC8259#section-2">Section&nbsp;2 JSON Grammar</a> of
-        [[RFC8259]].</dd>
+        <a data-cite="RFC8259#section-2">Section&nbsp;2 JSON Grammar</a> of [[RFC8259]],
+        which also conform to the requirements of [[[RFC7493]]] [[RFC7493]].</dd>
 
       <dt id="JSON-value-space">The <a>value space</a></dt>
-      <dd>
-        is the set of all <a data-lt="string">RDF strings</a> that conform to the
-        <a data-cite="RFC8259#section-2">JSON Grammar</a> as described in
-        <a data-cite="RFC8259#section-2">Section&nbsp;2 JSON Grammar</a> of
-        [[RFC8259]], and furthermore comply with the following constraints:
-        <ul>
-          <li>They MUST NOT contain any unnecessary whitespace.</li>
-          <li>Keys in objects MUST be ordered lexicographically.</li>
-          <li>Native Numeric values MUST be serialized according to
-            <a data-cite="ECMASCRIPT#sec-tostring-applied-to-the-number-type">Section&nbsp;7.1.12.1</a>
-            of [[ECMASCRIPT]].</li>
-          <li>Strings MUST be serialized with Unicode code points from <code class="codepoint">U+0000</code>
-            through <code class="codepoint">U+001F</code> using lower case hexadecimal Unicode notation
-            (`\uhhhh`) except for the set of predefined JSON control characters —
-            `U+0008`, `U+0009`, `U+000A`, `U+000C`, and `U+000D` — which SHOULD be
-            serialized as `\b`, `\t`, `\n`, `\f`, and `\r`, respectively. All
-            other Unicode characters SHOULD be serialized "as is", except
-            `U+005C` (`\`) and `U+0022` (`"`), which SHOULD be serialized as
-            `\\` and `\"`, respectively.</li>
-        </ul>
-        <div class="issue">The JSON Canonicalization Scheme (JCS) [[RFC8785]]
-          is an emerging standard for JSON canonicalization. This <code>rdf:JSON</code> specification
-          will likely be updated to require such a canonical representation.
-          Users are cautioned against depending on the lexical representation of
-          literals with the <code>rdf:JSON</code> datatype as RDF literals,
-          as the specifics of serialization may change in a future revision of
-          this document.</div>
-        Despite being defined as a set of strings, this value space is
-        considered distinct from the value space of <code>xsd:string</code>,
-        in order to avoid side effects with existing specifications.
-      </dd>
- 
+      <dd>is the set of
+        <a data-cite="RFC8259#section-7">strings</a>,
+        <a data-cite="RFC8259#section-6">numbers</a>,
+        <a data-cite="RFC8259#section-4">objects</a>,
+        <a data-cite="RFC8259#section-5">arrays</a>, and
+        literal values (`true`, `false`, and `null`) [[RFC8259]].
+
+        Two values are considered equal
+        if they are the same <a data-cite="RFC8259#section-7">string</a>,
+        <a data-cite="RFC8259#section-6">number</a>, or
+        literal value,
+        if they are both <a data-cite="RFC8259#section-5">arrays</a> with elements
+        which are pairwise equal,
+        or if they are both <a data-cite="RFC8259#section-4">objects</a> with equal members.
+      </dd> 
+
       <dt id="JSON-mapping">The <a>lexical-to-value mapping</a></dt>
-      <dd>
-        maps every element of the lexical space to the result of
-         <ol>
-          <li>parsing it into an internal representation consistent with the
-            [[ECMASCRIPT]] representation created by using the <code>JSON.parse</code>
-            function as defined in <a data-cite="ECMASCRIPT#sec-json-object">Section&nbsp;24.5 The JSON Object</a>
-            of [[ECMASCRIPT]],</li>
-          <li>then serializing it into the JSON format [[RFC8259]] in compliance
-            with the constraints of the value space described above.</li>
-        </ol>
+      <dd>maps every element of the lexical space to the result of parsing it into a
+        <a data-cite="RFC4627#section-2.1">JSON value</a>.
       </dd>
 
       <dt id="JSON-canonical">The canonical mapping</dt>
-      <dd>maps any element of the value space to the identical string in the
-        lexical space.</dd>
+      <dd>defines a canonical lexical form for each member of the value space.
+        The `rdf:JSON` canonical mapping
+        to an <a data-lt="string">RDF string</a> conforming to the <a data-cite="RFC4627#section-2">JSON Grammar</a>
+        using the mechanism described in [[[RFC8785]] [[RFC8785]].
+      </dd>
     </dl>
   </section>
 
@@ -1821,7 +1800,10 @@
       datatypes to this appendix.</li>
     <li>Added the <a>rdf:JSON</a> datatype, the definition of which is adopted
       from <a data-cite="?JSON-LD11#the-rdf-json-datatype">Section&nbsp;10.2 The `rdf:JSON` Datatype</a>
-      in [[?JSON-LD11]].</li>
+      in [[?JSON-LD11]].
+      Note that the <a href="#JSON-value-space">value space</a> defined here
+      updates the <a>value space</a> of the
+      <a data-cite="JSON-LD11#the-rdf-json-datatype">`rdf:JSON`</a> datatype defined in [[[JSON-LD11]]] [[JSON-LD11]]</li>
     <li>Clarify Unicode terminology,
       using <a data-cite="I18N-GLOSSARY#dfn-code-point" class="lint-ignore">Unicode code points</a>,
       and restriction to the XML <a data-cite="XML11#charsets">Char</a> production.
