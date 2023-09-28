@@ -149,10 +149,9 @@
     <a>literal value</a>. Literals have
     <a>datatypes</a> that define the range of possible
     values, such as strings, numbers, and dates. Special kind of literals,
-    <a>language-tagged strings</a>, denote
-    plain-text strings in a natural language, and
-    <a>directional language-tagged strings</a>, denote
-    plain-text strings in a natural language and include an initial text direction.</p>
+    <a>language-tagged strings</a> and <a>directional language-tagged strings</a>,
+    respectively denote plain-text strings in a natural language, and plain-text
+    strings in a natural language including an initial text direction.</p>
 
     <p>Asserting an <a>RDF triple</a> says that <em>some relationship,
     indicated by the <a>predicate</a>, holds between the
@@ -735,8 +734,8 @@
 
     <p>A literal is a <dfn id="dfn-dir-lang-string">directional language-tagged string</dfn>
       if both the third element and fourth elements are present.
-      Language tags are treated identically to <a>language-tagged string</a>,
-      and the fourth element , <a>base direction</a> MUST BE either `ltr` or `rtl` in lower case.</p>
+      The third element, the language tag, is treated identically as in a <a>language-tagged string</a>,
+      and the fourth element, <a>base direction</a>, MUST be either `ltr` or `rtl`, which MUST be in lower case.</p>
 
     <p>Please note that concrete syntaxes MAY support
       <dfn data-lt="simple literal" class="export">simple literals</dfn> consisting of only a
@@ -810,24 +809,19 @@
 
       <p>The <a>base direction</a> of a <a>directional language-tagged string</a>
         provides a means of establishing the initial direction of text,
-        including text which is mixture of right-to-left and left-to-right scripts.
+        including text which is a mixture of right-to-left and left-to-right scripts.
         The [[[?UAX9]]] [[?UAX9]] provides support for automatically rendering
         a sequence of characters in logical order,
         so that they are visually ordered as expected.
         However, this is not sufficient to correctly render bidirectional text.</p>
 
-      <p>For example, the text `"פעילות הבינאום, W3C"` with language tag "he" (for Hebrew) may be displayed
-        incorrectly unless the <a>base direction</a> of `rtl` (for right-to-left)
-        is also provided.
-        When this is provided to a user agent,
-        for example using the HTML `dir` attribute,
-        it would be correctly presented as follows: <div lang="he" dir="rtl">פעילות הבינאום, W3C</div></p>
-
-      <p class="note">The absence of a <a>base direction</a> does not necessarily imply that
-        the text has no initial text direction;
-        as described in [[[?UAX9]]],
-        strings may be embedded within structures which establish an <em>embedding direction</em>,
-        which determines the default bidirectional orientation of text.</p>
+       <p>For example, some text with a language tag "`he`" might be displayed
+         in a left-to-right context (such as an English web page) as
+         <bdi dir="ltr">פעילות הבינאום, W3C</bdi>, which is incorrect. When provided
+         to a user agent including base direction information (such as using
+         HTML's `dir` attribute) it can then be correctly presented as:
+       </p>
+       <div lang="he" dir="rtl">פעילות הבינאום, W3C</div>
     </section>
   </section>
 
@@ -1645,9 +1639,13 @@
     RDF provides a mechanism for specifying the <a>base direction</a>
     of a <a>directional language-tagged string</a>
     to signal the initial text direction of a string.
-    When a string has an overall base direction which cannot be determined by the
-    beginning of the string, an external indicator is required,
-    such as the [[HTML]] <a data-cite="HTML/dom.html#the-dir-attribute">dir attribute</a>.</p>
+    For most human language strings, but particularly for those
+    whose base direction cannot be accurately determined from the 
+    string content, is it valuable to have an external indicator in order
+    to get the proper display and isolation of the value.
+    One example of such an indicator is
+    the [[HTML]] <a data-cite="HTML/dom.html#the-dir-attribute">dir attribute</a>.
+    see [[STRING-META]].</p>
 
   <p>[[[JSON-LD11]]] [[JSON-LD11]] introduced the
     <a data-cite="JSON-LD11#the-i18n-namespace">i18n namespace</a> to use
@@ -1799,7 +1797,7 @@
       and clarifies that, in the abstract syntax, IRIs are resolved,
       avoiding the incorrect use of "absolute IRI".</li>
     <li>Changed reference from DOM4, which was not a recommendation at the time, to [[DOM]],
-      making the <a>rdf:HTML</a> and <a>rdf:XMLLiteral</a> datatypes normative.</li>
+      making the definitions of <a>rdf:HTML</a> and <a>rdf:XMLLiteral</a> datatypes normative.</li>
     <li>Added <a href="#section-additional-datatypes" class="sectionRef"></a>
       and moved the sections about the <a>rdf:HTML</a> and <a>rdf:XMLLiteral</a>
       datatypes to this appendix.</li>
