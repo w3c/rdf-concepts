@@ -33,7 +33,7 @@
         { name: "Brian McBride" }
       ],
 
-      xref: ["i18n-glossary", "infra"],
+      xref: ["I18N-GLOSSARY", "INFRA"],
       github: "https://github.com/w3c/rdf-concepts/",
       group:           "rdf-star",
       doJsonLd:     true,
@@ -510,10 +510,10 @@
       Within this, and related specifications, the term <dfn id="dfn-rdf-string">string</dfn>,
       or <a data-lt="string">RDF string</a>,
       is used to describe an ordered sequence of zero or more
-      <a data-cite="i18n-glossary#dfn-code-point" class="lint-ignore">Unicode code points</a>
-      which are <a data-cite="i18n-glossary#dfn-scalar-value" class="lint-ignore">Unicode scalar values</a>.
+      <a data-cite="I18N-GLOSSARY#dfn-code-point" class="lint-ignore">Unicode code points</a>
+      which are <a data-cite="I18N-GLOSSARY#dfn-scalar-value" class="lint-ignore">Unicode scalar values</a>.
       Unicode scalar values do not include the
-      <a data-cite="i18n-glossary#dfn-surrogate" class="lint-ignore">surrogate code points</a>.
+      <a data-cite="I18N-GLOSSARY#dfn-surrogate" class="lint-ignore">surrogate code points</a>.
       Note that most <a>concrete RDF syntaxes</a> require the use
       of the UTF-8 character encoding [[!RFC3629]], 
       and use the `\u0000` or `\U00000000` forms to express certain non-character values.
@@ -521,10 +521,10 @@
 
     <p>A string is identical to another string if it consists of the same sequence of code points.
       An implementation MAY determine string equality by comparing the
-      <a data-cite="i18n-glossary#dfn-code-unit">code units</a> of two strings
-      that use the same <a data-cite="i18n-glossary#dfn-character-encoding">Unicode character encoding</a>
+      <a data-cite="I18N-GLOSSARY#dfn-code-unit">code units</a> of two strings
+      that use the same <a data-cite="I18N-GLOSSARY#dfn-character-encoding">Unicode character encoding</a>
       (UTF-8 or UTF-16) without decoding the string into a
-      <a data-cite="i18n-glossary#dfn-code-point" class="lint-ignore">Unicode code point</a> sequence.</p>
+      <a data-cite="I18N-GLOSSARY#dfn-code-point" class="lint-ignore">Unicode code point</a> sequence.</p>
   </section>
 </section>
 
@@ -619,7 +619,7 @@
 
     <p><dfn>IRI equality</dfn>:
       Two IRIs are the same if and only if they consist of the same sequence of
-      <a data-cite="i18n-glossary#dfn-code-point" class="lint-ignore">Unicode code points</a>,
+      <a data-cite="I18N-GLOSSARY#dfn-code-point" class="lint-ignore">Unicode code points</a>,
       as in Simple String Comparison in
       <a data-cite="rfc3987#section-5.3.1">section 5.3.1</a> of [[!RFC3987]].
       (This is done in the abstract syntax, so the IRIs are resolved
@@ -705,10 +705,10 @@
 
     <ul>
       <li>a <dfn>lexical form</dfn> consisting of a sequence of
-        <a data-cite="i18n-glossary#dfn-code-point" class="lint-ignore">Unicode code points</a> [[!UNICODE]]
-        which are <a data-cite="i18n-glossary#dfn-scalar-value">Unicode scalar values</a>,
+        <a data-cite="I18N-GLOSSARY#dfn-code-point" class="lint-ignore">Unicode code points</a> [[!UNICODE]]
+        which are <a data-cite="I18N-GLOSSARY#dfn-scalar-value">Unicode scalar values</a>,
         and therefore do not contain
-        <a data-cite="i18n-glossary#dfn-surrogate" class="lint-ignore">Unicode surrogate code points</a>.</li>
+        <a data-cite="I18N-GLOSSARY#dfn-surrogate" class="lint-ignore">Unicode surrogate code points</a>.</li>
       <li>a <dfn>datatype IRI</dfn>, being an <a>IRI</a>
         identifying a datatype that determines how the lexical form maps
         to a <a>literal value</a>, and</li>
@@ -788,7 +788,7 @@
       the two <a>datatype IRIs</a>,
       the two <a>language tags</a> (if any), and
       the two <a>base directions</a> (if any) compare equal,
-      using <a data-cite="i18n-glossary#dfn-case-sensitive">case sensitive matching</a>
+      using <a data-cite="I18N-GLOSSARY#dfn-case-sensitive">case sensitive matching</a>
       (see description of string comparison in <a href="#rdf-strings" class="sectionRef"></a>).
       Thus, two literals can have the same value
       without being the same <a>RDF term</a>.
@@ -1805,7 +1805,7 @@
       from <a data-cite="?JSON-LD11#the-rdf-json-datatype">Section&nbsp;10.2 The `rdf:JSON` Datatype</a>
       in [[?JSON-LD11]].</li>
     <li>Clarify Unicode terminology,
-      using <a data-cite="i18n-glossary#dfn-code-point" class="lint-ignore">Unicode code points</a>,
+      using <a data-cite="I18N-GLOSSARY#dfn-code-point" class="lint-ignore">Unicode code points</a>,
       and restriction to the XML <a data-cite="XML11#charsets">Char</a> production.
       Also removes obsolete recommendations for the use of Normalization Form C in literals.
       Adds a definition of <a>string</a> that can be used in other RDF documents.</li>
