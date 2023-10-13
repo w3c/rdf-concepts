@@ -68,9 +68,9 @@
 
   <p>RDF 1.2 introduces <a>quoted triples</a> as another kind of <a>RDF term</a>
     which can be used as the <a>subject</a> or <a>object</a> of another <a>triple</a>.
-    RDF 1.2 also introduces <a>directional language-tagged strings</a>
-    containing a <a>base direction</a> element allowing the
-    initial text direction to be specified when presented in a user agent.</p>
+    RDF 1.2 also introduces <a>directional language-tagged strings</a>,
+    which contain a <a>base direction</a> element that allows the
+    initial text direction to be specified for presentation by a user agent.</p>
 
   <p>RDF 1.2 Concepts introduces key concepts and terminology for RDF 1.2, discusses
     datatyping, and the handling of <a>fragment identifiers</a> in IRIs within
@@ -148,8 +148,8 @@
     resource denoted by a literal is called its
     <a>literal value</a>. Literals have
     <a>datatypes</a> that define the range of possible
-    values, such as strings, numbers, and dates. Special kind of literals,
-    <a>language-tagged strings</a> and <a>directional language-tagged strings</a>,
+    values, such as strings, numbers, and dates. Special kinds of literals &mdash;
+    <a>language-tagged strings</a> and <a>directional language-tagged strings</a> &mdash;
     respectively denote plain-text strings in a natural language, and plain-text
     strings in a natural language including an initial text direction.</p>
 
@@ -812,8 +812,8 @@
         including text which is a mixture of right-to-left and left-to-right scripts.
         The [[[?UAX9]]] [[?UAX9]] provides support for automatically rendering
         a sequence of characters in logical order,
-        so that they are visually ordered as expected.
-        However, this is not sufficient to correctly render bidirectional text.</p>
+        so that they are visually ordered as expected,
+        but this is not sufficient to correctly render bidirectional text.</p>
 
        <p>For example, some text with a language tag "`he`" might be displayed
          in a left-to-right context (such as an English web page) as
