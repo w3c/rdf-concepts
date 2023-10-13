@@ -33,7 +33,7 @@
         { name: "Brian McBride" }
       ],
 
-      xref: ["i18n-glossary", "infra"],
+      xref: ["I18N-GLOSSARY", "INFRA"],
       github: "https://github.com/w3c/rdf-concepts/",
       group:           "rdf-star",
       doJsonLd:     true,
@@ -67,7 +67,10 @@
   </ul>
 
   <p>RDF 1.2 introduces <a>quoted triples</a> as another kind of <a>RDF term</a>
-    which can be used as the <a>subject</a> or <a>object</a> of another <a>triple</a>.</p>
+    which can be used as the <a>subject</a> or <a>object</a> of another <a>triple</a>.
+    RDF 1.2 also introduces <a>directional language-tagged strings</a>,
+    which contain a <a>base direction</a> element that allows the
+    initial text direction to be specified for presentation by a user agent.</p>
 
   <p>RDF 1.2 Concepts introduces key concepts and terminology for RDF 1.2, discusses
     datatyping, and the handling of <a>fragment identifiers</a> in IRIs within
@@ -145,9 +148,10 @@
     resource denoted by a literal is called its
     <a>literal value</a>. Literals have
     <a>datatypes</a> that define the range of possible
-    values, such as strings, numbers, and dates. Special kind of literals,
-    <a>language-tagged strings</a>, denote
-    plain-text strings in a natural language.</p>
+    values, such as strings, numbers, and dates. Special kinds of literals &mdash;
+    <a>language-tagged strings</a> and <a>directional language-tagged strings</a> &mdash;
+    respectively denote plain-text strings in a natural language, and plain-text
+    strings in a natural language including an initial text direction.</p>
 
     <p>Asserting an <a>RDF triple</a> says that <em>some relationship,
     indicated by the <a>predicate</a>, holds between the
@@ -506,10 +510,10 @@
       Within this, and related specifications, the term <dfn id="dfn-rdf-string">string</dfn>,
       or <a data-lt="string">RDF string</a>,
       is used to describe an ordered sequence of zero or more
-      <a data-cite="i18n-glossary#dfn-code-point" class="lint-ignore">Unicode code points</a>
-      which are <a data-cite="i18n-glossary#dfn-scalar-value" class="lint-ignore">Unicode scalar values</a>.
+      <a data-cite="I18N-GLOSSARY#dfn-code-point" class="lint-ignore">Unicode code points</a>
+      which are <a data-cite="I18N-GLOSSARY#dfn-scalar-value" class="lint-ignore">Unicode scalar values</a>.
       Unicode scalar values do not include the
-      <a data-cite="i18n-glossary#dfn-surrogate" class="lint-ignore">surrogate code points</a>.
+      <a data-cite="I18N-GLOSSARY#dfn-surrogate" class="lint-ignore">surrogate code points</a>.
       Note that most <a>concrete RDF syntaxes</a> require the use
       of the UTF-8 character encoding [[!RFC3629]], 
       and use the `\u0000` or `\U00000000` forms to express certain non-character values.
@@ -517,10 +521,10 @@
 
     <p>A string is identical to another string if it consists of the same sequence of code points.
       An implementation MAY determine string equality by comparing the
-      <a data-cite="i18n-glossary#dfn-code-unit">code units</a> of two strings
-      that use the same <a data-cite="i18n-glossary#dfn-character-encoding">Unicode character encoding</a>
+      <a data-cite="I18N-GLOSSARY#dfn-code-unit">code units</a> of two strings
+      that use the same <a data-cite="I18N-GLOSSARY#dfn-character-encoding">Unicode character encoding</a>
       (UTF-8 or UTF-16) without decoding the string into a
-      <a data-cite="i18n-glossary#dfn-code-point" class="lint-ignore">Unicode code point</a> sequence.</p>
+      <a data-cite="I18N-GLOSSARY#dfn-code-point" class="lint-ignore">Unicode code point</a> sequence.</p>
   </section>
 </section>
 
@@ -615,7 +619,7 @@
 
     <p><dfn>IRI equality</dfn>:
       Two IRIs are the same if and only if they consist of the same sequence of
-      <a data-cite="i18n-glossary#dfn-code-point" class="lint-ignore">Unicode code points</a>,
+      <a data-cite="I18N-GLOSSARY#dfn-code-point" class="lint-ignore">Unicode code points</a>,
       as in Simple String Comparison in
       <a data-cite="rfc3987#section-5.3.1">section 5.3.1</a> of [[!RFC3987]].
       (This is done in the abstract syntax, so the IRIs are resolved
@@ -696,15 +700,15 @@
 
     <p>Literals are used for values such as strings, numbers, and dates.</p>
 
-    <p>A <dfn data-local-lt="RDF literal">literal</dfn> in an <a>RDF graph</a> consists of two or three
-      elements:</p>
+    <p>A <dfn data-local-lt="RDF literal">literal</dfn> in an <a>RDF graph</a> consists of
+      two, three, or four elements:</p>
 
     <ul>
       <li>a <dfn>lexical form</dfn> consisting of a sequence of
-        <a data-cite="i18n-glossary#dfn-code-point" class="lint-ignore">Unicode code points</a> [[!UNICODE]]
-        which are <a data-cite="i18n-glossary#dfn-scalar-value">Unicode scalar values</a>,
+        <a data-cite="I18N-GLOSSARY#dfn-code-point" class="lint-ignore">Unicode code points</a> [[!UNICODE]]
+        which are <a data-cite="I18N-GLOSSARY#dfn-scalar-value">Unicode scalar values</a>,
         and therefore do not contain
-        <a data-cite="i18n-glossary#dfn-surrogate" class="lint-ignore">Unicode surrogate code points</a>.</li>
+        <a data-cite="I18N-GLOSSARY#dfn-surrogate" class="lint-ignore">Unicode surrogate code points</a>.</li>
       <li>a <dfn>datatype IRI</dfn>, being an <a>IRI</a>
         identifying a datatype that determines how the lexical form maps
         to a <a>literal value</a>, and</li>
@@ -714,25 +718,38 @@
         language tag MUST be well-formed according to
         <a data-cite="bcp47#section-2.2.9">section 2.2.9</a>
         of [[!BCP47]].</li>
+      <li>if and only if the <a>datatype IRI</a> is
+        <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#dirLangString</code>,
+        a non-empty <a>language tag</a>
+        that MUST be well-formed according to <a data-cite="bcp47#section-2.2.9">section 2.2.9</a>
+        of [[!BCP47]].
+        and a <dfn>base direction</dfn> that MUST be either `ltr` or `rtl`.</li>
     </ul>
 
     <p>A literal is a <dfn>language-tagged string</dfn> if the third element
-      is present. Lexical representations of language tags MAY be converted
-      to lower case. The value space of language tags is always in lower
-      case.</p>
+      is present and the fourth element is not present.
+      Lexical representations of language tags MAY be converted
+      to lower case.
+      The value of language tags is always treated as being in lower case.</p>
+
+    <p>A literal is a <dfn id="dfn-dir-lang-string">directional language-tagged string</dfn>
+      if both the third element and fourth elements are present.
+      The third element, the language tag, is treated identically as in a <a>language-tagged string</a>,
+      and the fourth element, <a>base direction</a>, MUST be either `ltr` or `rtl`, which MUST be in lower case.</p>
 
     <p>Please note that concrete syntaxes MAY support
       <dfn data-lt="simple literal" class="export">simple literals</dfn> consisting of only a
-      <a>lexical form</a> without any <a>datatype IRI</a> or <a>language tag</a>.
+      <a>lexical form</a> without any <a>datatype IRI</a>, <a>language tag</a>, or <a>base direction</a>.
       Simple literals are syntactic sugar for abstract syntax
       <a>literals</a>
       with the <a>datatype IRI</a>
       <code>http://www.w3.org/2001/XMLSchema#string</code>
       (which is commonly abbreviated as <code>xsd:string</code>).
       Similarly, most concrete syntaxes represent
-      <a>language-tagged strings</a> without
-      the <a>datatype IRI</a> because it always equals
-      <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#langString</code> (<code>rdf:langString</code>).</p>
+      <a>language-tagged strings</a> and <a>directional language-tagged strings</a> without
+      the <a>datatype IRI</a> because it always equals either
+      <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#langString</code> (<code>rdf:langString</code>)
+      or <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#dirLangString</code> (<code>rdf:dirLangString</code>), respectively.</p>
 
     <p>The <dfn>literal value</dfn> associated with a <a>literal</a> is:</p>
 
@@ -740,6 +757,9 @@
       <li>If the literal is a <a>language-tagged string</a>,
         then the literal value is a pair consisting of its <a>lexical form</a>
         and its <a>language tag</a>, in that order.</li>
+      <li>if the literal is a <a>directional language-tagged string</a>, then the literal value is
+        a tuple of its <a>lexical form</a>, its <a>language tag</a>, and its <a>base direction</a>,
+        likewise in that order.</li>
 
       <li>If the literal's <a>datatype IRI</a> is in the set of
         <a>recognized datatype IRIs</a>, let <var>d</var> be the
@@ -762,14 +782,17 @@
         not defined by this specification.</li>
     </ol>
 
-    <p><dfn data-local-lt="term-equal">Literal term equality</dfn>: Two literals are term-equal (the same
-      RDF literal) if and only if the two <a>lexical forms</a>,
-      the two <a>datatype IRIs</a>, and the two
-      <a>language tags</a> (if any) compare equal,
-      using <a data-cite="i18n-glossary#dfn-case-sensitive">case sensitive matching</a>
+    <p><dfn data-local-lt="term-equal">Literal term equality</dfn>:
+      Two literals are term-equal (the same <a>RDF literal</a>)
+      if and only if the two <a>lexical forms</a>,
+      the two <a>datatype IRIs</a>,
+      the two <a>language tags</a> (if any), and
+      the two <a>base directions</a> (if any) compare equal,
+      using <a data-cite="I18N-GLOSSARY#dfn-case-sensitive">case sensitive matching</a>
       (see description of string comparison in <a href="#rdf-strings" class="sectionRef"></a>).
       Thus, two literals can have the same value
-      without being the same RDF term. For example:</p>
+      without being the same <a>RDF term</a>.
+      For example:</p>
 
     <pre>
       "1"^^xs:integer
@@ -779,7 +802,27 @@
     <p>denote the same <a data-lt="literal value">value</a>, but are not the
       same literal <a>RDF terms</a> and are not
       <a>term-equal</a> because their
-      <a>lexical form</a> differs.</p>
+      <a>lexical forms</a> differ.</p>
+
+    <section id="section-text-direction" class="informative">
+      <h3>Initial Text Direction</h3>
+
+      <p>The <a>base direction</a> of a <a>directional language-tagged string</a>
+        provides a means of establishing the initial direction of text,
+        including text which is a mixture of right-to-left and left-to-right scripts.
+        The [[[?UAX9]]] [[?UAX9]] provides support for automatically rendering
+        a sequence of characters in logical order,
+        so that they are visually ordered as expected,
+        but this is not sufficient to correctly render bidirectional text.</p>
+
+       <p>For example, some text with a language tag "`he`" might be displayed
+         in a left-to-right context (such as an English web page) as
+         <bdi dir="ltr">פעילות הבינאום, W3C</bdi>, which is incorrect. When provided
+         to a user agent including base direction information (such as using
+         HTML's `dir` attribute) it can then be correctly presented as:
+       </p>
+       <div lang="he" dir="rtl">פעילות הבינאום, W3C</div>
+    </section>
   </section>
 
   <section id="section-blank-nodes">
@@ -1591,17 +1634,18 @@
 
 <section id="internationalization" class="appendix informative">
   <h2>Internationalization Considerations</h2>
-  <p>RDF is restricted to representing Unicode <a>string</a> [[UNICODE]] values with left-to-right or right-to-left direction indicators.
-    RDF provides a mechanism for specifying the language associated with
-    a string (<a>language-tagged string</a>),
-    but does not provide a means of indicating the base direction of the string.</p>
-
   <p>Unicode [[UNICODE]] provides a mechanism for signaling direction within a string
-    (see [[[UAX9]]] [[UAX9]]),
-    however, when a string has an overall base direction which cannot be determined by the
-    beginning of the string, an external indicator is required,
-    such as the [[HTML]] <a data-cite="HTML/dom.html#the-dir-attribute">dir attribute</a>,
-    which currently has no counterpart for <a>RDF literals</a>.</p>
+    (see [[[UAX9]]] [[UAX9]]).
+    RDF provides a mechanism for specifying the <a>base direction</a>
+    of a <a>directional language-tagged string</a>
+    to signal the initial text direction of a string.
+    For most human language strings, but particularly for those
+    whose base direction cannot be accurately determined from the 
+    string content, is it valuable to have an external indicator in order
+    to get the proper display and isolation of the value.
+    One example of such an indicator is
+    the [[HTML]] <a data-cite="HTML/dom.html#the-dir-attribute">dir attribute</a>.
+    see [[STRING-META]].</p>
 
   <p>[[[JSON-LD11]]] [[JSON-LD11]] introduced the
     <a data-cite="JSON-LD11#the-i18n-namespace">i18n namespace</a> to use
@@ -1744,13 +1788,16 @@
       for informative definition of a <a>quad</a>.</li>
     <li>Added <a href="#section-quoted-triples" class="sectionRef"></a>
       and definitions for <a>quoted triple</a> and <a>asserted triple</a>.</li>
+    <li>Added the <a>base direction</a> element as part of 
+      a <a>literal</a>,
+      and a description of its use in <a href="#section-text-direction" class="sectionRef"></a>.</li>
     <li>Improved the use of IRI terminology,
       and added <a href="#iri-abnf" class="sectionRef"></a>.
       This improves the language using <a>relative IRI references</a>
       and clarifies that, in the abstract syntax, IRIs are resolved,
       avoiding the incorrect use of "absolute IRI".</li>
     <li>Changed reference from DOM4, which was not a recommendation at the time, to [[DOM]],
-      making the <a>rdf:HTML</a> and <a>rdf:XMLLiteral</a> datatypes normative.</li>
+      making the definitions of <a>rdf:HTML</a> and <a>rdf:XMLLiteral</a> datatypes normative.</li>
     <li>Added <a href="#section-additional-datatypes" class="sectionRef"></a>
       and moved the sections about the <a>rdf:HTML</a> and <a>rdf:XMLLiteral</a>
       datatypes to this appendix.</li>
@@ -1758,7 +1805,7 @@
       from <a data-cite="?JSON-LD11#the-rdf-json-datatype">Section&nbsp;10.2 The `rdf:JSON` Datatype</a>
       in [[?JSON-LD11]].</li>
     <li>Clarify Unicode terminology,
-      using <a data-cite="i18n-glossary#dfn-code-point" class="lint-ignore">Unicode code points</a>,
+      using <a data-cite="I18N-GLOSSARY#dfn-code-point" class="lint-ignore">Unicode code points</a>,
       and restriction to the XML <a data-cite="XML11#charsets">Char</a> production.
       Also removes obsolete recommendations for the use of Normalization Form C in literals.
       Adds a definition of <a>string</a> that can be used in other RDF documents.</li>
