@@ -66,7 +66,7 @@
       are comprised of a default graph and zero or more named graphs.</li>
   </ul>
 
-  <p>RDF 1.2 introduces <a>quoted graphs</a> as another kind of <a>RDF term</a>
+  <p>RDF 1.2 introduces <a>graph terms</a> as another kind of <a>RDF term</a>
     which can be used as the <a>subject</a> or <a>object</a> of another <a>triple</a>.</p>
 
   <p>RDF 1.2 Concepts introduces key concepts and terminology for RDF 1.2, discusses
@@ -126,7 +126,7 @@
 
     <p>There can be four kinds of <a>nodes</a> in an
       <a>RDF graph</a>: <a>IRIs</a>, <a>literals</a>,
-      <a>blank nodes</a>, and <a>quoted graphs</a>.</p>
+      <a>blank nodes</a>, and <a>graph terms</a>.</p>
 
   </section>
 
@@ -167,71 +167,71 @@
       exists, without explicitly naming it.</p>
   </section>
 
-  <section id="section-quoted-graphs">
-    <h3>Quoted Graphs</h3>
+  <section id="section-graph-terms">
+    <h3>Graph Terms</h3>
 
-    <p>A <a>quoted graph</a> is an <a>RDF term</a> with the components of
+    <p>A <a>graph term</a> is an <a>RDF term</a> with the components of
       an <a>RDF graph</a>, which can be used as the <a>subject</a> or <a>object</a>
       of another triple.</p>
 
-    <p>A <a>quoted graph</a> is not necessarily asserted, allowing
+    <p>A <a>graph term</a> is not necessarily asserted, allowing
       statements to be made about other statements that may not be
       asserted within another <a>RDF graph</a>.
       This allows statements to be made about relationships that may be contradictory.
-      For a <a>quoted graph</a> to be asserted,
-      the triples it contains must also appear in a graph which is not <a>quoted</a>.</p>
+      For a <a>graph term</a> to be asserted,
+      the triples it contains must also appear in a graph which is not a <a>graph term</a>.</p>
 
-    <p>The following diagram represents a statement with an unasserted <a>quoted graph</a>
+    <p>The following diagram represents a statement with an unasserted <a>graph term</a>
       as the subject.</p>
 
-    <figure id="fig-quoted-graph">
+    <figure id="fig-graph-term">
       <a href="quoted-triple.svg">
         <!-- Source for this file is at https://docs.google.com/drawings/d/1I_QxbUgnQXumXzb8c0WNJHIQ-mtRs2S80dDG6i9aOD8 -->
         <img src="quoted-triple.svg"
-             alt="An RDF graph containing a triple that references an unasserted quoted graph (with grey background) as the subject"
+             alt="An RDF graph containing a triple that references an unasserted graph term (with grey background) as the subject"
              style="width:70%"
-             aria-describedby="fig-quoted-graph-alt"/>
+             aria-describedby="fig-graph-term-alt"/>
       </a>
-      <figcaption id="fig-quoted-graph-alt">
-        An RDF graph containing a triple that references an unasserted quoted graph (with grey background) as the subject.
+      <figcaption id="fig-graph-term-alt">
+        An RDF graph containing a triple that references an unasserted graph term (with grey background) as the subject.
       </figcaption>
     </figure>
 
-    <p>A variation on the graph shown in <a href="#fig-quoted-graph"></a> can be described
-      where the triples in the <a>quoted graph</a> are also in the <a>default graph</a>.</p>
+    <p>A variation on the graph shown in <a href="#fig-graph-term"></a> can be described
+      where the triples in the <a>graph term</a> are also in the <a>default graph</a>.</p>
 
-    <figure id="fig-quoted-asserted-graph">
+    <figure id="fig-asserted-graph-term">
       <a href="quoted-asserted-triple.svg">
         <!-- Source for this file is at https://docs.google.com/drawings/d/1aoUEsb07P-nu5rvPRob7O07CRKgnf7tBw2CmRJNuaQ0 -->
         <img src="quoted-asserted-triple.svg"
-             alt="An RDF graph containing two triples where one of them contains the other as the subject; hence, that other triple is both quoted and asserted"
+             alt="An RDF graph containing two triples where one of them contains the other as the subject; hence, that other triple is both asserted and the content of a graph term"
              style="width:70%"
-             aria-describedby="fig-quoted-asserted-graph-alt"/>
+             aria-describedby="fig-asserted-graph-term-alt"/>
       </a>
-      <figcaption id="fig-quoted-asserted-graph-alt">
+      <figcaption id="fig-asserted-graph-term-alt">
         An RDF graph containing two triples where one of them contains the other as the subject;
-        hence, that other triple is both quoted and asserted.
+        hence, that other triple is both asserted and the content of a graph term.
       </figcaption>
     </figure>
 
-    <p>A quoted graph may contain triples which also have quoted graphs as subjects or objects.</p>
+    <p>A graph term may contain triples which also have graph terms as subjects or objects.</p>
 
     <p class="note">
-      The concept of a quoted graph is similar to that of a named graph,
-      however a quoted graph does not have a name, and is intended to be used as the
-      subject or object of other triples.
+      The concept of a graph term is similar to that of a named graph,
+      however a graph term does not have a name, and is intended to be used as the
+      subject or object of RDF triples.
     </p>
 
     <p class="issue">
-      An alternative interpretation is that quoted graphs can have a blank node name,
+      An alternative interpretation is that graph terms can have a blank node name,
       which can also be used as the subject or object of other triples.
-      These blank node named graphs (or <em>blank graphs</em> may have semantics distinct
+      These blank node named graphs (or <em>blank graphs</em>) may have semantics distinct
       from graphs named using IRIs or using blank nodes which are not also
-      the subject or object of another triple).
+      the subject or object of another triple.
     </p>
 
     <p class="issue" data-number="46">
-      This issue considers using <a>quoted graphs</a> as an alternative to quoted triples.
+      This issue considers using <a>graph terms</a> as an alternative to quoted triples.
     </p>
   </section>
 
@@ -556,28 +556,28 @@
       |p| is called the <dfn>predicate</dfn> of the triple, and
       |o| is called the <dfn>object</dfn> of the triple.</p>
 
-    <p>A <dfn data-local-lt="quoted">quoted graph</dfn> is an <a>RDF graph</a> that is
-      used as the <a>subject</a> or <a>object</a> of triple.</p>
+    <p>A <dfn>graph term</dfn> is an <a>RDF graph</a> that is
+      used as the <a>subject</a> or <a>object</a> of a <a>triple</a>.</p>
 
     <p class="note">By the given definitions,
       the <a>subject</a> of an <a>RDF triple</a> may be either an <a>IRI</a>,
-      a <a>blank node</a>, or a <a>quoted graph</a>;
+      a <a>blank node</a>, or a <a>graph term</a>;
       the <a>predicate</a> of an <a>RDF triple</a> may only be an <a>IRI</a>;
       the <a>object</a> of an <a>RDF triple</a> may be either an <a>IRI</a>,
-      a <a>blank node</a>, a <a>literal</a> or a <a>quoted graph</a>.</p>
+      a <a>blank node</a>, a <a>literal</a> or a <a>graph term</a>.</p>
 
-    <p class="note">The definition of <a>quoted graph</a> is recursive.
-      That is, a <a>quoted graph</a> can itself have a
+    <p class="note">The definition of <a>graph term</a> is recursive.
+      That is, a <a>graph term</a> can itself contain
       triples where the <a>subject</a> or <a>object</a> components
-      are <a>quoted graphs</a>.
-      However, by this definition, cycles of <a>quoted graphs</a> cannot be created.</p>
+      are <a>graph terms</a>.
+      However, by this definition, cycles of <a>graph terms</a> cannot be created.</p>
 
     <p><a>IRIs</a>, <a>literals</a>,
-      <a>blank nodes</a>, and <a>quoted graphs</a> are collectively known as
+      <a>blank nodes</a>, and <a>graph terms</a> are collectively known as
       <span id="dfn-rdf-terms"><!-- obsolete term--></span><dfn data-lt="rdf term">RDF terms</dfn>.</p>
 
     <p><a>IRIs</a>, <a>literals</a>,
-      <a>blank nodes</a>, and <a>quoted graphs</a> are distinct and distinguishable.
+      <a>blank nodes</a>, and <a>graph terms</a> are distinct and distinguishable.
       For example, <code>http://example.org/</code> as a string literal
       is equal to neither <code>http://example.org/</code> as an IRI,
       nor a blank node with the <a>blank node identifier</a>
@@ -1733,8 +1733,8 @@
   <ul>
     <li>Added <a href="#section-dataset-quad" class="sectionRef"></a>
       for informative definition of a <a>quad</a>.</li>
-    <li>Added <a href="#section-quoted-graphs" class="sectionRef"></a>
-      and definitions for <a>quoted graph</a>.</li>
+    <li>Added <a href="#section-graph-terms" class="sectionRef"></a>
+      and definitions for <a>graph terms</a>.</li>
     <li>Improved the use of IRI terminology,
       and added <a href="#iri-abnf" class="sectionRef"></a>.
       This improves the language using <a>relative IRI references</a>
