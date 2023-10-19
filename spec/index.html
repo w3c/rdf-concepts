@@ -181,24 +181,24 @@
       For the triples in a <a>graph term</a> to be asserted,
       they must also appear in a graph which is not a <a>graph term</a>.</p>
 
-    <p>The following diagram represents a statement with an unasserted <a>graph term</a>
+    <p>The following diagram represents a statement with a <a>graph term</a> containing unasserted triples
       as the subject.</p>
 
     <figure id="fig-graph-term">
       <a href="quoted-triple.svg">
         <!-- Source for this file is at https://docs.google.com/drawings/d/1I_QxbUgnQXumXzb8c0WNJHIQ-mtRs2S80dDG6i9aOD8 -->
         <img src="quoted-triple.svg"
-             alt="An RDF graph containing a triple that references an unasserted graph term (with grey background) as the subject"
+             alt="An RDF graph containing a triple that references a graph term containing unasserted triples (with grey background) as the subject"
              style="width:70%"
              aria-describedby="fig-graph-term-alt"/>
       </a>
       <figcaption id="fig-graph-term-alt">
-        An RDF graph containing a triple that references an unasserted graph term (with grey background) as the subject.
+        An RDF graph containing a triple that references that references a graph term containing unasserted triples (with grey background) as the subject.
       </figcaption>
     </figure>
 
     <p>A variation on the graph shown in <a href="#fig-graph-term"></a> can be described
-      where the triples in the <a>graph term</a> are also in the <a>default graph</a>.</p>
+      where the triples in the <a>graph term</a> (where they are unasserted) are also in the <a>default graph</a> (where they are asserted).</p>
 
     <figure id="fig-asserted-graph-term">
       <a href="quoted-asserted-triple.svg">
@@ -210,7 +210,7 @@
       </a>
       <figcaption id="fig-asserted-graph-term-alt">
         An RDF graph containing two triples where one of them contains the other as the subject;
-        hence, that other triple is both asserted and the content of a graph term.
+        hence, the second triple is both asserted _and_ contained within a graph term.
       </figcaption>
     </figure>
 
@@ -218,7 +218,7 @@
 
     <p class="note">
       The concept of a graph term is similar to that of a named graph,
-      however a graph term does not have a name, and is intended to be used as the
+      however a graph term does not have a name, and is intended to be used only as the
       subject or object of RDF triples.
     </p>
 
@@ -564,13 +564,15 @@
       a <a>blank node</a>, or a <a>graph term</a>;
       the <a>predicate</a> of an <a>RDF triple</a> may only be an <a>IRI</a>;
       the <a>object</a> of an <a>RDF triple</a> may be either an <a>IRI</a>,
-      a <a>blank node</a>, a <a>literal</a> or a <a>graph term</a>.</p>
+      a <a>blank node</a>, a <a>literal</a>, or a <a>graph term</a>.</p>
 
     <p class="note">The definition of <a>graph term</a> is recursive.
       That is, a <a>graph term</a> can itself contain
       triples where either or both the <a>subject</a> and/or <a>object</a> component
       is a <a>graph term</a>.
-      However, by this definition, cycles of <a>graph terms</a> cannot be created.</p>
+      However, by this definition, cycles of <a>graph terms</a> cannot be created;
+      that is, a <a>graph term</a> cannot contain an identical <a>graph term</a> — 
+      a copy of itself — at any depth.</p>
 
     <p><a>IRIs</a>, <a>literals</a>,
       <a>blank nodes</a>, and <a>graph terms</a> are collectively known as
