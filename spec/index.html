@@ -584,9 +584,10 @@
 
     <p><a>IRIs</a>, <a>literals</a>,
       <a>blank nodes</a>, and <a>quoted triples</a> are distinct and distinguishable.
-      For example, <code>http://example.org/</code> as a string literal
-      is equal to neither <code>http://example.org/</code> as an IRI,
-      nor a blank node with the <a>blank node identifier</a>
+      For example, a literal with the string <code>http://example.org/</code> as
+      its <a>lexical form</a>
+      is not equal to the IRI <code>http://example.org/</code>,
+      nor to a blank node with the <a>blank node identifier</a>
       <code>http://example.org/</code>.</p>
 
     <p>The set of <span id="dfn-nodes"><!-- obsolete term--></span><dfn data-lt="node">nodes</dfn> of an <a>RDF graph</a>
@@ -1809,6 +1810,9 @@
       and restriction to the XML <a data-cite="XML11#charsets">Char</a> production.
       Also removes obsolete recommendations for the use of Normalization Form C in literals.
       Adds a definition of <a>string</a> that can be used in other RDF documents.</li>
+    <li>Minor edit
+      to improve the example about distinguishing literals, IRIs, and blank nodes
+      in <a href="#section-triples" class="sectionRef"></a>.</li>
   </ul>
 
   <p class="note">A detailed overview of the differences between RDF versions&nbsp;1.0
