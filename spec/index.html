@@ -719,7 +719,7 @@
         language tag MUST be well-formed according to
         <a data-cite="bcp47#section-2.2.9">section 2.2.9</a>
         of [[!BCP47]],
-        and MUST be case normalized consistently (e.g., to lower case)..</li>
+        and MUST be case normalized consistently (e.g., to lower case).</li>
       <li>if and only if the <a>datatype IRI</a> is
         <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#dirLangString</code>,
         a non-empty <a>language tag</a>
@@ -732,7 +732,7 @@
       is present and the fourth element is not present.
       Lexical representations of language tags
       MUST be case normalized
-      and MAY be converted to lower case.
+      and MAY (preferably) be converted to lower case.
       The value of language tags is always treated as being in lower case.</p>
 
     <p>A literal is a <dfn id="dfn-dir-lang-string">directional language-tagged string</dfn>
@@ -1815,7 +1815,7 @@
     <li>Minor edit
       to improve the example about distinguishing literals, IRIs, and blank nodes
       in <a href="#section-triples" class="sectionRef"></a>.</li>
-    <li>Language tags were previously allowed to be normalized to lower case,
+    <li>Implementations were previously allowed to normalize language tags to lower case,
       which made it ambiguous if two literals with language tags different only by case represented the same literal,
       or distinct literals.
       RDF 1.2 requires that language tags be case normalized,
