@@ -719,7 +719,8 @@
         language tag MUST be well-formed according to
         <a data-cite="bcp47#section-2.2.9">section 2.2.9</a>
         of [[!BCP47]],
-        and MUST be case normalized consistently (e.g., to lower case).</li>
+        and MUST be treated consistently, that is, in a case insensitive manner.
+        Two language tags are the same if they only differ by case.</li>
       <li>if and only if the <a>datatype IRI</a> is
         <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#dirLangString</code>,
         a non-empty <a>language tag</a>
@@ -733,7 +734,7 @@
       Lexical representations of language tags
       MUST be case normalized
       and MAY (preferably) be converted to lower case.
-      The value of language tags is always treated as being in lower case.</p>
+      </p>
 
     <p>A literal is a <dfn id="dfn-dir-lang-string">directional language-tagged string</dfn>
       if both the third element and fourth elements are present.
