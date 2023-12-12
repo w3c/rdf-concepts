@@ -1819,8 +1819,10 @@
     <li>Implementations were previously allowed to normalize language tags to lower case,
       which made it ambiguous if two literals with language tags different only by case represented the same literal,
       or distinct literals.
-      RDF 1.2 requires that language tags be case normalized,
-      but does not specify excactly how this is to be performed.
+      RDF 1.2 requires that language tags must be unique to within case-senstivity
+      but does not specify the common formatting to be used.
+      Two literals that with the same lexical form and language tags different only by case
+      are the same literal.
       Implementations can either follow the advice to normalize to lower case,
       use the recommended BCP47 format,
       or something else, as long it is performed consistently.</li>
