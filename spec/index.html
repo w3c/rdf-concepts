@@ -731,9 +731,9 @@
 
     <p>A literal is a <dfn>language-tagged string</dfn> if the third element
       is present and the fourth element is not present.
-      Lexical representations of language tags
-      MUST be case normalized
-      and MAY (preferably) be converted to lower case.
+       Lexical representations of language tags
+       MAY be case normalized,
+       (for example, by converting to lower case).
       </p>
 
     <p>A literal is a <dfn id="dfn-dir-lang-string">directional language-tagged string</dfn>
@@ -1817,15 +1817,16 @@
       to improve the example about distinguishing literals, IRIs, and blank nodes
       in <a href="#section-triples" class="sectionRef"></a>.</li>
     <li>Implementations were previously allowed to normalize language tags to lower case,
-      which made it ambiguous if two literals with language tags different only by case represented the same literal,
+      which made it ambiguous whether two literals with language tags
+      that differed only by case represented the same literal,
       or distinct literals.
-      RDF 1.2 requires that language tags must be unique to within case-senstivity
+      RDF 1.2 requires that language tags be case-insensitively unique 
       but does not specify the common formatting to be used.
-      Two literals that with the same lexical form and language tags different only by case
+      Two literals with the same lexical form and language tags that differ only by case
       are the same literal.
       Implementations can either follow the advice to normalize to lower case,
       use the recommended BCP47 format,
-      or something else, as long it is performed consistently.</li>
+      or do something else, as long it is performed consistently.</li>
   </ul>
 
   <p class="note">A detailed overview of the differences between RDF versions&nbsp;1.0
