@@ -718,7 +718,9 @@
         non-empty <dfn>language tag</dfn> as defined by [[!BCP47]]. The
         language tag MUST be well-formed according to
         <a data-cite="bcp47#section-2.2.9">section 2.2.9</a>
-        of [[!BCP47]].</li>
+        of [[!BCP47]],
+        and MUST be treated consistently, that is, in a case insensitive manner.
+        Two language tags are the same if they only differ by case.</li>
       <li>if and only if the <a>datatype IRI</a> is
         <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#dirLangString</code>,
         a non-empty <a>language tag</a>
@@ -729,9 +731,10 @@
 
     <p>A literal is a <dfn>language-tagged string</dfn> if the third element
       is present and the fourth element is not present.
-      Lexical representations of language tags MAY be converted
-      to lower case.
-      The value of language tags is always treated as being in lower case.</p>
+       Lexical representations of language tags
+       MAY be case normalized,
+       (for example, by converting to lower case).
+      </p>
 
     <p>A literal is a <dfn id="dfn-dir-lang-string">directional language-tagged string</dfn>
       if both the third element and fourth elements are present.
@@ -1813,6 +1816,17 @@
     <li>Minor edit
       to improve the example about distinguishing literals, IRIs, and blank nodes
       in <a href="#section-triples" class="sectionRef"></a>.</li>
+    <li>Implementations were previously allowed to normalize language tags to lower case,
+      which made it ambiguous whether two literals with language tags
+      that differed only by case represented the same literal,
+      or distinct literals.
+      RDF 1.2 requires that language tags be case-insensitively unique 
+      but does not specify the common formatting to be used.
+      Two literals with the same lexical form and language tags that differ only by case
+      are the same literal.
+      Implementations can either follow the advice to normalize to lower case,
+      use the recommended BCP47 format,
+      or do something else, as long it is performed consistently.</li>
   </ul>
 
   <p class="note">A detailed overview of the differences between RDF versions&nbsp;1.0
