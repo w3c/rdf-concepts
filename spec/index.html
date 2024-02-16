@@ -67,7 +67,7 @@
       are comprised of a default graph and zero or more named graphs.</li>
   </ul>
 
-  <p>RDF 1.2 introduces <a>quoted triples</a> as another kind of <a>RDF term</a>
+  <p>RDF 1.2 introduces <a>triple terms</a> as another kind of <a>RDF term</a>
     which can be used as the <a>subject</a> or <a>object</a> of another <a>triple</a>.
     RDF 1.2 also introduces <a>directional language-tagged strings</a>,
     which contain a <a>base direction</a> element that allows the
@@ -130,7 +130,7 @@
 
     <p>There can be four kinds of <a>nodes</a> in an
       <a>RDF graph</a>: <a>IRIs</a>, <a>literals</a>,
-      <a>blank nodes</a>, and <a>quoted triples</a>.</p>
+      <a>blank nodes</a>, and <a>triple terms</a>.</p>
 
   </section>
 
@@ -492,12 +492,12 @@
   <ul>
     <li><dfn class="no-export lint-ignore">Full</dfn> conformance
       supports <a data-lt="RDF graph">graphs</a> and <a data-lt="RDF dataset">datasets</a>
-      containing <a>quoted triples</a>.
+      with <a>triples</a> that contain <a>triple terms</a>.
       Concrete syntaxes in which such graphs and datasets can be expressed include
       [[RDF12-N-TRIPLES]], [[RDF12-N-QUADS]], [[RDF12-TURTLE]], and [[RDF12-TRIG]].</li>
     <li><dfn class="no-export lint-ignore">Classic</dfn> conformance
-      only supports <a data-lt="RDF graph">graphs</a> or <a data-lt="RDF dataset">datasets</a>,
-      that do not contain <a>quoted triples</a>.</li>
+      only supports <a data-lt="RDF graph">graphs</a> or <a data-lt="RDF dataset">datasets</a>
+      with <a>triples</a> that do not contain <a>triple terms</a>.</li>
   </ul>
   <p class="ednote">The conformance levels described above are tentative,
     and still the subject of group discussion. An alternative to conformance
@@ -538,53 +538,59 @@
   <section id="section-triples">
     <h3>Triples</h3>
 
-    <p>An <dfn data-local-lt="triple">RDF triple</dfn> is a 3-tuple that is defined recursively as follows:</p>
+    <p>An <dfn data-local-lt="triple">RDF triple</dfn> (usually called "triple")
+      is a 3-tuple (|s|, |p|, |o|) where:</p>
+
+    <ul>
+      <li>|s| is an <a>IRI</a> or a <a>blank node</a>,</li>
+      <li>|p| is an <a>IRI</a>, and</li>
+      <li>|o| is an <a>IRI</a>, a <a>blank node</a>, a <a>literal</a>,
+        or a <a>triple term</a>.</li>
+    </ul>
+
+    <p>An <dfn>triple term</dfn> is a 3-tuple that is defined recursively as follows:</p>
 
     <ul>
       <li>
         If |s| is an <a>IRI</a> or a <a>blank node</a>,
         |p| is an <a>IRI</a>, and
         |o| is an <a>IRI</a>, a <a>blank node</a>, or a <a>literal</a>,
-        then (|s|, |p|, |o|) is an RDF triple.
+        then (|s|, |p|, |o|) is a triple term.
       </li>
 
       <li>
-        If |t| and <var>t'</var> are <a>RDF triples</a>,
-        |s| is an <a>IRI</a> or a <a>blank node</a>,
+        If |s| is an <a>IRI</a> or a <a>blank node</a>,
         |p| is an <a>IRI</a>, and
-        |o| is an <a>IRI</a>, a <a>blank node</a>, or a <a>literal</a>,
-        then (|t|, |p|, |o|), (|s|, |p|, |t|), and (|t|, |p|, <var>t'</var>) are RDF triples.
+        |t| is a <a>triple term</a>,
+        then (|s|, |p|, |t|) is a triple term.
       </li>
     </ul>
-
-    <p>"RDF triple" is usually written "<a>triple</a>".<p>
 
     <p>Given a <a>triple</a> (|s|, |p|, |o|),
       |s| is called the <dfn>subject</dfn> of the triple,
       |p| is called the <dfn>predicate</dfn> of the triple, and
-      |o| is called the <dfn>object</dfn> of the triple.</p>
+      |o| is called the <dfn>object</dfn> of the triple.
+      Similarly, given a <a>triple term</a> (|s|, |p|, |o|),
+      |s| is called the <em>subject</em> of the triple term,
+      |p| is called the <em>predicate</em> of the triple term, and
+      |o| is called the <em>object</em> of the triple term.</p>
 
-    <p>When an <a>RDF triple</a> is used as the <a>subject</a> or <a>object</a> of a triple, this occurrence of
-      the triple is called a <dfn data-local-lt="quoted">quoted triple</dfn>.</p>
+    <p class="note">While, syntactically, the notion of an <a>RDF triple</a>
+      and the notion of a <a>triple term</a> are the same, they represent
+      different concepts. RDF triples are the members of <a>RDF graphs</a>,
+      whereas triple terms can be used as components of RDF triples.</p>
 
-    <p class="note">By the given definitions,
-      the <a>subject</a> of an <a>RDF triple</a> may be either an <a>IRI</a>,
-      a <a>blank node</a>, or a <a>quoted triple</a>;
-      the <a>predicate</a> of an <a>RDF triple</a> may only be an <a>IRI</a>;
-      the <a>object</a> of an <a>RDF triple</a> may be either an <a>IRI</a>,
-      a <a>blank node</a>, a <a>literal</a> or a <a>quoted triple</a>.</p>
-
-    <p class="note">The definition of <a>quoted triple</a> is recursive.
-      That is, a <a>quoted triple</a> can itself have a
-      <a>subject</a> or <a>object</a> component which is another <a>quoted triple</a>.
-      However, by this definition, cycles of <a>quoted triples</a> cannot be created.</p>
+    <p class="note">The definition of <a>triple term</a> is recursive.
+      That is, a <a>triple term</a> can itself have an
+      <a>object</a> component which is another <a>triple term</a>.
+      However, by this definition, cycles of <a>triple terms</a> cannot be created.</p>
 
     <p><a>IRIs</a>, <a>literals</a>,
-      <a>blank nodes</a>, and <a>quoted triples</a> are collectively known as
+      <a>blank nodes</a>, and <a>triple terms</a> are collectively known as
       <span id="dfn-rdf-terms"><!-- obsolete term--></span><dfn data-lt="rdf term">RDF terms</dfn>.</p>
 
     <p><a>IRIs</a>, <a>literals</a>,
-      <a>blank nodes</a>, and <a>quoted triples</a> are distinct and distinguishable.
+      <a>blank nodes</a>, and <a>triple terms</a> are distinct and distinguishable.
       For example, a literal with the string <code>http://example.org/</code> as
       its <a>lexical form</a>
       is not equal to the IRI <code>http://example.org/</code>,
@@ -592,17 +598,9 @@
       <code>http://example.org/</code>.</p>
 
     <p>The set of <span id="dfn-nodes"><!-- obsolete term--></span><dfn data-lt="node">nodes</dfn> of an <a>RDF graph</a>
-      is the set of <a>subjects</a> and <a>objects</a> of <a>triples</a> in the graph.
+      is the set of <a>subjects</a> and <a>objects</a> of the <a>triples</a> in the graph.
       It is possible for a predicate IRI to also occur as a node in
       the same graph.</p>
-
-    <p>An <dfn data-local-lt="asserted">asserted triple</dfn>
-      is an <a>RDF triple</a> that is an element of an <a>RDF graph</a>.</p>
-
-    <p class="note">In an <a>RDF graph</a>,
-      a <a>triple</a> may occur as either a <a>quoted triple</a>, an 
-      <a>asserted triple</a>, or both.</p>
-  </section>
 
   <section id="section-IRIs">
     <h3>IRIs</h3>
