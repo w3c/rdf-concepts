@@ -175,6 +175,10 @@
   <section id="section-quoted-triples">
     <h3>Quoted Triples</h3>
 
+    <p class="issue" data-number="81">
+      As the WG has moved away from the notion of quoted triples, this section needs to be changed such that it does not mention quoted triples anymore but, instead, describes whatever new concept the WG settles on (e.g., <a>triple terms</a>).
+    </p>
+
     <p>A <a>quoted triple</a> is an <a>RDF term</a> with the components of
       an <a>RDF triple</a>, which can be used as the <a>subject</a> or <a>object</a>
       of another triple.</p>
@@ -1789,10 +1793,13 @@
   <ul>
     <li>Added <a href="#section-dataset-quad" class="sectionRef"></a>
       for informative definition of a <a>quad</a>.</li>
-    <!-- The following bullet point should be removed when Section 1.3 is changed
-         to introduce triple terms instead of quoted triples. -->
     <li>Added <a href="#section-quoted-triples" class="sectionRef"></a>
       <s>and definitions for <a>quoted triple</a> and <a>asserted triple</a></s>.</li>
+
+    <div class="issue" data-number="81">
+      The notion of quoted triples is deprecated and will be removed again from this document. Currently, Section <a href="#section-quoted-triples" class="sectionRef"></a> still describes this notion. Once this section is changed to describe whatever new concept the WG settles on (currently, this may be <a>triple terms</a>---see the next bullet point), the previous bullet point can be removed and the addition of the then-rewritten section can be mentioned in the next bullet point.
+    </div>
+
     <li>Added the notion of a <a>triple term</a> and extended the definition of
       <a>RDF triple</a> to permit triple terms as objects.</li>
     <li>Added the <a>base direction</a> element as part of 
