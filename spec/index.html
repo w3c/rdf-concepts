@@ -1517,35 +1517,77 @@
       <dd>is the set of all <a data-lt="string">RDF strings</a> that conform to the
         <a data-cite="RFC8259#section-2">JSON Grammar</a> as described in
         <a data-cite="RFC8259#section-2">Section&nbsp;2 JSON Grammar</a> of [[RFC8259]],
-        which also conform to the requirements of [[[RFC7493]]] [[RFC7493]].</dd>
+        which also conform to the requirements of [[[RFC7493]]] [[RFC7493]].
+        <div class="note">
+          [[[RFC8259]]] [[RFC8259]] allows strings to include
+          <a data-cite="i18n-glossary#dfn-surrogate" class="lint-ignore">surrogate code points</a>
+          which are not allowed in <a data-lt="string">RDF strings</a>,
+          which are also excluded in [[RFc7493]],
+          thus the lexical representation of JSON literals excludes those including
+          <a data-cite="i18n-glossary#dfn-surrogate" class="lint-ignore">surrogate code points</a>.
+        </div></dd>
 
       <dt id="JSON-value-space">The <a>value space</a></dt>
       <dd>is the set of
-        <a data-cite="RFC8259#section-7">strings</a>,
-        <a data-cite="RFC8259#section-6">numbers</a>,
-        <a data-cite="RFC8259#section-4">objects</a>,
-        <a data-cite="RFC8259#section-5">arrays</a>, and
-        literal values (`true`, `false`, and `null`) [[RFC8259]].
+        <a>strings</a>,
+        numbers (<a data-cite="XMLSCHEMA11-2#integer">integer</a> or <a data-cite="XMLSCHEMA11-2#double">double</a>),
+        <a data-cite="INFRA#ordered-map">maps</a>,
+        <a data-cite="INFRA#list">lists</a>, and
+        literal values (<a data-cite="INFRA#boolean">`true`, `false`</a>, and <a data-cite="INFRA#nulls">`null`</a>)
+        from [[[INFRA]]] [[INFRA]] and [[[XMLSCHEMA11-2]]] [[XMLSCHEMA11-2]].
 
-        Two values are considered equal
-        if they are the same <a data-cite="RFC8259#section-7">string</a>,
-        <a data-cite="RFC8259#section-6">number</a>, or
-        literal value;
-        if they are both <a data-cite="RFC8259#section-5">arrays</a> with elements
-        which are pairwise equal;
-        or if they are both <a data-cite="RFC8259#section-4">objects</a> with equal members.
+        <p>Two values (|a| and |b|) are considered equal if:
+          <ul>
+            <li>they are the same <a>string</a>,
+              number (<a data-cite="XMLSCHEMA11-2#integer">integer</a> or <a data-cite="XMLSCHEMA11-2#double">double</a>), or
+              literal value;</li>
+            <li>they are both <a data-cite="INFRA#list">lists</a> containing <a data-cite="INFRA#list-item">items</a>
+              which are pairwise equal – meaning that each <a data-cite="INFRA#list-item">item</a>
+              in |a| is equal the <a data-cite="INFRA#list-item">item</a>
+              at the corresponding index in |b|,
+              and both |a| and |b| have the same <a data-cite="INFRA#list-size">size</a>; or</li>
+            <li>if they are both <a data-cite="INFRA#ordered-map">maps</a> with equal <a data-cite="INFRA#entry">entries</a>
+              – meaning that each a <a data-cite="INFRA#entry">entry</a> in |a|
+              has a corresponding <a data-cite="INFRA#entry">entry</a> in |b|,
+              and both |a| and |b| have the same <a data-cite="INFRA#map-size">size</a>.</li>
+          </ul>
       </dd> 
 
       <dt id="JSON-mapping">The <a>lexical-to-value mapping</a></dt>
       <dd>maps every element of the lexical space to the result of parsing it into a
-        <a data-cite="RFC4627#section-2.1">JSON value</a>.
+        <a>string</a>,
+        number (<a data-cite="XMLSCHEMA11-2#integer">integer</a> or <a data-cite="XMLSCHEMA11-2#double">double</a>),
+        <a data-cite="INFRA#ordered-map">map</a>,
+        <a data-cite="INFRA#list">list</a>, or
+        literal value (<a data-cite="INFRA#boolean">`true`, `false`</a>, and <a data-cite="INFRA#nulls">null</a>).
+
+        <ul>
+          <li>A <a href="RFC8259#section-4">JSON Object</a> is mapped to a <a data-cite="INFRA#ordered-map">map</a>
+            by transforming each object member into a <a data-cite="INFRA#map-entry">map entry</a>
+            with the <a data-cite="INFRA#map-key">key</a> taken from the member name and
+            <a data-cite="INFRA#map-value">value</a> taken by performing this mapping
+            to the member value.</li>
+          <li>A <a href="RFC8259#section-5">JSON Array</a> is mapped to a <a data-cite="INFRA#list">list</a>
+            by performing this mapping on each array value.</li>
+          <li>A <a href="RFC8259#section-6">JSON Number</a> is mapped to
+            either an <a data-cite="XMLSCHEMA11-2#integer">integer</a>
+            (if the number has the lexical form of an <a data-cite="XMLSCHEMA11-2#integer">integer</a>)
+            or <a data-cite="XMLSCHEMA11-2#double">double</a>.</li>
+          <li>A <a href="RFC8259#section-7">JSON String</a> is mapped to
+            a <a>string</a>.</li>
+          <li>A <a href="RFC8259#section-3">JSON literal name</a> is mapped to
+            <a data-cite="INFRA#boolean">`true`, `false`</a>, or <a data-cite="INFRA#nulls">null</a>.</li>
+        </ul>
       </dd>
 
       <dt id="JSON-canonical">The canonical mapping</dt>
       <dd>defines a canonical lexical form for each member of the value space.
         The `rdf:JSON` canonical mapping is
-        to an <a data-lt="string">RDF string</a> conforming to the <a data-cite="RFC4627#section-2">JSON Grammar</a>
+        to an <a data-lt="string">RDF string</a> conforming to the <a data-cite="RFC8259#section-2">JSON Grammar</a>
         using the mechanism described in [[[RFC8785]]] [[RFC8785]].
+
+        <p>The relative order of two `rdf:JSON` literals
+          is the relative order of their <a href="#JSON-canonical">canonical mappings</a>.</p>
       </dd>
     </dl>
   </section>
