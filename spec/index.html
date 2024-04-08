@@ -895,7 +895,7 @@
       if needed.</p>
 
     <p>Systems that want Skolem IRIs to be recognizable outside of the system
-      boundaries SHOULD use a well-known IRI [[RFC5785]] with the registered
+      boundaries SHOULD use a well-known IRI [[RFC8615]] with the registered
       name <code>genid</code>. This is an IRI that uses the HTTP or HTTPS scheme,
       or another scheme that has been specified to use well-known IRIs; and whose
       path component starts with <code>/.well-known/genid/</code>.
@@ -905,7 +905,7 @@
 
     <pre>http://example.com/.well-known/genid/d26a2d0e98334696f4ad70a677abc1f6</pre>
 
-    <p class="note">RFC 5785 [[RFC5785]] only specifies well-known URIs,
+    <p class="note">RFC 8615 [[RFC8615]] only specifies well-known URIs,
       not IRIs. For the purpose of this document, a well-known IRI is any
       IRI that results in a well-known <a>URI</a> after IRI-to-URI mapping [[!RFC3987]].</p>
   </section>
