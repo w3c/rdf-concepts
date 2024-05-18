@@ -1531,7 +1531,7 @@
       <dd>is the set of
         <a>strings</a>,
         numbers (<a data-cite="XMLSCHEMA11-2#integer">integer</a> or <a data-cite="XMLSCHEMA11-2#double">double</a>),
-        <a data-cite="INFRA#ordered-map">maps</a>,
+        <a data-cite="INFRA#ordered-map">maps (unordered)</a>,
         <a data-cite="INFRA#list">lists</a>, and
         literal values (<a data-cite="INFRA#boolean">`true`, `false`</a>, and <a data-cite="INFRA#nulls">`null`</a>)
         from [[[INFRA]]] [[INFRA]] and [[[XMLSCHEMA11-2]]] [[XMLSCHEMA11-2]].
@@ -1566,7 +1566,9 @@
             by transforming each object member into a <a data-cite="INFRA#map-entry">map entry</a>
             with the <a data-cite="INFRA#map-key">key</a> taken from the member name and
             <a data-cite="INFRA#map-value">value</a> taken by performing this mapping
-            to the member value.</li>
+            to the member value.
+            <a data-cite="INFRA#map-entry">Map entries</a> are treated as being unordered.
+            </li>
           <li>A <a href="RFC8259#section-5">JSON Array</a> is mapped to a <a data-cite="INFRA#list">list</a>
             by performing this mapping on each array value.</li>
           <li>A <a href="RFC8259#section-6">JSON Number</a> is mapped to
