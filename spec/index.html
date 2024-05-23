@@ -1581,21 +1581,6 @@
             <a data-cite="INFRA#boolean">`true`, `false`</a>, or <a data-cite="INFRA#nulls">null</a>.</li>
         </ul>
       </dd>
-
-      <dt id="JSON-canonical">The canonical mapping</dt>
-      <dd>defines a canonical lexical form for each member of the value space.
-        The `rdf:JSON` canonical mapping is
-        to an <a data-lt="string">RDF string</a> conforming to the <a data-cite="RFC8259#section-2">JSON Grammar</a>
-        using the mechanism described in [[[RFC8785]]] [[RFC8785]].
-
-        <div class="ednote">Due to concerns about number encoding in JCS,
-          the canonical representation of JSON literals will be adapted from
-          <a data-cite="JSON-LD11#the-rdf-json-datatype">the value space of the rdf:JSON Datatype</a>
-          as described in [[[JSON-LD11]]] [[JSON-LD11]].</div>
-
-        <p>The relative order of two `rdf:JSON` literals
-          is the relative order of their <a href="#JSON-canonical">canonical mappings</a>.</p>
-      </dd>
     </dl>
   </section>
 
