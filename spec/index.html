@@ -1517,14 +1517,12 @@
       <dd>is the set of all <a data-lt="string">RDF strings</a> that conform to the
         <a data-cite="RFC8259#section-2">JSON Grammar</a> as described in
         <a data-cite="RFC8259#section-2">Section&nbsp;2 JSON Grammar</a> of [[RFC8259]],
-        which also conform to the requirements of [[[RFC7493]]] [[RFC7493]];
-        additionally, numbers MUST NOT include values that cannot be expressed
-        as an <a href="http://ieeexplore.ieee.org/servlet/opac?punumber=4610933">IEEE 754-2008</a> double precision number.
+        which also conform to the requirements of [[[RFC7493]]] [[RFC7493]].
         <div class="note">
           [[[RFC8259]]] [[RFC8259]] allows strings to include
           <a data-cite="I18N-GLOSSARY#dfn-surrogate" class="lint-ignore">surrogate code points</a>
-          which are not allowed in <a data-lt="string">RDF strings</a>,
-          which are also excluded in [[RFc7493]],
+          not allowed in <a data-lt="string">RDF strings</a>,
+          which are also excluded in [[RFC7493]],
           thus the lexical representation of JSON literals excludes those including
           <a data-cite="I18N-GLOSSARY#dfn-surrogate" class="lint-ignore">surrogate code points</a>.
         </div></dd>
@@ -1532,7 +1530,7 @@
       <dt id="JSON-value-space">The <a>value space</a></dt>
       <dd>is the set of
         <a>strings</a>,
-        numbers (<a data-cite="XMLSCHEMA11-2#double">double</a>),
+        numbers (<a data-cite="XMLSCHEMA11-2#double"><strong>xsd:double</strong></a>),
         <a data-cite="INFRA#ordered-map">maps (unordered)</a>,
         <a data-cite="INFRA#list">lists</a>, and
         literal values (<a data-cite="INFRA#boolean">`true`, `false`</a>, and <a data-cite="INFRA#nulls">`null`</a>)
@@ -1541,7 +1539,7 @@
         <p>Two values (|a| and |b|) are considered equal if:
           <ul>
             <li>they are the same <a>string</a>,
-              number (<a data-cite="XMLSCHEMA11-2#double">double</a>), or
+              number (<a data-cite="XMLSCHEMA11-2#double"><strong>xsd:double</strong></a>), or
               literal value;</li>
             <li>they are both <a data-cite="INFRA#list">lists</a> containing <a data-cite="INFRA#list-item">items</a>
               which are pairwise equal – meaning that each <a data-cite="INFRA#list-item">item</a>
@@ -1549,16 +1547,20 @@
               at the corresponding index in |b|,
               and both |a| and |b| have the same <a data-cite="INFRA#list-size">size</a>; or</li>
             <li>if they are both <a data-cite="INFRA#ordered-map">maps</a> with equal <a data-cite="INFRA#entry">entries</a>
-              – meaning that each a <a data-cite="INFRA#entry">entry</a> in |a|
-              has an equivalent <a data-cite="INFRA#entry">entry</a> in |b|,
-              and both |a| and |b| have the same <a data-cite="INFRA#map-size">size</a>.</li>
+              – meaning that both |a| and |b| have the same <a data-cite="INFRA#map-size">size</a>,
+              and for each entry <var>e<sub>a</sub></var> in |a|
+              there is an entry <var>e<sub>b</sub></var> in |b|
+              such that the <a data-cite="INFRA#map-key">key</a> in <var>e<sub>a</sub></var>
+              equals the <a data-cite="INFRA#map-key">key</a> in <var>e<sub>b</sub></var>,
+              and the <a data-cite="INFRA#map-value">value</a> in <var>e<sub>a</sub></var>
+              equals the <a data-cite="INFRA#map-value">value</a> in <var>e<sub>b</sub></var>.</li>
           </ul>
       </dd> 
 
       <dt id="JSON-mapping">The <a>lexical-to-value mapping</a></dt>
       <dd>maps every element of the lexical space to the result of parsing it into a
         <a>string</a>,
-        number (<a data-cite="XMLSCHEMA11-2#double">double</a>),
+        number (<a data-cite="XMLSCHEMA11-2#double"><strong>xsd:double</strong></a>),
         <a data-cite="INFRA#ordered-map">map</a>,
         <a data-cite="INFRA#list">list</a>, or
         literal value (<a data-cite="INFRA#boolean">`true`, `false`</a>, and <a data-cite="INFRA#nulls">null</a>).
@@ -1574,7 +1576,8 @@
           <li>A <a href="RFC8259#section-5">JSON Array</a> is mapped to a <a data-cite="INFRA#list">list</a>
             by performing this mapping on each array value.</li>
           <li>A <a href="RFC8259#section-6">JSON Number</a> is mapped to
-            a <a data-cite="XMLSCHEMA11-2#double">double</a>.</li>
+            an <a data-cite="XMLSCHEMA11-2#double"><strong>xsd:double</strong></a>
+            using a method consistent with <a data-cite="XMLSCHEMA11-2#f-doubleLexmap">doubleLexicalMap</a>.</li>
           <li>A <a href="RFC8259#section-7">JSON String</a> is mapped to
             a <a>string</a>.</li>
           <li>A <a href="RFC8259#section-3">JSON literal name</a> is mapped to
