@@ -1577,7 +1577,11 @@
             by performing this mapping on each array value.</li>
           <li>A <a href="RFC8259#section-6">JSON Number</a> is mapped to
             an <a data-cite="XMLSCHEMA11-2#double"><strong>xsd:double</strong></a>
-            using a method consistent with <a data-cite="XMLSCHEMA11-2#f-doubleLexmap">doubleLexicalMap</a>.</li>
+            using a method consistent with <a data-cite="XMLSCHEMA11-2#f-doubleLexmap">doubleLexicalMap</a>.
+            <div class="note">Some numbers cannot be represented
+              as finite <a data-cite="XMLSCHEMA11-2#double"><strong>xsd:double</strong></a> values
+              and may map to `+INF` or `-INF`.</div>
+          </li>
           <li>A <a href="RFC8259#section-7">JSON String</a> is mapped to
             a <a>string</a>.</li>
           <li>A <a href="RFC8259#section-3">JSON literal name</a> is mapped to
