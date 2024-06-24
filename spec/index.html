@@ -1531,8 +1531,10 @@
       <dd>is the set of
         <a>strings</a>,
         numbers (<a data-cite="XMLSCHEMA11-2#double"><strong>xsd:double</strong></a>),
-        <a data-cite="INFRA#ordered-map">maps (unordered)</a>,
-        <a data-cite="INFRA#list">lists</a>, and
+        <a data-cite="INFRA#ordered-map">maps</a>
+        (mapping <a>strings</a> to values in the <a href="#JSON-value-space">value space</a> where the order of <a data-cite="INFRA#entry">map entries</a> is not significant),
+        <a data-cite="INFRA#list">lists</a>
+        (of values in the <a href="#JSON-value-space">value space</a>), and
         literal values (<a data-cite="INFRA#boolean">`true`, `false`</a>, and <a data-cite="INFRA#nulls">`null`</a>)
         from [[[INFRA]]] [[INFRA]] and [[[XMLSCHEMA11-2]]] [[XMLSCHEMA11-2]].
 
@@ -1553,7 +1555,11 @@
               such that the <a data-cite="INFRA#map-key">key</a> in <var>e<sub>a</sub></var>
               equals the <a data-cite="INFRA#map-key">key</a> in <var>e<sub>b</sub></var>,
               and the <a data-cite="INFRA#map-value">value</a> in <var>e<sub>a</sub></var>
-              equals the <a data-cite="INFRA#map-value">value</a> in <var>e<sub>b</sub></var>.</li>
+              equals the <a data-cite="INFRA#map-value">value</a> in <var>e<sub>b</sub></var>.
+              <div class="note">Two JSON Objects containing maps which are serialized with entries in a different order will be equal under this definition when transformed to the value space.
+              For example, `{ "a": 1, "b": 2} and {"b":2, "a":1}` are considered equal.
+              </div>
+            </li>
           </ul>
       </dd> 
 
@@ -1580,7 +1586,8 @@
             using a method consistent with <a data-cite="XMLSCHEMA11-2#f-doubleLexmap">doubleLexicalMap</a>.
             <div class="note">Some numbers cannot be represented
               as finite <a data-cite="XMLSCHEMA11-2#double"><strong>xsd:double</strong></a> values
-              and may map to `+INF` or `-INF`.</div>
+              and may map to `+INF` or `-INF`.
+              Such values cannot be represented as JSON Numbers, limiting the ability to serialize such values back to JSON.</div>
           </li>
           <li>A <a href="RFC8259#section-7">JSON String</a> is mapped to
             a <a>string</a>.</li>
