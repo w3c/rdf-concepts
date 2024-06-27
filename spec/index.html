@@ -314,11 +314,11 @@
       <tr>
         <td>rdf</td>
         <td><a href="http://www.w3.org/1999/02/22-rdf-syntax-ns#"><code>http://www.w3.org/1999/02/22-rdf-syntax-ns#</code></a></td>
-        <td>The RDF built-in vocabulary [[RDF-SYNTAX]]</td>
+        <td>The RDF built-in vocabulary [[RDF12-SCHEMA]]</td>
       </tr>
       <tr><td>rdfs</td>
         <td><a href="http://www.w3.org/2000/01/rdf-schema#"><code>http://www.w3.org/2000/01/rdf-schema#</code></a></td>
-        <td>The RDF Schema vocabulary [[RDF-SCHEMA]]</td>
+        <td>The RDF Schema vocabulary [[RDF12-SCHEMA]]</td>
       </tr>
       <tr><td>xsd</td>
         <td><a href="http://www.w3.org/2001/XMLSchema#"><code>http://www.w3.org/2001/XMLSchema#</code></a></td>
@@ -446,7 +446,7 @@
       defines precise conditions that make these relationships hold.
       RDF itself recognizes only some basic cases of entailment, <a>equivalence</a>
       and inconsistency. Other specifications, such as
-      [[[RDF-SCHEMA]]] [[RDF-SCHEMA]]
+      [[[RDF12-SCHEMA]]] [[RDF12-SCHEMA]]
       and <a data-cite="owl2-overview#">OWL 2</a>
       [[OWL2-OVERVIEW]], add more powerful entailment regimes,
       as do some domain-specific <a>vocabularies</a>.</p>
@@ -895,7 +895,7 @@
       if needed.</p>
 
     <p>Systems that want Skolem IRIs to be recognizable outside of the system
-      boundaries SHOULD use a well-known IRI [[RFC5785]] with the registered
+      boundaries SHOULD use a well-known IRI [[RFC8615]] with the registered
       name <code>genid</code>. This is an IRI that uses the HTTP or HTTPS scheme,
       or another scheme that has been specified to use well-known IRIs; and whose
       path component starts with <code>/.well-known/genid/</code>.
@@ -905,7 +905,7 @@
 
     <pre>http://example.com/.well-known/genid/d26a2d0e98334696f4ad70a677abc1f6</pre>
 
-    <p class="note">RFC 5785 [[RFC5785]] only specifies well-known URIs,
+    <p class="note">RFC 8615 [[RFC8615]] only specifies well-known URIs,
       not IRIs. For the purpose of this document, a well-known IRI is any
       IRI that results in a well-known <a>URI</a> after IRI-to-URI mapping [[!RFC3987]].</p>
   </section>
@@ -1516,58 +1516,85 @@
       <dt id="JSON-lexical-space">The <a>lexical space</a></dt>
       <dd>is the set of all <a data-lt="string">RDF strings</a> that conform to the
         <a data-cite="RFC8259#section-2">JSON Grammar</a> as described in
-        <a data-cite="RFC8259#section-2">Section&nbsp;2 JSON Grammar</a> of
-        [[RFC8259]].</dd>
+        <a data-cite="RFC8259#section-2">Section&nbsp;2 JSON Grammar</a> of [[RFC8259]],
+        which also conform to the requirements of [[[RFC7493]]] [[RFC7493]].
+        <div class="note">
+          [[[RFC8259]]] [[RFC8259]] allows strings to include
+          <a data-cite="I18N-GLOSSARY#dfn-surrogate" class="lint-ignore">surrogate code points</a>
+          not allowed in <a data-lt="string">RDF strings</a>,
+          which are also excluded in [[RFC7493]],
+          thus the lexical representation of JSON literals excludes those including
+          <a data-cite="I18N-GLOSSARY#dfn-surrogate" class="lint-ignore">surrogate code points</a>.
+        </div></dd>
 
       <dt id="JSON-value-space">The <a>value space</a></dt>
-      <dd>
-        is the set of all <a data-lt="string">RDF strings</a> that conform to the
-        <a data-cite="RFC8259#section-2">JSON Grammar</a> as described in
-        <a data-cite="RFC8259#section-2">Section&nbsp;2 JSON Grammar</a> of
-        [[RFC8259]], and furthermore comply with the following constraints:
-        <ul>
-          <li>They MUST NOT contain any unnecessary whitespace.</li>
-          <li>Keys in objects MUST be ordered lexicographically.</li>
-          <li>Native Numeric values MUST be serialized according to
-            <a data-cite="ECMASCRIPT#sec-tostring-applied-to-the-number-type">Section&nbsp;7.1.12.1</a>
-            of [[ECMASCRIPT]].</li>
-          <li>Strings MUST be serialized with Unicode code points from <code class="codepoint">U+0000</code>
-            through <code class="codepoint">U+001F</code> using lower case hexadecimal Unicode notation
-            (`\uhhhh`) except for the set of predefined JSON control characters —
-            `U+0008`, `U+0009`, `U+000A`, `U+000C`, and `U+000D` — which SHOULD be
-            serialized as `\b`, `\t`, `\n`, `\f`, and `\r`, respectively. All
-            other Unicode characters SHOULD be serialized "as is", except
-            `U+005C` (`\`) and `U+0022` (`"`), which SHOULD be serialized as
-            `\\` and `\"`, respectively.</li>
-        </ul>
-        <div class="issue">The JSON Canonicalization Scheme (JCS) [[RFC8785]]
-          is an emerging standard for JSON canonicalization. This <code>rdf:JSON</code> specification
-          will likely be updated to require such a canonical representation.
-          Users are cautioned against depending on the lexical representation of
-          literals with the <code>rdf:JSON</code> datatype as RDF literals,
-          as the specifics of serialization may change in a future revision of
-          this document.</div>
-        Despite being defined as a set of strings, this value space is
-        considered distinct from the value space of <code>xsd:string</code>,
-        in order to avoid side effects with existing specifications.
-      </dd>
- 
-      <dt id="JSON-mapping">The <a>lexical-to-value mapping</a></dt>
-      <dd>
-        maps every element of the lexical space to the result of
-         <ol>
-          <li>parsing it into an internal representation consistent with the
-            [[ECMASCRIPT]] representation created by using the <code>JSON.parse</code>
-            function as defined in <a data-cite="ECMASCRIPT#sec-json-object">Section&nbsp;24.5 The JSON Object</a>
-            of [[ECMASCRIPT]],</li>
-          <li>then serializing it into the JSON format [[RFC8259]] in compliance
-            with the constraints of the value space described above.</li>
-        </ol>
-      </dd>
+      <dd>is the set of
+        <a>strings</a>,
+        numbers (<a data-cite="XMLSCHEMA11-2#double"><strong>xsd:double</strong></a>),
+        <a data-cite="INFRA#ordered-map">maps</a>
+        (mapping <a>strings</a> to values in the <a href="#JSON-value-space">value space</a> where the order of <a data-cite="INFRA#entry">map entries</a> is not significant),
+        <a data-cite="INFRA#list">lists</a>
+        (of values in the <a href="#JSON-value-space">value space</a>), and
+        literal values (<a data-cite="INFRA#boolean">`true`, `false`</a>, and <a data-cite="INFRA#nulls">`null`</a>)
+        from [[[INFRA]]] [[INFRA]] and [[[XMLSCHEMA11-2]]] [[XMLSCHEMA11-2]].
 
-      <dt id="JSON-canonical">The canonical mapping</dt>
-      <dd>maps any element of the value space to the identical string in the
-        lexical space.</dd>
+        <p>Two values (|a| and |b|) are considered equal if:
+          <ul>
+            <li>they are the same <a>string</a>,
+              number (<a data-cite="XMLSCHEMA11-2#double"><strong>xsd:double</strong></a>), or
+              literal value;</li>
+            <li>they are both <a data-cite="INFRA#list">lists</a> containing <a data-cite="INFRA#list-item">items</a>
+              which are pairwise equal – meaning that each <a data-cite="INFRA#list-item">item</a>
+              in |a| is equal the <a data-cite="INFRA#list-item">item</a>
+              at the corresponding index in |b|,
+              and both |a| and |b| have the same <a data-cite="INFRA#list-size">size</a>; or</li>
+            <li>if they are both <a data-cite="INFRA#ordered-map">maps</a> with equal <a data-cite="INFRA#entry">entries</a>
+              – meaning that both |a| and |b| have the same <a data-cite="INFRA#map-size">size</a>,
+              and for each entry <var>e<sub>a</sub></var> in |a|
+              there is an entry <var>e<sub>b</sub></var> in |b|
+              such that the <a data-cite="INFRA#map-key">key</a> in <var>e<sub>a</sub></var>
+              equals the <a data-cite="INFRA#map-key">key</a> in <var>e<sub>b</sub></var>,
+              and the <a data-cite="INFRA#map-value">value</a> in <var>e<sub>a</sub></var>
+              equals the <a data-cite="INFRA#map-value">value</a> in <var>e<sub>b</sub></var>.
+              <div class="note">Two JSON Objects containing maps which are serialized with entries in a different order will be equal under this definition when transformed to the value space.
+              For example, `{ "a": 1, "b": 2 } and { "b": 2, "a": 1 }` are considered equal.
+              </div>
+            </li>
+          </ul>
+      </dd> 
+
+      <dt id="JSON-mapping">The <a>lexical-to-value mapping</a></dt>
+      <dd>maps every element of the lexical space to the result of parsing it into a
+        <a>string</a>,
+        number (<a data-cite="XMLSCHEMA11-2#double"><strong>xsd:double</strong></a>),
+        <a data-cite="INFRA#ordered-map">map</a>,
+        <a data-cite="INFRA#list">list</a>, or
+        literal value (<a data-cite="INFRA#boolean">`true`, `false`</a>, and <a data-cite="INFRA#nulls">null</a>).
+
+        <ul>
+          <li>A <a href="RFC8259#section-4">JSON Object</a> is mapped to a <a data-cite="INFRA#ordered-map">map</a>
+            by transforming each object member into a <a data-cite="INFRA#map-entry">map entry</a>
+            with the <a data-cite="INFRA#map-key">key</a> taken from the member name and
+            <a data-cite="INFRA#map-value">value</a> taken by performing this mapping
+            to the member value.
+            <a data-cite="INFRA#map-entry">Map entries</a> are treated as being unordered.
+            </li>
+          <li>A <a href="RFC8259#section-5">JSON Array</a> is mapped to a <a data-cite="INFRA#list">list</a>
+            by performing this mapping on each array value.</li>
+          <li>A <a href="RFC8259#section-6">JSON Number</a> is mapped to
+            an <a data-cite="XMLSCHEMA11-2#double"><strong>xsd:double</strong></a>
+            using a method consistent with <a data-cite="XMLSCHEMA11-2#f-doubleLexmap">doubleLexicalMap</a>.
+            <div class="note">Some numbers cannot be represented
+              as finite <a data-cite="XMLSCHEMA11-2#double"><strong>xsd:double</strong></a> values
+              and may map to `+INF` or `-INF`.
+              Such values cannot be represented as JSON Numbers, limiting the ability to serialize such values back to JSON.</div>
+          </li>
+          <li>A <a href="RFC8259#section-7">JSON String</a> is mapped to
+            a <a>string</a>.</li>
+          <li>A <a href="RFC8259#section-3">JSON literal name</a> is mapped to
+            <a data-cite="INFRA#boolean">`true`, `false`</a>, or <a data-cite="INFRA#nulls">null</a>.</li>
+        </ul>
+      </dd>
     </dl>
   </section>
 
@@ -1821,7 +1848,10 @@
       datatypes to this appendix.</li>
     <li>Added the <a>rdf:JSON</a> datatype, the definition of which is adopted
       from <a data-cite="?JSON-LD11#the-rdf-json-datatype">Section&nbsp;10.2 The `rdf:JSON` Datatype</a>
-      in [[?JSON-LD11]].</li>
+      in [[?JSON-LD11]].
+      Note that the <a href="#JSON-value-space">value space</a> defined here
+      updates the <a>value space</a> of the
+      <a data-cite="JSON-LD11#the-rdf-json-datatype">`rdf:JSON`</a> datatype defined in [[[JSON-LD11]]] [[JSON-LD11]]</li>
     <li>Clarify Unicode terminology,
       using <a data-cite="I18N-GLOSSARY#dfn-code-point" class="lint-ignore">Unicode code points</a>,
       and restriction to the XML <a data-cite="XML11#charsets">Char</a> production.
