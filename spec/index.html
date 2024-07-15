@@ -589,6 +589,13 @@
       <a>object</a> component which is another <a>triple term</a>.
       However, by this definition, cycles of <a>triple terms</a> cannot be created.</p>
 
+    <p class="note"><a>Triples</a> with a <a>triple term</a> object SHOULD
+      use <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#reifies</code> (<code>rdf:reifies</code>)
+      as the <a>predicate</a>.
+      <a>Triples</a> where the <a>object</a> is not a <a>triple term</a> SHOULD NOT
+      use <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#reifies</code> (<code>rdf:reifies</code>)
+      as the <a>predicate</a>.</p>
+
     <p><a>IRIs</a>, <a>literals</a>,
       <a>blank nodes</a>, and <a>triple terms</a> are collectively known as
       <span id="dfn-rdf-terms"><!-- obsolete term--></span><dfn data-lt="rdf term">RDF terms</dfn>.</p>
