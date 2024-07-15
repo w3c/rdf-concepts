@@ -172,61 +172,59 @@
       exists, without explicitly naming it.</p>
   </section>
 
-  <section id="section-quoted-triples">
-    <h3>Quoted Triples</h3>
+  <section id="section-triple-terms">
+    <h3>Triple Terms</h3>
 
-    <p class="issue" data-number="81">
-      As the WG has moved away from the notion of quoted triples, this section needs to be changed such that it does not mention quoted triples anymore but, instead, describes whatever new concept the WG settles on (e.g., <a>triple terms</a>).
-    </p>
-
-    <p>A <dfn>quoted triple</dfn> is an <a>RDF term</a> with the components of
-      an <a>RDF triple</a>, which can be used as the <a>subject</a> or <a>object</a>
+    <p>A <a>triple term</a> is an <a>RDF term</a> with the components of
+      an <a>RDF triple</a>, which can be used as the <a>object</a>
       of another triple.</p>
 
-    <p>A <a>quoted triple</a> is not necessarily asserted, allowing
+    <p>A <a>triple term</a> is not necessarily asserted, allowing
       statements to be made about other statements that may not be
       asserted within an <a>RDF graph</a>.
       This allows statements to be made about relationships that may be contradictory.
-      For a <a>quoted triple</a> to be asserted,
+      For a <a>triple term</a> to be asserted,
       it must also appear in a graph as an <a>asserted triple</a>.</p>
 
-    <p>The following diagram represents a statement with an unasserted <a>quoted triple</a>
-      as the subject.</p>
+    <p>A <a>triple term</a> can be used as the object of a <a>triple</a> with the predicate <code>rdf:reifies</code>.
+      The <a>subject</a> of that <a>triple</a> is called a <dfn>reifier</dfn>.
+      Assertions on the <a>triple term</a> are made using the <a>reifier</a>.</p>
 
-    <figure id="fig-quoted-triple">
-      <a href="quoted-triple.svg">
-        <!-- Source for this file is at https://docs.google.com/drawings/d/1I_QxbUgnQXumXzb8c0WNJHIQ-mtRs2S80dDG6i9aOD8 -->
-        <img src="quoted-triple.svg"
-             alt="An RDF graph containing a triple that references an unasserted quoted triple (with grey background) as the subject"
+    <p>The following diagram represents a statement an a reification of an an unasserted <a>triple term</a>.</p>
+
+    <figure id="fig-triple-term">
+      <a href="triple-term.svg">
+        <!-- Source for this file is at https://docs.google.com/drawings/d/1RP9Nw5GCNjduWSXZj_EZ8FaAc7p_N-WVmzJ0syvum1k -->
+        <img src="triple-term.svg"
+             alt="An RDF graph containing a triple that references an unasserted triple term (with grey background) via a reifier"
              style="width:70%"
-             aria-describedby="fig-quoted-triple-alt"/>
+             aria-describedby="fig-triple-term-alt"/>
       </a>
-      <figcaption id="fig-quoted-triple-alt">
-        An RDF graph containing a triple that references an unasserted quoted triple (with grey background) as the subject.
+      <figcaption id="fig-triple-term-alt">
+        An <a>RDF graph</a> containing a <a>triple</a> that references an unasserted <a>triple term</a> (with grey background) via a <a>reifier</a>.
       </figcaption>
     </figure>
 
-    <p>A variation on the graph shown in <a href="#fig-quoted-triple"></a> can be described
-      where the <a>quoted triple</a> is also <a data-lt="asserted triple">asserted</a>.</p>
+    <p>A variation on the graph shown in <a href="#fig-triple-term"></a> can be described
+      where the <a>triple term</a> is also <a data-lt="asserted triple">asserted</a>.</p>
 
-    <figure id="fig-quoted-asserted-triple">
-      <a href="quoted-asserted-triple.svg">
-        <!-- Source for this file is at https://docs.google.com/drawings/d/1aoUEsb07P-nu5rvPRob7O07CRKgnf7tBw2CmRJNuaQ0 -->
-        <img src="quoted-asserted-triple.svg"
-             alt="An RDF graph containing two triples where one of them contains the other as the subject; hence, that other triple is both quoted and asserted"
+    <figure id="fig-asserted-triple-term">
+      <a href="asserted-triple-term.svg">
+        <!-- Source for this file is at https://docs.google.com/drawings/d/1gAHQj4wk87tmeHf4-wnxdgmjq3T05_ovrJq0V-1VXKw -->
+        <img src="asserted-triple-term.svg"
+             alt="An RDF graph containing a triple that references an triple term, which is also asserted, via a reifier"
              style="width:70%"
-             aria-describedby="fig-quoted-asserted-triple-alt"/>
+             aria-describedby="fig-asserted-triple-term-alt"/>
       </a>
-      <figcaption id="fig-quoted-asserted-triple-alt">
-        An RDF graph containing two triples where one of them contains the other as the subject;
-        hence, that other triple is both quoted and asserted.
+      <figcaption id="fig-asserted-triple-term-alt">
+        An <a>RDF graph</a> containing a <a>triple</a> that references an <a>triple term</a>, which is also asserted, via a <a>reifier</a>.
       </figcaption>
     </figure>
 
-    <p>Note that a <a>quoted triple</a> may also have a quoted triple as its subject or object.</p>
+    <p>Note that a <a>triple term</a> may also have another <a>triple term</a> as an <a>object</a>.</p>
 
     <p class="issue" data-number="34">
-      This issue considers the potential for additional terminology related to <a>quoted triples</a>.
+      This issue considers the potential for additional terminology related to <a>triple terms</a>.
     </p>
   </section>
 
@@ -494,12 +492,12 @@
   <p>This specification establishes two conformance levels:</p>
 
   <ul>
-    <li><dfn class="no-export lint-ignore">Full</dfn> conformance
+    <li><dfn class="no-export lint-ignore">Full conformance</dfn>
       supports <a data-lt="RDF graph">graphs</a> and <a data-lt="RDF dataset">datasets</a>
       with <a>triples</a> that contain <a>triple terms</a>.
       Concrete syntaxes in which such graphs and datasets can be expressed include
       [[RDF12-N-TRIPLES]], [[RDF12-N-QUADS]], [[RDF12-TURTLE]], and [[RDF12-TRIG]].</li>
-    <li><dfn class="no-export lint-ignore">Classic</dfn> conformance
+    <li><dfn class="no-export lint-ignore">Classic conformance</dfn>
       only supports <a data-lt="RDF graph">graphs</a> or <a data-lt="RDF dataset">datasets</a>
       with <a>triples</a> that do not contain <a>triple terms</a>.</li>
   </ul>
@@ -1813,14 +1811,10 @@
   <ul>
     <li>Added <a href="#section-dataset-quad" class="sectionRef"></a>
       for informative definition of a <a>quad</a>.</li>
-    <li>Added <a href="#section-quoted-triples" class="sectionRef"></a>
-      <s>and definitions for <a>quoted triple</a></s>
-      and <a>asserted triple</a>.
-
-    <div class="issue" data-number="81">
-      The notion of quoted triples is deprecated and will be removed again from this document. Currently, Section <a href="#section-quoted-triples" class="sectionRef"></a> still describes this notion. Once this section is changed to describe whatever new concept the WG settles on (currently, this may be <a>triple terms</a>---see the next bullet point), the previous bullet point can be removed and the addition of the then-rewritten section can be mentioned in the next bullet point.
-    </div>
-
+   <li>Added <a href="#section-triple-terms" class="sectionRef"></a>
+      and definitions for <a>triple term</a> and <a>asserted triple</a>
+      and extended the definition of
+      <a>RDF triple</a> to permit triple terms as objects..
     <li>Added the notion of a <a>triple term</a> and extended the definition of
       <a>RDF triple</a> to permit triple terms as objects.</li>
     <li>Added the <a>base direction</a> element as part of 
