@@ -190,6 +190,14 @@
       The <a>subject</a> of that <a>triple</a> is called a <dfn>reifier</dfn>.
       Assertions on the <a>triple term</a> are made using the <a>reifier</a>.</p>
 
+    <p class="note">Using the <a>reifier</a> as an indirect way of referencing a <a>triple term</a>
+      allows annotations to be separated from each other,
+      which might be necessary if the same <a>triple term</a> was derived from different sources.
+      Annotations are always made on the <a>reifier</a>, which can be the <a>subject</a> or <a>object</a>
+      of different triples.
+      Concrete syntaxes, such as Turtle [[RDF12-TURTLE]],
+      may have shortcuts for describing a <a>triple term</a> with its <a>reifier</a>.</p>
+
     <p>The following diagram represents a statement an a reification of an an unasserted <a>triple term</a>.</p>
 
     <figure id="fig-triple-term">
