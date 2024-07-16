@@ -1479,15 +1479,6 @@
           <li>Return <code>domfrag.{{Node/normalize()}}</code></li>
         </ul>
       </dd>
-
-      <dt id="XMLLiteral-canonical">The canonical mapping</dt>
-      <dd>defines a
-        <a data-cite="xmlschema11-2#dt-canonical-mapping">canonical lexical form</a> [[XMLSCHEMA11-2]]
-        for each member of the value space. The <code>rdf:XMLLiteral</code> canonical mapping is the
-        <a data-cite="XML-EXC-C14N#def-exclusive-XML-canonicalization-method">exclusive XML canonicalization method</a>
-        (<em>with comments, with empty
-        <a data-cite="XML-EXC-C14N#def-InclusiveNamespaces-PrefixList">InclusiveNamespaces PrefixList</a></em>)
-        [[XML-EXC-C14N]].</dd>
     </dl>
 
     <p class="note">Any XML namespace declarations (<code>xmlns</code>),
@@ -1871,6 +1862,7 @@
       Implementations can either follow the advice to normalize to lower case,
       use the recommended BCP47 format,
       or do something else, as long it is performed consistently.</li>
+    <li>Removed the section on the canonical mapping for the <a>rdf:XMLLiteral</a> datatype.</li>
   </ul>
 
   <p class="note">A detailed overview of the differences between RDF versions&nbsp;1.0
