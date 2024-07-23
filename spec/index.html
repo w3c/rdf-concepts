@@ -191,12 +191,12 @@
       Assertions on the <a>triple term</a> are made using the <a>reifier</a>.</p>
 
     <p class="note">Using the <a>reifier</a> as an indirect way of referencing a <a>triple term</a>
-      allows annotations to be separated from each other,
+      allows multiple groups of assertions to be separated from each other,
       which might be necessary if the same <a>triple term</a> was derived from different sources.
-      Annotations are always made on the <a>reifier</a>, which can be the <a>subject</a> or <a>object</a>
+      Assertions are always made using the <a>reifier</a>, which can be the <a>subject</a> or <a>object</a>
       of different triples.
       Concrete syntaxes, such as Turtle [[RDF12-TURTLE]],
-      may have shortcuts for describing a <a>triple term</a> with its <a>reifier</a>.</p>
+      may have shortcuts for capturing a <a>triple term</a> with its <a>reifier</a>.</p>
 
     <p>The following diagram represents a statement and a reification of an unasserted <a>triple term</a>.</p>
 
@@ -230,10 +230,6 @@
     </figure>
 
     <p>Note that a <a>triple term</a> may also have another <a>triple term</a> as an <a>object</a>.</p>
-
-    <p class="issue" data-number="34">
-      This issue considers the potential for additional terminology related to <a>triple terms</a>.
-    </p>
   </section>
 
   <section id="referents">
@@ -597,12 +593,12 @@
       <a>object</a> component which is another <a>triple term</a>.
       However, by this definition, cycles of <a>triple terms</a> cannot be created.</p>
 
-    <p class="note"><a>Triples</a> with a <a>triple term</a> object SHOULD
+    <p class="note">Every <a>triple</a> with a <a>triple term</a> as its object SHOULD
       use <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#reifies</code> (<code>rdf:reifies</code>)
-      as the <a>predicate</a>.
-      <a>Triples</a> where the <a>object</a> is not a <a>triple term</a> SHOULD NOT
+      as its <a>predicate</a>.
+      Every <a>triple</a> whose <a>object</a> is not a <a>triple term</a> SHOULD NOT
       use <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#reifies</code> (<code>rdf:reifies</code>)
-      as the <a>predicate</a>.</p>
+      as its <a>predicate</a>.</p>
 
     <p><a>IRIs</a>, <a>literals</a>,
       <a>blank nodes</a>, and <a>triple terms</a> are collectively known as
@@ -1831,8 +1827,6 @@
       and definitions for <a>triple term</a> and <a>asserted triple</a>
       and extended the definition of
       <a>RDF triple</a> to permit triple terms as objects..
-    <li>Added the notion of a <a>triple term</a> and extended the definition of
-      <a>RDF triple</a> to permit triple terms as objects.</li>
     <li>Added the <a>base direction</a> element as part of 
       a <a>literal</a>,
       and a description of its use in <a href="#section-text-direction" class="sectionRef"></a>.</li>
