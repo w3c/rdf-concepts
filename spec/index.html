@@ -812,14 +812,15 @@
 
     <p><dfn data-local-lt="term-equal">Literal term equality</dfn>:
       Two literals are term-equal (the same <a>RDF literal</a>)
-      if and only if:
-      <ul>
-        <li>the two <a>lexical forms</a> compare equal</li>
-        <li>the two <a>datatype IRIs</a> compare equal</li>
-        <li>the two <a>language tags</a> (if any) compare equal</li>
-        <li>the two <a>base directions</a> (if any) compare equal</li>
-      </ul>
-      Comparison is performed using 
+      if and only if:</p>
+
+    <ul>
+      <li>the two <a>lexical forms</a> compare equal</li>
+      <li>the two <a>datatype IRIs</a> compare equal</li>
+      <li>the two <a>language tags</a> (if any) compare equal</li>
+      <li>the two <a>base directions</a> (if any) compare equal</li>
+    </ul>
+    <p>Comparison is performed using 
       <a data-cite="I18N-GLOSSARY#dfn-case-sensitive">case sensitive matching</a>
       (see description of string comparison in 
       <a href="#rdf-strings" class="sectionRef"></a>)
@@ -862,7 +863,7 @@
          can detect text direction from the initial character.
          For example "<bdi lang="ar">اَلأَعْشَى</bdi> - 1st place" displays the
          aarabic characters in a right-to-left fashion, while in memory
-         they would be stored as "<bdo lang="ar">اَلأَعْشَى</bdo> - 1st place"</p>
+         they would be stored as "<bdo dir="ltr" lang="ar">اَلأَعْشَى</bdo> - 1st place"</p>
     </section>
   </section>
 
