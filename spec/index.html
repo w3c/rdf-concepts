@@ -857,6 +857,12 @@
          HTML's `dir` attribute) it can then be correctly presented as:
        </p>
        <div lang="he" dir="rtl">פעילות הבינאום, W3C</div>
+
+       <p>In the absense of an explicit initial text direction, the [[?UAX9]] algorithm
+         can detect text direction from the initial character.
+         For example "<bdi lang="ar">اَلأَعْشَى</bdi> - 1st place" displays the
+         aarabic characters in a right-to-left fashion, while in memory
+         they would be stored as "<bdo lang="ar">اَلأَعْشَى</bdo> - 1st place"</p>
     </section>
   </section>
 
