@@ -707,8 +707,7 @@
           “<code>%3f</code>”)</li>
         <li>Punycode-encoding of Internationalized Domain Names
           in IRIs [[RFC3492]]</li>
-        <li>IRIs that are not in Unicode 
-          <a class="lint-ignore">Normalization Form C</a> [[UAX15]]</li>
+        <li>IRIs that are not in Unicode [=Normalization Form C=] [[I18N-Glossary]]</li>
       </ul>
     </div>
   </section>
@@ -846,7 +845,7 @@
       <p>The <a>base direction</a> of a <a>directional language-tagged string</a>
         provides a means of establishing the initial direction of text,
         including text which is a mixture of right-to-left and left-to-right scripts.
-        The [[[?UAX9]]] [[?UAX9]] provides support for automatically rendering
+        The [=Unicode Bidirectional Algorithm=] [[?I18N-Glossary]] provides support for automatically rendering
         a sequence of characters in logical order,
         so that they are visually ordered as expected,
         but this is not sufficient to correctly render bidirectional text.</p>
@@ -860,11 +859,11 @@
        <div lang="he" dir="rtl">פעילות הבינאום, W3C</div>
 
        <p>In the absence of an explicit initial text direction,
-       the [=Unicode Bidirectional Algorithm=] detects the text direction from the content.
-       This depends on the first strongly directional character in the text
-       or on the context.
-       Users need to provide [=bidi isolation=] whenever text is inserted into a larger document
-       in order to avoid [=spillover effects=].
+         the [=Unicode Bidirectional Algorithm=] detects the text direction from the content.
+         This depends on the first strongly directional character in the text
+         or on the context.
+         Users need to provide [=bidi isolation=] whenever text is inserted into a larger document
+         in order to avoid [=spillover effects=].
          For example "<bdi lang="ar">اَلأَعْشَى</bdi> - 1st place" displays the
          Arabic characters in a right-to-left fashion, while in memory
          they would be stored as "<bdo dir="ltr" lang="ar">اَلأَعْشَى</bdo> - 1st place"</p>
@@ -1704,7 +1703,7 @@
 <section id="internationalization" class="appendix informative">
   <h2>Internationalization Considerations</h2>
   <p>Unicode [[UNICODE]] provides a mechanism for signaling direction within a string
-    (see [[[UAX9]]] [[UAX9]]).
+    (see [=Unicode Bidirectional Algorithm=] [[I18N-Glossary]]).
     RDF provides a mechanism for specifying the <a>base direction</a>
     of a <a>directional language-tagged string</a>
     to signal the initial text direction of a string.
