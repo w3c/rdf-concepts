@@ -859,8 +859,12 @@
        </p>
        <div lang="he" dir="rtl">פעילות הבינאום, W3C</div>
 
-       <p>In the absence of an explicit initial text direction, the [[?UAX9]] algorithm
-         can detect text direction from the initial character.
+       <p>In the absence of an explicit initial text direction,
+       the [=Unicode Bidirectional Algorithm=] detects the text direction from the content.
+       This depends on the first strongly directional character in the text
+       or on the context.
+       Users need to provide [=bidi isolation=] whenever text is inserted into a larger document
+       in order to avoid [=spillover effects=].
          For example "<bdi lang="ar">اَلأَعْشَى</bdi> - 1st place" displays the
          Arabic characters in a right-to-left fashion, while in memory
          they would be stored as "<bdo dir="ltr" lang="ar">اَلأَعْشَى</bdo> - 1st place"</p>
