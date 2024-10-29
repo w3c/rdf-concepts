@@ -862,11 +862,14 @@
          the [=Unicode Bidirectional Algorithm=] detects the text direction from the content.
          This depends on the first strongly directional character in the text
          or on the context.
-         Users need to provide [=bidi isolation=] whenever text is inserted into a larger document
-         in order to avoid [=spillover effects=].
-         For example &quot;<bdi lang="he">ספרים בינלאומיים!</bdi>&quot; displays the
-         Hebrew characters in a right-to-left fashion, while in memory
-         they would be stored as &quot;<bdo dir="ltr" lang="he">ספרים בינלאומיים!</bdo>&quot;</p>
+         To avoid [=spillover effects=], users need to employ [=bidi isolation=] 
+         whenever text is inserted into a larger document.
+         For example,
+         &quot;<code>&lt;bdi lang="he"&gt;ספרים בינלאומיים!&lt;/bdi&gt;</code>&quot;
+         displays the Hebrew characters in a right-to-left fashion
+         — i.e., as &quot;<bdi lang="he">ספרים בינלאומיים!</bdi>&quot;
+         — while they would be stored in memory as
+         &quot;<bdo dir="ltr" lang="he">ספרים בינלאומיים!</bdo>&quot;</p>
     </section>
   </section>
 
