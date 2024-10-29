@@ -100,17 +100,17 @@
 
   <p>This document defines an abstract syntax (a data model)
   which serves to link all RDF-based languages and specifications,
-  including:</p>
+  including the following:</p>
 
   <ul>
-    <li>the formal model-theoretic semantics for RDF [[RDF12-SEMANTICS]];</li>
+    <li>the formal model-theoretic semantics for RDF [[RDF12-SEMANTICS]]</li>
 
     <li>serialization syntaxes for storing and exchanging RDF such as [[[RDF12-TURTLE]]] [[RDF12-TURTLE]]
-      and [[[JSON-LD11]]] [[JSON-LD11]];</li>
+      and [[[JSON-LD11]]] [[JSON-LD11]]</li>
 
-    <li>the [[[SPARQL12-QUERY]]] [[SPARQL12-QUERY]];</li>
+    <li>the [[[SPARQL12-QUERY]]] [[SPARQL12-QUERY]]</li>
 
-    <li>the [[[RDF12-SCHEMA]]] [[RDF12-SCHEMA]].</li>
+    <li>the [[[RDF12-SCHEMA]]] [[RDF12-SCHEMA]]</li>
   </ul>
 
   <section id="data-model">
@@ -259,7 +259,7 @@
       <li>By social convention, the
         <a data-cite="WEBARCH#uri-ownership">IRI owner</a>
         [[WEBARCH]] gets to say what the intended (or usual)
-        referent of an <a>IRI</a> is.  Applications and users need not
+        referent of an <a>IRI</a> is. Applications and users need not
         abide by this intended denotation, but there may be a loss of
         interoperability with other applications and users if they do
         not do so.</li>
@@ -549,11 +549,11 @@
     <h3>Triples</h3>
 
     <p>An <dfn data-local-lt="triple">RDF triple</dfn> (usually called "triple")
-      is a 3-tuple (|s|, |p|, |o|) where:</p>
+      is a 3-tuple (|s|, |p|, |o|) with the following characteristics:</p>
 
     <ul>
-      <li>|s| is an <a>IRI</a> or a <a>blank node</a>,</li>
-      <li>|p| is an <a>IRI</a>, and</li>
+      <li>|s| is an <a>IRI</a> or a <a>blank node</a>.</li>
+      <li>|p| is an <a>IRI</a>.</li>
       <li>|o| is an <a>IRI</a>, a <a>blank node</a>, a <a>literal</a>,
         or a <a>triple term</a>.</li>
     </ul>
@@ -688,26 +688,27 @@
         only IRIs that are normalized according to
         <a data-cite="rfc3987#section-5">Section 5</a>
         of [[!RFC3987]]. Non-normalized forms that are best avoided
-        include:</p>
+        include the following:</p>
 
       <ul>
         <li>Uppercase characters in scheme names and domain names</li>
         <li>Percent-encoding of characters where it is not
           required by IRI syntax</li>
-        <li>Explicitly stated HTTP default port
+        <li>Explicit inclusion of the HTTP default port
           (<code>http://example.com:80/</code>);
           <code>http://example.com/</code> is preferable</li>
-        <li>Completely empty path in HTTP IRIs
+        <li>A completely empty path in an HTTP IRI
           (<code>http://example.com</code>);
           <code>http://example.com/</code> is preferable</li>
         <li>“<code>/./</code>” or “<code>/../</code>” in the path
           component of an IRI</li>
         <li>Lowercase hexadecimal letters within percent-encoding
-          triplets (“<code>%3F</code>” is preferable over
+          triplets (i.e., “<code>%3F</code>” is preferred over
           “<code>%3f</code>”)</li>
         <li>Punycode-encoding of Internationalized Domain Names
           in IRIs [[RFC3492]]</li>
-        <li>IRIs that are not in Unicode <a class="lint-ignore">Normalization Form C</a> [[UAX15]]</li>
+        <li>IRIs that are not in Unicode 
+          <a class="lint-ignore">Normalization Form C</a> [[UAX15]]</li>
       </ul>
     </div>
   </section>
@@ -718,17 +719,17 @@
     <p>Literals are used for values such as strings, numbers, and dates.</p>
 
     <p>A <dfn data-local-lt="RDF literal">literal</dfn> in an <a>RDF graph</a> consists of
-      two, three, or four elements:</p>
+      two, three, or four elements, as follow:</p>
 
-    <ul>
+    <ol>
       <li>a <dfn>lexical form</dfn> consisting of a sequence of
         <a data-cite="I18N-GLOSSARY#dfn-code-point" class="lint-ignore">Unicode code points</a> [[!UNICODE]]
         which are <a data-cite="I18N-GLOSSARY#dfn-scalar-value">Unicode scalar values</a>,
         and therefore do not contain
-        <a data-cite="I18N-GLOSSARY#dfn-surrogate" class="lint-ignore">Unicode surrogate code points</a>.</li>
+        <a data-cite="I18N-GLOSSARY#dfn-surrogate" class="lint-ignore">Unicode surrogate code points</a></li>
       <li>a <dfn>datatype IRI</dfn>, being an <a>IRI</a>
         identifying a datatype that determines how the lexical form maps
-        to a <a>literal value</a>, and</li>
+        to a <a>literal value</a></li>
       <li>if and only if the <a>datatype IRI</a> is
         <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#langString</code>, a
         non-empty <dfn>language tag</dfn> as defined by [[!BCP47]]. The
@@ -742,8 +743,9 @@
         a non-empty <a>language tag</a>
         that MUST be well-formed according to <a data-cite="bcp47#section-2.2.9">section 2.2.9</a>
         of [[!BCP47]],
+        and MUST be treated consistently, that is, in a case insensitive manner,
         and a <dfn>base direction</dfn> that MUST be either `ltr` or `rtl`.</li>
-    </ul>
+    </ol>
 
     <p>A literal is a <dfn>language-tagged string</dfn> if the third element
       is present and the fourth element is not present.
@@ -773,7 +775,7 @@
 
     <p>The <dfn>literal value</dfn> associated with a <a>literal</a> is:</p>
 
-    <ol>
+    <ul>
       <li>If the literal is a <a>language-tagged string</a>,
         then the literal value is a pair consisting of its <a>lexical form</a>
         and its <a>language tag</a>, in that order.</li>
@@ -784,7 +786,7 @@
       <li>If the literal's <a>datatype IRI</a> is in the set of
         <a>recognized datatype IRIs</a>, let <var>d</var> be the
         <a>referent</a> of the datatype IRI.
-        <ol>
+        <ul>
           <li>If the literal's <a>lexical form</a> is in the <a>lexical space</a>
             of <var>d</var>, then the literal value is the result of applying
             the <a>lexical-to-value mapping</a> of <var>d</var> to the
@@ -795,12 +797,12 @@
              Implementations MUST accept ill-typed literals and produce RDF
              graphs from them. Implementations MAY produce warnings when
              encountering ill-typed literals.</li>
-        </ol>
+        </ul>
       </li>
       <li>If the literal's <a>datatype IRI</a> is <em>not</em> in the set of
         <a>recognized datatype IRIs</a>, then the literal value is
         not defined by this specification.</li>
-    </ol>
+    </ul>
 
     <p><dfn data-local-lt="term-equal">Literal term equality</dfn>:
       Two literals are term-equal (the same <a>RDF literal</a>)
@@ -934,9 +936,9 @@
       <dfn data-lt="graph isomorphism|isomorphic" data-lt-noDefault class="export">isomorphic</dfn>
       (that is, they have an identical form)
       if there is a bijection <var>M</var> between the sets of nodes of the two
-      graphs, such that:</p>
+      graphs, such that all of the following properties hold:</p>
 
-    <ol>
+    <ul>
       <li><var>M</var> maps blank nodes to blank nodes.</li>
       <li><var>M(lit)=lit</var> for all <a>RDF literals</a> <var>lit</var> which
         are nodes of <var>G</var>.</li>
@@ -947,7 +949,7 @@
       <li>The triple <var>( s, p, o )</var> is in <var>G</var> if and
         only if the triple <var>( M(s), p, M(o) )</var> is in
         <var>G'</var></li>
-    </ol>
+    </ul>
 
     <p>See also: <a>IRI equality</a>, <a>literal term equality</a>.</p>
 
@@ -1011,9 +1013,9 @@
       <var>DG2</var> and any named graph <var>NG2</var>)
       are <dfn data-lt="dataset isomorphism" class="export">dataset-isomorphic</dfn> if and only if
       there is a bijection <var>M</var> between the nodes, triples and graphs in
-      <var>D1</var> and those in <var>D2</var> such that:</p>
+      <var>D1</var> and those in <var>D2</var> such that all of the following properties hold:</p>
 
-    <ol>
+    <ul>
       <li><var>M</var> maps <a>blank nodes</a> to blank nodes;</li>
       <li><var>M</var> is the identity map on <a>literals</a> and URIs;</li>
       <li>For every triple &lt;s p o&gt;, <var>M</var>(&lt;s, p, o&gt;)=
@@ -1023,7 +1025,7 @@
       <li><var>DG2</var> = <var>M(DG1)</var>; and</li>
       <li>&lt;n, G&gt; is in <var>NG1</var> if and only if
         &lt;<var>M(n)</var>, <var>M(G)</var>&gt; is in <var>NG2</var>.
-    </ol>
+    </ul>
 
   </section>
 
@@ -1273,11 +1275,11 @@
 
     <ul>
       <li>The IRI <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral</code>
-        refers to the datatype <code><a>rdf:XMLLiteral</a></code></li>
+        refers to the datatype <code><a>rdf:XMLLiteral</a></code>.</li>
       <li>The IRI <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#HTML</code>
-        refers to the datatype <code><a>rdf:HTML</a></code></li>
+        refers to the datatype <code><a>rdf:HTML</a></code>.</li>
       <li>The IRI <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#JSON</code>
-        refers to the datatype <code><a>rdf:JSON</a></code></li>
+        refers to the datatype <code><a>rdf:JSON</a></code>.</li>
     </ul>
 
     <p>RDF processors are not required to recognize datatype IRIs.
@@ -1443,7 +1445,7 @@
           <li>Let <code>domfrag</code> be a DOM
             <a data-cite="DOM#interface-documentfragment"><code>DocumentFragment</code></a> [[DOM]]
             whose <code>childNodes</code> attribute is equal to <code>domnodes</code></li>
-            <li>Return <code>domfrag.{{Node/normalize()}}</code></li>
+            <li>Return <code>domfrag.{{Node/normalize()}}</code>.</li>
         </ul>
       </dd>
     </dl>
@@ -1496,8 +1498,8 @@
         <ul>
           <li>Let <code>domfrag</code> be a DOM
             <a data-cite="DOM#interface-documentfragment"><code>DocumentFragment</code></a>
-            node [[DOM]] corresponding to the input string</li>
-          <li>Return <code>domfrag.{{Node/normalize()}}</code></li>
+            node [[DOM]] corresponding to the input string.</li>
+          <li>Return <code>domfrag.{{Node/normalize()}}</code>.</li>
         </ul>
       </dd>
     </dl>
@@ -1550,17 +1552,17 @@
         literal values (<a data-cite="INFRA#boolean">`true`, `false`</a>, and <a data-cite="INFRA#nulls">`null`</a>)
         from [[[INFRA]]] [[INFRA]] and [[[XMLSCHEMA11-2]]] [[XMLSCHEMA11-2]].
 
-        <p>Two values (|a| and |b|) are considered equal if:
+        <p>Two values (|a| and |b|) are considered equal if any of the following are true:
           <ul>
-            <li>they are the same <a>string</a>,
+            <li>They are the same <a>string</a>,
               number (<a data-cite="XMLSCHEMA11-2#double"><strong>xsd:double</strong></a>), or
-              literal value;</li>
-            <li>they are both <a data-cite="INFRA#list">lists</a> containing <a data-cite="INFRA#list-item">items</a>
+              literal value.</li>
+            <li>They are both <a data-cite="INFRA#list">lists</a> containing <a data-cite="INFRA#list-item">items</a>
               which are pairwise equal – meaning that each <a data-cite="INFRA#list-item">item</a>
               in |a| is equal the <a data-cite="INFRA#list-item">item</a>
               at the corresponding index in |b|,
-              and both |a| and |b| have the same <a data-cite="INFRA#list-size">size</a>; or</li>
-            <li>if they are both <a data-cite="INFRA#ordered-map">maps</a> with equal <a data-cite="INFRA#map-entry">entries</a>
+              and both |a| and |b| have the same <a data-cite="INFRA#list-size">size</a>.</li>
+            <li>They are both <a data-cite="INFRA#ordered-map">maps</a> with equal <a data-cite="INFRA#map-entry">entries</a>
               – meaning that both |a| and |b| have the same <a data-cite="INFRA#map-size">size</a>,
               and for each entry <var>e<sub>a</sub></var> in |a|
               there is an entry <var>e<sub>b</sub></var> in |b|
