@@ -707,8 +707,7 @@
           “<code>%3f</code>”)</li>
         <li>Punycode-encoding of Internationalized Domain Names
           in IRIs [[RFC3492]]</li>
-        <li>IRIs that are not in Unicode 
-          <a class="lint-ignore">Normalization Form C</a> [[UAX15]]</li>
+        <li>IRIs that are not in Unicode [=Normalization Form C=] [[I18N-Glossary]]</li>
       </ul>
     </div>
   </section>
@@ -759,6 +758,12 @@
       The third element, the language tag, is treated identically as in a <a>language-tagged string</a>,
       and the fourth element, <a>base direction</a>, MUST be either `ltr` or `rtl`, which MUST be in lower case.</p>
 
+    <p>The meanings of the <a>base direction</a> values are:</p>
+    <ul>
+      <li>`ltr`: indicates that the initial text direction is set to left-to-right.</li>
+      <li>`rtl`: indicates that the initial text direction is set to right-to-left.</li>
+    </ul>
+
     <p>Please note that concrete syntaxes MAY support
       <dfn data-lt="simple literal" class="export">simple literals</dfn> consisting of only a
       <a>lexical form</a> without any <a>datatype IRI</a>, <a>language tag</a>, or <a>base direction</a>.
@@ -806,14 +811,15 @@
 
     <p><dfn data-local-lt="term-equal">Literal term equality</dfn>:
       Two literals are term-equal (the same <a>RDF literal</a>)
-      if and only if:
-      <ul>
-        <li>the two <a>lexical forms</a> compare equal</li>
-        <li>the two <a>datatype IRIs</a> compare equal</li>
-        <li>the two <a>language tags</a> (if any) compare equal</li>
-        <li>the two <a>base directions</a> (if any) compare equal</li>
-      </ul>
-      Comparison is performed using 
+      if and only if:</p>
+
+    <ul>
+      <li>the two <a>lexical forms</a> compare equal</li>
+      <li>the two <a>datatype IRIs</a> compare equal</li>
+      <li>the two <a>language tags</a> (if any) compare equal</li>
+      <li>the two <a>base directions</a> (if any) compare equal</li>
+    </ul>
+    <p>Comparison is performed using 
       <a data-cite="I18N-GLOSSARY#dfn-case-sensitive">case sensitive matching</a>
       (see description of string comparison in 
       <a href="#rdf-strings" class="sectionRef"></a>)
@@ -839,7 +845,7 @@
       <p>The <a>base direction</a> of a <a>directional language-tagged string</a>
         provides a means of establishing the initial direction of text,
         including text which is a mixture of right-to-left and left-to-right scripts.
-        The [[[?UAX9]]] [[?UAX9]] provides support for automatically rendering
+        The [=Unicode Bidirectional Algorithm=] [[?I18N-Glossary]] provides support for automatically rendering
         a sequence of characters in logical order,
         so that they are visually ordered as expected,
         but this is not sufficient to correctly render bidirectional text.</p>
@@ -851,6 +857,19 @@
          HTML's `dir` attribute) it can then be correctly presented as:
        </p>
        <div lang="he" dir="rtl">פעילות הבינאום, W3C</div>
+
+       <p>In the absence of an explicit initial text direction,
+         the [=Unicode Bidirectional Algorithm=] detects the text direction from the content.
+         This depends on the first strongly directional character in the text
+         or on the context.
+         To avoid [=spillover effects=], users need to employ [=bidi isolation=] 
+         whenever text is inserted into a larger document.
+         For example,
+         &quot;<code>&lt;bdi lang="he"&gt;ספרים בינלאומיים!&lt;/bdi&gt;</code>&quot;
+         displays the Hebrew characters in a right-to-left fashion
+         — i.e., as &quot;<bdi lang="he">ספרים בינלאומיים!</bdi>&quot;
+         — while they would be stored in memory as
+         &quot;<bdo dir="ltr" lang="he">ספרים בינלאומיים!</bdo>&quot;</p>
     </section>
   </section>
 
@@ -1687,7 +1706,7 @@
 <section id="internationalization" class="appendix informative">
   <h2>Internationalization Considerations</h2>
   <p>Unicode [[UNICODE]] provides a mechanism for signaling direction within a string
-    (see [[[UAX9]]] [[UAX9]]).
+    (see [=Unicode Bidirectional Algorithm=] [[I18N-Glossary]]).
     RDF provides a mechanism for specifying the <a>base direction</a>
     of a <a>directional language-tagged string</a>
     to signal the initial text direction of a string.
