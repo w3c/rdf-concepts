@@ -172,68 +172,6 @@
       exists, without explicitly naming it.</p>
   </section>
 
-  <section id="section-triple-terms-reification">
-    <h3>Triple Terms and Reification</h3>
-
-    <p>A <a>triple term</a> is an <a>RDF term</a> with the components of
-      an <a>RDF triple</a>, which can be used as the <a>object</a>
-      of another triple.</p>
-
-    <p>A <a>triple term</a> is not necessarily asserted, allowing
-      statements to be made about other statements that may not be
-      asserted within an <a>RDF graph</a>.
-      This allows statements to be made about relationships that may be contradictory.
-      For a <a>triple term</a> to be asserted,
-      it must also appear in a graph as an <a>asserted triple</a>.</p>
-
-    <p>A <a>triple term</a> can be used as the object of a <a>triple</a> with the predicate <code>rdf:reifies</code>;
-      such a <a>triple</a> is then a <dfn>reifying triple</dfn>.
-      The <a>subject</a> of that <a>triple</a> is called a <dfn>reifier</dfn>.
-      Assertions on the <a>triple term</a> are made using the <a>reifier</a>.
-      A concrete syntax may provide a special notation for specifying <a>reifying triples</a>.</p>
-
-    <p class="note">Using the <a>reifier</a> as an indirect way of referencing a <a>triple term</a>
-      allows multiple groups of assertions to be separated from each other,
-      which might be necessary if the same <a>triple term</a> was derived from different sources.
-      Assertions are always made using the <a>reifier</a>, which can be the <a>subject</a> or <a>object</a>
-      of different triples.
-      Concrete syntaxes, such as Turtle [[RDF12-TURTLE]],
-      may have shortcuts for capturing a <a>triple term</a> with its <a>reifier</a>.</p>
-
-    <p>The following diagram represents a statement and a reification of an unasserted <a>triple term</a>.</p>
-
-    <figure id="fig-triple-term">
-      <a href="triple-term.svg">
-        <!-- A version of this graphic can be found at https://docs.google.com/drawings/d/1RP9Nw5GCNjduWSXZj_EZ8FaAc7p_N-WVmzJ0syvum1k -->
-        <img src="triple-term.svg"
-             alt="An RDF graph containing a triple that references an unasserted triple term (with grey background) via a reifier"
-             style="width:70%"
-             aria-describedby="fig-triple-term-alt"/>
-      </a>
-      <figcaption id="fig-triple-term-alt">
-        An <a>RDF graph</a> containing a <a>triple</a> that references an unasserted <a>triple term</a> (with grey background) via a <a>reifier</a>.
-      </figcaption>
-    </figure>
-
-    <p>A variation on the graph shown in <a href="#fig-triple-term"></a> can be described
-      where the <a>triple term</a> is also <a data-lt="asserted triple">asserted</a>.</p>
-
-    <figure id="fig-asserted-triple-term">
-      <a href="asserted-triple-term.svg">
-        <!-- A version of this graphic can be found at https://docs.google.com/drawings/d/1gAHQj4wk87tmeHf4-wnxdgmjq3T05_ovrJq0V-1VXKw -->
-        <img src="asserted-triple-term.svg"
-             alt="An RDF graph containing a triple that references an triple term, which is also asserted, via a reifier"
-             style="width:70%"
-             aria-describedby="fig-asserted-triple-term-alt"/>
-      </a>
-      <figcaption id="fig-asserted-triple-term-alt">
-        An <a>RDF graph</a> containing a <a>triple</a> that references an <a>triple term</a>, which is also asserted, via a <a>reifier</a>.
-      </figcaption>
-    </figure>
-
-    <p>Note that a <a>triple term</a> may also have another <a>triple term</a> as an <a>object</a>.</p>
-  </section>
-
   <section id="referents">
     <h3>The Referent of an IRI</h3>
 
@@ -344,6 +282,68 @@
     <p>The term “<dfn class="lint-ignore">namespace</dfn>” on its own does not have a
       well-defined meaning in the context of RDF, but is sometimes informally
       used to mean “<a>namespace IRI</a>” or “<a>RDF vocabulary</a>”.</p>
+  </section>
+
+  <section id="section-triple-terms-reification">
+    <h3>Triple Terms and Reification</h3>
+
+    <p>A <a>triple term</a> is an <a>RDF term</a> with the components of
+      an <a>RDF triple</a>, which can be used as the <a>object</a>
+      of another triple.</p>
+
+    <p>A <a>triple term</a> is not necessarily asserted, allowing
+      statements to be made about other statements that may not be
+      asserted within an <a>RDF graph</a>.
+      This allows statements to be made about relationships that may be contradictory.
+      For a <a>triple term</a> to be asserted,
+      it must also appear in a graph as an <a>asserted triple</a>.</p>
+
+    <p>A <a>triple term</a> can be used as the object of a <a>triple</a> with the predicate <code>rdf:reifies</code>;
+      such a <a>triple</a> is then a <dfn>reifying triple</dfn>.
+      The <a>subject</a> of that <a>triple</a> is called a <dfn>reifier</dfn>.
+      Assertions on the <a>triple term</a> are made using the <a>reifier</a>.
+      A concrete syntax may provide a special notation for specifying <a>reifying triples</a>.</p>
+
+    <p class="note">Using the <a>reifier</a> as an indirect way of referencing a <a>triple term</a>
+      allows multiple groups of assertions to be separated from each other,
+      which might be necessary if the same <a>triple term</a> was derived from different sources.
+      Assertions are always made using the <a>reifier</a>, which can be the <a>subject</a> or <a>object</a>
+      of different triples.
+      Concrete syntaxes, such as Turtle [[RDF12-TURTLE]],
+      may have shortcuts for capturing a <a>triple term</a> with its <a>reifier</a>.</p>
+
+    <p>The following diagram represents a statement and a reification of an unasserted <a>triple term</a>.</p>
+
+    <figure id="fig-triple-term">
+      <a href="triple-term.svg">
+        <!-- A version of this graphic can be found at https://docs.google.com/drawings/d/1RP9Nw5GCNjduWSXZj_EZ8FaAc7p_N-WVmzJ0syvum1k -->
+        <img src="triple-term.svg"
+             alt="An RDF graph containing a triple that references an unasserted triple term (with grey background) via a reifier"
+             style="width:70%"
+             aria-describedby="fig-triple-term-alt"/>
+      </a>
+      <figcaption id="fig-triple-term-alt">
+        An <a>RDF graph</a> containing a <a>triple</a> that references an unasserted <a>triple term</a> (with grey background) via a <a>reifier</a>.
+      </figcaption>
+    </figure>
+
+    <p>A variation on the graph shown in <a href="#fig-triple-term"></a> can be described
+      where the <a>triple term</a> is also <a data-lt="asserted triple">asserted</a>.</p>
+
+    <figure id="fig-asserted-triple-term">
+      <a href="asserted-triple-term.svg">
+        <!-- A version of this graphic can be found at https://docs.google.com/drawings/d/1gAHQj4wk87tmeHf4-wnxdgmjq3T05_ovrJq0V-1VXKw -->
+        <img src="asserted-triple-term.svg"
+             alt="An RDF graph containing a triple that references an triple term, which is also asserted, via a reifier"
+             style="width:70%"
+             aria-describedby="fig-asserted-triple-term-alt"/>
+      </a>
+      <figcaption id="fig-asserted-triple-term-alt">
+        An <a>RDF graph</a> containing a <a>triple</a> that references an <a>triple term</a>, which is also asserted, via a <a>reifier</a>.
+      </figcaption>
+    </figure>
+
+    <p>Note that a <a>triple term</a> may also have another <a>triple term</a> as an <a>object</a>.</p>
   </section>
 
   <section id="change-over-time">
@@ -831,7 +831,7 @@
 
   <section id="section-triple-terms">
     <h3>Triple Terms</h3>
-    
+
     <p>A <dfn>triple term</dfn> is a 3-tuple that is defined recursively as follows:</p>
 
     <ul>
@@ -1066,7 +1066,7 @@
 
   <section id="section-dataset-quad" class="informative">
     <h3>Dataset as a Set of Quads</h3>
-    
+
     <p>A <dfn>quad</dfn> is a <a>triple</a> associated with an optional <a>graph name</a>
       and is used when referring to triples within an <a>RDF dataset</a>.
     </p>
