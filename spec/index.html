@@ -1381,12 +1381,35 @@
 </section>
 
 <section id="section-generalized-rdf" class="informative">
-  <h2>Generalized RDF Triples, Graphs, and Datasets</h2>
+  <h2>Generalizations of RDF Triples, Graphs, and Datasets</h2>
 
   <p>It is sometimes convenient to loosen the requirements
     on <a>RDF triples</a>.  For example, the completeness
-    of the RDFS entailment rules is easier to show with a
-    generalization of RDF triples.</p>
+    of the RDFS entailment rules is easier to show with
+    symmetric RDF triples.</p>
+
+  <p>
+    A <dfn class="export">symmetric RDF triple</dfn> allows the subject to be
+    any <a>RDF term</a> that is allowed in the object position, one of
+    an <a>IRI</a>, 
+    a <a>blank node</a>,
+    a <a>literal</a> 
+    or a <a>triple term</a>.
+    A <dfn class="export">symmetric RDF graph</dfn> is a set of symmetric RDF triples.
+    A <dfn class="export">symmetric RDF dataset</dfn>
+    comprises a distinguished symmetric RDF graph, and zero
+    or more pairs each associating an <a>IRI</a>
+    with a symmetric RDF graph.</p>
+
+   <p>Symmetric RDF triples, graphs, and datasets differ
+    from standard normative RDF <a>triples</a>,
+    <a data-lt="RDF graph">graphs</a>, and
+    <a data-lt="RDF dataset">datasets</a>
+    only by allowing <a>IRIs</a>,
+    <a>blank nodes</a>,
+    <a>literals</a>,
+    or <a>triple terms</a>
+    in the subject and object positions.</p>
 
   <p>A <dfn class="export">generalized RDF triple</dfn> is a triple having a subject,
     a predicate, and an object, where each can be an <a>IRI</a>, a
@@ -1414,7 +1437,7 @@
     in any position, i.e., as subject, predicate, object, or graph name.</p>
 
   <p class="note" id="note-generalized-rdf">Any user of
-    generalized RDF triples, graphs, or datasets needs to be
+    symmetric or generalized RDF triples, graphs, or datasets needs to be
     aware that these notions are non-standard extensions of
     RDF, and their use may cause interoperability problems.
     There is no requirement for any RDF tool to
