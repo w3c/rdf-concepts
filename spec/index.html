@@ -172,8 +172,8 @@
       exists, without explicitly naming it.</p>
   </section>
 
-  <section id="section-triple-terms">
-    <h3>Triple Terms</h3>
+  <section id="section-triple-terms-reification">
+    <h3>Triple Terms and Reification</h3>
 
     <p>A <a>triple term</a> is an <a>RDF term</a> with the components of
       an <a>RDF triple</a>, which can be used as the <a>object</a>
@@ -558,50 +558,6 @@
         or a <a>triple term</a>.</li>
     </ul>
 
-    <p>A <dfn>triple term</dfn> is a 3-tuple that is defined recursively as follows:</p>
-
-    <ul>
-      <li>
-        If |s| is an <a>IRI</a> or a <a>blank node</a>,
-        |p| is an <a>IRI</a>, and
-        |o| is an <a>IRI</a>, a <a>blank node</a>, or a <a>literal</a>,
-        then (|s|, |p|, |o|) is a triple term.
-      </li>
-
-      <li>
-        If |s| is an <a>IRI</a> or a <a>blank node</a>,
-        |p| is an <a>IRI</a>, and
-        |o| is a <a>triple term</a>,
-        then (|s|, |p|, |o|) is a triple term.
-      </li>
-    </ul>
-
-    <p>Given a <a>triple</a> (|s|, |p|, |o|),
-      |s| is called the <dfn>subject</dfn> of the triple,
-      |p| is called the <dfn>predicate</dfn> of the triple, and
-      |o| is called the <dfn>object</dfn> of the triple.
-      Similarly, given a <a>triple term</a> (|s|, |p|, |o|),
-      |s| is called the <em>subject</em> of the triple term,
-      |p| is called the <em>predicate</em> of the triple term, and
-      |o| is called the <em>object</em> of the triple term.</p>
-
-    <p class="note">While, syntactically, the notion of an <a>RDF triple</a>
-      and the notion of a <a>triple term</a> are the same, they represent
-      different concepts. RDF triples are the members of <a>RDF graphs</a>,
-      whereas triple terms can be used as components of RDF triples.</p>
-
-    <p class="note">The definition of <a>triple term</a> is recursive.
-      That is, a <a>triple term</a> can itself have an
-      <a>object</a> component which is another <a>triple term</a>.
-      However, by this definition, cycles of <a>triple terms</a> cannot be created.</p>
-
-    <p class="note">Every <a>triple</a> with a <a>triple term</a> as its object SHOULD
-      use <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#reifies</code> (<code>rdf:reifies</code>)
-      as its <a>predicate</a>.
-      Every <a>triple</a> whose <a>object</a> is not a <a>triple term</a> SHOULD NOT
-      use <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#reifies</code> (<code>rdf:reifies</code>)
-      as its <a>predicate</a>.</p>
-
     <p><a>IRIs</a>, <a>literals</a>,
       <a>blank nodes</a>, and <a>triple terms</a> are collectively known as
       <span id="dfn-rdf-terms"><!-- obsolete term--></span><dfn data-lt="rdf term">RDF terms</dfn>.</p>
@@ -839,38 +795,6 @@
       <a>term-equal</a> because their
       <a>lexical forms</a> differ.</p>
 
-    <section id="section-text-direction" class="informative">
-      <h3>Initial Text Direction</h3>
-
-      <p>The <a>base direction</a> of a <a>directional language-tagged string</a>
-        provides a means of establishing the initial direction of text,
-        including text which is a mixture of right-to-left and left-to-right scripts.
-        The [=Unicode Bidirectional Algorithm=] [[?I18N-Glossary]] provides support for automatically rendering
-        a sequence of characters in logical order,
-        so that they are visually ordered as expected,
-        but this is not sufficient to correctly render bidirectional text.</p>
-
-       <p>For example, some text with a language tag "`he`" might be displayed
-         in a left-to-right context (such as an English web page) as
-         <bdi dir="ltr">פעילות הבינאום, W3C</bdi>, which is incorrect. When provided
-         to a user agent including base direction information (such as using
-         HTML's `dir` attribute) it can then be correctly presented as:
-       </p>
-       <div lang="he" dir="rtl">פעילות הבינאום, W3C</div>
-
-       <p>In the absence of an explicit initial text direction,
-         the [=Unicode Bidirectional Algorithm=] detects the text direction from the content.
-         This depends on the first strongly directional character in the text
-         or on the context.
-         To avoid [=spillover effects=], users need to employ [=bidi isolation=] 
-         whenever text is inserted into a larger document.
-         For example,
-         &quot;<code>&lt;bdi lang="he"&gt;ספרים בינלאומיים!&lt;/bdi&gt;</code>&quot;
-         displays the Hebrew characters in a right-to-left fashion
-         — i.e., as &quot;<bdi lang="he">ספרים בינלאומיים!</bdi>&quot;
-         — while they would be stored in memory as
-         &quot;<bdo dir="ltr" lang="he">ספרים בינלאומיים!</bdo>&quot;</p>
-    </section>
   </section>
 
   <section id="section-blank-nodes">
@@ -904,6 +828,88 @@
       In the interest of consistency, the use of this alternative
       term is discouraged now.</p>
     </div>
+  </section>
+
+  <section id="section-triple-terms">
+    <h3>Triple Terms</h3>
+
+    <p>A <dfn>triple term</dfn> is a 3-tuple that is defined recursively as follows:</p>
+
+    <ul>
+      <li>
+        If |s| is an <a>IRI</a> or a <a>blank node</a>,
+        |p| is an <a>IRI</a>, and
+        |o| is an <a>IRI</a>, a <a>blank node</a>, or a <a>literal</a>,
+        then (|s|, |p|, |o|) is a triple term.
+      </li>
+
+      <li>
+        If |s| is an <a>IRI</a> or a <a>blank node</a>,
+        |p| is an <a>IRI</a>, and
+        |o| is a <a>triple term</a>,
+        then (|s|, |p|, |o|) is a triple term.
+      </li>
+    </ul>
+
+    <p>Given a <a>triple</a> (|s|, |p|, |o|),
+      |s| is called the <dfn>subject</dfn> of the triple,
+      |p| is called the <dfn>predicate</dfn> of the triple, and
+      |o| is called the <dfn>object</dfn> of the triple.
+      Similarly, given a <a>triple term</a> (|s|, |p|, |o|),
+      |s| is called the <em>subject</em> of the triple term,
+      |p| is called the <em>predicate</em> of the triple term, and
+      |o| is called the <em>object</em> of the triple term.</p>
+
+    <p class="note">While, syntactically, the notion of an <a>RDF triple</a>
+      and the notion of a <a>triple term</a> are the same, they represent
+      different concepts. RDF triples are the members of <a>RDF graphs</a>,
+      whereas triple terms can be used as components of RDF triples.</p>
+
+    <p class="note">The definition of <a>triple term</a> is recursive.
+      That is, a <a>triple term</a> can itself have an
+      <a>object</a> component which is another <a>triple term</a>.
+      However, by this definition, cycles of <a>triple terms</a> cannot be created.</p>
+
+    <p class="note">Every <a>triple</a> with a <a>triple term</a> as its object SHOULD
+      use <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#reifies</code> (<code>rdf:reifies</code>)
+      as its <a>predicate</a>.
+      Every <a>triple</a> whose <a>object</a> is not a <a>triple term</a> SHOULD NOT
+      use <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#reifies</code> (<code>rdf:reifies</code>)
+      as its <a>predicate</a>.</p>
+    
+  </section>
+
+  <section id="section-text-direction" class="informative">
+    <h3>Initial Text Direction</h3>
+
+    <p>The <a>base direction</a> of a <a>directional language-tagged string</a>
+      provides a means of establishing the initial direction of text,
+      including text which is a mixture of right-to-left and left-to-right scripts.
+      The [=Unicode Bidirectional Algorithm=] [[?I18N-Glossary]] provides support for automatically rendering
+      a sequence of characters in logical order,
+      so that they are visually ordered as expected,
+      but this is not sufficient to correctly render bidirectional text.</p>
+    
+    <p>For example, some text with a language tag "`he`" might be displayed
+      in a left-to-right context (such as an English web page) as
+      <bdi dir="ltr">פעילות הבינאום, W3C</bdi>, which is incorrect. When provided
+      to a user agent including base direction information (such as using
+      HTML's `dir` attribute) it can then be correctly presented as:
+    </p>
+    <div lang="he" dir="rtl">פעילות הבינאום, W3C</div>
+    
+    <p>In the absence of an explicit initial text direction,
+      the [=Unicode Bidirectional Algorithm=] detects the text direction from the content.
+      This depends on the first strongly directional character in the text
+      or on the context.
+      To avoid [=spillover effects=], users need to employ [=bidi isolation=] 
+      whenever text is inserted into a larger document.
+      For example,
+      &quot;<code>&lt;bdi lang="he"&gt;ספרים בינלאומיים!&lt;/bdi&gt;</code>&quot;
+      displays the Hebrew characters in a right-to-left fashion
+      — i.e., as &quot;<bdi lang="he">ספרים בינלאומיים!</bdi>&quot;
+      — while they would be stored in memory as
+      &quot;<bdo dir="ltr" lang="he">ספרים בינלאומיים!</bdo>&quot;</p>
   </section>
 
   <section id="section-skolemization">
@@ -1857,7 +1863,7 @@
   <ul>
     <li>Added <a href="#section-dataset-quad" class="sectionRef"></a>
       for informative definition of a <a>quad</a>.</li>
-   <li>Added <a href="#section-triple-terms" class="sectionRef"></a>
+   <li>Added <a href="#section-triple-terms-reification" class="sectionRef"></a>
       and definitions for <a>triple term</a> and <a>asserted triple</a>
       and extended the definition of
       <a>RDF triple</a> to permit triple terms as objects.
