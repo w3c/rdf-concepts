@@ -172,6 +172,65 @@
       exists, without explicitly naming it.</p>
   </section>
 
+  <section id="referents">
+    <h3>The Referent of an IRI</h3>
+
+    <p>The <a>resource</a> <a>denoted</a> by an <a>IRI</a>
+      is also called its <dfn>referent</dfn>. For some IRIs with particular
+      meanings, such as those identifying XSD datatypes, the referent is
+      fixed by this specification. For all other IRIs, what exactly is
+      <a>denoted</a> by any given IRI is not defined by this specification. Other
+      specifications may fix IRI referents, or apply other constraints on
+      what may be the referent of any IRI.</p>
+
+    <p>Guidelines for determining the <a>referent</a> of an <a>IRI</a> are
+      provided in other documents, like
+      [[[WEBARCH]]] [[WEBARCH]]
+      and [[[COOLURIS]]] [[COOLURIS]].
+      A very brief, informal, and partial account follows:</p>
+
+    <ul>
+      <li>By design, IRIs have global scope. Thus, two different appearances of an IRI
+        <a>denote</a> the same <a>resource</a>. Violating this principle constitutes
+        an <a data-cite="WEBARCH#URI-collision">IRI collision</a> [[WEBARCH]].</li>
+
+      <li>By social convention, the
+        <a data-cite="WEBARCH#uri-ownership">IRI owner</a>
+        [[WEBARCH]] gets to say what the intended (or usual)
+        referent of an <a>IRI</a> is. Applications and users need not
+        abide by this intended denotation, but there may be a loss of
+        interoperability with other applications and users if they do
+        not do so.</li>
+
+      <li>The IRI owner can establish the intended <a>referent</a>
+        by means of a specification or other document that explains
+        what is denoted. For example, the
+        [[[VOCAB-ORG]]] [[VOCAB-ORG]]
+        specifies the intended referents of various IRIs that start with
+        <code>http://www.w3.org/ns/org#</code>.</li>
+
+      <li>A good way of communicating the intended referent
+        is to set up the IRI so that it
+        <a data-cite="WEBARCH#uri-dereference">dereferences</a> [[WEBARCH]]
+        to such a document.</li>
+
+      <li>Such a document can, in fact, be an <a>RDF document</a>
+        that describes the denoted resource by means of
+        <a>RDF statements</a>.</li>
+    </ul>
+
+    <p>Perhaps the most important characteristic of <a>IRIs</a>
+      in web architecture is that they can be
+      <a data-cite="WEBARCH#uri-dereference">dereferenced</a>,
+      and hence serve as starting points for interactions with a remote server.
+      This specification is not concerned with such interactions.
+      It does not define an interaction model. It only treats IRIs as globally
+      unique identifiers in a graph data model that describes resources.
+      However, those interactions are critical to the concept of
+      [[[LINKED-DATA]]], [[LINKED-DATA]],
+      which makes use of the RDF data model and serialization formats.</p>
+  </section>
+
   <section id="section-triple-terms-reification">
     <h3>Triple Terms and Reification</h3>
 
@@ -232,65 +291,6 @@
     </figure>
 
     <p>Note that a <a>triple term</a> may also have another <a>triple term</a> as an <a>object</a>.</p>
-  </section>
-
-  <section id="referents">
-    <h3>The Referent of an IRI</h3>
-
-    <p>The <a>resource</a> <a>denoted</a> by an <a>IRI</a>
-      is also called its <dfn>referent</dfn>. For some IRIs with particular
-      meanings, such as those identifying XSD datatypes, the referent is
-      fixed by this specification. For all other IRIs, what exactly is
-      <a>denoted</a> by any given IRI is not defined by this specification. Other
-      specifications may fix IRI referents, or apply other constraints on
-      what may be the referent of any IRI.</p>
-
-    <p>Guidelines for determining the <a>referent</a> of an <a>IRI</a> are
-      provided in other documents, like
-      [[[WEBARCH]]] [[WEBARCH]]
-      and [[[COOLURIS]]] [[COOLURIS]].
-      A very brief, informal, and partial account follows:</p>
-
-    <ul>
-      <li>By design, IRIs have global scope. Thus, two different appearances of an IRI
-        <a>denote</a> the same <a>resource</a>. Violating this principle constitutes
-        an <a data-cite="WEBARCH#URI-collision">IRI collision</a> [[WEBARCH]].</li>
-
-      <li>By social convention, the
-        <a data-cite="WEBARCH#uri-ownership">IRI owner</a>
-        [[WEBARCH]] gets to say what the intended (or usual)
-        referent of an <a>IRI</a> is. Applications and users need not
-        abide by this intended denotation, but there may be a loss of
-        interoperability with other applications and users if they do
-        not do so.</li>
-
-      <li>The IRI owner can establish the intended <a>referent</a>
-        by means of a specification or other document that explains
-        what is denoted. For example, the
-        [[[VOCAB-ORG]]] [[VOCAB-ORG]]
-        specifies the intended referents of various IRIs that start with
-        <code>http://www.w3.org/ns/org#</code>.</li>
-
-      <li>A good way of communicating the intended referent
-        is to set up the IRI so that it
-        <a data-cite="WEBARCH#uri-dereference">dereferences</a> [[WEBARCH]]
-        to such a document.</li>
-
-      <li>Such a document can, in fact, be an <a>RDF document</a>
-        that describes the denoted resource by means of
-        <a>RDF statements</a>.</li>
-    </ul>
-
-    <p>Perhaps the most important characteristic of <a>IRIs</a>
-      in web architecture is that they can be
-      <a data-cite="WEBARCH#uri-dereference">dereferenced</a>,
-      and hence serve as starting points for interactions with a remote server.
-      This specification is not concerned with such interactions.
-      It does not define an interaction model. It only treats IRIs as globally
-      unique identifiers in a graph data model that describes resources.
-      However, those interactions are critical to the concept of
-      [[[LINKED-DATA]]], [[LINKED-DATA]],
-      which makes use of the RDF data model and serialization formats.</p>
   </section>
 
   <section id="vocabularies">
