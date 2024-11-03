@@ -231,6 +231,59 @@
       which makes use of the RDF data model and serialization formats.</p>
   </section>
 
+  <section id="vocabularies">
+    <h3>RDF Vocabularies and Namespace IRIs</h3>
+
+    <p>An <dfn data-local-lt="vocabulary">RDF vocabulary</dfn> is a collection of <a>IRIs</a>
+      intended for use in <a>RDF graphs</a>. For example,
+      the IRIs documented in [[RDF12-SCHEMA]] are the RDF Schema vocabulary.
+      RDF Schema can itself be used to define and document additional
+      RDF vocabularies. Some such vocabularies are mentioned in the
+      Primer [[RDF12-PRIMER]].</p>
+
+    <p>The <a>IRIs</a> in an <a>RDF vocabulary</a> often begin with
+      a common substring known as a <dfn>namespace IRI</dfn>.
+      Some namespace IRIs are associated by convention with a short name
+      known as a <dfn>namespace prefix</dfn>. Some examples:
+
+    <table id="tab-vocab-ns" class="simple">
+      <caption>Some example namespace prefixes and IRIs</caption>
+      <tr>
+        <th>Namespace prefix</th>
+        <th>Namespace IRI</th>
+        <th>RDF vocabulary</th>
+      </tr>
+      <tr>
+        <td>rdf</td>
+        <td><a href="http://www.w3.org/1999/02/22-rdf-syntax-ns#"><code>http://www.w3.org/1999/02/22-rdf-syntax-ns#</code></a></td>
+        <td>The RDF built-in vocabulary [[RDF12-SCHEMA]]</td>
+      </tr>
+      <tr><td>rdfs</td>
+        <td><a href="http://www.w3.org/2000/01/rdf-schema#"><code>http://www.w3.org/2000/01/rdf-schema#</code></a></td>
+        <td>The RDF Schema vocabulary [[RDF12-SCHEMA]]</td>
+      </tr>
+      <tr><td>xsd</td>
+        <td><a href="http://www.w3.org/2001/XMLSchema#"><code>http://www.w3.org/2001/XMLSchema#</code></a></td>
+        <td>The <a>RDF-compatible XSD types</a></td>
+      </tr>
+    </table>
+
+    <p>In some serialization formats it is common to abbreviate <a>IRIs</a>
+      that start with <a>namespace IRIs</a> by using a
+      <a>namespace prefix</a> in order to assist readability. For example, the IRI
+      <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral</code>
+      would be abbreviated as <code>rdf:XMLLiteral</code>.
+      Note however that these abbreviations are <em>not</em> valid IRIs,
+      and must not be used in contexts where IRIs are expected.
+      Namespace IRIs and namespace prefixes are <em>not</em> a formal part of the
+      RDF data model. They are merely a syntactic convenience for
+      abbreviating IRIs.</p>
+
+    <p>The term “<dfn class="lint-ignore">namespace</dfn>” on its own does not have a
+      well-defined meaning in the context of RDF, but is sometimes informally
+      used to mean “<a>namespace IRI</a>” or “<a>RDF vocabulary</a>”.</p>
+  </section>
+
   <section id="section-triple-terms-reification">
     <h3>Triple Terms and Reification</h3>
 
@@ -293,61 +346,8 @@
     <p>Note that a <a>triple term</a> may also have another <a>triple term</a> as an <a>object</a>.</p>
   </section>
 
-  <section id="vocabularies">
-    <h3>RDF Vocabularies and Namespace IRIs</h3>
-
-    <p>An <dfn data-local-lt="vocabulary">RDF vocabulary</dfn> is a collection of <a>IRIs</a>
-      intended for use in <a>RDF graphs</a>. For example,
-      the IRIs documented in [[RDF12-SCHEMA]] are the RDF Schema vocabulary.
-      RDF Schema can itself be used to define and document additional
-      RDF vocabularies. Some such vocabularies are mentioned in the
-      Primer [[RDF12-PRIMER]].</p>
-
-    <p>The <a>IRIs</a> in an <a>RDF vocabulary</a> often begin with
-      a common substring known as a <dfn>namespace IRI</dfn>.
-      Some namespace IRIs are associated by convention with a short name
-      known as a <dfn>namespace prefix</dfn>. Some examples:
-
-    <table id="tab-vocab-ns" class="simple">
-      <caption>Some example namespace prefixes and IRIs</caption>
-      <tr>
-        <th>Namespace prefix</th>
-        <th>Namespace IRI</th>
-        <th>RDF vocabulary</th>
-      </tr>
-      <tr>
-        <td>rdf</td>
-        <td><a href="http://www.w3.org/1999/02/22-rdf-syntax-ns#"><code>http://www.w3.org/1999/02/22-rdf-syntax-ns#</code></a></td>
-        <td>The RDF built-in vocabulary [[RDF12-SCHEMA]]</td>
-      </tr>
-      <tr><td>rdfs</td>
-        <td><a href="http://www.w3.org/2000/01/rdf-schema#"><code>http://www.w3.org/2000/01/rdf-schema#</code></a></td>
-        <td>The RDF Schema vocabulary [[RDF12-SCHEMA]]</td>
-      </tr>
-      <tr><td>xsd</td>
-        <td><a href="http://www.w3.org/2001/XMLSchema#"><code>http://www.w3.org/2001/XMLSchema#</code></a></td>
-        <td>The <a>RDF-compatible XSD types</a></td>
-      </tr>
-    </table>
-
-    <p>In some serialization formats it is common to abbreviate <a>IRIs</a>
-      that start with <a>namespace IRIs</a> by using a
-      <a>namespace prefix</a> in order to assist readability. For example, the IRI
-      <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral</code>
-      would be abbreviated as <code>rdf:XMLLiteral</code>.
-      Note however that these abbreviations are <em>not</em> valid IRIs,
-      and must not be used in contexts where IRIs are expected.
-      Namespace IRIs and namespace prefixes are <em>not</em> a formal part of the
-      RDF data model. They are merely a syntactic convenience for
-      abbreviating IRIs.</p>
-
-    <p>The term “<dfn class="lint-ignore">namespace</dfn>” on its own does not have a
-      well-defined meaning in the context of RDF, but is sometimes informally
-      used to mean “<a>namespace IRI</a>” or “<a>RDF vocabulary</a>”.</p>
-  </section>
-
   <section id="change-over-time">
-    <h2>RDF and Change over Time</h2>
+    <h3>RDF and Change over Time</h3>
 
     <p>The RDF data model is <em>atemporal</em>: <a>RDF graphs</a>
       are static snapshots of information.</p>
@@ -465,7 +465,7 @@
   </section>
 
   <section id="rdf-documents">
-    <h2>RDF Documents and Syntaxes</h2>
+    <h3>RDF Documents and Syntaxes</h3>
 
     <p>An <dfn>RDF document</dfn> is a document that encodes an
       <a>RDF graph</a> or <a>RDF dataset</a> in a <dfn>concrete RDF syntax</dfn>,
@@ -513,7 +513,7 @@
     another specification.</p>
 
   <section id="rdf-strings">
-    <h2>Strings in RDF</h2>
+    <h3>Strings in RDF</h3>
 
     <p>RDF uses Unicode [[Unicode]] as the fundamental representation for string values.
       Within this, and related specifications, the term <dfn id="dfn-rdf-string">string</dfn>,
@@ -669,7 +669,7 @@
   </section>
 
   <section id="section-Graph-Literal">
-    <h2>Literals</h2>
+    <h3>Literals</h3>
 
     <p>Literals are used for values such as strings, numbers, and dates.</p>
 
@@ -798,7 +798,7 @@
   </section>
 
   <section id="section-blank-nodes">
-    <h2>Blank Nodes</h2>
+    <h3>Blank Nodes</h3>
 
     <p><dfn data-lt="blank node">Blank nodes</dfn> are disjoint from
       <a>IRIs</a> and <a>literals</a>.  Otherwise,
@@ -1065,29 +1065,30 @@
       is returned and the consumer is expecting an <a>RDF graph</a>,
       the consumer is expected to use the <a data-lt="rdf dataset">RDF dataset's</a> default graph.</p>
 
-    </section>
+  </section>
 
-    <section id="section-dataset-quad" class="informative">
-      <h3>Dataset as a Set of Quads</h3>
+  <section id="section-dataset-quad" class="informative">
+    <h3>Dataset as a Set of Quads</h3>
 
-      <p>A <dfn>quad</dfn> is a <a>triple</a> associated with an optional <a>graph name</a>
-        and is used when referring to triples within an <a>RDF dataset</a>.
-      </p>
+    <p>A <dfn>quad</dfn> is a <a>triple</a> associated with an optional <a>graph name</a>
+      and is used when referring to triples within an <a>RDF dataset</a>.
+    </p>
 
-      <p>A <a>quad</a> can be represented as a tuple composed of <a>subject</a>, <a>predicate</a>, <a>object</a>,
-        and an optional <a>graph name</a>.</p>
+    <p>A <a>quad</a> can be represented as a tuple composed of <a>subject</a>, <a>predicate</a>, <a>object</a>,
+      and an optional <a>graph name</a>.</p>
 
-      <p>An <a>RDF dataset</a> can be considered to be a set of <a>quads</a>
-        where quads with no <a>graph name</a> supply the <a>triples</a> of the <a>default graph</a>,
-        and quads with the same graph name
-        supply the triples of the <a>named graph</a> with that name.</p>
+    <p>An <a>RDF dataset</a> can be considered to be a set of <a>quads</a>
+      where quads with no <a>graph name</a> supply the <a>triples</a> of the <a>default graph</a>,
+      and quads with the same graph name
+      supply the triples of the <a>named graph</a> with that name.</p>
 
-      <p class="note">Although a <a>quad</a> without a <a>graph name</a>
-        consists of the same three components as a <a>triple</a>,
-        it is a distinct concept,
-        as it specifically captures the notion of a triple within the <a>default graph</a>
-        of an <a>RDF dataset</a>.</p>
-    </section>
+    <p class="note">Although a <a>quad</a> without a <a>graph name</a>
+      consists of the same three components as a <a>triple</a>,
+      it is a distinct concept,
+      as it specifically captures the notion of a triple within the <a>default graph</a>
+      of an <a>RDF dataset</a>.</p>
+  </section>
+
 </section>
 
 <section id="section-Datatypes">
