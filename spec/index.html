@@ -1561,7 +1561,7 @@
         </div></dd>
 
       <dt id="JSON-value-space">The <a>value space</a></dt>
-      <dd>is the set of
+      <dd>is the set the smallest set containing
         <a>strings</a>,
         numbers (<a data-cite="XMLSCHEMA11-2#double"><strong>xsd:double</strong></a>),
         <a data-cite="INFRA#ordered-map">maps</a>
@@ -1570,6 +1570,10 @@
         (of values in the <a href="#JSON-value-space">value space</a>), and
         literal values (<a data-cite="INFRA#boolean">`true`, `false`</a>, and <a data-cite="INFRA#nulls">`null`</a>)
         from [[[INFRA]]] [[INFRA]] and [[[XMLSCHEMA11-2]]] [[XMLSCHEMA11-2]].
+
+        <p class="note">The value space of <a data-cite="INFRA#ordered-map">maps</a>
+          and <a data-cite="INFRA#list">lists</a> does not include values having themselves as members,
+          which cannot be represented in JSON.</p>
 
         <p>Two values (|a| and |b|) are considered equal if any of the following are true:
           <ul>
