@@ -1617,8 +1617,10 @@
             <a data-cite="INFRA#map-entry">Map entries</a> are treated as being unordered.
           </li>
           <li>A <a href="RFC8259#section-5">JSON Array</a> is mapped to a <a data-cite="INFRA#list">list</a>
-            by performing this mapping on each array value,
-            and adding that mapped value at the same index within the <a data-cite="INFRA#list">list</a>.</li>
+            such that this list contains as many elements as the JSON Array
+            and, for every position |i| in the array, the element at the |i|-th
+            position in the list is the value that results from applying this
+            mapping to the |i|-th element of the array.</li>
           <li>A <a href="RFC8259#section-6">JSON Number</a> is mapped to
             an <a data-cite="XMLSCHEMA11-2#double"><strong>xsd:double</strong></a>
             using a method consistent with <a data-cite="XMLSCHEMA11-2#f-doubleLexmap">doubleLexicalMap</a>.
