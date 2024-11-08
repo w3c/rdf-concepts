@@ -1609,19 +1609,19 @@
         literal value (<a data-cite="INFRA#boolean">`true`, `false`</a>, and <a data-cite="INFRA#nulls">null</a>).
 
         <ul>
-          <li>A <a href="RFC8259#section-4">JSON Object</a> is mapped to a <a data-cite="INFRA#ordered-map">map</a>
+          <li>A <a data-cite="RFC8259#section-4">JSON Object</a> is mapped to a <a data-cite="INFRA#ordered-map">map</a>
             by transforming each object member into a <a data-cite="INFRA#map-entry">map entry</a>
             with the <a data-cite="INFRA#map-key">key</a> taken from the member name and
             <a data-cite="INFRA#map-value">value</a> taken by performing this mapping
             to the member value.
             <a data-cite="INFRA#map-entry">Map entries</a> are treated as being unordered.
           </li>
-          <li>A <a href="RFC8259#section-5">JSON Array</a> is mapped to a <a data-cite="INFRA#list">list</a>
+          <li>A <a data-cite="RFC8259#section-5">JSON Array</a> is mapped to a <a data-cite="INFRA#list">list</a>
             such that this list contains as many elements as the JSON Array
             and, for every position |i| in the array, the element at the |i|-th
             position in the list is the value that results from applying this
             mapping to the |i|-th element of the array.</li>
-          <li>A <a href="RFC8259#section-6">JSON Number</a> is mapped to
+          <li>A <a data-cite="RFC8259#section-6">JSON Number</a> is mapped to
             an <a data-cite="XMLSCHEMA11-2#double"><strong>xsd:double</strong></a>
             using a method consistent with <a data-cite="XMLSCHEMA11-2#f-doubleLexmap">doubleLexicalMap</a>.
             <div class="note">Some numbers cannot be represented
@@ -1629,10 +1629,10 @@
               and may map to `+INF` or `-INF`.
               Such values cannot be represented as JSON Numbers, limiting the ability to serialize such values back to JSON.</div>
           </li>
-          <li>A <a href="RFC8259#section-7">JSON String</a> is mapped to
+          <li>A <a data-cite="RFC8259#section-7">JSON String</a> is mapped to
             a <a>string</a> after converting any escape sequences to the associated
             <a data-cite="I18N-GLOSSARY#dfn-code-point">Unicode code point</a>.</li>
-          <li>A <a href="RFC8259#section-3">JSON literal name</a> maps
+          <li>A <a data-cite="RFC8259#section-3">JSON literal name</a> maps
             `true` to <a data-cite="INFRA#boolean">`true`</a>,
             `false` to <a data-cite="INFRA#boolean">`false`</a>, and
             `null` to <a data-cite="INFRA#nulls">`null`</a>.</li>
