@@ -1586,15 +1586,23 @@
               at the corresponding index in |b|,
               and both |a| and |b| have the same <a data-cite="INFRA#list-size">size</a>.</li>
             <li>They are both <a data-cite="INFRA#ordered-map">maps</a> with equal <a data-cite="INFRA#map-entry">entries</a>
-              – meaning that both |a| and |b| have the same <a data-cite="INFRA#map-size">size</a>,
-              and for each entry <var>e<sub>a</sub></var> in |a|
-              there is an entry <var>e<sub>b</sub></var> in |b|
+              – meaning that for each entry <var>e<sub>a</sub></var> in |a|
+              there exists an entry <var>e<sub>b</sub></var> in |b|
               such that the <a data-cite="INFRA#map-key">key</a> in <var>e<sub>a</sub></var>
               equals the <a data-cite="INFRA#map-key">key</a> in <var>e<sub>b</sub></var>,
-              and the <a data-cite="INFRA#map-value">value</a> in <var>e<sub>a</sub></var>
-              equals the <a data-cite="INFRA#map-value">value</a> in <var>e<sub>b</sub></var>.
+              the <a data-cite="INFRA#map-value">value</a> in <var>e<sub>a</sub></var>
+              equals the <a data-cite="INFRA#map-value">value</a> in <var>e<sub>b</sub></var>,
+              and both |a| and |b| have the same <a data-cite="INFRA#map-size">size</a>.
               <div class="note">Two JSON Objects containing maps which are serialized with entries in a different order will be equal under this definition when transformed to the value space.
               For example, `{ "a": 1, "b": 2 } and { "b": 2, "a": 1 }` are considered equal.
+              As a result of the value space being defined using terminology from [[INFRA]],
+              property values which can contain more than one item, such as <a data-cite="INFRA#list">lists</a> and <a data-cite="INFRA#ordered-map">maps</a>,
+              are explicitly ordered.
+              All list-like value structures in [[INFRA]] are ordered,
+              whether or not that order is significant.
+              For the purposes of this specification, unless otherwise stated,
+              <a data-cite="INFRA#ordered-map">map</a> ordering is not important
+              and implementations are not expected to produce or consume deterministically ordered values.
               </div>
             </li>
           </ul>
