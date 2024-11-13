@@ -1634,7 +1634,9 @@
             <a data-cite="RFC8259#section-5">array</a>.</li>
           <li>A <a data-cite="RFC8259#section-6">JSON Number</a> is mapped to
             an <a data-cite="XMLSCHEMA11-2#double"><strong>xsd:double</strong></a>
-            using a method consistent with <a data-cite="XMLSCHEMA11-2#f-doubleLexmap">doubleLexicalMap</a>.
+            using a method consistent with <a data-cite="XMLSCHEMA11-2#f-doubleLexmap">doubleLexicalMap</a>,
+            which MUST strictly conform to the rounding method described in
+            <a data-cite="XMLSCHEMA11-2#f-floatPtRound">floatPtRound</a>.
             <div class="note">Some numbers cannot be represented
               as finite <a data-cite="XMLSCHEMA11-2#double"><strong>xsd:double</strong></a> values
               and may map to `+INF` or `-INF`.
