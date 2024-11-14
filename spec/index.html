@@ -1587,7 +1587,7 @@
         </div></dd>
 
       <dt id="JSON-value-space">The <a>value space</a></dt>
-      <dd>is the set of
+      <dd>is the smallest set containing
         <a>strings</a>,
         numbers (<a data-cite="XMLSCHEMA11-2#double"><strong>xsd:double</strong></a>),
         <a data-cite="INFRA#ordered-map">maps</a>
@@ -1596,6 +1596,10 @@
         (of values in the <a href="#JSON-value-space">value space</a>), and
         literal values (<a data-cite="INFRA#boolean">`true`, `false`</a>, and <a data-cite="INFRA#nulls">`null`</a>)
         from [[[INFRA]]] [[INFRA]] and [[[XMLSCHEMA11-2]]] [[XMLSCHEMA11-2]].
+
+        <p class="note">The value space of <a data-cite="INFRA#ordered-map">maps</a>
+          and <a data-cite="INFRA#list">lists</a> does not include values having themselves as members,
+          which cannot be represented in JSON.</p>
 
         <p>Two values (|a| and |b|) are considered equal if any of the following are true:
           <ul>
@@ -1608,15 +1612,23 @@
               at the corresponding index in |b|,
               and both |a| and |b| have the same <a data-cite="INFRA#list-size">size</a>.</li>
             <li>They are both <a data-cite="INFRA#ordered-map">maps</a> with equal <a data-cite="INFRA#map-entry">entries</a>
-              – meaning that both |a| and |b| have the same <a data-cite="INFRA#map-size">size</a>,
-              and for each entry <var>e<sub>a</sub></var> in |a|
-              there is an entry <var>e<sub>b</sub></var> in |b|
+              – meaning that for each entry <var>e<sub>a</sub></var> in |a|
+              there exists an entry <var>e<sub>b</sub></var> in |b|
               such that the <a data-cite="INFRA#map-key">key</a> in <var>e<sub>a</sub></var>
               equals the <a data-cite="INFRA#map-key">key</a> in <var>e<sub>b</sub></var>,
-              and the <a data-cite="INFRA#map-value">value</a> in <var>e<sub>a</sub></var>
-              equals the <a data-cite="INFRA#map-value">value</a> in <var>e<sub>b</sub></var>.
+              the <a data-cite="INFRA#map-value">value</a> in <var>e<sub>a</sub></var>
+              equals the <a data-cite="INFRA#map-value">value</a> in <var>e<sub>b</sub></var>,
+              and both |a| and |b| have the same <a data-cite="INFRA#map-size">size</a>.
               <div class="note">Two JSON Objects containing maps which are serialized with entries in a different order will be equal under this definition when transformed to the value space.
               For example, `{ "a": 1, "b": 2 } and { "b": 2, "a": 1 }` are considered equal.
+              As a result of the value space being defined using terminology from [[INFRA]],
+              property values which can contain more than one item, such as <a data-cite="INFRA#list">lists</a> and <a data-cite="INFRA#ordered-map">maps</a>,
+              are explicitly ordered.
+              All list-like value structures in [[INFRA]] are ordered,
+              whether or not that order is significant.
+              For the purposes of this specification, unless otherwise stated,
+              <a data-cite="INFRA#ordered-map">map</a> ordering is not important
+              and implementations are not expected to produce or consume deterministically ordered values.
               </div>
             </li>
           </ul>
@@ -1628,30 +1640,42 @@
         number (<a data-cite="XMLSCHEMA11-2#double"><strong>xsd:double</strong></a>),
         <a data-cite="INFRA#ordered-map">map</a>,
         <a data-cite="INFRA#list">list</a>, or
-        literal value (<a data-cite="INFRA#boolean">`true`, `false`</a>, and <a data-cite="INFRA#nulls">null</a>).
+        literal value (<a data-cite="INFRA#boolean">`true`, `false`</a>, and <a data-cite="INFRA#nulls">`null`</a>).
 
         <ul>
-          <li>A <a href="RFC8259#section-4">JSON Object</a> is mapped to a <a data-cite="INFRA#ordered-map">map</a>
+          <li>A <a data-cite="RFC8259#section-4">JSON Object</a> is mapped to a <a data-cite="INFRA#ordered-map">map</a>
             by transforming each object member into a <a data-cite="INFRA#map-entry">map entry</a>
             with the <a data-cite="INFRA#map-key">key</a> taken from the member name and
             <a data-cite="INFRA#map-value">value</a> taken by performing this mapping
             to the member value.
             <a data-cite="INFRA#map-entry">Map entries</a> are treated as being unordered.
-            </li>
-          <li>A <a href="RFC8259#section-5">JSON Array</a> is mapped to a <a data-cite="INFRA#list">list</a>
-            by performing this mapping on each array value.</li>
-          <li>A <a href="RFC8259#section-6">JSON Number</a> is mapped to
+          </li>
+          <li>A <a data-cite="RFC8259#section-5">JSON Array</a> is mapped to a <a data-cite="INFRA#list">list</a>
+            such that this <a data-cite="INFRA#list">list</a> contains as many
+            elements as the <a data-cite="RFC8259#section-5">JSON Array</a> and, for
+            every position |i| in the <a data-cite="RFC8259#section-5">array</a>,
+            the element at the |i|-th position in the
+            <a data-cite="INFRA#list">list</a> is the value that results from
+            applying this mapping to the |i|-th element of the
+            <a data-cite="RFC8259#section-5">array</a>.</li>
+          <li>A <a data-cite="RFC8259#section-6">JSON Number</a> is mapped to
             an <a data-cite="XMLSCHEMA11-2#double"><strong>xsd:double</strong></a>
-            using a method consistent with <a data-cite="XMLSCHEMA11-2#f-doubleLexmap">doubleLexicalMap</a>.
+            using a method consistent with <a data-cite="XMLSCHEMA11-2#f-doubleLexmap">doubleLexicalMap</a>,
+            which MUST strictly conform to the rounding method described in
+            <a data-cite="XMLSCHEMA11-2#f-floatPtRound">floatPtRound</a> [[XMLSCHEMA11-2]].
             <div class="note">Some numbers cannot be represented
               as finite <a data-cite="XMLSCHEMA11-2#double"><strong>xsd:double</strong></a> values
               and may map to `+INF` or `-INF`.
               Such values cannot be represented as JSON Numbers, limiting the ability to serialize such values back to JSON.</div>
           </li>
-          <li>A <a href="RFC8259#section-7">JSON String</a> is mapped to
-            a <a>string</a>.</li>
-          <li>A <a href="RFC8259#section-3">JSON literal name</a> is mapped to
-            <a data-cite="INFRA#boolean">`true`, `false`</a>, or <a data-cite="INFRA#nulls">null</a>.</li>
+          <li>A <a data-cite="RFC8259#section-7">JSON String</a> is mapped to
+            a <a>string</a> after converting any escape sequences to the associated
+            <a data-cite="I18N-GLOSSARY#dfn-code-point">Unicode code point</a>.</li>
+          <li>A <a data-cite="RFC8259#section-3">JSON literal name</a> maps
+            JSON `true`, `false`, and `null` values
+            to [[INFRA]] <a data-cite="INFRA#boolean">`true`</a>,
+            <a data-cite="INFRA#boolean">`false`</a>, and
+            <a data-cite="INFRA#nulls">`null`</a> values, respectively.</li>
         </ul>
       </dd>
     </dl>
