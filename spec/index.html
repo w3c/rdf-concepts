@@ -1242,6 +1242,12 @@
       <tr><td><a data-cite="xmlschema11-2#NCName"><code>xsd:NCName</code></a></td><td>XML NCNames</td></tr>
     </table>
 
+    <p>The <a>lexical-to-value mapping</a> for <a data-cite="xmlschema11-2#float"><code>xsd:float</code></a>
+      and <a data-cite="xmlschema11-2#double"><code>xsd:double</code></a>
+      MUST use a method consistent with <a data-cite="XMLSCHEMA11-2#f-doubleLexmap">doubleLexicalMap</a>,
+      which MUST strictly conform to the rounding method described in
+      <a data-cite="XMLSCHEMA11-2#f-floatPtRound">floatPtRound</a> [[XMLSCHEMA11-2]].</p>
+
     <p>The other built-in XML Schema datatypes are unsuitable
       for various reasons and SHOULD NOT be used:</p>
 
