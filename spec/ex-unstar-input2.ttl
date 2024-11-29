@@ -3,8 +3,3 @@ PREFIX ex: <http://example.org/>
 
 _:r1 rdf:reifies <<( ex:s ex:p ex:o )>>.
 _:r1 ex:q "some value".
-
-GRAPH ex:g {
-  ex:s ex:p ex:o.
-  ex:s ex:p ex:o2.
-}
