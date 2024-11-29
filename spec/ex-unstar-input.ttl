@@ -3,8 +3,3 @@ PREFIX ex: <http://example.org/>
 
 << ex:s ex:p ex:o >> ex:q "some value".
 
-GRAPH ex:g {
-  ex:s ex:p ex:o.
-  ex:s ex:p ex:o2.
-}
-
