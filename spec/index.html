@@ -1637,6 +1637,13 @@
       Such application should make sure to apply `unstar` to every graph prior to merging them.
       Since `unstar` is idempotent, there is no harm in applying it more than necessary.</p>
 
+    <p class=note>
+      Note that the use of the <a data-cite="rdf12-schema/#ch_reificationvocab">reification vocabulary</a> does not, in itself, interfere with the `unstar` algorithm,
+      as long as the subject of the reification triples does not have the type `rdf:UnstarredTripleTerm`.
+      In particular, a [=Classic=] graph or dataset using "old style" reification will be unchanged by the `unstar` mapping,
+      and a [=Full=] graph or dataset mixing <a>triple terms</a> with "old style" reification will be losslessly `unstar`red.
+    </p>
+
   </section>
 
   <p class=issue>We should probably provide the `restar` algorithm, the opposite of `unstar`.</p>
