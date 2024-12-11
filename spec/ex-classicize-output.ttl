@@ -4,7 +4,7 @@ PREFIX ex: <http://example.org/>
 _:r1 rdf:reifies _:gen1.
 _:r1 ex:q "some value".
 
-_:gen1 a rdf:UnstarredTripleTerm ;
+_:gen1 a rdf:ClassicizedTripleTerm ;
   rdf:subject ex:s;
   rdf:predicate ex:p;
   rdf:object ex:o.
