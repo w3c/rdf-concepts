@@ -1115,14 +1115,21 @@
     of that value. The mapping can be seen as a function
     from the lexical space to the value space.</p>
 
-  <p class="note"><a>Language-tagged strings</a> have the <a>datatype IRI</a>
+  <p class="note" id="note-lang-strings"><a>Language-tagged strings</a> have the <a>datatype IRI</a>
     <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#langString</code>
     (commonly abbreviated as <code>rdf:langString</code>).
     No datatype is formally defined for this IRI because the definition
     of <a>datatypes</a> does not accommodate
     <a>language tags</a> in the <a>lexical space</a>.
     The <a>value space</a> associated with this datatype IRI is the set
-    of all pairs of strings and language tags.</p>
+    of all pairs that consist of a string and a language tag.
+    Similarly, <a>directional language-tagged strings</a>
+    <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#dirLangString</code>
+    (commonly abbreviated as <code>rdf:dirLangString</code>)
+    also have a <a>base direction</a> in the value space.
+    The <a>value space</a> associated with this datatype IRI is the set
+    of all 3-tuples of a string, a language tag and a base direction.
+  </p>
 
   <p>For example, the XML Schema datatype <code>xsd:boolean</code>,
     where each member of the <a>value space</a> has two lexical
