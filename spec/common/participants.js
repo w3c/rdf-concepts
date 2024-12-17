@@ -10,17 +10,14 @@
 const https = require('https');
 const process = require('process');
 
-const APIKEY = process.env.APIKEY || process.argv[2];
+const APIKEY = process.env.APIKEY || process.argv[2] || '';
 const GROUP = process.env.GROUP || process.argv[3] || "wg/rdf-star";
 
-if (!APIKEY) {
-  console.error('Error: APIKEY must be specified as either an environment variable or a command-line argument.');
-  process.exit(1);
-}
+var apikey = APIKEY.length > 0 ? `&apikey=${APIKEY}` : ''
 
 const groupOptions = {
   hostname: 'api.w3.org',
-  path: `/groups/${GROUP}?items=50&apikey=${APIKEY}`,
+  path: `/groups/${GROUP}?items=50${apikey}`,
   headers: {
     'Accept': 'application/json'
   }
@@ -28,7 +25,7 @@ const groupOptions = {
 
 const userOptions = {
   hostname: 'api.w3.org',
-  path: `/groups/${GROUP}/users?items=50&apikey=${APIKEY}`,
+  path: `/groups/${GROUP}/users?items=50${apikey}`,
   headers: {
     'Accept': 'application/json'
   }
@@ -53,16 +50,23 @@ https.get(groupOptions, (res) => {
 
       res.on('end', () => {
         const users = JSON.parse(userData)._links.users.map(u => u.title);
-        const sortedUsers = users.sort();
 
-        if (sortedUsers.length === 1) {
-          console.log(`The sole member of the ${groupName} Group was ${sortedUsers[0]}.`);
-        } else if (sortedUsers.length === 2) {
-          const joinedUsers = sortedUsers.join(' and ');
+        if (users.length === 1) {
+          console.log(`The sole member of the ${groupName} Group was ${users[0]}.`);
+        } else if (users.length === 2) {
+          const joinedUsers = users.join(' and ');
           console.log(`Members of the ${groupName} Group included ${joinedUsers}.`);
         } else {
-          const joinedUsers = sortedUsers.slice(0, -1).join(', ');
-          console.log(`Members of the ${groupName} Group included ${joinedUsers}, and ${sortedUsers[sortedUsers.length - 1]}.`);
+          // Find the maximum length of the first part (before the space)
+          const maxLength = Math.max(...users.map(user => user.split(" ")[0].length));
+
+          // Right-align the first component and format the strings
+          const alignedUsers = users.map(user => {
+            const [first, ...rest] = user.split(" ");
+            return first.padStart(maxLength, " ") + " " + rest.join(" ");
+          });
+          const joinedUsers = alignedUsers.slice(0, -1).join(",\n");
+          console.log(`Members of the ${groupName} Group included\n${joinedUsers}, and\n${alignedUsers[users.length - 1]}.`);
         }
       });
     }).on('error', (err) => {
