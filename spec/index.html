@@ -281,10 +281,6 @@
         <td><a href="http://www.w3.org/2001/XMLSchema#"><code>http://www.w3.org/2001/XMLSchema#</code></a></td>
         <td>The <a>RDF-compatible XSD types</a></td>
       </tr>
-      <tr><td>classicize</td>
-        <td><a href="https://www.w3.org/ns/classicize#"><code>https://www.w3.org/ns/classicize#</code></a></td>
-        <td>The vocabulary used by the [=classicize=] transformation</td>
-      </tr>
     </table>
 
     <p>In some serialization formats it is common to abbreviate <a>IRIs</a>
@@ -1516,7 +1512,7 @@
 
   <p class=issue>Should we go even further and aim to provide interoperability between <em>RDF 1.1</em> and RDF 1.2 [=Full=]?</p>
 
-  <p class=issue>AT RISK: the working group may decide to replace the terms from the `classicize:` namespace used in this section by other terms, possibly in a different namespace.</p>
+  <p class=issue>AT RISK: the working group may decide to replace the terms `rdf:TripleTerm`, `rdf:ttSubject`, `rdf:ttPredicate` and `rdf:ttObject` used in this section by other terms, possibly in a different namespace.</p>
 
   <p>These transformation are designed to be:</p>
 
@@ -1547,14 +1543,14 @@
       and the following triples are added to the graph (where <var>s</var>, <var>p</var> and <var>o</var> are respectively the [=subject=], [=predicate=] and [=object=] of <var>tt</var>):
     </p>
     <ul>
-      <li>(<var>b</var>, `rdf:type`, `classicize:TripleTerm`)
-      <li>(<var>b</var>, `classicize:subject`, <var>s</var>)
-      <li>(<var>b</var>, `classicize:predicate`, <var>p</var>)
-      <li>(<var>b</var>, `classicize:object`, <var>o</var>)
+      <li>(<var>b</var>, `rdf:type`, `rdf:TripleTerm`)
+      <li>(<var>b</var>, `rdf:ttSubject`, <var>s</var>)
+      <li>(<var>b</var>, `rdf:ttPredicate`, <var>p</var>)
+      <li>(<var>b</var>, `rdf:ttObject`, <var>o</var>)
     </ul>
 
     <p>Note that this transformation is <em>information preserving</em> only when the input graph does not contain at the same time a [=triple term=]
-      and an [=asserted=] triple (<var>b</var>, `rdf:type`, `classicize:TripleTerm`) where <var>b</var> is a [=blank node=].
+      and an [=asserted=] triple (<var>b</var>, `rdf:type`, `rdf:TripleTerm`) where <var>b</var> is a [=blank node=].
       Implementations encountering this situation MUST report an error.
       See Section <a href="#section-classicize-caveat"></a> for a discussion on this limitation.
     </p>
@@ -1604,10 +1600,10 @@
     <h2>From [=Classic=] to [=Full=]</h2>
 
     <p>Reverting a [=classicize=] graph to its original form consists,
-      for each [=blank node=] <var>b</var> that is the subject of an [=asserted=] triple (<var>b</var>, `rdf:type`, `classicize:TripleTerm`),
-      in locating the three other [=asserted=] triples (<var>b</var>, `classicize:subject`, <var>s</var>),
-      (<var>b</var>, `classicize:predicate`, <var>p</var>),
-      and (<var>b</var>, `classicize:object`, <var>o</var>).
+      for each [=blank node=] <var>b</var> that is the subject of an [=asserted=] triple (<var>b</var>, `rdf:type`, `rdf:TripleTerm`),
+      in locating the three other [=asserted=] triples (<var>b</var>, `rdf:ttSubject`, <var>s</var>),
+      (<var>b</var>, `rdf:ttPredicate`, <var>p</var>),
+      and (<var>b</var>, `rdf:ttObject`, <var>o</var>).
       These four triples are removed from the graph.
       All remaining occurrences of <var>b</var> are then replaced with the triple term (<var>s</var>, <var>p</var>, <var>o</var>).
     </p>
@@ -1615,14 +1611,14 @@
     <p>Implementations MUST report an error if, for a given <var>b</var>,
       it can not unambiguously determine <var>s</var>, <var>p</var> or <var>o</var>
       (i.e. if one of the `classicize:` properties of <var>b</var> is missing or duplicated).
-      Implementations MUST also report an error if the input graph contains at the same time a [=triple term=] and an [=asserted triple=] (<var>b</var>, `rdf:type`, `classicize:TripleTerm`) where <var>b</var> is a [=blank node=].
+      Implementations MUST also report an error if the input graph contains at the same time a [=triple term=] and an [=asserted triple=] (<var>b</var>, `rdf:type`, `rdf:TripleTerm`) where <var>b</var> is a [=blank node=].
       None of these situations can occur if the input graph was produced by the [=classicize=] transformation.
     </p>
 
     <p>To revert a [=classicized=] [=RDF dataset=] to its original form, the transformation above is applied to its [=default graph=] and to each of its [=named graphs=].
     </p>
 
-    <p>Note that this transformation has no effect on any [=RDF graph=] or [=RDF dataset=] that does not use the `classicize:TripleTerm` type,
+    <p>Note that this transformation has no effect on any [=RDF graph=] or [=RDF dataset=] that does not use the `rdf:TripleTerm` type,
       including [=Full=] graphs or datasets containing [=triple terms=].
       This makes this transformation <em>idempotent</em> as intended.
     </p>
@@ -1632,12 +1628,12 @@
     <h2>Limitations</h2>
 
     <p>The two transformations above are explicitly not supporting graphs or datasets containing at the same time a [=triple term=]
-      and an [=asserted triple=] (<var>b</var>, `rdf:type`, `classicize:TripleTerm`) where <var>b</var> is a [=blank node=].
+      and an [=asserted triple=] (<var>b</var>, `rdf:type`, `rdf:TripleTerm`) where <var>b</var> is a [=blank node=].
       This means, in particular, that the [=classicize=] transformation is not strictly <em>universal</em>.
     </p>
 
     <p>This limitation should not be an issue in practice.
-      The `classicize:TripleTerm` type is unlikely to be in used in any published graph or dataset,
+      The `rdf:TripleTerm` type is unlikely to be in used in any published graph or dataset,
       as it was not defined prior to this specification.
       For this reason, using it would actually have been bad practice.
       As for future graphs and datasets, their authors should consider this type to be reserved, in order to prevent interference with the [=classicize=] transformation.
@@ -1645,7 +1641,7 @@
 
     <p>Another consequence of this restriction is that users should be careful when merging graphs in an application that [=classicize=] graphs or datasets.
       More precisely, merging a [=Full=] [=RDF graph=] (containing at least one [=triple term=])
-      with a [=classicized=] [=RDF graph=] (and therefore potentially containing [=blank node=] instances of `classicize:TripleTerm`)
+      with a [=classicized=] [=RDF graph=] (and therefore potentially containing [=blank node=] instances of `rdf:TripleTerm`)
       could result in a "hybrid" graph that can not be transformed.
       Such applications should make sure to [=classicize=] every graph prior to merging them.
       Conversely, applications supporting RDF [=Full=] should make sure to apply the reverse tranformation to any graph that is known or likely to be [=classicized=],
@@ -1668,7 +1664,7 @@
         <li>Let <var>M</var> be an empty map from [=triple terms=] to [=blank nodes=].</li>
         <li>Let <var>inputKind</var> be `null`.</li>
         <li>For each triple (<var>s</var>, <var>p</var>, <var>o</var>) in <var>Gᵢ</var>:<ol>
-          <li>If <var>s</var> is a [=blank node=], <var>p</var> is `rdf:type` and <var>o</var> is `classicize:TripleTerm`, then:<ol>
+          <li>If <var>s</var> is a [=blank node=], <var>p</var> is `rdf:type` and <var>o</var> is `rdf:TripleTerm`, then:<ol>
             <li id="classicize-error1">If <var>inputKind</var> is `"full"` then exit with an error.</li>
             <li>Otherwise, set <var>inputKind</var> to `"classic"`.</li>
           </ol></li>
@@ -1713,7 +1709,7 @@
           </ol></li>
           <li id="qtt-fresh-bnode">Let <var>b</var> be a fresh blank node.</li>
           <li>Add the association (<var>t</var>, <var>b</var>) to <var>Mₒ</var>.</li>
-          <li>Add the triples (<var>b</var>, `rdf:type`, `classicize:TripleTerm`), (<var>b</var>, `classicize:subject`, <var>s</var>), (<var>b</var>, `classicize:predicate`, <var>p</var>), and (<var>b</var>, `classicize:object`, <var>o</var>) in <var>G</var>.</li>
+          <li>Add the triples (<var>b</var>, `rdf:type`, `rdf:TripleTerm`), (<var>b</var>, `rdf:ttSubject`, <var>s</var>), (<var>b</var>, `rdf:ttPredicate`, <var>p</var>), and (<var>b</var>, `rdf:ttObject`, <var>o</var>) in <var>G</var>.</li>
         </ol></li>
         <li>Return <var>b</var>, <var>Mₒ</var> and <var>G</var>.</li>
       </ol>
