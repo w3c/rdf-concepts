@@ -1,12 +1,11 @@
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX classicize: <https://www.w3.org/ns/rdf-classicize#>
 PREFIX ex: <http://example.org/>
 
 _:r1 rdf:reifies _:gen1.
 _:r1 ex:q "some value".
 
-_:gen1 a classicize:TripleTerm ;
-  classicize:subject ex:s;
-  classicize:predicate ex:p;
-  classicize:object ex:o.
+_:gen1 a rdf:TripleTerm ;
+  rdf:ttSubject ex:s;
+  rdf:ttPredicate ex:p;
+  rdf:ttObject ex:o.
 
