@@ -910,6 +910,12 @@
       use <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#reifies</code> (<code>rdf:reifies</code>)
       as its <a>predicate</a>.</p>
 
+    <p>The <dfn data-lt="constituent">constituent terms</dfn> (or simply constituents)
+      of a [=triple term=] (resp. an [=RDF triple=]) are its [=subject=], its [=predicate=], its [=object=],
+      and all the [=constituent terms=] of its [=object=] if it is itself a [=triple term=].
+      By extension, the [=constituent terms=] of an [=RDF graph=] are all the constituent terms of its triples.
+    </p>
+
   </section>
 
   <section id="graph-isomorphism">
@@ -1538,9 +1544,9 @@
 
     <p>
       Encoding an [=RDF graph=] to ensure that it is consumable by an RDF [=Classic=] implementation is called <dfn data-lt="classicize|classicized">classicizing</dfn> it.
-      It consists in assignning each [=triple term=] <var>tt</var> used in the graph to a fresh [=blank node=] <var>b</var> (i.e. a blank node not in use in the graph).
-      All occurrences of <var>tt</var> in the graph are replaced with <var>b</var>,
-      and the following triples are added to the graph (where <var>s</var>, <var>p</var> and <var>o</var> are respectively the [=subject=], [=predicate=] and [=object=] of <var>tt</var>):
+      It consists, while the graph has a [=triple term=] <var>tt</var> in its [=constituent terms=], to mint a fresh [=blank node=] <var>b</var>
+      (i.e. a blank node not in use in the graph), and replace <var>tt</var> with <var>b</var> in all the triples of the graph having <var>tt</var> in their [=constituents=].
+      Then the following triples are added to the graph (where <var>s</var>, <var>p</var> and <var>o</var> are respectively the [=subject=], [=predicate=] and [=object=] of <var>tt</var>):
     </p>
     <ul>
       <li>(<var>b</var>, `rdf:type`, `rdf:TripleTerm`)
@@ -1548,6 +1554,7 @@
       <li>(<var>b</var>, `rdf:ttPredicate`, <var>p</var>)
       <li>(<var>b</var>, `rdf:ttObject`, <var>o</var>)
     </ul>
+    <p>This process is repeated until the graph has no [=triple term=] [=constituent=], and is therefore compliant with RDF [=Classic=].</p>
 
     <p>Note that this transformation is <em>information preserving</em> only when the input graph does not contain at the same time a [=triple term=]
       and an [=asserted=] triple (<var>b</var>, `rdf:type`, `rdf:TripleTerm`) where <var>b</var> is a [=blank node=].
@@ -1605,7 +1612,7 @@
       (<var>b</var>, `rdf:ttPredicate`, <var>p</var>),
       and (<var>b</var>, `rdf:ttObject`, <var>o</var>).
       These four triples are removed from the graph.
-      All remaining occurrences of <var>b</var> are then replaced with the triple term (<var>s</var>, <var>p</var>, <var>o</var>).
+      All remaining occurrences of <var>b</var> as a [=constituent term=] of the graph are then replaced with the triple term (<var>s</var>, <var>p</var>, <var>o</var>).
     </p>
 
     <p>Implementations MUST report an error if, for a given <var>b</var>,
