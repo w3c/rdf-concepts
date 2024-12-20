@@ -1531,7 +1531,7 @@
       at least not in the entailment regimes defined in [[RDF12-SEMANTICS]].
     </dd>
     <dt>Idempotent</dt>
-    <dd>Applying a transformation several time to a graph (resp. dataset) should have the same effect as applying it once.
+    <dd>Applying a transformation several times to a graph (resp. dataset) should have the same effect as applying it once.
       Moreover, [=classicizing=] a graph (resp. dataset) that is already complying with RDF [=Classic=] (i.e. containing no [=triple term=]) must result in the same graph (resp. dataset).
     </dd>
     <dt>Universal</dt>
@@ -1545,7 +1545,7 @@
 
     <p>
       Encoding an [=RDF graph=] to ensure that it is consumable by an RDF [=Classic=] implementation is called <dfn data-lt="classicize|classicized">classicizing</dfn> it.
-      It consists, while the graph has a [=triple term=] <var>tt</var> in its [=constituent terms=], to mint a fresh [=blank node=] <var>b</var>
+      It consists, while the graph has a [=triple term=] <var>tt</var> in its [=constituent terms=], in minting a fresh [=blank node=] <var>b</var>
       (i.e. a blank node not in use in the graph), and replace <var>tt</var> with <var>b</var> in all the triples of the graph having <var>tt</var> in their [=constituents=].
       Then the following triples are added to the graph (where <var>s</var>, <var>p</var> and <var>o</var> are respectively the [=subject=], [=predicate=] and [=object=] of <var>tt</var>):
     </p>
