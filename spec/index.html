@@ -1646,6 +1646,15 @@
       As for future graphs and datasets, their authors should consider this type to be reserved, in order to prevent interference with the [=classicize=] transformation.
     </p>
 
+    <p class=note>
+      This is one of the reasons why this transformation introduces a new vocabulary
+      (`rdf:TripleTerm`, `rdf:ttSubject`, `rdf:ttPredicate`, `rdf::ttObject`),
+      rather than repurposing the existing <a data-cite="RDF12-SCHEMA#ch_reificationvocab">reification vocabulary</a>
+      (`rdf:Statement`, `rdf:subject`, `rdf:predicate`, `rdf:object`).
+      Contrarily to `rdf:TripleTerm`, `rdf:Statement` is known to used in widely used datasets (e.g. <a href="https://www.uniprot.org/">Uniprot</a>),
+      so deprecating its usage as "reserved" was not an option.
+    </p>
+
     <p>Another consequence of this restriction is that users should be careful when merging graphs in an application that [=classicize=] graphs or datasets.
       More precisely, merging a [=Full=] [=RDF graph=] (containing at least one [=triple term=])
       with a [=classicized=] [=RDF graph=] (and therefore potentially containing [=blank node=] instances of `rdf:TripleTerm`)
