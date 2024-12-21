@@ -740,28 +740,25 @@
       <li>If the literal is a <a>language-tagged string</a>,
         then the literal value is a pair consisting of its <a>lexical form</a>
         and its <a>language tag</a>, in that order.</li>
-      <li>if the literal is a <a>directional language-tagged string</a>, then the literal value is
+      <li>If the literal is a <a>directional language-tagged string</a>, then the literal value is
         a tuple of its <a>lexical form</a>, its <a>language tag</a>, and its <a>base direction</a>,
         likewise in that order.</li>
-
-      <li>If the literal's <a>datatype IRI</a> is in the set of
-        <a>recognized datatype IRIs</a>, let <var>d</var> be the
-        <a>referent</a> of the datatype IRI.
+      <li>If the literal's <a>datatype IRI</a> is handled by an RDF processor,
         <ul>
-          <li>If the literal's <a>lexical form</a> is in the <a>lexical space</a>
-            of <var>d</var>, then the literal value is the result of applying
-            the <a>lexical-to-value mapping</a> of <var>d</var> to the
+          <li>if the literal's <a>lexical form</a> is in the <a>lexical space</a>
+            of datatype, then the literal value is the result of applying
+            the <a>lexical-to-value mapping</a> of the datatype to the
             <a>lexical form</a>.</li>
-          <li>Otherwise, the literal is ill-typed and no literal value can be
+          <li>otherwise, the literal is ill-typed and no literal value can be
              associated with the literal. Such a case produces a semantic
              inconsistency but is not <em>syntactically</em> ill-formed.
-             Implementations MUST accept ill-typed literals and produce RDF
+             Implementations SHOULD accept ill-typed literals and produce RDF
              graphs from them. Implementations MAY produce warnings when
              encountering ill-typed literals.</li>
         </ul>
       </li>
-      <li>If the literal's <a>datatype IRI</a> is <em>not</em> in the set of
-        <a>recognized datatype IRIs</a>, then the literal value is
+      <li>If the literal's <a>datatype IRI</a> is <em>not</em>
+        handled by an RDF processor then the literal value is
         not defined by this specification.</li>
     </ul>
 
@@ -1098,8 +1095,7 @@
     in terms of XML Schema. RDF re-uses many of the XML Schema
     built-in datatypes, and defines three additional datatypes,
     <code><a>rdf:JSON</a></code>, <code><a>rdf:HTML</a></code>, and <code><a>rdf:XMLLiteral</a></code>.
-    The list of datatypes supported by an implementation is determined
-    by its <a>recognized datatype IRIs</a>.</p>
+  </p>
 
   <p>A <dfn>datatype</dfn> consists of a <a>lexical space</a>,
     a <a>value space</a> and a <a>lexical-to-value mapping</a>, and
@@ -1295,13 +1291,12 @@
   <section>
     <h3>Datatype IRIs</h3>
 
-    <p>Datatypes are identified by <a>IRIs</a>. If
-      <var>D</var> is a set of IRIs which are used to refer to
-      datatypes, then the elements of <var>D</var> are called
-      <span id="dfn-recognized-datatype-iris"><!-- obsolete term--></span><dfn data-lt="recognized datatype IRI">recognized datatype IRIs</dfn>.
-      Recognized IRIs have fixed
-      <a href="#referents">referents</a>. If any IRI of the form
-      <code>http://www.w3.org/2001/XMLSchema#xxx</code> is recognized, it
+    <p>Datatypes are identified by <a>IRIs</a> and the <a>referent</a>
+      of the IRI of a datatype defines a partial mapping from the
+      lexical form to a value.</p>
+
+   <p>If any IRI of the form
+      <code>http://www.w3.org/2001/XMLSchema#xxx</code> is handled by an RDF processor, it
       MUST refer to the RDF-compatible XSD type named <code>xsd:xxx</code> for
       every XSD type listed in <a href="#xsd-datatypes">section 5.1</a>.</p>
 
@@ -1317,12 +1312,13 @@
         refers to the datatype <code><a>rdf:JSON</a></code>.</li>
     </ul>
 
-    <p>RDF processors are not required to recognize datatype IRIs.
-      Any literal typed with an unrecognized IRI is treated just like
-      an unknown IRI, i.e. as referring to an unknown thing. Applications
-      MAY give a warning message if they are unable to determine the
-      referent of an IRI used in a typed literal, but they SHOULD NOT
-      reject such RDF as either a syntactic or semantic error.<p>
+    <p>RDF processors are not required to handle all datatypes.
+      Any literal typed with a datatype IRI not handled by an RDF processor
+      is treated just like an unknown IRI, i.e. as referring to an unknown thing.
+      Applications MAY give a warning message if they are unable to determine the
+      referent of an IRI used in a typed literal. RDF processors SHOULD
+      not reject literals with unknown IRI as either a syntactic or
+      semantic error.<p>
 
     <p>Other specifications MAY impose additional constraints on
       <a>datatype IRIs</a>, for example, require support
@@ -1343,6 +1339,14 @@
       user-defined simple XML Schema datatypes</a>
       is suggested in [[SWBP-XSCH-DATATYPES]]. RDF implementations
       are not required to support either of these facilities.</p>
+
+    <p class="note" id="note-recognized-datatype-iris">
+      In RDF 1.1, <em><span id="dfn-recognized-datatype-iris">Recognized datatype IRIs</span></em>
+      were defined RDF Concepts, overlapping with 
+      <a data-cite="RDF12-SEMANTICS#dfn-recognized">RDF Semantics, "recognizing"</a>
+      datatype IRIs for <a data-cite="RDF12-SEMANTICS#dfn-semantic-extension">semantic extensions</a>.
+    </p>
+
   </section>
 </section>
 
@@ -1696,7 +1700,6 @@
 
 </section>
 
-
 <section id="privacy" class="appendix informative">
   <h2>Privacy Considerations</h2>
   <p>RDF is used to express arbitrary application data,
@@ -1964,10 +1967,13 @@
       use the recommended BCP47 format,
       or do something else, as long it is performed consistently.</li>
     <li>Removed the section on the canonical mapping for the <a>rdf:XMLLiteral</a> datatype.</li>
+    <li>Refer to the definition and discussion of 
+      <a data-cite="RDF12-SEMANTICS#dfn-recognized">RDF Semantics, "recognizing"</a>
+      datatype IRIs, instead of <em>Recognized datatype IRIs</em>.</li>
   </ul>
 
-  <p class="note">A detailed overview of the differences between RDF versions&nbsp;1.0
-    and 1.1 can be found in [[[RDF11-NEW]]] [[RDF11-NEW]].</p>
+  <p class="note">A detailed overview of the differences between RDF versions&nbsp;1.1
+    and 1.2 can be found in [[[RDF12-NEW]]] [[RDF12-NEW]].</p>
 </section>
 
 <section id="index"></section>
@@ -1978,4 +1984,3 @@
 
 </body>
 </html>
-
