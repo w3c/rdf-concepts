@@ -583,9 +583,6 @@
       is a <a>string</a> that conforms to the syntax
       defined in RFC 3987 [[!RFC3987]].</p>
 
-    <p class="note">For convenience, a complete [[ABNF]] grammar
-      from [[RFC3987]] is provided in <a href="#iri-abnf" class="sectionRef"></a>.</p>
-
     <p>IRIs in the RDF abstract syntax MUST be <a data-cite="RFC3986#section-5">resolved</a>
       per [[RFC3986]],
       and MAY contain a fragment identifier.</p>
@@ -598,6 +595,9 @@
       (This is done in the abstract syntax, so the IRIs are resolved
       IRIs with no escaping or encoding.)
       Further normalization MUST NOT be performed before this comparison. </p>
+
+    <p class="note">For convenience, a complete [[ABNF]] grammar
+      from [[RFC3987]] is provided in <a href="#iri-abnf" class="sectionRef"></a>.</p>
 
     <div class="note" id="note-iris">
       <p><strong>URIs and IRIs:</strong>
