@@ -1020,16 +1020,12 @@
       can avoid interoperability issues by not ascribing importance to
       the presence or absence of empty named graphs.</p>
 
-    <p>SPARQL 1.2 [[SPARQL12-CONCEPTS]] also defines the concept of an RDF
-			Dataset.  The definition of an RDF Dataset in SPARQL 1.1 and this
-			specification differ slightly in that this specification allows RDF
-			Graphs to be identified using either an IRI or a blank node.  SPARQL 1.1
-			Query Language only allows RDF Graphs to be identified using an IRI.
-			Existing SPARQL implementations might not allow blank nodes to be used
-			to identify RDF Graphs for some time, so their use can cause
-			interoperability problems.
-      <a href="#section-skolemization">Skolemizing</a> blank nodes used as
-      graph names can be used to overcome these interoperability problems.</p>
+    <p>SPARQL 1.2 [[SPARQL12-QUERY]] uses 
+      <a data-cite="SPARQL12-QUERY#sparqlDataset">the same concept of an RDF Dataset</a>
+      where an RDF Graph can be identified using an IRI or a blank node.
+      SPARQL 1.1 Query Language [[SPARQL12-QUERY]]
+      only allows RDF Graphs to be identified using an IRI.</p>
+
   </div>
 
   <section id="section-dataset-isomorphism">
