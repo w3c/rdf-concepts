@@ -36,6 +36,7 @@
 
       xref: ["I18N-GLOSSARY", "INFRA"],
       github: "https://github.com/w3c/rdf-concepts/",
+      issueBase: "https://github.com/w3c/rdf-concepts/issues",
       group:           "rdf-star",
       doJsonLd:     true,
       wgPublicList: "public-rdf-star-wg"
@@ -132,6 +133,7 @@
       <a>RDF graph</a>: <a>IRIs</a>, <a>literals</a>,
       <a>blank nodes</a>, and <a>triple terms</a>.</p>
 
+    <p class="issue" data-number="129">There is a mixture of "Abstract Syntax" and "Data Model". We should have a consistent way to say "Abstract Syntax" vs "Data Model". One way is to use "Abstract Syntax" as the basis of semantics and usually say "Data Model" in Concepts otherwise.</p>
   </section>
 
   <section id="resources-and-statements">
@@ -446,6 +448,8 @@
         of the world that would make the expression true.</dd>
     </dl>
 
+    <p class="issue" data-number="118"></p>
+
     <p>An <span id="dfn-entailment-regime"><!-- obsolete term --></span><dfn data-cite="RDF12-SEMANTICS#dfn-entailment-regime">entailment regime</dfn> [[RDF12-SEMANTICS]] is a specification that
       defines precise conditions that make these relationships hold.
       RDF itself recognizes only some basic cases of entailment, <a>equivalence</a>
@@ -511,6 +515,8 @@
     and still the subject of group discussion. An alternative to conformance
     levels, "profiles", may be adopted instead, abandoned, or described in 
     another specification.</p>
+  <p class="issue" data-number="70">
+    Change "Classic Conformance" to "Basic Conformance" and define them as profiles.</p>
 
   <section id="rdf-strings">
     <h3>Strings in RDF</h3>
@@ -665,6 +671,10 @@
           in IRIs [[RFC3492]]</li>
         <li>IRIs that are not in Unicode [=Normalization Form C=] [[I18N-Glossary]]</li>
       </ul>
+      <p class="issue" data-number="63">
+        Change Punnycode-encoding refernece from [[RFC3492]] to [[RFC5890]].
+        Also, rephrase this note accordingly.
+      </p>
     </div>
   </section>
 
@@ -977,6 +987,13 @@
       in <var>G</var> can be replaced with
       a new blank node to give <var>G'</var>. Graph isomorphism
       is needed to support the RDF Test Cases [[RDF11-TESTCASES]] specification.</p>
+
+    <div class="issue" data-number="128">
+      Graph isomorphism needs the following extra clause:
+      <ul>
+        <li>M(tt) is the triple term ( M(s), M(p), M(o) ) for tt a triple term of the form (s, p, o)</li>
+      </ul>
+    </div>
   </section>
 </section>
 
@@ -1286,6 +1303,7 @@
       datatype <a data-cite="xmlschema11-2#decimal"><code>xsd:decimal</code></a>
       can be used to accurately capture arbitrary decimal numbers.</p>
 
+    <p class="issue" data-number="92"></p>
   </section>
 
   <section>
@@ -1694,6 +1712,10 @@
         </ul>
       </dd>
     </dl>
+    <p class="issue" data-number="116">The issue refers to the use
+      of <a data-cite="INFRA#ordered-map">ordered map</a>
+      from [[INFRA]] for describing the value space of <a data-cite="RFC8259#section-4">JSON Objects</a>
+      and suggests defining a new datatype for unordered maps.</p>
   </section>
 
 </section>
@@ -1786,8 +1808,6 @@
     <a data-cite="JSON-LD11#the-i18n-namespace">i18n namespace</a> to use
     a datatype to specify both the base direction an <a>language tag</a>
     of an <a>RDF literal</a>.</p>
-
-  <p class="issue" data-number="9"></p>
 </section>
 
 <section id="iri-abnf" class="appendix informative">
