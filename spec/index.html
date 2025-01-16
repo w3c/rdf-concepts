@@ -648,27 +648,26 @@
         Interoperability problems can be avoided by minting
         only IRIs that are normalized according to
         <a data-cite="rfc3987#section-5">Section 5</a>
-        of [[!RFC3987]]. Non-normalized forms that are best avoided
-        include the following:</p>
+        of [[!RFC3987]]. 
+        </p>
 
       <ul>
-        <li>Uppercase characters in scheme names and domain names</li>
-        <li>Percent-encoding of characters where it is not
-          required by IRI syntax</li>
-        <li>Explicit inclusion of the HTTP default port
-          (<code>http://example.com:80/</code>);
-          <code>http://example.com/</code> is preferable</li>
-        <li>A completely empty path in an HTTP IRI
-          (<code>http://example.com</code>);
-          <code>http://example.com/</code> is preferable</li>
-        <li>“<code>/./</code>” or “<code>/../</code>” in the path
-          component of an IRI</li>
-        <li>Lowercase hexadecimal letters within percent-encoding
-          triplets (i.e., “<code>%3F</code>” is preferred over
-          “<code>%3f</code>”)</li>
-        <li>Punycode-encoding of Internationalized Domain Names
-          in IRIs [[RFC3492]]</li>
-        <li>IRIs that are not in Unicode [=Normalization Form C=] [[I18N-Glossary]]</li>
+        <li>Use lowercase characters in scheme names and domain names.</li>
+        <li>Only use percent-encoding of characters where 
+          necessary for IRI syntax.</li>
+        <li>Omit the HTTP or HTTPS default port; <code>http://example/</code>
+          is preferred over <code>http://example:80/</code>.</li>
+        <li>Use uppercase hexadecimal letters within percent-encoding
+          triplets;"<code>%3F</code>" is preferred over
+          "<code>%3f</code>".</li>
+        <li>An empty path in an HTTP IRI
+          <code>http://example/</code> is preferred over
+          having no path <code>http://example</code>.</li>
+        <li>Normalize IRIs to remove "<code>/./</code>" and "<code>/../</code>" in the path
+          component of an IRI.</li>
+        <li>Avoid using punycode-encoding of Internationalized Domain Names 
+          in IRIs ][RFC3492]].</li>
+        <li>Use IRIs in Unicode [=Normalization Form C=] [[I18N-Glossary]].</li>
       </ul>
     </div>
   </section>
