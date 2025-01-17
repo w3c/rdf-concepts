@@ -955,8 +955,9 @@
       <a>RDF graphs</a> <var>G</var> and <var>G'</var> are
       <dfn data-lt="graph isomorphism|isomorphic" data-lt-noDefault class="export">isomorphic</dfn>
       (that is, they have an identical form)
-      if there is a bijection <var>M</var> between the sets of <a>nodes</a> of the two
-      graphs, such that all of the following properties hold:</p>
+      if there is a bijection <var>M</var>
+      from the set of all <a>RDF terms</a> into that same set,
+      such that all of the following properties hold:</p>
 
     <ul>
       <li><var>M</var> maps blank nodes to blank nodes.</li>
@@ -966,8 +967,10 @@
       <li><var>M</var>(<var>iri</var>)=<var>iri</var> for every <a>IRI</a> <var>iri</var>
         that is a node of <var>G</var>.</li>
 
+      <li><var>M</var>(<var>tt</var>) is the triple term ( <var>M</var>(<var>s</var>), <var>M</var>(<var>p</var>), <var>M</var>(<var>o</var>) ) if <var>tt</var> is a triple term of the form ( <var>s</var>, <var>p</var>, <var>o</var> ).</li>
+
       <li>The triple ( <var>s</var>, <var>p</var>, <var>o</var> ) is in <var>G</var> if and
-        only if the triple ( <var>M</var>(<var>s</var>), <var>p</var>, <var>M</var>(<var>o</var>) ) is in
+        only if the triple ( <var>M</var>(<var>s</var>), <var>M</var>(<var>p</var>), <var>M</var>(<var>o</var>) ) is in
         <var>G'</var>.</li>
     </ul>
 
