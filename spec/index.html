@@ -591,6 +591,15 @@
     <p>IRIs in the RDF abstract syntax MUST be <a data-cite="RFC3986#section-5">resolved</a>
       per [[RFC3986]], and MAY contain a fragment identifier. IRIs SHOULD
       follow rules defined by the <a data-cite="RFC3986#section-3.1">IRI scheme</a>.
+
+    <p class="note">For convenience, a complete [[ABNF]] grammar
+      from [[RFC3987]] is provided in <a href="#iri-abnf" class="sectionRef"></a>.</p>
+
+    <p>IRIs in the RDF abstract syntax 
+      MUST be <a data-cite="RFC3986#section-5">resolved</a> per [[RFC3986]] and
+      MUST NOT be <a data-cite="RFC3986#section-4.2">relative references</a>.
+      They MAY contain a <a data-cite="RFC3986#section-3.5">fragment identifier</a>.
+      IRIs SHOULD follow rules defined by the <a data-cite="RFC3986#section-3.1">IRI scheme</a>.
     </p>
 
     <p><dfn>IRI equality</dfn>:
