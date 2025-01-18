@@ -588,18 +588,11 @@
       is a <a>string</a> that conforms to the syntax
       defined in RFC 3987 [[!RFC3987]].</p>
 
-    <p>IRIs in the RDF abstract syntax MUST be <a data-cite="RFC3986#section-5">resolved</a>
-      per [[RFC3986]], and MAY contain a fragment identifier. IRIs SHOULD
-      follow rules defined by the <a data-cite="RFC3986#section-3.1">IRI scheme</a>.
-
-    <p class="note">For convenience, a complete [[ABNF]] grammar
-      from [[RFC3987]] is provided in <a href="#iri-abnf" class="sectionRef"></a>.</p>
-
-    <p>IRIs in the RDF abstract syntax 
+    <p>An IRI in the RDF abstract syntax 
       MUST be <a data-cite="RFC3986#section-5">resolved</a> per [[RFC3986]] and
-      MUST NOT be <a data-cite="RFC3986#section-4.2">relative references</a>.
-      They MAY contain a <a data-cite="RFC3986#section-3.5">fragment identifier</a>.
-      IRIs SHOULD follow rules defined by the <a data-cite="RFC3986#section-3.1">IRI scheme</a>.
+      MUST NOT be a <a data-cite="RFC3986#section-4.2">relative reference</a>.
+      An IRI MAY contain a <a data-cite="RFC3986#section-3.5">fragment identifier</a>.
+      An IRI SHOULD follow rules defined by the <a data-cite="RFC3986#section-3.1">IRI scheme</a>.
     </p>
 
     <p><dfn>IRI equality</dfn>:
@@ -654,9 +647,13 @@
         if a <a data-cite="rfc3986#section-5.1">base IRI
         can be established</a> [[RFC3986]].</p>
 
-      <p><strong>URI Schemes:</strong> Examples of scheme-specific rules include the
-        <a data-cite="RFC7230#section-2.7.1">scheme rules for HTTP</a> and the
+      <p><strong>URI Schemes:</strong>
+        Implementations are encouraged to enforce the scheme-specific rules of
+        the common schemes, such as the
+        <a data-cite="RFC7230#section-2.7.1">scheme rules for HTTP/HTTPS</a> and the
         <a data-cite="did-core#identifier">DID syntax</a>.
+        Implementations ignore URI scheme rules
+        for schemes they do not recognize. 
       </p>
 
       <p><strong>IRI normalization:</strong>
