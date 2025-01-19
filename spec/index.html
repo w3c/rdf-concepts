@@ -764,7 +764,9 @@
       </li>
       <li>If the literal's <a>datatype IRI</a> is <em>not</em>
         handled by an RDF implementation, then the literal value is
-        not defined by this specification.</li>
+        not defined by this specification. Implementations SHOULD accept
+        literals with unknown datatype IRIs and produce RDF graphs from them.
+      </li>
     </ul>
 
     <p><dfn data-local-lt="term-equal">Literal term equality</dfn>:
