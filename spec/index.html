@@ -879,6 +879,39 @@
       as its <a>predicate</a>.</p>
   </section>
 
+  <section id="graph-isomorphism">
+    <h3>Graph Comparison</h3>
+
+    <p id="section-graph-equality">Two
+      <a>RDF graphs</a> <var>G</var> and <var>G'</var> are
+      <dfn data-lt="graph isomorphism|isomorphic" data-lt-noDefault class="export">isomorphic</dfn>
+      (that is, they have an identical form)
+      if there is a bijection <var>M</var>
+      from the set of all <a>RDF terms</a> into that same set,
+      such that all of the following properties hold:</p>
+
+    <ul>
+      <li><var>M</var> maps blank nodes to blank nodes.</li>
+      <li><var>M</var>(<var>lit</var>)=<var>lit</var> for every <a>RDF literal</a> <var>lit</var>.</li>
+
+      <li><var>M</var>(<var>iri</var>)=<var>iri</var> for every <a>IRI</a> <var>iri</var>.</li>
+
+      <li><var>M</var>(<var>tt</var>) is the triple term ( <var>M</var>(<var>s</var>), <var>M</var>(<var>p</var>), <var>M</var>(<var>o</var>) ) if <var>tt</var> is a triple term of the form ( <var>s</var>, <var>p</var>, <var>o</var> ).</li>
+
+      <li>The triple ( <var>s</var>, <var>p</var>, <var>o</var> ) is in <var>G</var> if and
+        only if the triple ( <var>M</var>(<var>s</var>), <var>M</var>(<var>p</var>), <var>M</var>(<var>o</var>) ) is in
+        <var>G'</var>.</li>
+    </ul>
+
+    <p>See also: <a>IRI equality</a>, <a>literal term equality</a>.</p>
+
+    <p>With this definition, <var>M</var> shows how each blank node
+      in <var>G</var> can be replaced with
+      a new blank node to give <var>G'</var>. Graph isomorphism
+      is needed to support the RDF Test Cases [[RDF11-TESTCASES]] specification.</p>
+
+  </section>
+
   <section id="section-text-direction" class="informative">
     <h3>Initial Text Direction</h3>
 
@@ -953,44 +986,6 @@
       IRI that results in a well-known <a>URI</a> after IRI-to-URI mapping [[!RFC3987]].</p>
   </section>
 
-  <section id="graph-isomorphism">
-    <h3>Graph Comparison</h3>
-
-    <p id="section-graph-equality">Two
-      <a>RDF graphs</a> <var>G</var> and <var>G'</var> are
-      <dfn data-lt="graph isomorphism|isomorphic" data-lt-noDefault class="export">isomorphic</dfn>
-      (that is, they have an identical form)
-      if there is a bijection <var>M</var>
-      from the set of all <a>RDF terms</a> into that same set,
-      such that all of the following properties hold:</p>
-
-    <ul>
-      <li><var>M</var> maps blank nodes to blank nodes.</li>
-      <li><var>M</var>(<var>lit</var>)=<var>lit</var> for every <a>RDF literal</a> <var>lit</var>.</li>
-
-      <li><var>M</var>(<var>iri</var>)=<var>iri</var> for every <a>IRI</a> <var>iri</var>.</li>
-
-      <li><var>M</var>(<var>tt</var>) is the triple term ( <var>M</var>(<var>s</var>), <var>M</var>(<var>p</var>), <var>M</var>(<var>o</var>) ) if <var>tt</var> is a triple term of the form ( <var>s</var>, <var>p</var>, <var>o</var> ).</li>
-
-      <li>The triple ( <var>s</var>, <var>p</var>, <var>o</var> ) is in <var>G</var> if and
-        only if the triple ( <var>M</var>(<var>s</var>), <var>M</var>(<var>p</var>), <var>M</var>(<var>o</var>) ) is in
-        <var>G'</var>.</li>
-    </ul>
-
-    <p>See also: <a>IRI equality</a>, <a>literal term equality</a>.</p>
-
-    <p>With this definition, <var>M</var> shows how each blank node
-      in <var>G</var> can be replaced with
-      a new blank node to give <var>G'</var>. Graph isomorphism
-      is needed to support the RDF Test Cases [[RDF11-TESTCASES]] specification.</p>
-
-    <div class="issue" data-number="128">
-      Graph isomorphism needs the following extra clause:
-      <ul>
-        <li>M(tt) is the triple term ( M(s), M(p), M(o) ) for tt a triple term of the form (s, p, o)</li>
-      </ul>
-    </div>
-  </section>
 </section>
 
 <section id="section-dataset">
