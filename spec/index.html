@@ -765,12 +765,12 @@
             of the <a>datatype</a>, then the literal value is the result of applying
             the <a>lexical-to-value mapping</a> of the datatype to the
             <a>lexical form</a>.</li>
-          <li>otherwise, the literal is ill-typed and no literal value can be
+          <li>otherwise, the literal is <dfn data-lt-no-plural>ill-typed</dfn> and no literal value can be
              associated with the literal. Such a case produces a semantic
              inconsistency but is not <em>syntactically</em> ill-formed.
-             Implementations SHOULD accept ill-typed literals and produce RDF
+             Implementations SHOULD accept [=ill-typed=] literals and produce RDF
              graphs from them. Implementations MAY produce warnings when
-             encountering ill-typed literals.</li>
+             encountering [=ill-typed=] literals.</li>
         </ul>
       </li>
       <li>If the literal's <a>datatype IRI</a> is <em>not</em>
