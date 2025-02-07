@@ -664,9 +664,8 @@
         </p>
 
       <ul>
-        <li>Use lowercase characters in scheme names and domain names.</li>
-        <li>Only use percent-encoding of characters where 
-          necessary for IRI syntax.</li>
+        <li>Use lowercase characters in scheme names.</li>
+        <li>Only use percent-encoding of characters where required by the IRI syntax.</li>
         <li>Omit the HTTP or HTTPS default port; <code>http://example/</code>
           is preferred over <code>http://example:80/</code>.</li>
         <li>Use uppercase hexadecimal letters within percent-encoding
@@ -676,9 +675,14 @@
           <code>http://example/</code> is preferred over
           having no path <code>http://example</code>.</li>
         <li>Normalize IRIs to remove "<code>/./</code>" and "<code>/../</code>" in the path
-          component of an IRI.</li>
-        <li>Avoid using punycode-encoding of Internationalized Domain Names 
-          in IRIs [[RFC5890]].</li>
+          component of an IRI.</li>  
+        <li>Use lowercase characters in domain names. 
+          Note that, while ASCII characters in domain names are case-insensitive, 
+          non-ASCII characters in domain names are case-sensitive [[RFC5890]].
+          Domains are generally only registered with lowercase letters [[RFC5892]].</li>
+        <li>Avoid using the 
+          <a href="https://datatracker.ietf.org/doc/html/rfc5890#section-2.3.2.1">A-label</a> 
+          (ASCII, punycode-encoded name]) for Internationalized Domain Names [[RFC5890]] in IRIs.</li>
         <li>Use IRIs in Unicode [=Normalization Form C=] [[I18N-Glossary]].</li>
       </ul>
     </div>
