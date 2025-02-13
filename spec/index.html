@@ -1563,8 +1563,8 @@
 
     <p>Reverting a [=classicized=] graph to its original form consists of locating
       each [=asserted=] triple (<var>b</var>, `rdf:type`, `rdf:TripleTerm`)
-      that has a [=blank node=] <var>b</var> as its subject, 
-      along with the three associated [=asserted=] triples 
+      that has a [=blank node=] <var>b</var> as its subject,
+      along with the three associated [=asserted=] triples
       that have the same [=blank node=] <var>b</var> as their subjects, i.e.,
       (<var>b</var>, `rdf:ttSubject`, <var>s</var>),
       (<var>b</var>, `rdf:ttPredicate`, <var>p</var>),
@@ -1581,7 +1581,7 @@
       is missing or duplicated).
       An implementation MUST also report an error if the input graph contains
       at the same time a [=triple term=] and an [=asserted triple=]
-      (<var>b</var>, `rdf:type`, `rdf:TripleTerm`) 
+      (<var>b</var>, `rdf:type`, `rdf:TripleTerm`)
       where <var>b</var> is the same [=blank node=].
       Note that none of these situations can occur if the input graph was produced by the [=classicize=] transformation.
     </p>
@@ -1599,7 +1599,7 @@
     <h2>Limitations</h2>
 
     <p>The two transformations above explicitly do not support graphs or datasets containing at the same time a [=triple term=] and an [=asserted triple=]
-      (<var>b</var>, `rdf:type`, `rdf:TripleTerm`) 
+      (<var>b</var>, `rdf:type`, `rdf:TripleTerm`)
       where <var>b</var> is a [=blank node=].
       This means that the [=classicize=] transformation is not <em>strictly</em> universal.
     </p>
