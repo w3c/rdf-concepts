@@ -909,13 +909,6 @@
       Every <a>triple</a> whose <a>object</a> is not a <a>triple term</a> SHOULD NOT
       use <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#reifies</code> (<code>rdf:reifies</code>)
       as its <a>predicate</a>.</p>
-
-    <p>The <dfn data-lt="constituent">constituent terms</dfn> (or simply constituents)
-      of a [=triple term=] or an [=RDF triple=] are its [=subject=], its [=predicate=], its [=object=],
-      and all the [=constituent terms=] of its [=object=] if it is itself a [=triple term=].
-      By extension, the [=constituent terms=] of an [=RDF graph=] are all the constituent terms of its triples.
-    </p>
-
   </section>
 
   <section id="graph-isomorphism">
@@ -1544,8 +1537,8 @@
 
     <p>
       Encoding an [=RDF graph=] to ensure that it is consumable by an RDF [=Classic=] implementation is called <dfn data-lt="classicize|classicized">classicizing</dfn> it.
-      [=Classicizing=] consists of repeating the following steps until no [=constituent=] of the graph is a [=triple term=], and the graph is therefore compliant with RDF [=Classic=]: picking a [=triple term=] <var>tt</var> that is a [=constituent terms=] of the graph; minting a fresh [=blank node=] <var>b</var>
-      (i.e., a blank node not yet in use in the graph); replacing <var>tt</var> with <var>b</var> in all the triples of the graph having <var>tt</var> in their [=constituents=];
+      [=Classicizing=] consists of repeating the following steps until no [=triple term=] [=appears=] in the graph, and the graph is therefore compliant with RDF [=Classic=]: picking a [=triple term=] <var>tt</var> that [=appears=] in the graph; minting a fresh [=blank node=] <var>b</var>
+      (i.e., a blank node not yet in use in the graph); replacing all occurrences of <var>tt</var> [=appearing=] in the graph with <var>b</var>;
       and then adding the following triples to the graph (where <var>s</var>, <var>p</var>, and <var>o</var> are respectively the [=subject=], [=predicate=] and [=object=] of <var>tt</var>):
     </p>
     <ul>
@@ -1555,7 +1548,7 @@
       <li>(<var>b</var>, `rdf:ttObject`, <var>o</var>)
     </ul>
 
-    <p>Note that this transformation is <em>information preserving</em> only when the input graph either has no [=triple term=] in its [=constituents=],
+    <p>Note that this transformation is <em>information preserving</em> only when the input graph either has no [=triple term=] [=appearing=] in it,
       or contains no [=asserted=] triple (<var>b</var>, `rdf:type`, `rdf:TripleTerm`) where <var>b</var> is a [=blank node=].
       Implementations encountering this situation MUST report an error.
       This limitation is discussed in Section <a href="#section-classicize-caveat"></a>.
@@ -1607,15 +1600,14 @@
 
     <p>Reverting a [=classicized=] graph to its original form consists of locating
       each [=asserted=] triple (<var>b</var>, `rdf:type`, `rdf:TripleTerm`)
-      that has a [=blank node=] <var>b</var> as its subject, 
-      along with the three associated [=asserted=] triples 
+      that has a [=blank node=] <var>b</var> as its subject,
+      along with the three associated [=asserted=] triples
       that have the same [=blank node=] <var>b</var> as their subjects, i.e.,
       (<var>b</var>, `rdf:ttSubject`, <var>s</var>),
       (<var>b</var>, `rdf:ttPredicate`, <var>p</var>),
       and (<var>b</var>, `rdf:ttObject`, <var>o</var>);
       removing these four triples from the graph;
-      and replacing all remaining occurrences of <var>b</var> 
-      as a [=constituent term=] of the graph 
+      and replacing all remaining occurrences of <var>b</var> [=appearing=] in the graph
       with the triple term (<var>s</var>, <var>p</var>, <var>o</var>).
     </p>
 
@@ -1626,7 +1618,7 @@
       is missing or duplicated).
       An implementation MUST also report an error if the input graph contains
       at the same time a [=triple term=] and an [=asserted triple=]
-      (<var>b</var>, `rdf:type`, `rdf:TripleTerm`) 
+      (<var>b</var>, `rdf:type`, `rdf:TripleTerm`)
       where <var>b</var> is the same [=blank node=].
       Note that none of these situations can occur if the input graph was produced by the [=classicize=] transformation.
     </p>
@@ -1644,7 +1636,7 @@
     <h2>Limitations</h2>
 
     <p>The two transformations above explicitly do not support graphs or datasets containing at the same time a [=triple term=] and an [=asserted triple=]
-      (<var>b</var>, `rdf:type`, `rdf:TripleTerm`) 
+      (<var>b</var>, `rdf:type`, `rdf:TripleTerm`)
       where <var>b</var> is a [=blank node=].
       This means that the [=classicize=] transformation is not <em>strictly</em> universal.
     </p>
