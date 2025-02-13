@@ -911,7 +911,7 @@
       as its <a>predicate</a>.</p>
 
     <p>The <dfn data-lt="constituent">constituent terms</dfn> (or simply constituents)
-      of a [=triple term=] (resp. an [=RDF triple=]) are its [=subject=], its [=predicate=], its [=object=],
+      of a [=triple term=] or an [=RDF triple=] are its [=subject=], its [=predicate=], its [=object=],
       and all the [=constituent terms=] of its [=object=] if it is itself a [=triple term=].
       By extension, the [=constituent terms=] of an [=RDF graph=] are all the constituent terms of its triples.
     </p>
@@ -1514,7 +1514,7 @@
 
   <p class=issue>Should we make this section normative?</p>
 
-  <p>This section provides transformations between [=Full=] [=RDF graphs=] (resp. [=RDF datasets=]) and [=Classic=] [=RDF graphs=] (resp. [=RDF datasets=]),
+  <p>This section provides transformations between [=Full=] [=RDF graphs=] (respectively, [=RDF datasets=]) and [=Classic=] [=RDF graphs=] (respectively, [=RDF datasets=]),
   to provide some level of interoperability between the different classes of <a href="#conformance">Conformance</a>.
 
   <p class=issue>Should we go even further and aim to provide interoperability between <em>RDF 1.1</em> and RDF 1.2 [=Full=]?</p>
@@ -1525,17 +1525,17 @@
 
   <dl>
     <dt>Information preserving</dt>
-    <dd>It must be possible to reconstruct the input graph (resp. dataset) from the output graph (resp. dataset).
+    <dd>It must be possible to reconstruct the input graph (respectively, dataset) from the output graph (respectively, dataset).
       Note, however, that these transformations are not designed to preserve semantics:
       the output graph is not semantically [=equivalent=] to the input graph,
       at least not in the entailment regimes defined in [[RDF12-SEMANTICS]].
     </dd>
     <dt>Idempotent</dt>
-    <dd>Applying a transformation several times to a graph (resp. dataset) should have the same effect as applying it once.
-      Moreover, [=classicizing=] a graph (resp. dataset) that is already complying with RDF [=Classic=] (i.e., containing no [=triple term=]) must result in the same graph (resp. dataset).
+    <dd>Applying a transformation several times to a graph (respectively, dataset) should have the same effect as applying it once.
+      Moreover, [=classicizing=] a graph (respectively, dataset) that is already complying with RDF [=Classic=] (i.e., containing no [=triple term=]) must result in the same graph (respectively, dataset).
     </dd>
     <dt>Universal</dt>
-    <dd>It should be possible to transform any [=Full=] graph (resp. dataset) to a [=Classic=] graph (resp. dataset) using this method.
+    <dd>It should be possible to transform any [=Full=] graph (respectively, dataset) to a [=Classic=] graph (respectively, dataset) using this method.
       There is actually <a href="#section-classicize-caveat">a minor caveat</a> to this property.
     </dd>
   </dl>
@@ -1545,8 +1545,8 @@
 
     <p>
       Encoding an [=RDF graph=] to ensure that it is consumable by an RDF [=Classic=] implementation is called <dfn data-lt="classicize|classicized">classicizing</dfn> it.
-      [=Classicizing=] consists of repeating the following steps until no [=constituent=] of the graph is a [=triple term=], and the graph is therefore compliant with RDF [=Classic=]: while the graph has a [=triple term=] <var>tt</var> in its [=constituent terms=], of minting a fresh [=blank node=] <var>b</var>
-      (i.e., a blank node not yet in use in the graph); replacing each <var>tt</var> with <var>b</var> in all the triples of the graph having <var>tt</var> in their [=constituents=];
+      [=Classicizing=] consists of repeating the following steps until no [=constituent=] of the graph is a [=triple term=], and the graph is therefore compliant with RDF [=Classic=]: picking a [=triple term=] <var>tt</var> that is a [=constituent terms=] of the graph; minting a fresh [=blank node=] <var>b</var>
+      (i.e., a blank node not yet in use in the graph); replacing <var>tt</var> with <var>b</var> in all the triples of the graph having <var>tt</var> in their [=constituents=];
       and then adding the following triples to the graph (where <var>s</var>, <var>p</var>, and <var>o</var> are respectively the [=subject=], [=predicate=] and [=object=] of <var>tt</var>):
     </p>
     <ul>
@@ -1556,8 +1556,8 @@
       <li>(<var>b</var>, `rdf:ttObject`, <var>o</var>)
     </ul>
 
-    <p>Note that this transformation is <em>information preserving</em> only when the input graph does not contain at the same time a [=triple term=]
-      and an [=asserted=] triple (<var>b</var>, `rdf:type`, `rdf:TripleTerm`) where <var>b</var> is a [=blank node=].
+    <p>Note that this transformation is <em>information preserving</em> only when the input graph either has no [=triple term=] in its [=constituents=],
+      or contains no [=asserted=] triple (<var>b</var>, `rdf:type`, `rdf:TripleTerm`) where <var>b</var> is a [=blank node=].
       Implementations encountering this situation MUST report an error.
       This limitation is discussed in Section <a href="#section-classicize-caveat"></a>.
     </p>
@@ -1622,9 +1622,9 @@
 
     <p>An implementation MUST report an error if, for a given <var>b</var>,
       it can not unambiguously determine <var>s</var>, <var>p</var>, or <var>o</var>
-      (i.e., if one of the `classicize:` properties
+      (i.e., if one of the properties of <var>b</var>
       — `rdf:ttSubject`, `rdf:ttPredicate`, or `rdf:ttObject` —
-      of <var>b</var> is missing or duplicated).
+      is missing or duplicated).
       An implementation MUST also report an error if the input graph contains
       at the same time a [=triple term=] and an [=asserted triple=]
       (<var>b</var>, `rdf:type`, `rdf:TripleTerm`) 
@@ -1646,7 +1646,7 @@
 
     <p>The two transformations above explicitly do not support graphs or datasets containing at the same time a [=triple term=] and an [=asserted triple=]
       (<var>b</var>, `rdf:type`, `rdf:TripleTerm`) 
-      where <var>b</var> is the same [=blank node=].
+      where <var>b</var> is a [=blank node=].
       This means that the [=classicize=] transformation is not <em>strictly</em> universal.
     </p>
 
@@ -1667,11 +1667,11 @@
       so reserving its use for the [=classicize=] transformation was not an option.
     </p>
 
-    <p>Another consequence of this restriction is that users will need to be aware and careful when merging graphs in an application that [=classicizes=] graphs or datasets.
+    <p>Another consequence of this restriction is that implementers will need to be aware and careful when merging graphs in an application that [=classicizes=] graphs or datasets.
       The concern is that merging a [=Full=] [=RDF graph=] containing at least one [=triple term=]
       with a [=classicized=] [=RDF graph=] (which might contain [=blank node=] instances of `rdf:TripleTerm`)
       could result in a "hybrid" graph that cannot be transformed to a consistent [=Full=] nor [=Classic=] [=RDF graph=].
-      Therefor, such applications should [=classicize=] every graph prior to merging them.
+      Therefore, such applications should [=classicize=] every graph prior to merging them.
       Conversely, applications supporting RDF [=Full=] should make sure to apply the reverse transformation
       to any graph that is known or likely to have been [=classicized=],
       to avoid creating such "hybrid" graphs.
