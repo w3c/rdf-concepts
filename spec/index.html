@@ -899,26 +899,25 @@
   <section id="graph-isomorphism">
     <h3>Graph Comparison</h3>
 
+    <p>Given a bijection |M| from [=blank nodes=] to [=blank nodes=],
+      we can extend |M| to map [=RDF terms=] to [=RDF terms=],
+      [=RDF triples=] to [=RDF triples=],
+      and [=RDF graphs=] to [=RDF graphs=],
+      as follows:
+
+    <ul>
+      <li>|M|(|iri|)=|iri| if |iri| is an [=IRI=].
+      <li>|M|(|lit|)=|lit| if |lit| is a [=literal=].
+      <li>|M|(|t|)=( |M|(|s|), |M|(|p|), |M|(|o|) ) if |t| is an [=RDF triple=] of the form ( |s|, |p|, |o| ).
+      <li>|M|(|G|)={ |M|(|t|<sub>1</sub>), ..., |M|(|t|<sub>|n|</sub>) } if |G| = { |t|<sub>1</sub>, ..., |t|<sub>|n|</sub> } is an [=RDF graph=].
+    </ul>
+
     <p id="section-graph-equality">Two
       <a>RDF graphs</a> <var>G</var> and <var>G'</var> are
       <dfn data-lt="graph isomorphism|isomorphic" data-lt-noDefault class="export">isomorphic</dfn>
       (that is, they have an identical form)
-      if there is a bijection <var>M</var>
-      from the set of all <a>RDF terms</a> into that same set,
-      such that all of the following properties hold:</p>
-
-    <ul>
-      <li><var>M</var> maps blank nodes to blank nodes.</li>
-      <li><var>M</var>(<var>lit</var>)=<var>lit</var> for every <a>RDF literal</a> <var>lit</var>.</li>
-
-      <li><var>M</var>(<var>iri</var>)=<var>iri</var> for every <a>IRI</a> <var>iri</var>.</li>
-
-      <li><var>M</var>(<var>tt</var>) is the triple term ( <var>M</var>(<var>s</var>), <var>M</var>(<var>p</var>), <var>M</var>(<var>o</var>) ) if <var>tt</var> is a triple term of the form ( <var>s</var>, <var>p</var>, <var>o</var> ).</li>
-
-      <li>The triple ( <var>s</var>, <var>p</var>, <var>o</var> ) is in <var>G</var> if and
-        only if the triple ( <var>M</var>(<var>s</var>), <var>M</var>(<var>p</var>), <var>M</var>(<var>o</var>) ) is in
-        <var>G'</var>.</li>
-    </ul>
+      if and only if there is a bijection <var>M</var> from [=blank nodes=] to [=blank nodes=]
+      such that |M|(|G|)=<var>G'</var>, extending |M| as above.</p>
 
     <p>See also: <a>IRI equality</a>, <a>literal term equality</a>.</p>
 
