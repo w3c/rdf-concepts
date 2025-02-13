@@ -67,8 +67,8 @@
       are comprised of a default graph and zero or more named graphs.</li>
   </ul>
 
-  <p>RDF 1.2 introduces <a>triple terms</a> as another kind of <a>RDF term</a>
-    which can be used as the <a>object</a> of another <a>triple</a>.
+  <p>RDF 1.2 introduces the ability to use an <a>RDF triple</a>
+    as a <a>triple term</a>, in the <a>object</a> position of another <a>triple</a>.
     RDF 1.2 also introduces <a>directional language-tagged strings</a>,
     which contain a <a>base direction</a> element that allows the
     initial text direction to be specified for presentation by a user agent.</p>
@@ -288,9 +288,8 @@
   <section id="section-triple-terms-reification">
     <h3>Triple Terms and Reification</h3>
 
-    <p>A <a>triple term</a> is an <a>RDF term</a> with the components of
-      an <a>RDF triple</a>, which can be used as the <a>object</a>
-      of another triple.</p>
+    <p>A <a>triple term</a> is an [=RDF triple=] used as an [=RDF term=]
+      in the [=object=] position of another triple.</p>
 
     <p>A <a>triple term</a> is not necessarily asserted, allowing
       statements to be made about other statements that may not be
@@ -417,12 +416,14 @@
   <section id="entailment">
     <h3>Equivalence, Entailment and Inconsistency</h3>
 
-    <p>An <a>RDF triple</a> encodes a <a>statement</a>—a
-      simple <dfn class="export">logical expression</dfn>, or claim about the world.
+    <p>An <a>RDF triple</a> encodes a <dfn class=export >proposition</dfn>—a
+      simple logical expression, describing a relationship between two entities.
+      An [=asserted triple=] is a claim that the corresponding proposition is true.
       An <a>RDF graph</a> is the conjunction (logical <em>AND</em>) of
-      its triples.   The precise details of this meaning of RDF triples and graphs are
+      all the claims made by its [=asserted triples=].
+      The precise details of this meaning of [=RDF triples=] and [=RDF graphs=] are
       the subject of [[[RDF12-SEMANTICS]]] [[RDF12-SEMANTICS]], which yields the
-      following relationships between <a>RDF graph</a>s:</p>
+      following relationships between <a>RDF graphs</a>:</p>
 
     <dl>
       <dt><dfn>Entailment</dfn></dt>
@@ -547,20 +548,36 @@
 
   <p>An <dfn>RDF graph</dfn> is a set of <a>RDF triples</a>.</p>
 
-  <p>An RDF triple is said to be <dfn id="dfn-asserted-triple" data-lt="asserted|asserted triple">asserted</dfn> in an RDF graph if it is an element of the RDF graph.</p>
-
   <section id="section-triples">
     <h3>Triples</h3>
 
-    <p>An <dfn data-local-lt="triple">RDF triple</dfn> (usually called "triple")
-      is a 3-tuple (|s|, |p|, |o|) with the following characteristics:</p>
+    <p>An <dfn data-local-lt="triple" class=export >RDF triple</dfn>
+     (often called simply "triple")
+     is a 3-tuple that is defined recursively as follows:</p>
 
     <ul>
-      <li>|s| is an <a>IRI</a> or a <a>blank node</a>.</li>
-      <li>|p| is an <a>IRI</a>.</li>
-      <li>|o| is an <a>IRI</a>, a <a>blank node</a>, a <a>literal</a>,
-        or a <a>triple term</a>.</li>
+      <li>
+        If |s| is an [=IRI=] or a [=blank node=],
+        |p| is an [=IRI=], and
+        |o| is an [=IRI=], a [=blank node=], or a [=literal=],
+        then (|s|, |p|, |o|) is an [=RDF triple=].
+      </li>
+
+      <li>
+        If |s| is an [=IRI=] or a [=blank node=],
+        |p| is an [=IRI=], and
+        |o| is an [=RDF triple=],
+        then (|s|, |p|, |o|) is an [=RDF triple=].
+      </li>
     </ul>
+
+    <p>The three components (|s|, |p|, |o|) of an [=RDF triple=] are respectively called the <dfn class=export >subject</dfn>, <dfn class=export >predicate</dfn> and <dfn class=export >object</dfn> of the triple.</p>
+
+    <p>An [=RDF triple=] used as the [=object=] of another [=triple=] is called a <dfn class=export >triple term</dfn>.
+      An [=RDF triple=] is said to be <dfn id="dfn-asserted-triple" class=export data-lt="asserted triple|asserted triples" data-lt-no-plural=""
+      >asserted</dfn> in an [=RDF graph=] if it is an element of the [=RDF graph=].
+      In a given [=RDF graph=], a [=triple=] can appear as a [=triple term=], as an [=asserted triple=], or both.
+    </p>
 
     <p><a>IRIs</a>, <a>literals</a>,
       <a>blank nodes</a>, and <a>triple terms</a> are collectively known as
@@ -575,9 +592,32 @@
       <code>http://example.org/</code>.</p>
 
     <p>The set of <span id="dfn-nodes"><!-- obsolete term--></span><dfn data-lt="node">nodes</dfn> of an <a>RDF graph</a>
-      is the set of <a>subjects</a> and <a>objects</a> of the <a>triples</a> in the graph.
-      It is possible for a predicate IRI to also occur as a node in
+      is the set of <a>subjects</a> and <a>objects</a> of the <a>asserted triples</a> of the graph.
+      It is possible for a [=predicate=] [=IRI=] to also occur as a [=node=] in
       the same graph.</p>
+
+    <p>The set of [=RDF terms=] <dfn class=export data-lt="appear">appearing</dfn> in an [=RDF triple=] |t| is defined recursively as follows:</p>
+
+    <ul>
+      <li>The [=subject=], [=predicate=] and [=object=] of |t| [=appear=] in |t|.
+      <li>If the [=object=] |o| of |t| is a [=triple term=], any [=RDF term=] [=appearing=] in |o| also [=appears=] in |t|.
+    </ul>
+
+    <p>By extension, an [=RDF term=] is said to [=appear=] in an [=RDF graph=] if it appears in an [=asserted triple=] of that graph. An [=RDF triple=] is said to [=appear=] in an [=RDF graph=] if it is either an [=asserted triple=] of that graph or a [=triple term=] [=appearing=] in that graph.</p>
+
+    <aside class="note">The definition of [=RDF triple=] is recursive:
+      an [=RDF triple=] can itself have an [=object=] which is another [=RDF triple=].
+      However, by this definition, cycles of [=RDF triples=] cannot be created:
+      an [=RDF triple=] can not be its own object, nor, more generally, [=appear=] in itself.
+      </aside>
+
+    <p class="note">Every <a>triple</a> with a <a>triple term</a> as its [=object=] SHOULD
+      use <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#reifies</code> (<code>rdf:reifies</code>)
+      as its <a>predicate</a>.
+      Every <a>triple</a> whose <a>object</a> is not a <a>triple term</a> SHOULD NOT
+      use <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#reifies</code> (<code>rdf:reifies</code>)
+      as its <a>predicate</a>.</p>
+
   </section>
 
   <section id="section-IRIs">
@@ -846,54 +886,6 @@
       In the interest of consistency, the use of this alternative
       term is discouraged now.</p>
     </div>
-  </section>
-
-  <section id="section-triple-terms">
-    <h3>Triple Terms</h3>
-
-    <p>A <dfn>triple term</dfn> is a 3-tuple that is defined recursively as follows:</p>
-
-    <ul>
-      <li>
-        If |s| is an <a>IRI</a> or a <a>blank node</a>,
-        |p| is an <a>IRI</a>, and
-        |o| is an <a>IRI</a>, a <a>blank node</a>, or a <a>literal</a>,
-        then (|s|, |p|, |o|) is a triple term.
-      </li>
-
-      <li>
-        If |s| is an <a>IRI</a> or a <a>blank node</a>,
-        |p| is an <a>IRI</a>, and
-        |o| is a <a>triple term</a>,
-        then (|s|, |p|, |o|) is a triple term.
-      </li>
-    </ul>
-
-    <p>Given a <a>triple</a> (|s|, |p|, |o|),
-      |s| is called the <dfn>subject</dfn> of the triple,
-      |p| is called the <dfn>predicate</dfn> of the triple, and
-      |o| is called the <dfn>object</dfn> of the triple.
-      Similarly, given a <a>triple term</a> (|s|, |p|, |o|),
-      |s| is called the <em>subject</em> of the triple term,
-      |p| is called the <em>predicate</em> of the triple term, and
-      |o| is called the <em>object</em> of the triple term.</p>
-
-    <p class="note">While, syntactically, the notion of an <a>RDF triple</a>
-      and the notion of a <a>triple term</a> are the same, they represent
-      different concepts. RDF triples are the members of <a>RDF graphs</a>,
-      whereas triple terms can be used as components of RDF triples.</p>
-
-    <p class="note">The definition of <a>triple term</a> is recursive.
-      That is, a <a>triple term</a> can itself have an
-      <a>object</a> component which is another <a>triple term</a>.
-      However, by this definition, cycles of <a>triple terms</a> cannot be created.</p>
-
-    <p class="note">Every <a>triple</a> with a <a>triple term</a> as its object SHOULD
-      use <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#reifies</code> (<code>rdf:reifies</code>)
-      as its <a>predicate</a>.
-      Every <a>triple</a> whose <a>object</a> is not a <a>triple term</a> SHOULD NOT
-      use <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#reifies</code> (<code>rdf:reifies</code>)
-      as its <a>predicate</a>.</p>
   </section>
 
   <section id="graph-isomorphism">
