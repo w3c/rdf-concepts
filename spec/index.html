@@ -909,13 +909,13 @@
       <li>|M|(|iri|)=|iri| if |iri| is an [=IRI=].
       <li>|M|(|lit|)=|lit| if |lit| is a [=literal=].
       <li>|M|(|t|)=( |M|(|s|), |M|(|p|), |M|(|o|) ) if |t| is an [=RDF triple=] of the form ( |s|, |p|, |o| ).
-      <li>|M|(|G|)={ |M|(|t|<sub>1</sub>), ..., |M|(|t|<sub>|n|</sub>) } if |G| = { |t|<sub>1</sub>, ..., |t|<sub>|n|</sub> } is an [=RDF graph=].
+      <li>|M|(|G|)={ |M|(|t|<sub>1</sub>), ..., |M|(|t|<sub>|n|</sub>) } if |G| is an [=RDF graph=] of the form { |t|<sub>1</sub>, ..., |t|<sub>|n|</sub> }.
     </ul>
 
     <p id="section-graph-equality">Two
       <a>RDF graphs</a> <var>G</var> and <var>G'</var> are
       <dfn data-lt="graph isomorphism|isomorphic" data-lt-noDefault class="export">isomorphic</dfn>
-      (that is, they have an identical form)
+      (that is, they have an the same form)
       if and only if there is a bijection <var>M</var> from [=blank nodes=] to [=blank nodes=]
       such that |M|(|G|)=<var>G'</var>, extending |M| as above.</p>
 
@@ -1047,18 +1047,16 @@
   <section id="section-dataset-isomorphism">
     <h3>RDF Dataset Comparison</h3>
 
-    <p id="section-dataset-equality">Two <a>RDF datasets</a>
-      (the RDF dataset <var>D1</var> with default graph <var>DG1</var> and any named
-      graph <var>NG1</var> and the RDF dataset <var>D2</var> with default graph
-      <var>DG2</var> and any named graph <var>NG2</var>)
+    <p id="section-dataset-equality">Two <a>RDF datasets</a> |D1| and |D2|
+      (respectively, with [=default graphs=] |DG1| and |DG2| and sets of [=named graphs=] NG1 and NG2)
       are <dfn data-lt="dataset isomorphism" class="export">dataset-isomorphic</dfn> if and only if
       there is a bijection <var>M</var> from [=blank nodes=] to [=blank nodes=],
       extended as described in <a href="#graph-isomorphism"></a>, such that:</p>
 
     <ul>
-      <li><var>M(DG1)</var> = <var>DG2</var>; and</li>
-      <li>&lt;n, G&gt; is in <var>NG1</var> if and only if
-        &lt;<var>M(n)</var>, <var>M(G)</var>&gt; is in <var>NG2</var>.
+      <li>|M|(|DG1|)</var> = |DG2|; and</li>
+      <li>( |n|, |G| ) is in |NG1| if and only if
+        ( |M|(|n|), |M|(|G|) ) is in |NG2|.
     </ul>
 
   </section>
