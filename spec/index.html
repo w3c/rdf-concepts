@@ -899,8 +899,13 @@
   <section id="graph-isomorphism">
     <h3>Graph Comparison</h3>
 
+    <p>This section introduces a notion of graph isomorphism for [=RDF graphs=]
+      which is based on a mapping between [=RDF terms=]
+      that maps blank nodes to blank nodes
+      and is the identity function for IRIs and literals.</p>
+
     <p>A function |M| from the set of all [=RDF terms=] into that same set
-      is called an <dfn>RDF-term isomorphism</dfn>
+      is called an <dfn>isomorphic RDF-term mapping</dfn>
       if it is has all of the following properties:</p>
 
     <ul>
@@ -914,7 +919,7 @@
     <p id="section-graph-equality">Two [=RDF graphs=] |G| and <var>G'</var> are
       <dfn data-lt="graph isomorphism|isomorphic" data-lt-noDefault class="export">isomorphic</dfn>
       (that is, they have the same form)
-      if there exists an [=RDF-term isomorphism=] |M| such that
+      if there exists an [=isomorphic RDF-term mapping=] |M| such that
       the triple (|s|, |p|, |o|) is in |G| if and only if
       the triple ( |M|(|s|), |M|(|p|), |M|(|o|) ) is in <var>G'</var>.</p>
 
@@ -1049,7 +1054,7 @@
     <p id="section-dataset-equality">Two <a>RDF datasets</a> |D1| and |D2|
       (respectively, with [=default graphs=] |DG1| and |DG2| and sets |NG1| and |NG2| of [=named graphs=])
       are <dfn data-lt="dataset isomorphism" class="export">dataset-isomorphic</dfn> if and only if
-      there exists an [=RDF-term isomorphism=] |M|
+      there exists an [=isomorphic RDF-term mapping=] |M|
       for which all of the following properties hold:</p>
 
     <ul>
