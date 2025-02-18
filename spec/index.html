@@ -548,6 +548,10 @@
 
   <p>An <dfn>RDF graph</dfn> is a set of <a>RDF triples</a>.</p>
 
+  <p>An [=RDF triple=] is said to be <dfn id="dfn-asserted-triple" class=export data-lt="asserted triple|asserted triples" data-lt-no-plural=""
+      >asserted</dfn> in an [=RDF graph=] if it is an element of the [=RDF graph=].
+  </p>
+
   <section id="section-triples">
     <h3>Triples</h3>
 
@@ -573,11 +577,15 @@
 
     <p>The three components (|s|, |p|, |o|) of an [=RDF triple=] are respectively called the <dfn class=export >subject</dfn>, <dfn class=export >predicate</dfn> and <dfn class=export >object</dfn> of the triple.</p>
 
-    <p>An [=RDF triple=] used as the [=object=] of another [=triple=] is called a <dfn class=export >triple term</dfn>.
-      An [=RDF triple=] is said to be <dfn id="dfn-asserted-triple" class=export data-lt="asserted triple|asserted triples" data-lt-no-plural=""
-      >asserted</dfn> in an [=RDF graph=] if it is an element of the [=RDF graph=].
-      In a given [=RDF graph=], a [=triple=] can appear as a [=triple term=], an [=asserted triple=], or both.
-    </p>
+
+    <p class="note">The definition of <a>triple</a> is recursive.
+      That is, a <a>triple</a> can itself have an
+      <a>object</a> component which is another <a>triple</a>.
+      However, by this definition, cycles of <a>triples</a> cannot be created.</p>
+  </section>
+
+  <section id="section-terms">
+    <h3>RDF terms</h3>
 
     <p><a>IRIs</a>, <a>literals</a>,
       <a>blank nodes</a>, and <a>triple terms</a> are collectively known as
@@ -595,29 +603,6 @@
       is the set of <a>subjects</a> and <a>objects</a> of the <a>asserted triples</a> of the graph.
       It is possible for a [=predicate=] [=IRI=] to also occur as a [=node=] in
       the same graph.</p>
-
-    <p>The set of [=RDF terms=] <dfn class=export data-lt="appear">appearing</dfn> in an [=RDF triple=] |t| is defined inductively as follows:</p>
-
-    <ul>
-      <li>The [=subject=], [=predicate=] and [=object=] of |t| [=appear=] in |t|.
-      <li>If the [=object=] |o| of |t| is a [=triple term=], any [=RDF term=] [=appearing=] in |o| also [=appears=] in |t|.
-    </ul>
-
-    <p>By extension, an [=RDF term=] is said to [=appear=] in an [=RDF graph=] if it appears in an [=asserted triple=] of that graph. An [=RDF triple=] is said to [=appear=] in an [=RDF graph=] if it is either an [=asserted triple=] of that graph or a [=triple term=] [=appearing=] in that graph.</p>
-
-    <aside class="note">The definition of [=RDF triple=] is recursive:
-      an [=RDF triple=] can itself have an [=object=] which is another [=RDF triple=].
-      However, by this definition, cycles of [=RDF triples=] cannot be created:
-      an [=RDF triple=] can not be its own object, nor, more generally, [=appear=] in itself.
-      </aside>
-
-    <p class="note">Every <a>triple</a> with a <a>triple term</a> as its [=object=] SHOULD
-      use <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#reifies</code> (<code>rdf:reifies</code>)
-      as its <a>predicate</a>.
-      Every <a>triple</a> whose <a>object</a> is not a <a>triple term</a> SHOULD NOT
-      use <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#reifies</code> (<code>rdf:reifies</code>)
-      as its <a>predicate</a>.</p>
-
   </section>
 
   <section id="section-IRIs">
@@ -886,6 +871,31 @@
       In the interest of consistency, the use of this alternative
       term is discouraged now.</p>
     </div>
+  </section>
+
+  <section id="section-triple-terms">
+    <h3>Triple terms</h3>
+
+    <p>An [=RDF triple=] used as the [=object=] of another [=triple=] is called a <dfn class=export >triple term</dfn>.
+      In a given [=RDF graph=], a [=triple=] can appear as a [=triple term=], an [=asserted triple=], or both.
+    </p>
+
+    <p>The set of [=RDF terms=] <dfn class=export data-lt="appear">appearing</dfn> in an [=RDF triple=] |t| is defined inductively as follows:</p>
+
+    <ul>
+      <li>The [=subject=], [=predicate=] and [=object=] of |t| [=appear=] in |t|.
+      <li>If the [=object=] |o| of |t| is a [=triple term=], any [=RDF term=] [=appearing=] in |o| also [=appears=] in |t|.
+    </ul>
+
+    <p>By extension, an [=RDF term=] is said to [=appear=] in an [=RDF graph=] if it appears in an [=asserted triple=] of that graph. An [=RDF triple=] is said to [=appear=] in an [=RDF graph=] if it is either an [=asserted triple=] of that graph or a [=triple term=] [=appearing=] in that graph.</p>
+
+    <p class="note">Every <a>triple</a> with a <a>triple term</a> as its [=object=] SHOULD
+      use <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#reifies</code> (<code>rdf:reifies</code>)
+      as its <a>predicate</a>.
+      Every <a>triple</a> whose <a>object</a> is not a <a>triple term</a> SHOULD NOT
+      use <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#reifies</code> (<code>rdf:reifies</code>)
+      as its <a>predicate</a>.</p>
+
   </section>
 
   <section id="graph-isomorphism">
