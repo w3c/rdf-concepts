@@ -901,26 +901,29 @@
   <section id="graph-isomorphism">
     <h3>Graph Comparison</h3>
 
-    <p id="section-graph-equality">Two
-      <a>RDF graphs</a> <var>G</var> and <var>G'</var> are
-      <dfn data-lt="graph isomorphism|isomorphic" data-lt-noDefault class="export">isomorphic</dfn>
-      (that is, they have an identical form)
-      if there is a bijection <var>M</var>
-      from the set of all <a>RDF terms</a> into that same set,
-      such that all of the following properties hold:</p>
+    <p>This section introduces a notion of graph isomorphism for [=RDF graphs=]
+      which is based on a mapping between [=RDF terms=]
+      that maps blank nodes to blank nodes
+      and is the identity function for IRIs and literals.</p>
+
+    <p>A function |M| from the set of all [=RDF terms=] into that same set
+      is called an <dfn>isomorphic RDF-term mapping</dfn>
+      if it is has all of the following properties:</p>
 
     <ul>
-      <li><var>M</var> maps blank nodes to blank nodes.</li>
-      <li><var>M</var>(<var>lit</var>)=<var>lit</var> for every <a>RDF literal</a> <var>lit</var>.</li>
-
-      <li><var>M</var>(<var>iri</var>)=<var>iri</var> for every <a>IRI</a> <var>iri</var>.</li>
-
-      <li><var>M</var>(<var>tt</var>) is the triple term ( <var>M</var>(<var>s</var>), <var>M</var>(<var>p</var>), <var>M</var>(<var>o</var>) ) if <var>tt</var> is a triple term of the form ( <var>s</var>, <var>p</var>, <var>o</var> ).</li>
-
-      <li>The triple ( <var>s</var>, <var>p</var>, <var>o</var> ) is in <var>G</var> if and
-        only if the triple ( <var>M</var>(<var>s</var>), <var>M</var>(<var>p</var>), <var>M</var>(<var>o</var>) ) is in
-        <var>G'</var>.</li>
+      <li>|M| is bijective.</li>
+      <li>For every [=blank node=] |b|, |M|(|b|) is a [=blank node=] (but not necessarily the same as |b|).</li>
+      <li>For every [=literal=] |lit|, |M|(|lit|) = |lit|.</li>
+      <li>For every [=IRI=] |iri|, |M|(|iri|) = |iri|.</li>
+      <li>For every [=triple term=] |tt| of the form (|s|, |p|, |o|), |M|(|tt|) is the triple term ( |M|(|s|), |M|(|p|), |M|(|o|) ).</li>
     </ul>
+
+    <p id="section-graph-equality">Two [=RDF graphs=] |G| and <var>G'</var> are
+      <dfn data-lt="graph isomorphism|isomorphic" data-lt-noDefault class="export">isomorphic</dfn>
+      (that is, they have the same form)
+      if there exists an [=isomorphic RDF-term mapping=] |M| such that
+      the triple (|s|, |p|, |o|) is in |G| if and only if
+      the triple ( |M|(|s|), |M|(|p|), |M|(|o|) ) is in <var>G'</var>.</p>
 
     <p>See also: <a>IRI equality</a>, <a>literal term equality</a>.</p>
 
@@ -1050,24 +1053,20 @@
   <section id="section-dataset-isomorphism">
     <h3>RDF Dataset Comparison</h3>
 
-    <p id="section-dataset-equality">Two <a>RDF datasets</a>
-      (the RDF dataset <var>D1</var> with default graph <var>DG1</var> and any named
-      graph <var>NG1</var> and the RDF dataset <var>D2</var> with default graph
-      <var>DG2</var> and any named graph <var>NG2</var>)
+    <p id="section-dataset-equality">Two <a>RDF datasets</a> |D1| and |D2|
+      (respectively, with [=default graphs=] |DG1| and |DG2| and sets |NG1| and |NG2| of [=named graphs=])
       are <dfn data-lt="dataset isomorphism" class="export">dataset-isomorphic</dfn> if and only if
-      there is a bijection <var>M</var> between the nodes, triples and graphs in
-      <var>D1</var> and those in <var>D2</var> such that all of the following properties hold:</p>
+      there exists an [=isomorphic RDF-term mapping=] |M|
+      for which all of the following properties hold:</p>
 
     <ul>
-      <li><var>M</var> maps <a>blank nodes</a> to blank nodes;</li>
-      <li><var>M</var> is the identity map on <a>literals</a> and URIs;</li>
-      <li>For every triple &lt;s p o&gt;, <var>M</var>(&lt;s, p, o&gt;)=
-        &lt;<var>M(s)</var>, <var>M(p)</var>, <var>M(o)</var>&gt;;</li>
-      <li>For every graph <var>G</var>={t1, ..., tn},
-        <var>M(G)</var>={<var>M(t1)</var>, ..., <var>M(tn)</var>};</li>
-      <li><var>DG2</var> = <var>M(DG1)</var>; and</li>
-      <li>&lt;n, G&gt; is in <var>NG1</var> if and only if
-        &lt;<var>M(n)</var>, <var>M(G)</var>&gt; is in <var>NG2</var>.
+      <li>The triple (|s|, |p|, |o|) is in |DG1| if and only if
+        the triple ( |M|(|s|), |M|(|p|), |M|(|o|) ) is in |DG2|.</li>
+      <li>The [=named graph=] (|n|, |G|) is in |NG1| if and only if
+        there is a [=named graph=] (<var>n'</var>, <var>G'</var>) in |NG2| such that
+        |M|(|n|) = <var>n'</var> and
+        the triple (|s|, |p|, |o|) is in |G| if and only if
+        the triple ( |M|(|s|), |M|(|p|), |M|(|o|) ) is in <var>G'</var>.</li>
     </ul>
 
   </section>
