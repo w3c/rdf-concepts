@@ -942,7 +942,7 @@
       <li>For every [=blank node=] |b|, |M|(|b|) is a [=blank node=] (but not necessarily the same as |b|).</li>
       <li>For every [=literal=] |lit|, |M|(|lit|) is a [=literal=] that is [=literal term equality|equal=] to |lit|.</li>
       <li>For every [=IRI=] |iri|, |M|(|iri|) is an [=IRI=] that is [=IRI equality|equal=] to |iri|.</li>
-      <li>For every [=triple term=] |tt|, |M|(|tt|) is a [=triple term=] that is [=triple term equality|equal=] to |tt|.</li>
+      <li>For every [=triple term=] |tt| of the form (|s|, |p|, |o|), |M|(|tt|) is the triple term ( |M|(|s|), |M|(|p|), |M|(|o|) ).</li>
     </ul>
 
     <p id="section-graph-equality">Two [=RDF graphs=] |G| and <var>G'</var> are
