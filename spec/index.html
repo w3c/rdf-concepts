@@ -614,10 +614,10 @@
       one of the following four conditions holds:</p>
 
     <ul>
-      <li>|t| and <var>t'</var> are [=IRIs=] that are [=IRI equality|equal=].</li>
-      <li>|t| and <var>t'</var> are [=literals=] that are [=literal term equality|equal=].</li>
-      <li>|t| and <var>t'</var> are [=blank nodes=] that are [=blank node equality|equal=].</li>
-      <li>|t| and <var>t'</var> are [=triple terms=] that are [=triple term equality|equal=].</li>
+      <li>|t| and <var>t'</var> are [=IRIs=] that are [=IRI equality|equal=] (per [=IRI equality=]).</li>
+      <li>|t| and <var>t'</var> are [=literals=] that are [=literal term equality|equal=] (per [=literal term equality=]).</li>
+      <li>|t| and <var>t'</var> are [=blank nodes=] that are [=blank node equality|equal=] (per [=blank node equality=]).</li>
+      <li>|t| and <var>t'</var> are [=triple terms=] that are [=triple equality|equal=] (per [=triple equality=]).</li>
     </ul>
 
     <p>The set of <span id="dfn-nodes"><!-- obsolete term--></span><dfn data-lt="node">nodes</dfn> of an <a>RDF graph</a>
@@ -913,9 +913,9 @@
 
     <p>By extension, an [=RDF term=] is said to [=appear=] in an [=RDF graph=] if it appears in an [=asserted triple=] of that graph. An [=RDF triple=] is said to [=appear=] in an [=RDF graph=] if it is either an [=asserted triple=] of that graph or a [=triple term=] [=appearing=] in that graph.</p>
 
-    <p><dfn>Triple term equality</dfn>:
+    <p>Triple term equality:
       Since triple terms are [=triples=], equality of triple terms is the same as [=triple equality=].</p>
-
+      
     <p class="note">Every <a>triple</a> with a <a>triple term</a> as its [=object=] SHOULD
       use <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#reifies</code> (<code>rdf:reifies</code>)
       as its <a>predicate</a>.
