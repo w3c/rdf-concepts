@@ -579,7 +579,7 @@
 
     <p><dfn>Triple equality</dfn>:
       Two triples (|s|, |p|, |o|) and (<var>s'</var>, <var>p'</var>, <var>o'</var>)
-      are considered equal if and only if all of the following three conditions holds.</p>
+      are considered equal if and only if all of the following three conditions hold.</p>
 
     <ul>
       <li>|s| and <var>s'</var> are [=RDF term equality|equal=].</li>
@@ -901,7 +901,7 @@
     <h3>Triple Terms</h3>
 
     <p>An [=RDF triple=] used as the [=object=] of another [=triple=] is called a <dfn class=export >triple term</dfn>.
-      In a given [=RDF graph=], a [=triple=] can appear as a [=triple term=], as an [=asserted triple=], or both.
+      In a given [=RDF graph=], a [=triple=] can appear as a [=triple term=], an [=asserted triple=], or both.
     </p>
 
     <p>The set of [=RDF terms=] <dfn class=export data-lt="appear">appearing</dfn> in an [=RDF triple=] |t| is defined inductively as follows:</p>
@@ -1089,9 +1089,10 @@
         the triple ( |M|(|s|), |M|(|p|), |M|(|o|) ) is in |DG2|.</li>
       <li>The [=named graph=] (|n|, |G|) is in |NG1| if and only if
         there is a [=named graph=] (<var>n'</var>, <var>G'</var>) in |NG2| such that
+        the following are true:
         <ul>
-          <li>|M|(|n|) is [=RDF term equality|equal=] to <var>n'</var> and</li>
-          <li>the triple (|s|, |p|, |o|) is in |G| if and only if
+          <li>|M|(|n|) is [=RDF term equality|equal=] to <var>n'</var>.</li>
+          <li>The triple (|s|, |p|, |o|) is in |G| and
             the triple ( |M|(|s|), |M|(|p|), |M|(|o|) ) is in <var>G'</var>.</li>
         </ul>
       </li>
