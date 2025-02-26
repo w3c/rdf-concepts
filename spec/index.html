@@ -754,125 +754,139 @@
     <p>Literals are used for values such as strings, numbers, and dates.</p>
 
     <p>A <dfn data-local-lt="RDF literal">literal</dfn> in an <a>RDF graph</a> consists of
-      two, three, or four elements, as follow:</p>
+      two, three, or four elements, as follow.</p>
 
     <ol>
-      <li>a <dfn>lexical form</dfn> consisting of a sequence of
-        <a data-cite="I18N-GLOSSARY#dfn-code-point" class="lint-ignore">Unicode code points</a> [[!UNICODE]]
-        which are <a data-cite="I18N-GLOSSARY#dfn-scalar-value">Unicode scalar values</a>,
-        and therefore do not contain
-        <a data-cite="I18N-GLOSSARY#dfn-surrogate" class="lint-ignore">Unicode surrogate code points</a></li>
-      <li>a <dfn>datatype IRI</dfn>, being an <a>IRI</a>
+      <li>A <dfn>lexical form</dfn>, being a [=string=].
+      <li>A <dfn>datatype IRI</dfn>, being an <a>IRI</a>
         identifying a datatype that determines how the lexical form maps
-        to a <a>literal value</a></li>
-      <li>if and only if the <a>datatype IRI</a> is
-        <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#langString</code>, a
+        to a <a>literal value</a>.</li>
+      <li>If and only if the <a>datatype IRI</a> is
+        <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#langString</code> or
+        <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#dirLangString</code>, a
         non-empty <dfn>language tag</dfn> as defined by [[!BCP47]]. The
         language tag MUST be well-formed according to
         <a data-cite="bcp47#section-2.2.9">section 2.2.9</a>
         of [[!BCP47]],
         and MUST be treated consistently, that is, in a case insensitive manner.
-        Two language tags are the same if they only differ by case.</li>
-      <li>if and only if the <a>datatype IRI</a> is
+        Two [[!BCP47]]-complying strings that differ only by case represent the same [=language tag=].</li>
+      <li>If and only if the <a>datatype IRI</a> is
         <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#dirLangString</code>,
-        a non-empty <a>language tag</a>
-        that MUST be well-formed according to <a data-cite="bcp47#section-2.2.9">section 2.2.9</a>
-        of [[!BCP47]],
-        and MUST be treated consistently, that is, in a case insensitive manner,
-        and a <dfn>base direction</dfn> that MUST be either `ltr` or `rtl`.</li>
+        a <dfn>base direction</dfn> that MUST be either<ul>
+          <li>`ltr`, indicating that the initial text direction is set to left-to-right, or</li>
+          <li>`rtl`, indicating that the initial text direction is set to right-to-left.</li>
+        </ul></li>
     </ol>
 
     <p>A literal is a <dfn>language-tagged string</dfn> if the third element
       is present and the fourth element is not present.
-      Lexical representations of language tags MAY be case normalized,
-      (for example, by canonicalizing as defined by 
-      <a data-cite="bcp47#section-4.5">BCP 47 section 4.5</a>).
-      </p>
-
-    <p>A literal is a <dfn id="dfn-dir-lang-string">directional language-tagged string</dfn>
+      A literal is a <dfn id="dfn-dir-lang-string">directional language-tagged string</dfn>
       if both the third element and fourth elements are present.
-      The third element, the language tag, is treated identically as in a <a>language-tagged string</a>,
-      and the fourth element, <a>base direction</a>, MUST be either `ltr` or `rtl`, which MUST be in lower case.</p>
-
-    <p>The meanings of the <a>base direction</a> values are:</p>
-    <ul>
-      <li>`ltr`: indicates that the initial text direction is set to left-to-right.</li>
-      <li>`rtl`: indicates that the initial text direction is set to right-to-left.</li>
-    </ul>
-
-    <p>Please note that concrete syntaxes MAY support
-      <dfn data-lt="simple literal" class="export">simple literals</dfn> consisting of only a
-      <a>lexical form</a> without any <a>datatype IRI</a>, <a>language tag</a>, or <a>base direction</a>.
-      Simple literals are syntactic sugar for abstract syntax
-      <a>literals</a>
-      with the <a>datatype IRI</a>
-      <code>http://www.w3.org/2001/XMLSchema#string</code>
-      (which is commonly abbreviated as <code>xsd:string</code>).
-      Similarly, most concrete syntaxes represent
-      <a>language-tagged strings</a> and <a>directional language-tagged strings</a> without
-      the <a>datatype IRI</a> because it always equals either
-      <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#langString</code> (<code>rdf:langString</code>)
-      or <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#dirLangString</code> (<code>rdf:dirLangString</code>), respectively.</p>
-
-    <p>The <dfn>literal value</dfn> associated with a <a>literal</a> is:</p>
-
-    <ul>
-      <li>If the literal is a <a>language-tagged string</a>,
-        then the literal value is a pair consisting of its <a>lexical form</a>
-        and its <a>language tag</a>, in that order.</li>
-      <li>If the literal is a <a>directional language-tagged string</a>, then the literal value is
-        a tuple of its <a>lexical form</a>, its <a>language tag</a>, and its <a>base direction</a>,
-        likewise in that order.</li>
-      <li>If the literal's <a>datatype</a> is handled by an RDF implementation,
-        <ul>
-          <li>if the literal's <a>lexical form</a> is in the <a>lexical space</a>
-            of the <a>datatype</a>, then the literal value is the result of applying
-            the <a>lexical-to-value mapping</a> of the datatype to the
-            <a>lexical form</a>.</li>
-          <li>otherwise, the literal is <dfn data-lt-no-plural>ill-typed</dfn> and no literal value can be
-             associated with the literal. Such a case produces a semantic
-             inconsistency but is not <em>syntactically</em> ill-formed.
-             Implementations SHOULD accept [=ill-typed=] literals and produce RDF
-             graphs from them. Implementations MAY produce warnings when
-             encountering [=ill-typed=] literals.</li>
-        </ul>
-      </li>
-      <li>If the literal's <a>datatype IRI</a> is <em>not</em>
-        handled by an RDF implementation, then the literal value is
-        not defined by this specification. Implementations SHOULD accept
-        literals with unknown datatype IRIs and produce RDF graphs from them.
-      </li>
-    </ul>
+    </p>
 
     <p><dfn data-local-lt="term-equal">Literal term equality</dfn>:
-      Two literals are term-equal (the same <a>RDF literal</a>)
+      two literals are term-equal (the same <a>RDF term</a>)
       if and only if:</p>
 
     <ul>
-      <li>the two <a>lexical forms</a> compare equal</li>
-      <li>the two <a>datatype IRIs</a> compare equal</li>
-      <li>the two <a>language tags</a> (if any) compare equal</li>
-      <li>the two <a>base directions</a> (if any) compare equal</li>
+      <li>the two <a>lexical forms</a> compare equal,</li>
+      <li>the two <a>datatype IRIs</a> compare equal,</li>
+      <li>the two <a>language tags</a> are either both absent, or both present and compare equal,</li>
+      <li>the two <a>base directions</a> are either both absent, both `ltr`, or both `rtl`.</li>
     </ul>
-    <p>Comparison is performed using 
+    <p>Comparison of the [=lexical forms=] and of the [=datatype IRIs=] is performed using
       <a data-cite="I18N-GLOSSARY#dfn-case-sensitive">case sensitive matching</a>
-      (see description of string comparison in 
-      <a href="#rdf-strings" class="sectionRef"></a>)
-      except for language tags, where the comparison is performed using 
+      (see description of string comparison in
+      <a href="#rdf-strings" class="sectionRef"></a>).
+      Comparison of the [=language tags=] is performed using
       <a data-cite="I18N-GLOSSARY#dfn-case-sensitive">ASCII case-insensitive matching</a>.
-      Thus, two literals can have the same value
-      without being the same <a>RDF term</a>.
-      For example:</p>
+    </p>
 
-    <pre>
-      "1"^^xs:integer
-      "01"^^xs:integer
-    </pre>
+    <section>
+      <h2>Representation of literals</h2>
 
-    <p>denote the same <a data-lt="literal value">value</a>, but are not the
-      same literal <a>RDF terms</a> and are not
-      <a>term-equal</a> because their
-      <a>lexical forms</a> differ.</p>
+      <p>Some concrete syntaxes MAY support
+        <dfn data-lt="simple literal" class="export">simple literals</dfn> consisting of only a
+        <a>lexical form</a> without any <a>datatype IRI</a>, <a>language tag</a>, or <a>base direction</a>.
+        Simple literals are syntactic sugar for abstract syntax
+        <a>literals</a>
+        with the <a>datatype IRI</a>
+        <code>http://www.w3.org/2001/XMLSchema#string</code>
+        (which is commonly abbreviated as <code>xsd:string</code>).
+      </p>
+
+      <p>
+        Similarly, most concrete syntaxes represent
+        <a>language-tagged strings</a> and <a>directional language-tagged strings</a> without
+        the <a>datatype IRI</a> because it always equals either
+        <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#langString</code> (<code>rdf:langString</code>)
+        or <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#dirLangString</code> (<code>rdf:dirLangString</code>), respectively.
+      </p>
+
+      <p>
+        Any [=string=] complying with [[!BCP47]] MAY be used to represent a [=language tag=] in concrete syntaxes or implementation.
+        Such strings MAY be case normalized,
+        (for example, by canonicalizing as defined by
+        <a data-cite="bcp47#section-4.5">BCP 47 section 4.5</a>).
+        On the contrary, an implementation MAY preserve the case from the original representation,
+        provided that it processes it in a case-insensitive manner.
+      </p>
+
+      <aside class=note>
+        The treatment of language tags has changed between RDF 1.1 and RDF 1.2.
+        In RDF 1.1, `"chat"@fr` and `"chat"@FR` were representing two distinct terms, but implementations had license to replace one with the other (which most did).
+        In RDF 1.2, they are now representing the exact same literal, i.e., the case difference in the concrete syntax does not propagate into the abstract syntax.
+      </aside>
+
+    </section>
+
+    <section>
+      <h2>Literal value</h2>
+
+      <p>The <dfn>literal value</dfn> associated with a <a>literal</a> is defined as follow.</p>
+
+      <ul>
+        <li>If the literal is a <a>language-tagged string</a>,
+          then the literal value is a pair consisting of its <a>lexical form</a>
+          and its <a>language tag</a>, in that order.</li>
+        <li>If the literal is a <a>directional language-tagged string</a>, then the literal value is
+          a tuple of its <a>lexical form</a>, its <a>language tag</a>, and its <a>base direction</a>,
+          likewise in that order.</li>
+        <li>If the literal's <a>datatype</a> is handled by an RDF implementation,
+          <ul>
+            <li>if the literal's <a>lexical form</a> is in the <a>lexical space</a>
+              of the <a>datatype</a>, then the literal value is the result of applying
+              the <a>lexical-to-value mapping</a> of the datatype to the
+              <a>lexical form</a>.</li>
+            <li>otherwise, the literal is <dfn data-lt-no-plural>ill-typed</dfn> and no literal value can be
+               associated with the literal. Such a case produces a semantic
+               inconsistency but is not <em>syntactically</em> ill-formed.
+               Implementations SHOULD accept [=ill-typed=] literals and produce RDF
+               graphs from them. Implementations MAY produce warnings when
+               encountering [=ill-typed=] literals.</li>
+          </ul>
+        </li>
+        <li>If the literal's <a>datatype IRI</a> is <em>not</em>
+          handled by an RDF implementation, then the literal value is
+          not defined by this specification. Implementations SHOULD accept
+          literals with unknown datatype IRIs and produce RDF graphs from them.
+        </li>
+      </ul>
+
+      <p>
+        Thus, two literals can have the same value
+        without being the same <a>RDF term</a>.
+        For example:</p>
+
+      <pre>
+        "1"^^xsd:integer
+        "01"^^xsd:integer
+      </pre>
+
+      <p>denote the same <a data-lt="literal value">value</a>, but are not the
+        same literal <a>RDF terms</a> because their
+        <a>lexical forms</a> differ.</p>
+    </section>
   </section>
 
   <section id="section-blank-nodes">
