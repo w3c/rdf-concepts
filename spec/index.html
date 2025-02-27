@@ -818,17 +818,17 @@
       <p>
         Similarly, most concrete syntaxes represent
         <a>language-tagged strings</a> and <a>directional language-tagged strings</a> without
-        the <a>datatype IRI</a> because it always equals either
+        the <a>datatype IRI</a> because it is always either
         <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#langString</code> (<code>rdf:langString</code>)
         or <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#dirLangString</code> (<code>rdf:dirLangString</code>), respectively.
       </p>
 
       <p>
-        Any [=string=] complying with [[!BCP47]] MAY be used to represent a [=language tag=] in concrete syntaxes or implementation.
-        Such strings MAY be case normalized,
+        Any [=string=] complying with [[!BCP47]] MAY be used to represent a [=language tag=] in concrete syntaxes or implementations.
+        Such strings MAY be case normalized
         (for example, by canonicalizing as defined by
         <a data-cite="bcp47#section-4.5">BCP 47 section 4.5</a>).
-        On the contrary, an implementation MAY preserve the case from the original representation,
+        Alternatively, an implementation MAY preserve the case from the original representation,
         provided that it processes it in a case-insensitive manner.
       </p>
 
@@ -843,7 +843,7 @@
     <section>
       <h2>Literal value</h2>
 
-      <p>The <dfn>literal value</dfn> associated with a <a>literal</a> is defined as follow.</p>
+        <p>The <dfn>literal value</dfn> associated with a <a>literal</a> is defined as follows.</p>
 
       <ul>
         <li>If the literal is a <a>language-tagged string</a>,
