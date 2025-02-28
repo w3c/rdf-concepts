@@ -834,8 +834,9 @@
 
       <aside class=note>
         The treatment of language tags has changed between RDF 1.1 and RDF 1.2.
-        In RDF 1.1, `"chat"@fr` and `"chat"@FR` were representing two distinct terms, but implementations had license to replace one with the other (which most did).
+        In RDF 1.1, `"chat"@fr` and `"chat"@FR` were theoretically representing two distinct terms, but implementations had license to replace one with the other via some form of normalization.
         In RDF 1.2, they are now representing the exact same literal, i.e., the case difference in the concrete syntax does not propagate into the abstract syntax.
+        Since many RDF 1.1 implementations do normalize language tags internally, they will not be impacted by this change.
       </aside>
 
     </section>
