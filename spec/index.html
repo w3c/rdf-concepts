@@ -591,6 +591,16 @@
 
     <p>The three components (|s|, |p|, |o|) of an [=RDF triple=] are respectively called the <dfn class=export >subject</dfn>, <dfn class=export >predicate</dfn> and <dfn class=export >object</dfn> of the triple.</p>
 
+    <p><dfn>Triple equality</dfn>:
+      Two triples (|s|, |p|, |o|) and (<var>s'</var>, <var>p'</var>, <var>o'</var>)
+      are equal (the same [=RDF triple=]) if and only if all of the following three conditions hold.</p>
+
+    <ul>
+      <li>|s| and <var>s'</var> are [=RDF term equality|equal=].</li>
+      <li>|p| and <var>p'</var> are [=RDF term equality|equal=].</li>
+      <li>|o| and <var>o'</var> are [=RDF term equality|equal=].</li>
+    </ul>
+
 
     <p class="note">The definition of <a>triple</a> is recursive.
       That is, a <a>triple</a> can itself have an
@@ -612,6 +622,17 @@
       is not equal to the IRI <code>http://example.org/</code>,
       nor to a blank node with the <a>blank node identifier</a>
       <code>http://example.org/</code>.</p>
+
+    <p><dfn>RDF term equality</dfn>:
+      Two [=RDF terms=] |t| and <var>t'</var> are equal (the same [=RDF term=]) if and only if
+      one of the following four conditions holds:</p>
+
+    <ul>
+      <li>|t| and <var>t'</var> are [=IRIs=] that are [=IRI equality|equal=] (per [=IRI equality=]).</li>
+      <li>|t| and <var>t'</var> are [=literals=] that are [=literal term equality|equal=] (per [=literal term equality=]).</li>
+      <li>|t| and <var>t'</var> are [=blank nodes=] that are [=blank node equality|equal=] (per [=blank node equality=]).</li>
+      <li>|t| and <var>t'</var> are [=triple terms=] that are [=triple equality|equal=] (per [=triple equality=]).</li>
+    </ul>
 
     <p>The set of <span id="dfn-nodes"><!-- obsolete term--></span><dfn data-lt="node">nodes</dfn> of an <a>RDF graph</a>
       is the set of <a>subjects</a> and <a>objects</a> of the <a>asserted triples</a> of the graph.
@@ -862,6 +883,9 @@
       the set of possible blank nodes is arbitrary.  RDF makes no reference to
       any internal structure of blank nodes.</p>
 
+    <p><dfn>Blank node equality</dfn>:
+      Two blank nodes are equal if and only if they are the same blank node.</p>
+
     <div class="note" id="note-bnode-id">
       <p><span id="dfn-blank-node-identifiers"><!-- obsolete term--></span><dfn data-lt="blank node identifier">Blank node identifiers</dfn>
       are local identifiers that are used in some
@@ -903,6 +927,9 @@
 
     <p>By extension, an [=RDF term=] is said to [=appear=] in an [=RDF graph=] if it appears in an [=asserted triple=] of that graph. An [=RDF triple=] is said to [=appear=] in an [=RDF graph=] if it is either an [=asserted triple=] of that graph or a [=triple term=] [=appearing=] in that graph.</p>
 
+    <p>Triple term equality:
+      Since triple terms are [=triples=], equality of triple terms is the same as [=triple equality=].</p>
+      
     <p class="note">Every <a>triple</a> with a <a>triple term</a> as its [=object=] SHOULD
       use <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#reifies</code> (<code>rdf:reifies</code>)
       as its <a>predicate</a>.
@@ -926,8 +953,8 @@
     <ul>
       <li>|M| is bijective.</li>
       <li>For every [=blank node=] |b|, |M|(|b|) is a [=blank node=] (but not necessarily the same as |b|).</li>
-      <li>For every [=literal=] |lit|, |M|(|lit|) = |lit|.</li>
-      <li>For every [=IRI=] |iri|, |M|(|iri|) = |iri|.</li>
+      <li>For every [=literal=] |lit|, |M|(|lit|) is |lit|.</li>
+      <li>For every [=IRI=] |iri|, |M|(|iri|) is |iri|.</li>
       <li>For every [=triple term=] |tt| of the form (|s|, |p|, |o|), |M|(|tt|) is the triple term ( |M|(|s|), |M|(|p|), |M|(|o|) ).</li>
     </ul>
 
@@ -937,8 +964,6 @@
       if there exists an [=isomorphic RDF-term mapping=] |M| such that
       the triple (|s|, |p|, |o|) is in |G| if and only if
       the triple ( |M|(|s|), |M|(|p|), |M|(|o|) ) is in <var>G'</var>.</p>
-
-    <p>See also: <a>IRI equality</a>, <a>literal term equality</a>.</p>
 
     <p>With this definition, <var>M</var> shows how each blank node
       in <var>G</var> can be replaced with
@@ -1077,9 +1102,14 @@
         the triple ( |M|(|s|), |M|(|p|), |M|(|o|) ) is in |DG2|.</li>
       <li>The [=named graph=] (|n|, |G|) is in |NG1| if and only if
         there is a [=named graph=] (<var>n'</var>, <var>G'</var>) in |NG2| such that
-        |M|(|n|) = <var>n'</var> and
-        the triple (|s|, |p|, |o|) is in |G| if and only if
-        the triple ( |M|(|s|), |M|(|p|), |M|(|o|) ) is in <var>G'</var>.</li>
+        the following are true:
+        <ul>
+          <li>|M|(|n|) is [=RDF term equality|equal=] to <var>n'</var>.</li>
+          <li>For every triple |t|=(|s|, |p|, |o|), it holds that
+            |t| is in |G| if and only if
+            the triple ( |M|(|s|), |M|(|p|), |M|(|o|) ) is in <var>G'</var>.</li>
+        </ul>
+      </li>
     </ul>
 
   </section>
@@ -2251,11 +2281,12 @@
       Implementations can either follow the advice to normalize to lower case,
       use the recommended BCP47 format,
       or do something else, as long it is performed consistently.</li>
+    <li>Added explicit definitions of [=blank node equality=], [=RDF term equality=], and [=triple equality=].</li>
     <li>Removed the section on the canonical mapping for the <a>rdf:XMLLiteral</a> datatype.</li>
     <li>Refer to the definition and discussion of 
       <a data-cite="RDF12-SEMANTICS#dfn-recognize">RDF Semantics, "recognizing"</a>
       datatype IRIs, instead of <em>Recognized datatype IRIs</em>.</li>
-    <li>The informal terminolgy "RDF processor" has been removed.</li>
+    <li>The informal terminology "RDF processor" has been removed.</li>
   </ul>
 
   <p class="note">A detailed overview of the differences between RDF versions&nbsp;1.1
