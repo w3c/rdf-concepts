@@ -754,7 +754,7 @@
     <p>Literals are used for values such as strings, numbers, and dates.</p>
 
     <p>A <dfn data-local-lt="RDF literal">literal</dfn> in an <a>RDF graph</a> consists of
-      two, three, or four elements, as follow.</p>
+      two, three, or four elements, as follow:</p>
 
     <ol>
       <li>A <dfn>lexical form</dfn>, being an [=RDF string=].
@@ -772,9 +772,9 @@
         Two [[!BCP47]]-complying strings that differ only by case represent the same [=language tag=].</li>
       <li>If and only if the <a>datatype IRI</a> is
         <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#dirLangString</code>,
-        a <dfn>base direction</dfn> that MUST be either<ul>
-          <li>`ltr`, indicating that the initial text direction is set to left-to-right, or</li>
-          <li>`rtl`, indicating that the initial text direction is set to right-to-left.</li>
+        a <dfn>base direction</dfn> that MUST be one of the following:<ul>
+          <li>`ltr`, indicating that the initial text direction is set to left-to-right</li>
+          <li>`rtl`, indicating that the initial text direction is set to right-to-left</li>
         </ul></li>
     </ol>
 
@@ -786,7 +786,7 @@
 
     <p><dfn data-local-lt="term-equal">Literal term equality</dfn>:
       two literals are term-equal (the same <a>RDF term</a>)
-      if and only if:</p>
+      if and only if the following are all true:</p>
 
     <ul>
       <li>the two <a>lexical forms</a> compare equal,</li>
@@ -834,8 +834,10 @@
 
       <aside class=note>
         The treatment of language tags has changed between RDF 1.1 and RDF 1.2.
-        In RDF 1.1, `"chat"@fr` and `"chat"@FR` theoretically represent two distinct terms, but implementations may replace one with the other via some form of normalization.
-        In RDF 1.2, they represent the exact same literal, i.e., the case difference in the concrete syntax does not propagate into the abstract syntax.
+        In RDF 1.1, `"chat"@fr` and `"chat"@FR` represent two distinct terms,
+        but implementations may replace either with the other via some form of normalization.
+        In RDF 1.2, they represent the exact same literal,
+        i.e., the case difference in the concrete syntax does not propagate into the abstract syntax.
         Since many RDF 1.1 implementations do normalize language tags internally, they will not be impacted by this change.
       </aside>
 
@@ -853,15 +855,15 @@
         <li>If the literal is a <a>directional language-tagged string</a>, then the literal value is
           a tuple of its <a>lexical form</a>, its <a>language tag</a>, and its <a>base direction</a>,
           likewise in that order.</li>
-        <li>If the literal's <a>datatype</a> is handled by an RDF implementation,
+        <li>If the literal's <a>datatype</a> is handled by an RDF implementation, then one of the following applies:
           <ul>
-            <li>if the literal's <a>lexical form</a> is in the <a>lexical space</a>
+            <li>If the literal's <a>lexical form</a> is in the <a>lexical space</a>
               of the <a>datatype</a>, then the literal value is the result of applying
               the <a>lexical-to-value mapping</a> of the datatype to the
               <a>lexical form</a>.</li>
-            <li>otherwise, the literal is <dfn data-lt-no-plural>ill-typed</dfn> and no literal value can be
+            <li>Otherwise, the literal is <dfn data-lt-no-plural>ill-typed</dfn> and no literal value can be
                associated with the literal. Such a case produces a semantic
-               inconsistency but is not <em>syntactically</em> ill-formed.
+               inconsistency, but it is not <em>syntactically</em> ill-formed.
                Implementations SHOULD accept [=ill-typed=] literals and produce RDF
                graphs from them. Implementations MAY produce warnings when
                encountering [=ill-typed=] literals.</li>
@@ -875,7 +877,7 @@
       </ul>
 
       <p>
-        Thus, two literals can have the same value
+        It follows from the above that two literals can have the same value
         without being the same <a>RDF term</a>.
         For example:</p>
 
@@ -885,7 +887,7 @@
       </pre>
 
       <p>denote the same <a data-lt="literal value">value</a>, but are not the
-        same literal <a>RDF terms</a> because their
+        same literal <a>RDF term</a> because their
         <a>lexical forms</a> differ.</p>
     </section>
   </section>
