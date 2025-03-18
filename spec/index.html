@@ -333,32 +333,34 @@
       Concrete syntaxes, such as Turtle [[RDF12-TURTLE]],
       may have shortcuts for capturing a <a>triple term</a> with its <a>reifier</a>.</p>
 
-    <p>The following diagram represents a statement and a reification of an unasserted <a>triple term</a>.</p>
+    <p>The following diagram represents a <a>reifying triple</a> of an unasserted, abstract <a>triple term</a>, and a <a>triple</a> relating the <a>reifier</a> to another resource.</p>
 
     <figure id="fig-triple-term">
       <a href="triple-term.svg">
         <!-- A version of this graphic can be found at https://docs.google.com/drawings/d/1RP9Nw5GCNjduWSXZj_EZ8FaAc7p_N-WVmzJ0syvum1k -->
         <img src="triple-term.svg"
-             alt="An RDF graph containing a triple that references an unasserted triple term (with grey background) via a reifier"
+             alt="An RDF graph containing a triple that references an unasserted triple term (with grey dashed arc) via a reifier"
              aria-describedby="fig-triple-term-alt"/>
       </a>
       <figcaption id="fig-triple-term-alt">
-        An <a>RDF graph</a> containing a <a>triple</a> that references an unasserted <a>triple term</a> (with grey background) via a <a>reifier</a>.
+        An <a>RDF graph</a> containing a <a>reifying triple</a> that references an abstract <a>triple term</a> (which is unasserted, depicted using a grey, dashed arc) from a <a>reifier</a>; and a triple describing this reifier.
       </figcaption>
     </figure>
 
-    <p>A variation on the graph shown in <a href="#fig-triple-term"></a> can be described
-      where the <a>triple term</a> is also <a data-lt="asserted triple">asserted</a>.</p>
+    <p>Here is a variation on the graph shown in <a href="#fig-triple-term"></a>. This represents a graph
+      where the <a>triple term</a> corresponds to an <a>asserted triple</a>.
+    </p>
 
     <figure id="fig-asserted-triple-term">
       <a href="asserted-triple-term.svg">
         <!-- A version of this graphic can be found at https://docs.google.com/drawings/d/1gAHQj4wk87tmeHf4-wnxdgmjq3T05_ovrJq0V-1VXKw -->
         <img src="asserted-triple-term.svg"
-             alt="An RDF graph containing a triple that references an triple term, which is also asserted, via a reifier"
+             alt="An RDF graph containing a reifying triple where the triple term corresponds to an asserted triple"
              aria-describedby="fig-asserted-triple-term-alt"/>
       </a>
       <figcaption id="fig-asserted-triple-term-alt">
-        An <a>RDF graph</a> containing a <a>triple</a> that references an <a>triple term</a>, which is also asserted, via a <a>reifier</a>.
+        An <a>RDF graph</a> containing a <a>reifying triple</a> where the <a>triple term</a> corresponds to an <a>asserted triple</a>.
+        The diagram represents the proposition as a fact using the asserted triple, meaning that the relationship holds.
       </figcaption>
     </figure>
 
