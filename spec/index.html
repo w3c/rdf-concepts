@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
+  <meta name="color-scheme" content="light dark">
   <title>RDF 1.2 Concepts and Abstract Syntax</title>
   <script src="https://www.w3.org/Tools/respec/respec-w3c" class="remove"></script>
   <script src="./common/local-biblio.js" class="remove"></script>
@@ -43,7 +44,10 @@
     };
   </script>
   <style>
+    body { color-scheme: light }
+    body.darkmode { color-scheme: dark }
     figure { text-align: center; }
+    figure img { width: 70%; }
     table.simple td, table th { border: 1px solid #ddd; padding: 0.2em 0.5em; }
     ol ol { list-style-type: lower-latin; }
     .grammar td { font-family: monospace;}
@@ -138,7 +142,10 @@
       node-arc-node link.</p>
 
     <figure id="fig-rdf-graph">
-      <a href="rdf-graph.svg"><img src="rdf-graph.svg" alt="An RDF graph with two nodes (Subject and Object) and a triple connecting them (Predicate)" /></a>
+      <a href="rdf-graph.svg">
+        <img src="rdf-graph.svg"
+             alt="An RDF graph with two nodes (Subject and Object) and a triple connecting them (Predicate)" />
+      </a>
       <figcaption>An RDF graph with two nodes (Subject and Object) and a triple connecting them (Predicate)</figcaption>
     </figure>
 
@@ -333,7 +340,6 @@
         <!-- A version of this graphic can be found at https://docs.google.com/drawings/d/1RP9Nw5GCNjduWSXZj_EZ8FaAc7p_N-WVmzJ0syvum1k -->
         <img src="triple-term.svg"
              alt="An RDF graph containing a triple that references an unasserted triple term (with grey background) via a reifier"
-             style="width:70%"
              aria-describedby="fig-triple-term-alt"/>
       </a>
       <figcaption id="fig-triple-term-alt">
@@ -349,7 +355,6 @@
         <!-- A version of this graphic can be found at https://docs.google.com/drawings/d/1gAHQj4wk87tmeHf4-wnxdgmjq3T05_ovrJq0V-1VXKw -->
         <img src="asserted-triple-term.svg"
              alt="An RDF graph containing a triple that references an triple term, which is also asserted, via a reifier"
-             style="width:70%"
              aria-describedby="fig-asserted-triple-term-alt"/>
       </a>
       <figcaption id="fig-asserted-triple-term-alt">
