@@ -1,26 +1,15 @@
-<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0.0 0.0 464 324">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0.0 0.0 464 324">
 
-  <style>
-    :root { --bg: #fff; --solid: #eee; --mid: #aaa; --fg: #000 }
-    @media (prefers-color-scheme: dark) {
-      :root { --bg: #000; --solid: #333; --mid: #777; --fg: #eee }
-    }
-    svg { background-color: var(--bg); stroke: none; }
-    ellipse { stroke: var(--fg); fill: var(--solid) }
-    path.arrow { stroke: var(--fg); marker-end: url(#arrowhead) }
-    text { fill: var(--fg); font-family: Helvetica, sans-serif; }
-    text.middle { text-anchor: middle }
-    text.italic { font-style: italic }
-    path.reifies { stroke: var(--fg); stroke-width: 1; marker-start: url(#arrowhead); fill: none }
-    .unasserted > path.arrow { stroke: var(--mid); stroke-dasharray: 8; marker-end: url(#arrowhead) }
-    .unasserted > text { fill: var(--mid) }
-    .unlinked > ellipse { stroke: var(--mid) }
-  </style>
+  <style>@import url('figure.css')</style>
 
   <defs>
-    <marker id="arrowhead" orient="auto-start-reverse" markerWidth="10" markerHeight="10"
-            refX="0" refY="5">
+    <marker id="arrowhead"
+            orient="auto-start-reverse" markerWidth="10" markerHeight="10" refX="0" refY="5">
       <path d="M0,0 V10 L10,5 Z" fill="context-stroke" />
+    </marker>
+    <marker id="arrowhead-abstract"
+            orient="auto-start-reverse" markerWidth="10" markerHeight="10" refX="0" refY="5">
+      <path d="M0,0 V10 L10,5 Z" />
     </marker>
   </defs>
 
@@ -29,7 +18,7 @@
       <ellipse rx="80" ry="36"/>
       <text class="middle" y="6">:Alice</text>
     </g>
-    <g transform="translate(180, 2)" class="unasserted">
+    <g transform="translate(180, 2)" class="abstract">
       <path d="M0,0 92,0" class="arrow"/>
       <text x="26" y="-8">:name</text>
     </g>

@@ -1,15 +1,6 @@
-<svg viewBox="0 0 464 80" xmlns="http://www.w3.org/2000/svg">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 464 80">
 
-  <style type="text/css">
-    :root { --bg: #fff; --solid: #eee; --mid: #aaa; --fg: #000 }
-    @media (prefers-color-scheme: dark) {
-      :root { --bg: #000; --solid: #333; --mid: #777; --fg: #eee }
-    }
-    svg { background-color: var(--bg); stroke: none; }
-    ellipse { stroke: var(--fg); fill: var(--solid) }
-    path.arrow { stroke: var(--fg); marker-end: url(#arrowhead) }
-    text { fill: var(--fg); text-anchor: middle; font-family: Helvetica, sans-serif; }
-  </style>
+  <style>@import url('figure.css')</style>
 
   <defs>
     <marker id="arrowhead" orient="auto-start-reverse" markerWidth="10" markerHeight="10"
@@ -21,15 +12,15 @@
   <g transform="translate(104 40)">
     <g>
       <ellipse rx="70" ry="26"/>
-      <text y="5" font-size="16">Subject</text>
+      <text class="middle" y="5" font-size="16">Subject</text>
     </g>
     <g transform="translate(70 0)">
-      <text x="52" y="-5" font-size="16">Predicate</text>
+      <text class="middle" x="52" y="-5" font-size="16">Predicate</text>
       <path d="M0,0 100,0" class="arrow"/>
     </g>
     <g transform="translate(251 0)">
       <ellipse rx="70" ry="26"/>
-      <text y="5" font-size="16">Object</text>
+      <text class="middle" y="5" font-size="16">Object</text>
     </g>
   </g>
 
