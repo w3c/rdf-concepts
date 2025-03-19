@@ -44,8 +44,8 @@
     };
   </script>
   <style>
-    body { color-scheme: light }
-    body.darkmode { color-scheme: dark }
+    body:has(input[type='radio'][value='light']:checked) { color-scheme: light }
+    body:has(input[type='radio'][value='dark']:checked) { color-scheme: dark }
     figure { text-align: center; }
     figure img { width: 70%; }
     table.simple td, table th { border: 1px solid #ddd; padding: 0.2em 0.5em; }
