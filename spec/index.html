@@ -789,18 +789,19 @@
       if and only if the following are all true:</p>
 
     <ul>
-      <li>The two <a>lexical forms</a> compare equal.</li>
-      <li>The two <a>datatype IRIs</a> compare equal.</li>
-      <li>The two <a>language tags</a> are either both absent, or both present and compare equal.</li>
+      <li>The two <a>lexical forms</a> compare equal,
+        where this comparison is performed using
+        <a data-cite="I18N-GLOSSARY#dfn-case-sensitive">case-sensitive matching</a>
+        (see description of string comparison in
+        <a href="#rdf-strings" class="sectionRef"></a>).</li>
+      <li>The two <a>datatype IRIs</a> compare [=IRI equality|equal=]
+        (per [=IRI equality=]).</li>
+      <li>The two <a>language tags</a> are either both absent, or both present and compare equal,
+        where this comparison is performed using
+        <a data-cite="I18N-GLOSSARY#dfn-ascii-case-insensitive">ASCII case-insensitive matching</a>
+        (in contrast to the case-sensitive comparison of the lexical forms).</li>
       <li>The two <a>base directions</a> are either both absent, both `ltr`, or both `rtl`.</li>
     </ul>
-    <p>Comparison of the [=lexical forms=] and of the [=datatype IRIs=] is performed using
-      <a data-cite="I18N-GLOSSARY#dfn-case-sensitive">case sensitive matching</a>
-      (see description of string comparison in
-      <a href="#rdf-strings" class="sectionRef"></a>).
-      Comparison of the [=language tags=] is performed using
-      <a data-cite="I18N-GLOSSARY#dfn-case-sensitive">ASCII case-insensitive matching</a>.
-    </p>
 
     <section>
       <h2>Representation of literals</h2>
