@@ -637,6 +637,16 @@
       is the set of <a>subjects</a> and <a>objects</a> of the <a>asserted triples</a> of the graph.
       It is possible for a [=predicate=] [=IRI=] to also occur as a [=node=] in
       the same graph.</p>
+
+    <p>The set of [=RDF terms=] <dfn class=export data-lt="appear">appearing</dfn> in an [=RDF triple=] |t| is defined inductively as follows:</p>
+
+    <ul>
+      <li>The [=subject=], [=predicate=] and [=object=] of |t| [=appear=] in |t|.
+      <li>If the [=object=] of |t| is an [=RDF triple=] |t2|, then any [=RDF term=] [=appearing=] in |t2| also [=appears=] in |t|.
+    </ul>
+
+    <p>By extension, an [=RDF term=] is said to [=appear=] in an [=RDF graph=] if it appears in an [=asserted triple=] of that graph. An [=RDF triple=] is said to [=appear=] in an [=RDF graph=] if it is either an [=asserted triple=] of that graph or a [=triple term=] [=appearing=] in that graph.</p>
+
   </section>
 
   <section id="section-IRIs">
@@ -934,15 +944,6 @@
     <p>An [=RDF triple=] used as the [=object=] of another [=triple=] is called a <dfn class=export >triple term</dfn>.
       In a given [=RDF graph=], a [=triple=] can appear as a [=triple term=], an [=asserted triple=], or both.
     </p>
-
-    <p>The set of [=RDF terms=] <dfn class=export data-lt="appear">appearing</dfn> in an [=RDF triple=] |t| is defined inductively as follows:</p>
-
-    <ul>
-      <li>The [=subject=], [=predicate=] and [=object=] of |t| [=appear=] in |t|.
-      <li>If a [=triple term=] |t2| appears in |t|, then any [=RDF term=] [=appearing=] in |t2| also [=appears=] in |t|.
-    </ul>
-
-    <p>By extension, an [=RDF term=] is said to [=appear=] in an [=RDF graph=] if it appears in an [=asserted triple=] of that graph. An [=RDF triple=] is said to [=appear=] in an [=RDF graph=] if it is either an [=asserted triple=] of that graph or a [=triple term=] [=appearing=] in that graph.</p>
 
     <p>Triple term equality:
       Since triple terms are [=triples=], equality of triple terms is the same as [=triple equality=].</p>
