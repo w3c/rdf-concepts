@@ -591,6 +591,11 @@
 
     <p>The three components (|s|, |p|, |o|) of an [=RDF triple=] are respectively called the <dfn class=export >subject</dfn>, <dfn class=export >predicate</dfn> and <dfn class=export >object</dfn> of the triple.</p>
 
+    <p>The set of <span id="dfn-nodes"><!-- obsolete term--></span><dfn data-lt="node">nodes</dfn> of an <a>RDF graph</a>
+      is the set of <a>subjects</a> and <a>objects</a> of the <a>asserted triples</a> of the graph.
+      It is possible for a [=predicate=] [=IRI=] to also occur as a [=node=] in
+      the same graph.</p>
+
     <p><dfn>Triple equality</dfn>:
       Two triples (|s|, |p|, |o|) and (<var>s'</var>, <var>p'</var>, <var>o'</var>)
       are equal (the same [=RDF triple=]) if and only if all of the following three conditions hold.</p>
@@ -632,11 +637,6 @@
       are always distinguishable, even if they are otherwise based on the same [=string=].
       For example, the IRI `http://example.org/` is not equal to a literal whose [=lexical form=] is `http://example.org/`.
     </aside>
-
-    <p>The set of <span id="dfn-nodes"><!-- obsolete term--></span><dfn data-lt="node">nodes</dfn> of an <a>RDF graph</a>
-      is the set of <a>subjects</a> and <a>objects</a> of the <a>asserted triples</a> of the graph.
-      It is possible for a [=predicate=] [=IRI=] to also occur as a [=node=] in
-      the same graph.</p>
 
     <p>The set of [=RDF terms=] <dfn class=export data-lt="appear">appearing</dfn> in an [=RDF triple=] |t| is defined inductively as follows:</p>
 
