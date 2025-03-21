@@ -615,14 +615,6 @@
       <a>blank nodes</a>, and <a>triple terms</a> are collectively known as
       <span id="dfn-rdf-terms"><!-- obsolete term--></span><dfn data-lt="rdf term">RDF terms</dfn>.</p>
 
-    <p><a>IRIs</a>, <a>literals</a>,
-      <a>blank nodes</a>, and <a>triple terms</a> are distinct and distinguishable.
-      For example, a literal with the string <code>http://example.org/</code> as
-      its <a>lexical form</a>
-      is not equal to the IRI <code>http://example.org/</code>,
-      nor to a blank node with the <a>blank node identifier</a>
-      <code>http://example.org/</code>.</p>
-
     <p><dfn>RDF term equality</dfn>:
       Two [=RDF terms=] |t| and <var>t'</var> are equal (the same [=RDF term=]) if and only if
       one of the following four conditions holds:</p>
@@ -633,6 +625,13 @@
       <li>|t| and <var>t'</var> are [=blank nodes=] that are [=blank node equality|equal=] (per [=blank node equality=]).</li>
       <li>|t| and <var>t'</var> are [=triple terms=] that are [=triple equality|equal=] (per [=triple equality=]).</li>
     </ul>
+
+    <aside class="note">
+      From the definition above of RDF term equality, it follows that terms of different kinds
+      ([=IRI=], [=literal=], [=blank node=] or [=triple term=])
+      are always distinguishable, even if they are otherwise based on the same [=string=].
+      For example, the IRI `http://example.org/` is not equal to a literal whose [=lexical form=] is `http://example.org/`.
+    </aside>
 
     <p>The set of <span id="dfn-nodes"><!-- obsolete term--></span><dfn data-lt="node">nodes</dfn> of an <a>RDF graph</a>
       is the set of <a>subjects</a> and <a>objects</a> of the <a>asserted triples</a> of the graph.
