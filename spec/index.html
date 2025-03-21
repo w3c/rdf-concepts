@@ -647,6 +647,12 @@
 
     <p>By extension, an [=RDF term=] is said to [=appear=] in an [=RDF graph=] if it appears in an [=asserted triple=] of that graph. An [=RDF triple=] is said to [=appear=] in an [=RDF graph=] if it is either an [=asserted triple=] of that graph or a [=triple term=] [=appearing=] in that graph.</p>
 
+    <p>
+      An [=RDF term=] is said to be <dfn>ground</dfn> if it is an [=IRI=], a [=literal=], or a [=triple term=] in which only [=ground=] terms [=appear=].
+      By extension, an [=RDF triple=] is said to be [=ground=] if its [=subject=], [=predicate=] and [=object=] are all ground.
+      An [=RDF graph=] is said to be [=ground=] if all its [=asserted=] triples are [=ground=].
+    </p>
+
   </section>
 
   <section id="section-IRIs">
