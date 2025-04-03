@@ -658,8 +658,16 @@
       [=triple term=] [=appearing=] in that graph.</p>
 
     <p>
-      An [=RDF term=] is said to be <dfn>ground</dfn> if it is an [=IRI=], a [=literal=], or a [=triple term=]
-      in which only [=ground=] terms [=appear=].
+      An [=RDF term=] is said to be <dfn>ground</dfn> if any of the following three conditions holds:
+    </p>
+
+    <ul>
+      <li>It is an [=IRI=].</li>
+      <li>It is a [=literal=].</li>
+      <li>It is a [=triple term=] (|s|, |p|, |o|) such that |s|, |p|, and |o| are all [=ground=].</li>
+    </ul>
+
+    <p>
       By extension, an [=RDF triple=] is said to be [=ground=] if its [=subject=], [=predicate=], and [=object=]
       are all ground.
       An [=RDF graph=] is said to be [=ground=] if all its [=asserted=] triples are [=ground=].
