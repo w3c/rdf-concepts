@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
+  <meta name="color-scheme" content="light dark">
   <title>RDF 1.2 Concepts and Abstract Syntax</title>
   <script src="https://www.w3.org/Tools/respec/respec-w3c" class="remove"></script>
   <script src="./common/local-biblio.js" class="remove"></script>
@@ -43,7 +44,11 @@
     };
   </script>
   <style>
-    figure { text-align: center; }
+    body:has(input[type='radio'][value='light']:checked) { color-scheme: light }
+    body:has(input[type='radio'][value='dark']:checked) { color-scheme: dark }
+    figure { text-align: center }
+    figure > a { display: block }
+    figure > a > object { max-width: 40em; pointer-events: none }
     table.simple td, table th { border: 1px solid #ddd; padding: 0.2em 0.5em; }
     ol ol { list-style-type: lower-latin; }
     .grammar td { font-family: monospace;}
@@ -138,7 +143,10 @@
       node-arc-node link.</p>
 
     <figure id="fig-rdf-graph">
-      <a href="rdf-graph.svg"><img src="rdf-graph.svg" alt="An RDF graph with two nodes (Subject and Object) and a triple connecting them (Predicate)" /></a>
+      <a href="rdf-graph.svg">
+        <object data="rdf-graph.svg"
+          aria-label="An RDF graph with two nodes (Subject and Object) and a triple connecting them (Predicate)"></object>
+      </a>
       <figcaption>An RDF graph with two nodes (Subject and Object) and a triple connecting them (Predicate)</figcaption>
     </figure>
 
@@ -326,34 +334,30 @@
       Concrete syntaxes, such as Turtle [[RDF12-TURTLE]],
       may have shortcuts for capturing a <a>triple term</a> with its <a>reifier</a>.</p>
 
-    <p>The following diagram represents a statement and a reification of an unasserted <a>triple term</a>.</p>
+    <p>The following diagram represents a <a>reifying triple</a> of an unasserted, abstract <a>triple term</a>, and a <a>triple</a> relating the <a>reifier</a> to another resource.</p>
 
     <figure id="fig-triple-term">
       <a href="triple-term.svg">
-        <!-- A version of this graphic can be found at https://docs.google.com/drawings/d/1RP9Nw5GCNjduWSXZj_EZ8FaAc7p_N-WVmzJ0syvum1k -->
-        <img src="triple-term.svg"
-             alt="An RDF graph containing a triple that references an unasserted triple term (with grey background) via a reifier"
-             style="width:70%"
-             aria-describedby="fig-triple-term-alt"/>
+        <object data="triple-term.svg" aria-describedby="fig-triple-term-alt"
+          aria-label="An RDF graph containing a triple that references an unasserted triple term (with grey dashed arc) via a reifier"></object>
       </a>
       <figcaption id="fig-triple-term-alt">
-        An <a>RDF graph</a> containing a <a>triple</a> that references an unasserted <a>triple term</a> (with grey background) via a <a>reifier</a>.
+        An <a>RDF graph</a> containing a <a>reifying triple</a> that references an abstract <a>triple term</a> (which is unasserted, depicted using a grey, dashed arc) from a <a>reifier</a>; and a triple describing this reifier.
       </figcaption>
     </figure>
 
-    <p>A variation on the graph shown in <a href="#fig-triple-term"></a> can be described
-      where the <a>triple term</a> is also <a data-lt="asserted triple">asserted</a>.</p>
+    <p>Here is a variation on the graph shown in <a href="#fig-triple-term"></a>. This represents a graph
+      where the <a>triple term</a> corresponds to an <a>asserted triple</a>.
+    </p>
 
     <figure id="fig-asserted-triple-term">
       <a href="asserted-triple-term.svg">
-        <!-- A version of this graphic can be found at https://docs.google.com/drawings/d/1gAHQj4wk87tmeHf4-wnxdgmjq3T05_ovrJq0V-1VXKw -->
-        <img src="asserted-triple-term.svg"
-             alt="An RDF graph containing a triple that references an triple term, which is also asserted, via a reifier"
-             style="width:70%"
-             aria-describedby="fig-asserted-triple-term-alt"/>
+        <object data="asserted-triple-term.svg" aria-describedby="fig-asserted-triple-term-alt"
+          aria-label="An RDF graph containing a reifying triple where the triple term corresponds to an asserted triple"></object>
       </a>
       <figcaption id="fig-asserted-triple-term-alt">
-        An <a>RDF graph</a> containing a <a>triple</a> that references an <a>triple term</a>, which is also asserted, via a <a>reifier</a>.
+        An <a>RDF graph</a> containing a <a>reifying triple</a> where the <a>triple term</a> corresponds to an <a>asserted triple</a>.
+        The diagram represents the proposition as a fact using the asserted triple, meaning that the relationship holds.
       </figcaption>
     </figure>
 

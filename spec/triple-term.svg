@@ -1,53 +1,51 @@
-<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0.0 0.0 464 296">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0.0 0.0 464 324">
 
-  <style>
-      svg { fill: none; stroke: none; }
-      ellipse { stroke: #000 }
-      path.arrow { stroke: #000; marker-end: url(#arrowhead) }
-      text { fill: #000; font-family: Helvetica, sans-serif; }
-      text.middle { text-anchor: middle }
-      text.italic { font-style: italic }
-      .rei { fill: #fff }
-      rect.quoted { fill: #ccc; stroke: #000; }
-      rect.reifies { fill: #fff; stroke: #000; }
-  </style>
+  <style>@import url('figure.css')</style>
 
   <defs>
-    <marker id="arrowhead" orient="auto" markerWidth="8" markerHeight="8"
-            refX="0" refY="3">
-      <path d="M0,0 V6 L8,3 Z" fill="#000" />
+    <marker id="arrowhead"
+            orient="auto-start-reverse" markerWidth="10" markerHeight="10" refX="0" refY="5">
+      <path d="M0,0 V10 L10,5 Z" fill="context-stroke" />
+    </marker>
+    <marker id="arrowhead-abstract"
+            orient="auto-start-reverse" markerWidth="10" markerHeight="10" refX="0" refY="5">
+      <path d="M0,0 V10 L10,5 Z" />
     </marker>
   </defs>
 
-  <g transform="translate(230, 256)">
-    <ellipse rx="80" ry="36"/>
-    <text class="middle" y="6">:Bob</text>
-  </g>
-  <rect class="quoted" x="5" y="2" width="453" height="128" rx="16"/>
-
-  <g transform="translate(230, 128)">
-    <ellipse class="rei" rx="60" ry="24"/>
-    <text class="middle italic" y="6">_:rei-1</text>
-    <text class="italic" x="72" y="-6">rdf:reifies</text>
-  </g>
-  <g transform="translate(230, 68)">
-    <path d="M0,84 0,142" class="arrow"/>
-    <text x="8" y="118">:accordingTo</text>
-  </g>
-
-  <g transform="translate(0, 58)">
-    <g transform="translate(100, 0)">
+  <g transform="translate(0, 48)">
+    <g transform="translate(100, 0)" class="unlinked">
       <ellipse rx="80" ry="36"/>
       <text class="middle" y="6">:Alice</text>
     </g>
-    <g transform="translate(180, 2)">
-      <path d="M0,0 95,0" class="arrow"/>
+    <g transform="translate(180, 2)" class="abstract">
+      <path d="M0,0 92,0" class="arrow"/>
       <text x="26" y="-8">:name</text>
     </g>
-    <g transform="translate(363, 0)">
+    <g transform="translate(363, 0)" class="unlinked">
       <ellipse rx="80" ry="36"/>
       <text class="middle" y="6">"Alice"</text>
     </g>
+  </g>
+
+  <g transform="translate(230, 60)">
+    <path d="m 0,1 c -8,16 -16,24 0,34 s 0,24 0,37" class="reifies"/>
+    <text class="italic" dx="16" dy="50">rdf:reifies</text>
+  </g>
+
+  <g transform="translate(228, 150)">
+    <ellipse rx="48" ry="18"/>
+    <text class="middle italic" y="6">:rei-1</text>
+  </g>
+
+  <g transform="translate(230, 84)">
+    <path d="M0,84 0,140" class="arrow"/>
+    <text x="8" y="118">:accordingTo</text>
+  </g>
+
+  <g transform="translate(230, 272)">
+    <ellipse rx="80" ry="36"/>
+    <text class="middle" y="6">:Bob</text>
   </g>
 
 </svg>
