@@ -295,11 +295,14 @@
       </tr>
     </table>
 
-    <p>In some serialization formats it is common to abbreviate <a>IRIs</a>
-      that start with <a>namespace IRIs</a> by using a
-      <a>namespace prefix</a> in order to assist readability. For example, the IRI
+    <p>In some serialization formats it is common
+      to some [=namespace IRIs=] to arbitrary [=namespace prefixes=],
+      and to abbreviate <a>IRIs</a> that start with one of those <a>namespace IRIs</a> by using the corresponding <a>namespace prefix</a>,
+      in order to assist readability.
+      For example, the IRI
       <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral</code>
-      would be abbreviated as <code>rdf:XMLLiteral</code>.
+      would be abbreviated as <code>rdf:XMLLiteral</code>
+      with the prefix mapping from <a href="#tab-vocab-ns"></a>.
       Note however that these abbreviations are <em>not</em> valid IRIs,
       and must not be used in contexts where IRIs are expected.
       Namespace IRIs and namespace prefixes are <em>not</em> a formal part of the
