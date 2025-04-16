@@ -364,43 +364,6 @@
     <p>Note that a <a>triple term</a> may also have another <a>triple term</a> as an <a>object</a>.</p>
   </section>
 
-  <section id="section-version-announcement">
-    <h3>RDF Version Announcement</h3>
-
-    <p>To allow RDF parsers to error or warn about unsupported RDF versions as early as possible,
-      RDF serialization formats are expected to allow a version to be specified,
-      via either the HTTP Content-Type header,
-      a version announcement in a format-specific syntax,
-      or both.</p>
-
-    <p>If the version is announced in both the Content-Type header and the syntax,
-      they are expected to be equal.</p>
-
-    <p>To retain compability that is as broad as possible with older parsers,
-      only RDF documents that make use of RDF 1.2-specific functionality
-      are encouraged to announce their version (i.e., for RDF documents that do not make use
-      of RDF 1.2-specific functionality it is discouraged to announce a version).</p>
-
-    <p>To announce the version in the HTTP responses using the Content-Type header,
-      the <code>version</code> parameter is expected to be used,
-      as illustrated in the following example response.</p>
-
-    <pre class="box http">HTTP/1.1 200 OK
-Content-Type: text/turtle; version=1.2
-Location: http://example.com/document.ttl
-    </pre>
-
-    <p>When requesting an RDF document from an HTTP server, the <code>version</code> parameter
-      can be used during <a data-cite="webarch#frag-coneg">content negotiation</a> [[WEBARCH]]
-      by including it in the <code>Accept</code> request header,
-      as illustrated in the following example request.</p>
-	
-    <pre class="box http">GET /document.ttl HTTP/1.1
-Host: example.com
-Accept: text/turtle; version=1.2
-    </pre>
-  </section>
-
   <section id="change-over-time">
     <h3>RDF and Change over Time</h3>
 
@@ -540,6 +503,43 @@ Accept: text/turtle; version=1.2
       and different ordering of triples. While these aspects can have great
       effect on the convenience of working with the <a>RDF document</a>,
       they are not significant for its meaning.</p>
+  </section>
+
+  <section id="section-version-announcement">
+    <h3>RDF Version Announcement</h3>
+
+    <p>To allow RDF parsers to error or warn about unsupported RDF versions as early as possible,
+      RDF serialization formats are expected to allow a version to be specified,
+      via either the HTTP Content-Type header,
+      a version announcement in a format-specific syntax,
+      or both.</p>
+
+    <p>If the version is announced in both the Content-Type header and the syntax,
+      they are expected to be equal.</p>
+
+    <p>To retain compability that is as broad as possible with older parsers,
+      only RDF documents that make use of RDF 1.2-specific functionality
+      are encouraged to announce their version (i.e., for RDF documents that do not make use
+      of RDF 1.2-specific functionality it is discouraged to announce a version).</p>
+
+    <p>To announce the version in the HTTP responses using the Content-Type header,
+      the <code>version</code> parameter is expected to be used,
+      as illustrated in the following example response.</p>
+
+    <pre class="box http">HTTP/1.1 200 OK
+Content-Type: text/turtle; version=1.2
+Location: http://example.com/document.ttl
+    </pre>
+
+    <p>When requesting an RDF document from an HTTP server, the <code>version</code> parameter
+      can be used during <a data-cite="webarch#frag-coneg">content negotiation</a> [[WEBARCH]]
+      by including it in the <code>Accept</code> request header,
+      as illustrated in the following example request.</p>
+	
+    <pre class="box http">GET /document.ttl HTTP/1.1
+Host: example.com
+Accept: text/turtle; version=1.2
+    </pre>
   </section>
 </section>
 
