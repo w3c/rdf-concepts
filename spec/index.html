@@ -379,10 +379,10 @@
 	
 	<p>To retain compability that is as broad as possible with older parsers,
 	  only RDF documents that make use of RDF 1.2-specific functionality
-	  SHOULD announce their version (i.e., RDF documents that do not make use
+	  are encouraged to announce their version (i.e., RDF documents that do not make use
 	  of RDF 1.2-specific functionality SHOULD NOT announce their version).</p>
 	
-	<p>To announce the version in the HTTP responses using the Content-Type header, the <code>version</code> parameter MUST be used.</p>
+	<p>To announce the version in the HTTP responses using the Content-Type header, the <code>version</code> parameter is expected to be used.</p>
 	
 	<pre class="box http">HTTP/1.1 200 OK
 Content-Type: text/turtle; version=1.2
@@ -390,7 +390,7 @@ Location: http://example.com/document.ttl
 	</pre>
 	
 	<p>When requesting an RDF document from an HTTP server, the <code>version</code> parameter
-	MAY be used during <a data-cite="webarch#frag-coneg">content negotiation</a> [[WEBARCH]]
+	can be used during <a data-cite="webarch#frag-coneg">content negotiation</a> [[WEBARCH]]
 	by including it in the <code>Accept</code> request header.</p>
 		
 	<pre class="box http">GET /document.ttl HTTP/1.1
