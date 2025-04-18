@@ -504,6 +504,45 @@
       effect on the convenience of working with the <a>RDF document</a>,
       they are not significant for its meaning.</p>
   </section>
+
+  <section id="section-version-announcement">
+    <h3>RDF Version Announcement</h3>
+
+    <p>To allow RDF parsers to error or warn about unsupported RDF versions as early as possible,
+      RDF serialization formats are expected to allow a version to be specified,
+      via either a media-type parameter,
+      a version announcement in a format-specific syntax,
+      or both.</p>
+
+    <p>When the version is indicated both in a media-type parameter and in syntax,
+      they are expected to be the same.
+      If they differ,
+      parsers use the version from the media-type parameter and might emit a warning about the mismatch.</p>
+
+    <p>To retain compability that is as broad as possible with older parsers,
+      only RDF documents that make use of RDF 1.2-specific functionality
+      are encouraged to announce their version (i.e., for RDF documents that do not make use
+      of RDF 1.2-specific functionality it is discouraged to announce a version).</p>
+
+    <p>To announce the version in the HTTP responses using the Content-Type header,
+      the <code>version</code> parameter is expected to be used,
+      as illustrated in the following example response.</p>
+
+    <pre class="box http">HTTP/1.1 200 OK
+Content-Type: text/turtle; version=1.2
+Location: http://example.com/document.ttl
+    </pre>
+
+    <p>When requesting an RDF document from an HTTP server, the <code>version</code> parameter
+      can be used during <a data-cite="webarch#frag-coneg">content negotiation</a> [[WEBARCH]]
+      by including it in the <code>Accept</code> request header,
+      as illustrated in the following example request.</p>
+	
+    <pre class="box http">GET /document.ttl HTTP/1.1
+Host: example.com
+Accept: text/turtle; version=1.2
+    </pre>
+  </section>
 </section>
 
 <section id="conformance">
@@ -2279,6 +2318,8 @@
   <h2>Changes between RDF 1.1 and RDF 1.2</h2>
 
   <ul>
+    <li>Added <a href="#section-version-announcement"class="sectionRef"></a>
+      for announcing RDF versions in RDF documents via the HTTP Content-Type header and/or syntax.</li>
     <li>Added <a href="#section-classic-full-interop" class="sectionRef"></a>
       for informative mappings between RDF [=Full=] and RDF [=Classic=].</li>
     <li>Added <a href="#section-dataset-quad" class="sectionRef"></a>
