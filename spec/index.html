@@ -516,8 +516,10 @@
       a version announcement in a format-specific syntax,
       or both.</p>
 
-    <p>If the version is announced in both the Content-Type header and the syntax,
-      they are expected to be equal.</p>
+    <p>When the version is indicated both in a media-type parameter and in syntax,
+	    they are expected to be the same.
+	    If they differ,
+	    parsers use the version from the media-type parameter and might emit a warning about the mismatch.</p>
 
     <p>To retain compability that is as broad as possible with older parsers,
       only RDF documents that make use of RDF 1.2-specific functionality
