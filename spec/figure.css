@@ -1,16 +1,16 @@
-:root { --bg: #fff; --solid: #eee; --abstract: #aaa; --fg: #000 }
+svg:root { --bg: #fff; --solid: #eee; --abstract: #aaa; --fg: #000 }
 @media (prefers-color-scheme: dark) {
-  :root { --bg: #000; --solid: #333; --abstract: #777; --fg: #eee }
+  svg:root { --bg: #000; --solid: #333; --abstract: #777; --fg: #eee }
 }
 svg { background-color: var(--bg); stroke: none }
-ellipse { stroke: var(--fg); fill: var(--solid) }
-path.arrow { stroke: var(--fg); marker-end: url(#arrowhead) }
-#arrowhead { fill: var(--fg) }
-text { fill: var(--fg); font-family: Helvetica, sans-serif }
-text.middle { text-anchor: middle }
-text.italic { font-style: italic }
-path.reifies { stroke: var(--fg); stroke-width: 1; marker-start: url(#arrowhead); fill: none }
-.abstract > path.arrow { stroke: var(--abstract); stroke-dasharray: 8; marker-end: url(#arrowhead-abstract) }
-#arrowhead-abstract { fill: var(--abstract) }
-.abstract > text { fill: var(--abstract) }
-.unlinked > ellipse { stroke: var(--abstract) }
+svg ellipse { stroke: var(--fg); fill: var(--solid) }
+svg path.arrow { stroke: var(--fg); marker-end: url(#arrowhead) }
+svg #arrowhead { fill: var(--fg) }
+svg text { fill: var(--fg); font-family: Helvetica, sans-serif }
+svg text.middle { text-anchor: middle }
+svg text.italic { font-style: italic }
+svg path.reifies { stroke: var(--fg); stroke-width: 1; marker-start: url(#arrowhead); fill: none }
+svg .abstract > path.arrow { stroke: var(--abstract); stroke-dasharray: 8; marker-end: url(#arrowhead-abstract) }
+svg #arrowhead-abstract { fill: var(--abstract) }
+svg .abstract > text { fill: var(--abstract) }
+svg .unlinked > ellipse { stroke: var(--abstract) }
