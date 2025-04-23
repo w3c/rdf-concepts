@@ -1511,7 +1511,7 @@
     same primary resource.</p>
 </section>
 
-<section id="section-generalized-rdf" class="informative">
+<section id="section-generalizations-of-rdf" class="informative">
   <h2>Generalizations of RDF Triples, Graphs, and Datasets</h2>
 
   <p>It is sometimes convenient to loosen the requirements
@@ -1519,6 +1519,8 @@
     of the RDFS entailment rules is easier to show with
     a notion of symmetric RDF triples.</p>
 
+  <section id="section-symmetric-rdf">
+  <h3>Symmetric RDF</h3>
   <p>
     A <dfn class="export">symmetric RDF triple</dfn> allows the subject to be
     any <a>RDF term</a> that is allowed in the object position, one of
@@ -1533,7 +1535,7 @@
     with a symmetric RDF graph.</p>
 
    <p>Symmetric RDF triples, graphs, and datasets differ
-    from standard normative RDF <a>triples</a>,
+    from standard, normative RDF <a>triples</a>,
     <a data-lt="RDF graph">graphs</a>, and
     <a data-lt="RDF dataset">datasets</a>
     only by allowing <a>IRIs</a>,
@@ -1541,7 +1543,10 @@
     <a>literals</a>,
     or <a>triple terms</a>
     in the subject and object positions.</p>
+  </section>
 
+  <section id="section-generalized-rdf">
+  <h3>Generalized RDF</h3>
   <p>A <dfn class="export">generalized RDF triple</dfn> is a triple having a subject,
     a predicate, and an object, where each can be an <a>IRI</a>, a
     <a>blank node</a>, a
@@ -1558,7 +1563,7 @@
     to a generalized RDF graph.</p>
 
   <p>Generalized RDF triples, graphs, and datasets differ
-    from standard normative RDF <a>triples</a>,
+    from standard, normative RDF <a>triples</a>,
     <a data-lt="RDF graph">graphs</a>, and
     <a data-lt="RDF dataset">datasets</a> only
     by allowing <a>IRIs</a>,
@@ -1566,6 +1571,7 @@
     <a>triple terms</a>, and
     <a>literals</a> to appear
     in any position, i.e., as subject, predicate, object, or graph name.</p>
+  </section>
 
   <p class="note" id="note-generalized-rdf">Any user of
     symmetric or generalized RDF triples, graphs, or datasets needs to be
