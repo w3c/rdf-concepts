@@ -1524,10 +1524,11 @@
   <p>
     A <dfn class="export">symmetric RDF triple</dfn> allows the subject to be
     any <a>RDF term</a> that is allowed in the object position, one of
-    an <a>IRI</a>, 
+    an <a>IRI</a>,
     a <a>blank node</a>,
-    a <a>literal</a> 
-    or a <a>triple term</a>.
+    a <a>literal</a>,
+    or a <a>triple term</a>,
+    which may itself be a symmetric RDF triple.
     A <dfn class="export">symmetric RDF graph</dfn> is a set of symmetric RDF triples.
     A <dfn class="export">symmetric RDF dataset</dfn>
     comprises a distinguished symmetric RDF graph, and zero
@@ -1541,25 +1542,27 @@
     only by allowing <a>IRIs</a>,
     <a>blank nodes</a>,
     <a>literals</a>,
-    or <a>triple terms</a>
+    and <a>triple terms</a>
     in the subject and object positions.</p>
   </section>
 
   <section id="section-generalized-rdf">
   <h3>Generalized RDF</h3>
   <p>A <dfn class="export">generalized RDF triple</dfn> is a triple having a subject,
-    a predicate, and an object, where each can be an <a>IRI</a>, a
-    <a>blank node</a>, a
-    <a>triple term</a>, or a
-    <a>literal</a>. A
-    <dfn class="export">generalized RDF graph</dfn>
+    a predicate, and an object, where each can be an <a>IRI</a>,
+    a <a>blank node</a>,
+    a <a>literal</a>,
+    or a <a>triple term</a>,
+    which may itself be a generalized RDF triple.
+    A <dfn class="export">generalized RDF graph</dfn>
     is a set of generalized RDF triples. A
     <dfn class="export">generalized RDF dataset</dfn>
     comprises a distinguished generalized RDF graph, and zero
     or more pairs each associating an <a>IRI</a>,
     a <a>blank node</a>,
-    a <a>triple term</a>, or
-    a <a>literal</a>
+    a <a>literal</a>,
+    or a <a>triple term</a>,
+    which may itself be a generalized RDF triple,
     to a generalized RDF graph.</p>
 
   <p>Generalized RDF triples, graphs, and datasets differ
@@ -1568,8 +1571,8 @@
     <a data-lt="RDF dataset">datasets</a> only
     by allowing <a>IRIs</a>,
     <a>blank nodes</a>,
-    <a>triple terms</a>, and
-    <a>literals</a> to appear
+    <a>literals</a>, and
+    <a>triple terms</a> to appear
     in any position, i.e., as subject, predicate, object, or graph name.</p>
   </section>
 
