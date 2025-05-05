@@ -545,6 +545,11 @@ Location: http://example.com/document.ttl
 Host: example.com
 Accept: text/turtle; version=1.2
     </pre>
+    <p>
+      Defined <a>version labels</a> to be used with the <code>version</code> parameter 
+      and in <a>concrete RDF syntax</a> are given in the
+      <a href="#defined-version-labels">section below</a>.
+    </p>
   </section>
 </section>
 
@@ -576,6 +581,41 @@ Accept: text/turtle; version=1.2
     another specification.</p>
   <p class="issue" data-number="70">
     Change "Classic Conformance" to "Basic Conformance" and define them as profiles.</p>
+
+  <section id="defined-version-labels">
+    <h3>Version Labels</h3>
+    <p>
+      A <dfn>version label</dfn> is a string that identifies the syntax and semantics conformance
+      for the RDF data.
+    </p>
+    <table id="tab-version-labels" class="simple">
+      <caption>Version Labels</caption>
+      <thead>
+        <tr>
+          <th style="text-align: center">Version Label</th>
+          <th style="text-align: center">Syntax</th>
+          <th style="text-align: center">Semantics</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>"1.2"</td>
+          <td>RDF 1.2 syntax</td>
+          <td><a href="https://www.w3.org/TR/rdf12-semantics/">RDF 1.2 Semantics</a></td>
+        </tr>
+        <tr>
+          <td>"1.2-basic"</td>
+          <td>RDF 1.2 syntax without triple terms</td>
+          <td><a href="https://www.w3.org/TR/rdf12-semantics/">RDF 1.2 Semantics</a></td>
+        </tr>
+        <tr>
+          <td>"1.1"</td>
+          <td>RDF 1.1 syntax except for use of a version directive</td>
+          <td><a href="https://www.w3.org/TR/rdf11-semantics/">RDF 1.1 Semantics</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
 
   <section id="rdf-strings">
     <h3>Strings in RDF</h3>
