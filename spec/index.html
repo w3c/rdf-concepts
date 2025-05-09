@@ -91,7 +91,7 @@
   <p>Compared to RDF 1.1, RDF 1.2 introduces the ability to use an <a>RDF triple</a>
     as a <a>triple term</a>, in the <a>object</a> position of another <a>triple</a>.
     RDF 1.2 also introduces <a>directional language-tagged strings</a>,
-    which contain a <a>base direction</a> element that allows the
+    which contain a <a>base direction</a> component that allows the
     initial text direction to be specified for presentation by a user agent.</p>
 
   <p>This specification introduces key concepts and terminology for RDF 1.2, and subsequently discusses
@@ -923,7 +923,7 @@ Accept: text/turtle; version=1.2
     <p>Literals are used for values such as strings, numbers, and dates.</p>
 
     <p>A <dfn data-local-lt="RDF literal">literal</dfn> consists of
-      two, three, or four component elements, as follows:</p>
+      two, three, or four components, as below:</p>
 
     <ol>
       <li>A <dfn>lexical form</dfn>, being an <a data-lt="string">RDF string</a>.
@@ -947,10 +947,10 @@ Accept: text/turtle; version=1.2
         </ul></li>
     </ol>
 
-    <p>A literal is a <dfn>language-tagged string</dfn> if the third element
-      is present and the fourth element is not present.
+    <p>A literal is a <dfn>language-tagged string</dfn> if the [=language tag=]
+      is present and the [=base direction=] is <em>not</em> present.
       A literal is a <dfn id="dfn-dir-lang-string">directional language-tagged string</dfn>
-      if both the third element and fourth elements are present.
+      if both the [=language tag=] and the [=base direction=] are present.
     </p>
 
     <p><dfn data-local-lt="term-equal">Literal term equality</dfn>:
@@ -2183,7 +2183,7 @@ Accept: text/turtle; version=1.2
       and extended the definition of
       <a>RDF triple</a> to permit triple terms as objects.
       Also defines <a>reifier</a> and <a>reifying triple</a>.</li>
-    <li>Added the <a>base direction</a> element as part of 
+    <li>Added the <a>base direction</a> component as part of
       a <a>literal</a>,
       and a description of its use in <a href="#section-text-direction" class="sectionRef"></a>.</li>
     <li>Improved the use of IRI terminology,
