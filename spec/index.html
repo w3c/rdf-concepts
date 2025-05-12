@@ -269,10 +269,11 @@
     <p>The <a>IRIs</a> in an <a>RDF vocabulary</a> often begin with
       a common substring known as a <dfn>namespace IRI</dfn>.
       Some namespace IRIs are associated by convention with a short name
-      known as a <dfn>namespace prefix</dfn>. Some examples:
+      known as a <dfn>namespace prefix</dfn>.
+      The table below provides some examples.
 
     <table id="tab-vocab-ns" class="simple">
-      <caption>Some example namespace prefixes and IRIs</caption>
+      <caption>Some namespace prefixes and IRIs used in this specification</caption>
       <tr>
         <th>Namespace prefix</th>
         <th>Namespace IRI</th>
@@ -293,16 +294,19 @@
       </tr>
     </table>
 
-    <p>In some serialization formats it is common to abbreviate <a>IRIs</a>
-      that start with <a>namespace IRIs</a> by using a
-      <a>namespace prefix</a> in order to assist readability. For example, the IRI
-      <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral</code>
+    <p>In some serialization formats, it is common
+      to associate some [=namespace IRIs=] with arbitrary [=namespace prefixes=],
+      and to improve readability by abbreviating <a>IRIs</a> that start with one of those <a>namespace IRIs</a>
+      by using the corresponding <a>namespace prefix</a>.
+      For example,
+      based on the prefix mapping in <a href="#tab-vocab-ns"></a>,
+      the IRI <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral</code>
       would be abbreviated as <code>rdf:XMLLiteral</code>.
-      Note however that these abbreviations are <em>not</em> valid IRIs,
-      and must not be used in contexts where IRIs are expected.
+      Note, however, that these "prefixed name" abbreviations are generally <em>not</em> valid IRIs,
+      and must not be used in contexts where only non-prefixed IRIs are expected.
       Namespace IRIs and namespace prefixes are <em>not</em> a formal part of the
-      RDF data model. They are merely a syntactic convenience for
-      abbreviating IRIs.</p>
+      RDF data model. They are merely a convenience for
+      abbreviating IRIs in some syntaxes.</p>
 
     <p>The term “<dfn class="lint-ignore">namespace</dfn>” on its own does not have a
       well-defined meaning in the context of RDF, but is sometimes informally
