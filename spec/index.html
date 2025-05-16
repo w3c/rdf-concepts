@@ -570,7 +570,7 @@ Accept: text/turtle; version=1.2
       supports <a data-lt="RDF graph">graphs</a> and <a data-lt="RDF dataset">datasets</a>
       with <a>triples</a> that contain <a>triple terms</a>.
       </li>
-    <li><dfn class="no-export lint-ignore" data-lt="classic">Classic conformance</dfn>
+    <li><dfn class="no-export lint-ignore" data-lt="basic">Basic conformance</dfn>
       only supports <a data-lt="RDF graph">graphs</a> or <a data-lt="RDF dataset">datasets</a>
       with <a>triples</a> that do not contain <a>triple terms</a>.</li>
   </ul>
@@ -578,8 +578,6 @@ Accept: text/turtle; version=1.2
     and still the subject of group discussion. An alternative to conformance
     levels, "profiles", may be adopted instead, abandoned, or described in 
     another specification.</p>
-  <p class="issue" data-number="70">
-    Change "Classic Conformance" to "Basic Conformance" and define them as profiles.</p>
 
   <section id="defined-version-labels">
     <h3>Version Labels</h3>
@@ -1665,15 +1663,18 @@ Accept: text/turtle; version=1.2
 </section>
 
 
-<section id="section-classic-full-interop" class="informative">
-  <h2>Interoperability between RDF [=Classic=] and RDF [=Full=]</h2>
+<section id="section-basic-full-interop" class="informative">
+  <h2><span id="section-classic-full-interop"><!-- legacy anchor --></span>
+    Interoperability between RDF [=Basic=] and RDF [=Full=]</h2>
 
   <p class=issue>Should we make this section normative?</p>
 
-  <p>This section provides transformations between [=Full=] [=RDF graphs=] (respectively, [=RDF datasets=]) and [=Classic=] [=RDF graphs=] (respectively, [=RDF datasets=]),
+  <p>This section provides transformations between [=Full=] [=RDF graphs=] (respectively, [=RDF datasets=]) and [=Basic=] [=RDF graphs=] (respectively, [=RDF datasets=]),
   to provide some level of interoperability between the different classes of <a href="#conformance">Conformance</a>.
 
   <p class=issue>Should we go even further and aim to provide interoperability between <em>RDF 1.1</em> and RDF 1.2 [=Full=]?</p>
+
+  <p class=issue>Find a better name than "classicize" for the algorithm</p>
 
   <p class=issue>AT RISK: The Working Group may decide to replace the terms `rdf:TripleTerm`, `rdf:ttSubject`, `rdf:ttPredicate`, and `rdf:ttObject` used in this section with other terms, possibly in a different namespace.</p>
 
@@ -1688,20 +1689,20 @@ Accept: text/turtle; version=1.2
     </dd>
     <dt>Idempotent</dt>
     <dd>Applying a transformation several times to a graph (respectively, dataset) should have the same effect as applying it once.
-      Moreover, [=classicizing=] a graph (respectively, dataset) that is already complying with RDF [=Classic=] (i.e., containing no [=triple term=]) must result in the same graph (respectively, dataset).
+      Moreover, [=classicizing=] a graph (respectively, dataset) that is already complying with RDF [=Basic=] (i.e., containing no [=triple term=]) must result in the same graph (respectively, dataset).
     </dd>
     <dt>Universal</dt>
-    <dd>It should be possible to transform any [=Full=] graph (respectively, dataset) to a [=Classic=] graph (respectively, dataset) using this method.
+    <dd>It should be possible to transform any [=Full=] graph (respectively, dataset) to a [=Basic=] graph (respectively, dataset) using this method.
       There is actually <a href="#section-classicize-caveat">a minor caveat</a> to this property.
     </dd>
   </dl>
 
   <section id="section-classicize-definition">
-    <h2>From [=Full=] to [=Classic=]</h2>
+    <h2>From [=Full=] to [=Basic=]</h2>
 
     <p>
-      Encoding an [=RDF graph=] to ensure that it is consumable by an RDF [=Classic=] implementation is called <dfn data-lt="classicize|classicized">classicizing</dfn> it.
-      [=Classicizing=] consists of repeating the following steps until no [=triple term=] [=appears=] in the graph, and the graph is therefore compliant with RDF [=Classic=]: picking a [=triple term=] <var>tt</var> that [=appears=] in the graph; minting a fresh [=blank node=] <var>b</var>
+      Encoding an [=RDF graph=] to ensure that it is consumable by an RDF [=Basic=] implementation is called <dfn data-lt="classicize|classicized">classicizing</dfn> it.
+      [=Classicizing=] consists of repeating the following steps until no [=triple term=] [=appears=] in the graph, and the graph is therefore compliant with RDF [=Basic=]: picking a [=triple term=] <var>tt</var> that [=appears=] in the graph; minting a fresh [=blank node=] <var>b</var>
       (i.e., a blank node not yet in use in the graph); replacing all occurrences of <var>tt</var> [=appearing=] in the graph with <var>b</var>;
       and then adding the following triples to the graph (where <var>s</var>, <var>p</var>, and <var>o</var> are respectively the [=subject=], [=predicate=] and [=object=] of <var>tt</var>):
     </p>
@@ -1760,7 +1761,7 @@ Accept: text/turtle; version=1.2
   </section>
 
   <section id="section-unclassicize-definition">
-    <h2>From [=Classic=] to [=Full=]</h2>
+    <h2>From [=Basic=] to [=Full=]</h2>
 
     <p>Reverting a [=classicized=] graph to its original form consists of locating
       each [=asserted=] triple (<var>b</var>, `rdf:type`, `rdf:TripleTerm`)
@@ -1825,7 +1826,7 @@ Accept: text/turtle; version=1.2
     <p>Another consequence of this restriction is that implementers will need to be aware and careful when merging graphs in an application that [=classicizes=] graphs or datasets.
       The concern is that merging a [=Full=] [=RDF graph=] containing at least one [=triple term=]
       with a [=classicized=] [=RDF graph=] (which might contain [=blank node=] instances of `rdf:TripleTerm`)
-      could result in a "hybrid" graph that cannot be transformed to a consistent [=Full=] nor [=Classic=] [=RDF graph=].
+      could result in a "hybrid" graph that cannot be transformed to a consistent [=Full=] nor [=Basic=] [=RDF graph=].
       Therefore, such applications should [=classicize=] every graph prior to merging them.
       Conversely, applications supporting RDF [=Full=] should make sure to apply the reverse transformation
       to any graph that is known or likely to have been [=classicized=],
@@ -1840,7 +1841,7 @@ Accept: text/turtle; version=1.2
     <section id="section-classicize-algo" class="algorithm">
       <h2>The `classicize` algorithm</h2>
 
-      <p>The algorithm expects one input variable <var>Gᵢ</var> which is an [=RDF graph=]. It returns a [=Classic=] [=RDF graph=].
+      <p>The algorithm expects one input variable <var>Gᵢ</var> which is an [=RDF graph=]. It returns a [=Basic=] [=RDF graph=].
       </p>
 
       <ol>
@@ -1850,10 +1851,10 @@ Accept: text/turtle; version=1.2
         <li>For each triple (<var>s</var>, <var>p</var>, <var>o</var>) in <var>Gᵢ</var>:<ol>
           <li>If <var>s</var> is a [=blank node=], <var>p</var> is `rdf:type` and <var>o</var> is `rdf:TripleTerm`, then:<ol>
             <li id="classicize-error1">If <var>inputKind</var> is `"full"` then exit with an error.</li>
-            <li>Otherwise, set <var>inputKind</var> to `"classic"`.</li>
+            <li>Otherwise, set <var>inputKind</var> to `"basic"`.</li>
           </ol></li>
           <li>If <var>o</var> is a [=triple term=], then:<ol>
-            <li id="classicize-error2">If <var>inputKind</var> is `"classic"` then exit with an error.</li>
+            <li id="classicize-error2">If <var>inputKind</var> is `"basic"` then exit with an error.</li>
             <li>Otherwise, set <var>inputKind</var> to `"full"`.</li>
             <li>Let <var>b</var>, <var>M'</var> and <var>G'</var> be the result of invoking <a href="#section-ctt-algo">`classicize-triple-term`</a> passing <var>o</var> as <var>t</var> and <var>M</var> as <var>Mi</var>.</li>
             <li>Merge <var>M'</var> into <var>M</var>.
@@ -1869,14 +1870,14 @@ Accept: text/turtle; version=1.2
     <section id="section-ctt-algo" class="algorithm">
       <h2>The `classicize-triple-term` algorithm</h2>
 
-      <p>This algorithm is responsible for incrementally populating the mapping <var>M</var> and the graph <var>G</var> used internally by the <a href="#section-classicize-algo">`classicize`</a> algorithm. It receives a [=triple term=] as input and processes it recursively (in case its object is itself a [=triple term=]). It returns, among other things, the [=blank node=] minted to replace the [=triple term=] in the transformed [=Classic=] [=RDF graph=].</p>
+      <p>This algorithm is responsible for incrementally populating the mapping <var>M</var> and the graph <var>G</var> used internally by the <a href="#section-classicize-algo">`classicize`</a> algorithm. It receives a [=triple term=] as input and processes it recursively (in case its object is itself a [=triple term=]). It returns, among other things, the [=blank node=] minted to replace the [=triple term=] in the transformed [=Basic=] [=RDF graph=].</p>
 
       <p>This algorithm expects two input variables:
         a [=triple term=] <var>t</var>,
         and a map <var>Mᵢ</var> from [=triple terms=] to [=blank nodes=].
         It returns a [=blank node=] <var>b</var>,
         a map <var>Mₒ</var> from [=triple terms=] to [=blank nodes=],
-        and a [=Classic=] [=RDF graph=] <var>G</var>.
+        and a [=Basic=] [=RDF graph=] <var>G</var>.
       </p>
 
       <ol>
@@ -2370,8 +2371,8 @@ Accept: text/turtle; version=1.2
   <ul>
     <li>Added <a href="#section-version-announcement"class="sectionRef"></a>
       for announcing RDF versions in RDF documents via the HTTP Content-Type header and/or syntax.</li>
-    <li>Added <a href="#section-classic-full-interop" class="sectionRef"></a>
-      for informative mappings between RDF [=Full=] and RDF [=Classic=].</li>
+    <li>Added <a href="#section-basic-full-interop" class="sectionRef"></a>
+      for informative mappings between RDF [=Full=] and RDF [=Basic=].</li>
     <li>Added <a href="#section-dataset-quad" class="sectionRef"></a>
       for informative definition of a <a>quad</a>.</li>
    <li>Added <a href="#section-triple-terms-reification" class="sectionRef"></a>
