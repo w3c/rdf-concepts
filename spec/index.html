@@ -535,6 +535,10 @@ Content-Type: text/turtle; version=1.2
 Location: http://example.com/document.ttl
     </pre>
 
+    <p>Servers are also expected to announce the version in-line,
+      when the format supports in-line version announcement
+      (such as [[[RDF12-TURTLE]]] [[RDF12-TURTLE]]).</p>
+
     <p>When requesting an RDF document from an HTTP server, a client 
       can use the <code>version</code> parameter 
       during <a data-cite="webarch#frag-coneg">content negotiation</a> [[WEBARCH]],
@@ -543,12 +547,20 @@ Location: http://example.com/document.ttl
 	
     <pre class="box http">GET /document.ttl HTTP/1.1
 Host: example.com
-Accept: text/turtle; version=1.2
+Accept: text/turtle; version="1.2"
     </pre>
     <p>
       Section <a href="#defined-version-labels" class="sectionRef"></a> defines <a>version labels</a>
       to be used with the <code>version</code> parameter and in <a>concrete RDF syntax</a>.
     </p>
+
+    <p class="note">As HTTP <a data-cite="webarch#frag-coneg">content negotiation</a> is advisory,
+      clients recieving a document should be prepared to properly handle a document
+      of the requested media type but potentially having a `version` other than what was
+      requested.
+      Systems may consider down-grading the content to an appropriate version
+      as discussed in <a href="#defined-version-labels" class="sectionRef"></a>,
+      or by returning a `406 "Not Acceptable"` status in the response.</p>
   </section>
 </section>
 
@@ -612,6 +624,49 @@ Accept: text/turtle; version=1.2
         </tr>
       </tbody>
     </table>
+
+    <p>For serializations supporting in-line version annouoncement,
+      the version announcement SHOULD be made early in the document
+      and certainly before serializing any feature depending on that version.</p>
+
+    <section id="server-considerations" class="informative">
+      <h4>Server considerations</h4>
+      <p>When serializing a graph or dataset which uses features incompatible
+        with a requested version, servers can consider different alternatives:</p>
+
+      <ol>
+        <li>Downgrade <a>Triple Terms</a> by using an algorithm such
+          as <em>Unstar</em> ("1.2" to "1.2-basic" or "1.1").
+          <div class="ednote">Fix this when such an algorithmm is defined.</div></li>
+        <li>Downgrade <a>directional language-tagged strings</a>
+          to a <a>literal</a> with a <a>datatype IRI</a>,
+          using <a data-cite="JSON-LD11#the-i18n-namespace">the `i18n` namespace</a>, as defined in [[JSON-LD11]]
+          ("1.2" or "1.2-basic" to "1.1").</li>
+        <li>Return `406 "Not Acceptable"`.</li>
+        <li>Ignore the requested version and return a native representation.</li>
+      </ol>
+
+      <p class="note">The principle here is to follow the
+        <a href="https://en.wikipedia.org/wiki/Robustness_principle">Robustness principle</a>
+        (also known as Postel's Law):
+        servers should be conservative in what they send, be liberal in what they accept.</p>
+    </section>
+
+    <section id="client-considerations" class="informative">
+      <h4>Client considerations</h4>
+      <p>If a document has no stated `version` (either by HTTP header or internal),
+        systems can assume the version is `"1.2"`, which is compatible
+        with all RDF versions.</p>
+      <p>When parsing a document with conflicting versions,
+        or when parsing a document using unsupported versions, a parser
+        may:</p>
+      <ul>
+        <li>Ignore the version directive.</li>
+        <li>Raise an error and abort.</li>
+        <li>Issue a warning and ignore the triple.</li>
+        <li>Parse the structure, but emit triples consistent with the declared version.</li>
+      </ul>
+    </section>
   </section>
 
   <section id="rdf-strings">
@@ -2369,7 +2424,7 @@ Accept: text/turtle; version=1.2
   <h2>Changes between RDF 1.1 and RDF 1.2</h2>
 
   <ul>
-    <li>Added <a href="#section-version-announcement"class="sectionRef"></a>
+    <li>Added <a href="#section-version-announcement" class="sectionRef"></a>
       for announcing RDF versions in RDF documents via the HTTP Content-Type header and/or syntax.</li>
     <li>Added <a href="#section-basic-full-interop" class="sectionRef"></a>
       for informative mappings between RDF [=Full=] and RDF [=Basic=].</li>
