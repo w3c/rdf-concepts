@@ -547,7 +547,7 @@ Location: http://example.com/document.ttl
 	
     <pre class="box http">GET /document.ttl HTTP/1.1
 Host: example.com
-Accept: text/turtle; version="1.2"
+Accept: text/turtle; version=1.2
     </pre>
     <p>
       Section <a href="#defined-version-labels" class="sectionRef"></a> defines <a>version labels</a>
@@ -555,12 +555,11 @@ Accept: text/turtle; version="1.2"
     </p>
 
     <p class="note">As HTTP <a data-cite="webarch#frag-coneg">content negotiation</a> is advisory,
-      clients recieving a document should be prepared to properly handle a document
+      clients receiving a document should be prepared to properly handle a document
       of the requested media type but potentially having a `version` other than what was
       requested.
-      Systems may consider down-grading the content to an appropriate version
-      as discussed in <a href="#defined-version-labels" class="sectionRef"></a>,
-      or by returning a `406 "Not Acceptable"` status in the response.</p>
+      Clients may consider down-grading the content to an appropriate version  themselves
+      as discussed in <a href="#server-considerations" class="sectionRef"></a>.</p>
   </section>
 </section>
 
@@ -625,35 +624,35 @@ Accept: text/turtle; version="1.2"
       </tbody>
     </table>
 
-    <p>For serializations supporting in-line version annouoncement,
+    <p>For serializations supporting in-line version announcement,
       the version announcement SHOULD be made early in the document
       and certainly before serializing any feature depending on that version.</p>
 
     <section id="server-considerations" class="informative">
-      <h4>Server considerations</h4>
+      <h4>Server Considerations</h4>
       <p>When serializing a graph or dataset which uses features incompatible
         with a requested version, servers can consider different alternatives:</p>
 
       <ol>
-        <li>Downgrade <a>Triple Terms</a> by using an algorithm such
-          as <em>Unstar</em> ("1.2" to "1.2-basic" or "1.1").
+        <li>Eliminate <a>triple terms</a> by using an algorithm such
+          as <em>Unstar</em> (downgrading from version "1.2" to "1.2-basic" or to "1.1").
           <div class="ednote">Fix this when such an algorithmm is defined.</div></li>
-        <li>Downgrade <a>directional language-tagged strings</a>
-          to a <a>literal</a> with a <a>datatype IRI</a>,
-          using <a data-cite="JSON-LD11#the-i18n-namespace">the `i18n` namespace</a>, as defined in [[JSON-LD11]]
+        <li>Replace <a>directional language-tagged strings</a>
+          by <a>literals</a> with a <a>datatype IRI</a> that
+          uses the <a data-cite="JSON-LD11#the-i18n-namespace">`i18n` namespace</a>, as defined in [[JSON-LD11]]
           ("1.2" or "1.2-basic" to "1.1").</li>
         <li>Return `406 "Not Acceptable"`.</li>
         <li>Ignore the requested version and return a native representation.</li>
       </ol>
 
-      <p class="note">The principle here is to follow the
+      <p class="note">The suggestion here is to follow the
         <a href="https://en.wikipedia.org/wiki/Robustness_principle">Robustness principle</a>
         (also known as Postel's Law):
         servers should be conservative in what they send, be liberal in what they accept.</p>
     </section>
 
     <section id="client-considerations" class="informative">
-      <h4>Client considerations</h4>
+      <h4>Client Considerations</h4>
       <p>If a document has no stated `version` (either by HTTP header or internal),
         systems can assume the version is `"1.2"`, which is compatible
         with all RDF versions.</p>
@@ -664,7 +663,7 @@ Accept: text/turtle; version="1.2"
         <li>Ignore the version directive.</li>
         <li>Raise an error and abort.</li>
         <li>Issue a warning and ignore the triple.</li>
-        <li>Parse the structure, but emit triples consistent with the declared version.</li>
+        <li>Parse the structure and only emit triples consistent with the declared version.</li>
       </ul>
     </section>
   </section>
