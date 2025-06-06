@@ -558,7 +558,7 @@ Accept: text/turtle; version=1.2
       clients receiving a document should be prepared to properly handle a document
       of the requested media type but potentially having a `version` other than what was
       requested.
-      Clients may consider down-grading the content to an appropriate version  themselves
+      Clients may consider down-grading the content to an appropriate version themselves
       as discussed in <a href="#server-considerations" class="sectionRef"></a>.</p>
   </section>
 </section>
@@ -640,7 +640,7 @@ Accept: text/turtle; version=1.2
         <li>Replace <a>directional language-tagged strings</a>
           by <a>literals</a> with a <a>datatype IRI</a> that
           uses the <a data-cite="JSON-LD11#the-i18n-namespace">`i18n` namespace</a>, as defined in [[JSON-LD11]]
-          ("1.2" or "1.2-basic" to "1.1").</li>
+          (downgrading from version "1.2" or "1.2-basic" to "1.1").</li>
         <li>Return `406 "Not Acceptable"`.</li>
         <li>Ignore the requested version and return a native representation.</li>
       </ol>
@@ -654,11 +654,11 @@ Accept: text/turtle; version=1.2
     <section id="client-considerations" class="informative">
       <h4>Client Considerations</h4>
       <p>If a document has no stated `version` (either by HTTP header or internal),
-        systems can assume the version is `"1.2"`, which is compatible
-        with all RDF versions.</p>
+        systems can assume the version is `"1.2"`, which continues to
+        support all prior RDF versions.</p>
       <p>When parsing a document with conflicting versions,
         or when parsing a document using unsupported versions, a parser
-        may:</p>
+        may do any of the following:</p>
       <ul>
         <li>Ignore the version directive.</li>
         <li>Raise an error and abort.</li>
