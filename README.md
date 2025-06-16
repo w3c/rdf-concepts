@@ -1,7 +1,7 @@
 
 # Specification 'rdf-concepts'
 
-This is the repository for the **_RDF Concepts_** deliverable of the [RDF-star Working Group](https://www.w3.org/groups/wg/rdf-star).
+This is the repository for the **_RDF Concepts_** deliverable of the [RDF & SPARQL Working Group](https://www.w3.org/groups/wg/rdf-star).
 The editors’ draft of the specification can also be [read directly](https://w3c.github.io/rdf-concepts/spec/).
 
 ## Contributing to the Repository
@@ -12,9 +12,9 @@ Editorial changes that improve the readability of the spec or correct spelling o
 
 Please read [CONTRIBUTING.md](CONTRIBUTING.md), about licensing contributions.
 
-## RDF-star Working Group Repositories
+## RDF & SPARQL Working Group Repositories
 
-This repository contains one of ten RDF 1.2 and twelve SPARQL 1.2 documents produced by the  [RDF-star Working Group](https://www.w3.org/groups/wg/rdf-star).
+This repository contains one of ten RDF 1.2 and twelve SPARQL 1.2 documents produced by the  [RDF & SPARQL Working Group](https://www.w3.org/groups/wg/rdf-star).
 
 ### RDF 1.2 Documents:
 * [RDF12-NEW][]
