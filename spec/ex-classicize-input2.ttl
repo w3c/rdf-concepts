@@ -1,5 +1,0 @@
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX ex: <http://example.org/>
-
-_:r1 rdf:reifies <<( ex:s ex:p ex:o )>>.
-_:r1 ex:q "some value".
