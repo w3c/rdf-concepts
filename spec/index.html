@@ -930,16 +930,16 @@ Accept: text/turtle; version=1.2
         to a <a>literal value</a>.</li>
       <li>If and only if the <a>datatype IRI</a> is
         <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#langString</code> or
-        <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#dirLangString</code>, a
-        non-empty <dfn>language tag</dfn> as defined by [[!BCP47]]. The
-        language tag MUST be well-formed according to
+        <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#dirLangString</code>, 
+        a non-empty <dfn>language tag</dfn> as defined by [[!BCP47]] MUST be present.
+        The language tag MUST be well-formed according to
         <a data-cite="bcp47#section-2.2.9">section 2.2.9</a>
         of [[!BCP47]],
         and MUST be treated accordingly, that is, in a case insensitive manner.
         Two [[!BCP47]]-complying strings that differ only by case represent the same [=language tag=].</li>
       <li>If and only if the <a>datatype IRI</a> is
         <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#dirLangString</code>,
-        a <dfn>base direction</dfn> that MUST be one of the following:<ul>
+        a <dfn>base direction</dfn> MUST be present and MUST be one of the following:<ul>
           <li>`ltr`, indicating that the initial text direction is set to left-to-right</li>
           <li>`rtl`, indicating that the initial text direction is set to right-to-left</li>
         </ul></li>
