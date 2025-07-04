@@ -88,7 +88,7 @@ var localBibliography = {
   },
  "SPARQL12-NEW": {
     "authors": [
-        "The W3C RDF-star Working Group"
+        "The W3C RDF &amp; SPARQL Working Group"
     ],
     "href": "https://w3c.github.io/sparql-new/spec/",
     "title": "What’s New in SPARQL 1.2",
@@ -98,7 +98,7 @@ var localBibliography = {
   },
   "SPARQL12-CONCEPTS": {
     "authors": [
-        "The W3C RDF-star Working Group"
+        "The W3C RDF &amp; SPARQL Working Group"
     ],
     "href": "https://w3c.github.io/sparql-concepts/spec/",
     "title": "SPARQL 1.2 Concepts",

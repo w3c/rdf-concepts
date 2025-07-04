@@ -76,26 +76,26 @@
 <body>
 <section id="abstract">
   <p>The Resource Description Framework (RDF) is a framework for
-    representing information in the Web.
+    representing information on the Web.
     This document defines an abstract syntax (a data model)
     which serves to link all RDF-based languages and specifications.
     The abstract syntax has two key data structures:</p>
   <ul>
     <li>RDF graphs are sets of subject-predicate-object triples,
-      where the elements may be IRIs, blank nodes, or datatyped literals.
+      where the elements may be IRIs, blank nodes, datatyped literals, or triple terms.
       They are used to express descriptions of resources.</li>
     <li>RDF datasets are used to organize collections of RDF graphs,
-      are comprised of a default graph and zero or more named graphs.</li>
+      and consist of a default graph and zero or more named graphs.</li>
   </ul>
 
-  <p>RDF 1.2 introduces the ability to use an <a>RDF triple</a>
+  <p>Compared to RDF 1.1, RDF 1.2 introduces the ability to use an <a>RDF triple</a>
     as a <a>triple term</a>, in the <a>object</a> position of another <a>triple</a>.
     RDF 1.2 also introduces <a>directional language-tagged strings</a>,
     which contain a <a>base direction</a> component that allows the
     initial text direction to be specified for presentation by a user agent.</p>
 
-  <p>RDF 1.2 Concepts introduces key concepts and terminology for RDF 1.2, discusses
-    datatyping, and the handling of <a>fragment identifiers</a> in IRIs within
+  <p>This specification introduces key concepts and terminology for RDF 1.2, and subsequently discusses
+    datatyping and the handling of <a>fragment identifiers</a> in IRIs within
     RDF graphs.</p>
 </section>
 
@@ -117,7 +117,7 @@
   <h2>Introduction</h2>
 
   <p>The <em>Resource Description Framework</em> (RDF) is a framework
-  for representing information in the Web.</p>
+  for representing information on the Web.</p>
 
   <p>This document defines an abstract syntax (a data model)
   which serves to link all RDF-based languages and specifications,
@@ -126,7 +126,7 @@
   <ul>
     <li>the formal model-theoretic semantics for RDF [[RDF12-SEMANTICS]]</li>
 
-    <li>serialization syntaxes for storing and exchanging RDF such as [[[RDF12-TURTLE]]] [[RDF12-TURTLE]]
+    <li>serialization syntaxes for storing and exchanging RDF such as [[[RDF12-N-TRIPLES]]] [[RDF12-N-TRIPLES]], [[[RDF12-TURTLE]]] [[RDF12-TURTLE]],
       and [[[JSON-LD11]]] [[JSON-LD11]]</li>
 
     <li>the [[[SPARQL12-QUERY]]] [[SPARQL12-QUERY]]</li>
@@ -147,9 +147,9 @@
     <figure id="fig-rdf-graph">
       <a href="rdf-graph.svg">
         <object data="rdf-graph.svg"
-          aria-label="An RDF graph with two nodes (Subject and Object) and a triple connecting them (Predicate)"></object>
+          aria-label="An RDF graph with two nodes (Subject and Object) and an arc (Predicate) connecting them"></object>
       </a>
-      <figcaption>An RDF graph with two nodes (Subject and Object) and a triple connecting them (Predicate)</figcaption>
+      <figcaption>An RDF graph with two nodes (Subject and Object) and an arc (Predicate) connecting them</figcaption>
     </figure>
 
     <p>There can be four kinds of <a>nodes</a> in an
@@ -176,13 +176,15 @@
     <a>datatypes</a> that define the range of possible
     values, such as strings, numbers, and dates. Special kinds of literals &mdash;
     <a>language-tagged strings</a> and <a>directional language-tagged strings</a> &mdash;
-    respectively denote plain-text strings in a natural language, and plain-text
+    respectively denote plain-text strings in a natural language and plain-text
     strings in a natural language including an initial text direction.</p>
 
     <p>Asserting an <a>RDF triple</a> says that <em>some relationship,
     indicated by the <a>predicate</a>, holds between the
     <a>resources</a> <a>denoted</a> by
-    the <a>subject</a> and <a>object</a></em>. This statement corresponding
+    the <a>subject</a> and <a>object</a></em>
+    (as explained <a href="#section-triple-terms-reification">below</a>, not all triples are asserted).
+    This statement corresponding
     to an RDF triple is known as an <dfn data-local-lt="statement">RDF statement</dfn>.
     The predicate itself is an <a>IRI</a> and denotes a <dfn class="export">property</dfn>,
     that is, a <a>resource</a> that can be thought of as a binary relation.
@@ -493,7 +495,7 @@
 
     <p>An <dfn>RDF document</dfn> is a document that encodes an
       <a>RDF graph</a> or <a>RDF dataset</a> in a <dfn>concrete RDF syntax</dfn>,
-      such as Turtle [[RDF12-TURTLE]], RDFa [[RDFA-CORE]], JSON-LD [[JSON-LD11]], or
+      such as N-Triples [[RDF12-N-TRIPLES]], Turtle [[RDF12-TURTLE]], RDFa [[RDFA-CORE]], JSON-LD [[JSON-LD11]], or
       TriG [[RDF12-TRIG]]. RDF documents enable the exchange of RDF graphs and RDF
       datasets between systems.</p>
 
@@ -505,6 +507,61 @@
       and different ordering of triples. While these aspects can have great
       effect on the convenience of working with the <a>RDF document</a>,
       they are not significant for its meaning.</p>
+  </section>
+
+  <section id="section-version-announcement">
+    <h3>RDF Version Announcement</h3>
+
+    <p>To allow RDF parsers to error or warn about unsupported RDF versions as early as possible,
+      RDF serialization formats are expected to allow a version to be specified,
+      via either a media-type parameter,
+      a version announcement in a format-specific syntax,
+      or both.</p>
+
+    <p>When the version is indicated both in a media-type parameter and in syntax,
+      they are expected to be the same.
+      If they differ,
+      parsers use the version from the media-type parameter and might emit a warning about the mismatch.</p>
+
+    <p>To retain compability that is as broad as possible with older parsers,
+      only RDF documents that make use of RDF 1.2-specific functionality
+      are encouraged to announce their version (i.e., for RDF documents that do not make use
+      of RDF 1.2-specific functionality it is discouraged to announce a version).</p>
+
+    <p>To announce the version in the HTTP responses using the Content-Type header,
+      the server is expected to use the <code>version</code> parameter,
+      as illustrated in the following example response.</p>
+
+    <pre class="box http">HTTP/1.1 200 OK
+Content-Type: text/turtle; version=1.2
+Location: http://example.com/document.ttl
+    </pre>
+
+    <p>Servers are also expected to announce the version in-line,
+      when the format supports in-line version announcement
+      (such as [[[RDF12-TURTLE]]] [[RDF12-TURTLE]]).</p>
+
+    <p>When requesting an RDF document from an HTTP server, a client 
+      can use the <code>version</code> parameter 
+      during <a data-cite="webarch#frag-coneg">content negotiation</a> [[WEBARCH]],
+      by including it in the <code>Accept</code> request header,
+      as illustrated in the following example request.</p>
+	
+    <pre class="box http">GET /document.ttl HTTP/1.1
+Host: example.com
+Accept: text/turtle; version=1.2
+    </pre>
+    <p>
+      Section <a href="#defined-version-labels" class="sectionRef"></a> defines <a>version labels</a>
+      to be used with the <code>version</code> parameter and in <a>concrete RDF syntax</a>.
+    </p>
+
+    <p class="note">As HTTP <a data-cite="webarch#frag-coneg">content negotiation</a> is advisory,
+      clients receiving a document should be prepared to properly handle a document
+      of the requested media type but potentially having a `version` other than what was
+      requested.
+      Clients may consider down-grading the content to an appropriate version themselves
+      as discussed in <a href="#server-considerations" class="sectionRef"></a>.</p>
   </section>
 </section>
 
@@ -525,9 +582,8 @@
     <li><dfn class="no-export lint-ignore" data-lt="full">Full conformance</dfn>
       supports <a data-lt="RDF graph">graphs</a> and <a data-lt="RDF dataset">datasets</a>
       with <a>triples</a> that contain <a>triple terms</a>.
-      Concrete syntaxes in which such graphs and datasets can be expressed include
-      [[?RDF12-N-TRIPLES]], [[?RDF12-N-QUADS]], [[?RDF12-TURTLE]], and [[?RDF12-TRIG]].</li>
-    <li><dfn class="no-export lint-ignore" data-lt="classic">Classic conformance</dfn>
+      </li>
+    <li><dfn class="no-export lint-ignore" data-lt="basic">Basic conformance</dfn>
       only supports <a data-lt="RDF graph">graphs</a> or <a data-lt="RDF dataset">datasets</a>
       with <a>triples</a> that do not contain <a>triple terms</a>.</li>
   </ul>
@@ -535,8 +591,84 @@
     and still the subject of group discussion. An alternative to conformance
     levels, "profiles", may be adopted instead, abandoned, or described in 
     another specification.</p>
-  <p class="issue" data-number="70">
-    Change "Classic Conformance" to "Basic Conformance" and define them as profiles.</p>
+
+  <section id="defined-version-labels">
+    <h3>Version Labels</h3>
+    <p>
+      A <dfn>version label</dfn> is a string that identifies the syntax and semantics conformance
+      for the RDF data.
+    </p>
+    <table id="tab-version-labels" class="simple">
+      <caption>Version Labels</caption>
+      <thead>
+        <tr>
+          <th style="text-align: center">Version Label</th>
+          <th style="text-align: center">Syntax</th>
+          <th style="text-align: center">Semantics</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>"1.2"</td>
+          <td>RDF 1.2 syntax</td>
+          <td><a href="https://www.w3.org/TR/rdf12-semantics/">RDF 1.2 Semantics</a></td>
+        </tr>
+        <tr>
+          <td>"1.2-basic"</td>
+          <td>RDF 1.2 syntax without triple terms</td>
+          <td><a href="https://www.w3.org/TR/rdf12-semantics/">RDF 1.2 Semantics</a></td>
+        </tr>
+        <tr>
+          <td>"1.1"</td>
+          <td>RDF 1.1 syntax except for use of a version directive</td>
+          <td><a href="https://www.w3.org/TR/rdf11-semantics/">RDF 1.1 Semantics</a></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>For serializations supporting in-line version announcement,
+      the version announcement SHOULD be made early in the document
+      and certainly before serializing any feature depending on that version.</p>
+
+    <section id="server-considerations" class="informative">
+      <h4>Server Considerations</h4>
+      <p>When serializing a graph or dataset which uses features incompatible
+        with a requested version, servers can consider different alternatives:</p>
+
+      <ol>
+        <li>Eliminate <a>triple terms</a> by using an algorithm such
+          as <em>Unstar</em> (downgrading from version "1.2" to "1.2-basic" or to "1.1").
+          <div class="ednote">Fix this when such an algorithmm is defined.</div></li>
+        <li>Replace <a>directional language-tagged strings</a>
+          by <a>literals</a> with a <a>datatype IRI</a> that
+          uses the <a data-cite="JSON-LD11#the-i18n-namespace">`i18n` namespace</a>, as defined in [[JSON-LD11]]
+          (downgrading from version "1.2" or "1.2-basic" to "1.1").</li>
+        <li>Return `406 "Not Acceptable"`.</li>
+        <li>Ignore the requested version and return a native representation.</li>
+      </ol>
+
+      <p class="note">The suggestion here is to follow the
+        <a href="https://en.wikipedia.org/wiki/Robustness_principle">Robustness principle</a>
+        (also known as Postel's Law):
+        servers should be conservative in what they send, be liberal in what they accept.</p>
+    </section>
+
+    <section id="client-considerations" class="informative">
+      <h4>Client Considerations</h4>
+      <p>If a document has no stated `version` (either by HTTP header or internal),
+        systems can assume the version is `"1.2"`, which continues to
+        support all prior RDF versions.</p>
+      <p>When parsing a document with conflicting versions,
+        or when parsing a document using unsupported versions, a parser
+        may do any of the following:</p>
+      <ul>
+        <li>Ignore the version directive.</li>
+        <li>Raise an error and abort.</li>
+        <li>Issue a warning and ignore the triple.</li>
+        <li>Parse the structure and only emit triples consistent with the declared version.</li>
+      </ul>
+    </section>
+  </section>
 
   <section id="rdf-strings">
     <h3>Strings in RDF</h3>
@@ -568,8 +700,8 @@
 
   <p>An <dfn>RDF graph</dfn> is a set of <a>RDF triples</a>.</p>
 
-  <p>An [=RDF triple=] is said to be <dfn id="dfn-asserted-triple" class=export data-lt="asserted triple|asserted triples" data-lt-no-plural=""
-      >asserted</dfn> in an [=RDF graph=] if it is an element of the [=RDF graph=].
+  <p>An [=RDF triple=] that is an element of an [=RDF graph=] is also said to be <dfn id="dfn-asserted-triple" class=export data-lt="asserted triple|asserted triples" data-lt-no-plural=""
+      >asserted</dfn> in that [=RDF graph=]
   </p>
 
   <section id="section-triples">
@@ -627,7 +759,7 @@
       <span id="dfn-rdf-terms"><!-- obsolete term--></span><dfn data-lt="rdf term">RDF terms</dfn>.</p>
 
     <p>
-      [=IRIs=], [=literals=] and [=blank nodes=] are said to be <dfn data-lt-no-plural>atomic</dfn> [=RDF terms=].
+      [=IRIs=], [=literals=] and [=blank nodes=] are said to be <dfn class="export" data-lt-no-plural>atomic</dfn> [=RDF terms=].
     </p>
 
     <p><dfn>RDF term equality</dfn>:
@@ -1067,9 +1199,9 @@
 
     <p>This transformation does not appreciably change the meaning of an
       RDF graph, provided that the Skolem IRIs do not occur anywhere else.
-      It does however permit the possibility of other graphs
-      subsequently using the Skolem IRIs, which is not possible
-      for blank nodes.</p>
+      It does however permit other graphs
+      to subsequently use the Skolem IRIs, which is not possible
+      with blank nodes.</p>
 
     <p>Systems may wish to mint Skolem IRIs in such a way that they can
       recognize the IRIs as having been introduced solely to replace blank
@@ -1079,7 +1211,7 @@
     <p>Systems that want Skolem IRIs to be recognizable outside of the system
       boundaries SHOULD use a well-known IRI [[RFC8615]] with the registered
       name <code>genid</code>. This is an IRI that uses the HTTP or HTTPS scheme,
-      or another scheme that has been specified to use well-known IRIs; and whose
+      or another scheme that has been specified to use well-known IRIs, and whose
       path component starts with <code>/.well-known/genid/</code>.
 
     <p>For example, the authority responsible for the domain
@@ -1489,7 +1621,7 @@
     to the web.</p>
 
   <p>In this way, the RDF-bearing representation acts as an intermediary
-    between the web-accessible primary resource, and some set of possibly
+    between the web-accessible primary resource and some set of possibly
     non-web or abstract entities that the <a>RDF graph</a> may describe.</p>
 
   <p>In cases where other specifications constrain the semantics of
@@ -1511,7 +1643,7 @@
     same primary resource.</p>
 </section>
 
-<section id="section-generalized-rdf" class="informative">
+<section id="section-generalizations-of-rdf" class="informative">
   <h2>Generalizations of RDF Triples, Graphs, and Datasets</h2>
 
   <p>It is sometimes convenient to loosen the requirements
@@ -1519,13 +1651,16 @@
     of the RDFS entailment rules is easier to show with
     a notion of symmetric RDF triples.</p>
 
+  <section id="section-symmetric-rdf">
+  <h3>Symmetric RDF</h3>
   <p>
     A <dfn class="export">symmetric RDF triple</dfn> allows the subject to be
     any <a>RDF term</a> that is allowed in the object position, one of
-    an <a>IRI</a>, 
+    an <a>IRI</a>,
     a <a>blank node</a>,
-    a <a>literal</a> 
-    or a <a>triple term</a>.
+    a <a>literal</a>,
+    or a <a>triple term</a>
+    (which may itself be a symmetric RDF triple).
     A <dfn class="export">symmetric RDF graph</dfn> is a set of symmetric RDF triples.
     A <dfn class="export">symmetric RDF dataset</dfn>
     comprises a distinguished symmetric RDF graph, and zero
@@ -1533,39 +1668,45 @@
     with a symmetric RDF graph.</p>
 
    <p>Symmetric RDF triples, graphs, and datasets differ
-    from standard normative RDF <a>triples</a>,
+    from standard, normative RDF <a>triples</a>,
     <a data-lt="RDF graph">graphs</a>, and
     <a data-lt="RDF dataset">datasets</a>
     only by allowing <a>IRIs</a>,
     <a>blank nodes</a>,
     <a>literals</a>,
-    or <a>triple terms</a>
+    and <a>triple terms</a>
     in the subject and object positions.</p>
+  </section>
 
+  <section id="section-generalized-rdf">
+  <h3>Generalized RDF</h3>
   <p>A <dfn class="export">generalized RDF triple</dfn> is a triple having a subject,
-    a predicate, and an object, where each can be an <a>IRI</a>, a
-    <a>blank node</a>, a
-    <a>triple term</a>, or a
-    <a>literal</a>. A
-    <dfn class="export">generalized RDF graph</dfn>
+    a predicate, and an object, where each can be an <a>IRI</a>,
+    a <a>blank node</a>,
+    a <a>literal</a>,
+    or a <a>triple term</a>
+    (which may itself be a generalized RDF triple).
+    A <dfn class="export">generalized RDF graph</dfn>
     is a set of generalized RDF triples. A
     <dfn class="export">generalized RDF dataset</dfn>
     comprises a distinguished generalized RDF graph, and zero
     or more pairs each associating an <a>IRI</a>,
     a <a>blank node</a>,
-    a <a>triple term</a>, or
-    a <a>literal</a>
+    a <a>literal</a>,
+    or a <a>triple term</a>
+    (which may itself be a generalized RDF triple),
     to a generalized RDF graph.</p>
 
   <p>Generalized RDF triples, graphs, and datasets differ
-    from standard normative RDF <a>triples</a>,
+    from standard, normative RDF <a>triples</a>,
     <a data-lt="RDF graph">graphs</a>, and
     <a data-lt="RDF dataset">datasets</a> only
     by allowing <a>IRIs</a>,
     <a>blank nodes</a>,
-    <a>triple terms</a>, and
-    <a>literals</a> to appear
+    <a>literals</a>, and
+    <a>triple terms</a> to appear
     in any position, i.e., as subject, predicate, object, or graph name.</p>
+  </section>
 
   <p class="note" id="note-generalized-rdf">Any user of
     symmetric or generalized RDF triples, graphs, or datasets needs to be
@@ -1574,254 +1715,6 @@
     There is no requirement for any RDF tool to
     accept, process, or produce anything beyond standard
     normative RDF triples, graphs, and datasets. </p>
-
-</section>
-
-
-<section id="section-classic-full-interop" class="informative">
-  <h2>Interoperability between RDF [=Classic=] and RDF [=Full=]</h2>
-
-  <p class=issue>Should we make this section normative?</p>
-
-  <p>This section provides transformations between [=Full=] [=RDF graphs=] (respectively, [=RDF datasets=]) and [=Classic=] [=RDF graphs=] (respectively, [=RDF datasets=]),
-  to provide some level of interoperability between the different classes of <a href="#conformance">Conformance</a>.
-
-  <p class=issue>Should we go even further and aim to provide interoperability between <em>RDF 1.1</em> and RDF 1.2 [=Full=]?</p>
-
-  <p class=issue>AT RISK: The Working Group may decide to replace the terms `rdf:TripleTerm`, `rdf:ttSubject`, `rdf:ttPredicate`, and `rdf:ttObject` used in this section with other terms, possibly in a different namespace.</p>
-
-  <p>These transformation are designed to be:</p>
-
-  <dl>
-    <dt>Information preserving</dt>
-    <dd>It must be possible to reconstruct the input graph (respectively, dataset) from the output graph (respectively, dataset).
-      Note, however, that these transformations are not designed to preserve semantics:
-      the output graph is not semantically [=equivalent=] to the input graph,
-      at least not in the entailment regimes defined in [[RDF12-SEMANTICS]].
-    </dd>
-    <dt>Idempotent</dt>
-    <dd>Applying a transformation several times to a graph (respectively, dataset) should have the same effect as applying it once.
-      Moreover, [=classicizing=] a graph (respectively, dataset) that is already complying with RDF [=Classic=] (i.e., containing no [=triple term=]) must result in the same graph (respectively, dataset).
-    </dd>
-    <dt>Universal</dt>
-    <dd>It should be possible to transform any [=Full=] graph (respectively, dataset) to a [=Classic=] graph (respectively, dataset) using this method.
-      There is actually <a href="#section-classicize-caveat">a minor caveat</a> to this property.
-    </dd>
-  </dl>
-
-  <section id="section-classicize-definition">
-    <h2>From [=Full=] to [=Classic=]</h2>
-
-    <p>
-      Encoding an [=RDF graph=] to ensure that it is consumable by an RDF [=Classic=] implementation is called <dfn data-lt="classicize|classicized">classicizing</dfn> it.
-      [=Classicizing=] consists of repeating the following steps until no [=triple term=] [=appears=] in the graph, and the graph is therefore compliant with RDF [=Classic=]: picking a [=triple term=] <var>tt</var> that [=appears=] in the graph; minting a fresh [=blank node=] <var>b</var>
-      (i.e., a blank node not yet in use in the graph); replacing all occurrences of <var>tt</var> [=appearing=] in the graph with <var>b</var>;
-      and then adding the following triples to the graph (where <var>s</var>, <var>p</var>, and <var>o</var> are respectively the [=subject=], [=predicate=] and [=object=] of <var>tt</var>):
-    </p>
-    <ul>
-      <li>(<var>b</var>, `rdf:type`, `rdf:TripleTerm`)
-      <li>(<var>b</var>, `rdf:ttSubject`, <var>s</var>)
-      <li>(<var>b</var>, `rdf:ttPredicate`, <var>p</var>)
-      <li>(<var>b</var>, `rdf:ttObject`, <var>o</var>)
-    </ul>
-
-    <p>Note that this transformation is <em>information preserving</em> only when the input graph either has no [=triple term=] [=appearing=] in it,
-      or contains no [=asserted=] triple (<var>b</var>, `rdf:type`, `rdf:TripleTerm`) where <var>b</var> is a [=blank node=].
-      Implementations encountering this situation MUST report an error.
-      This limitation is discussed in Section <a href="#section-classicize-caveat"></a>.
-    </p>
-
-    <p class=note>The blank nodes generated to replace [=triple terms=] should not be confused with the [=reifiers=] that are typically associated with these [=triple terms=].</p>
-
-    <p>
-      [=Classicizing=] an [=RDF dataset=] consists of [=classicizing=] its [=default graph=] and each of its [=named graph=].
-      In this case, the fresh [=blank node=] assigned to each [=triple term=] must not be used in any graph of the dataset.
-    </p>
-
-    <p>
-      A detailed algorithm of the transformation is found in Section <a href="#section-classicize-algo"></a>.
-    </p>
-
-    <section id="section-classicize-example">
-      <h2>Example</h2>
-
-      <p>The examples in this section are expressed in the Turtle concrete syntax [[RDF12-TURTLE]].</p>
-
-      <pre id="ex-classicize-input"
-       class="example nohighlight"
-       title="An input Full RDF graph"
-       data-include="./ex-classicize-input.ttl"
-       data-include-format="text"
-      ></pre>
-
-      <pre id="ex-classicize-input2"
-       class="example nohighlight"
-       title="The same graph as above, with reifiers made explicit"
-       data-include="./ex-classicize-input2.ttl"
-       data-include-format="text"
-      ></pre>
-
-      <pre id="ex-classicize-output"
-       class="example nohighlight"
-       title="The result of classicizing the dataset above"
-       data-include="./ex-classicize-output.ttl"
-       data-include-format="text"
-      ></pre>
-
-    </section>
-
-  </section>
-
-  <section id="section-unclassicize-definition">
-    <h2>From [=Classic=] to [=Full=]</h2>
-
-    <p>Reverting a [=classicized=] graph to its original form consists of locating
-      each [=asserted=] triple (<var>b</var>, `rdf:type`, `rdf:TripleTerm`)
-      that has a [=blank node=] <var>b</var> as its subject,
-      along with the three associated [=asserted=] triples
-      that have the same [=blank node=] <var>b</var> as their subjects, i.e.,
-      (<var>b</var>, `rdf:ttSubject`, <var>s</var>),
-      (<var>b</var>, `rdf:ttPredicate`, <var>p</var>),
-      and (<var>b</var>, `rdf:ttObject`, <var>o</var>);
-      removing these four triples from the graph;
-      and replacing all remaining occurrences of <var>b</var> [=appearing=] in the graph
-      with the triple term (<var>s</var>, <var>p</var>, <var>o</var>).
-    </p>
-
-    <p>An implementation MUST report an error if, for a given <var>b</var>,
-      it can not unambiguously determine <var>s</var>, <var>p</var>, or <var>o</var>
-      (i.e., if one of the properties of <var>b</var>
-      — `rdf:ttSubject`, `rdf:ttPredicate`, or `rdf:ttObject` —
-      is missing or duplicated).
-      An implementation MUST also report an error if the input graph contains
-      at the same time a [=triple term=] and an [=asserted triple=]
-      (<var>b</var>, `rdf:type`, `rdf:TripleTerm`)
-      where <var>b</var> is the same [=blank node=].
-      Note that none of these situations can occur if the input graph was produced by the [=classicize=] transformation.
-    </p>
-
-    <p>To revert a [=classicized=] [=RDF dataset=] to its original form, the transformation above is applied to its [=default graph=] and to each of its [=named graphs=].
-    </p>
-
-    <p>Note that this transformation has no effect on any [=RDF graph=] or [=RDF dataset=] that does not use the `rdf:TripleTerm` type,
-      including [=Full=] graphs or datasets containing [=triple terms=].
-      This makes this transformation <em>idempotent</em> as intended.
-    </p>
-  </section>
-
-  <section id="section-classicize-caveat">
-    <h2>Limitations</h2>
-
-    <p>The two transformations above explicitly do not support graphs or datasets containing at the same time a [=triple term=] and an [=asserted triple=]
-      (<var>b</var>, `rdf:type`, `rdf:TripleTerm`)
-      where <var>b</var> is a [=blank node=].
-      This means that the [=classicize=] transformation is not <em>strictly</em> universal.
-    </p>
-
-    <p>This limitation should not be an issue in practice.
-      The `rdf:TripleTerm` type is unlikely to be in used in any published graph or dataset,
-      as it was not defined prior to this specification.
-      For this reason, using it would actually have been bad practice.
-      For future graphs and datasets, this type should be considered to be reserved for use within the [=classicize=] transformation, and not used otherwise.
-    </p>
-
-    <p class=note>
-      This is one reason why this transformation introduces new vocabulary terms
-      (`rdf:TripleTerm`, `rdf:ttSubject`, `rdf:ttPredicate`, `rdf::ttObject`),
-      rather than repurposing the existing <a data-cite="RDF12-SCHEMA#ch_reificationvocab">reification vocabulary</a>
-      (`rdf:Statement`, `rdf:subject`, `rdf:predicate`, `rdf:object`).
-      Unlike `rdf:TripleTerm`, `rdf:Statement` is known to be found in
-      widely used datasets (e.g., <a href="https://www.uniprot.org/">Uniprot</a>),
-      so reserving its use for the [=classicize=] transformation was not an option.
-    </p>
-
-    <p>Another consequence of this restriction is that implementers will need to be aware and careful when merging graphs in an application that [=classicizes=] graphs or datasets.
-      The concern is that merging a [=Full=] [=RDF graph=] containing at least one [=triple term=]
-      with a [=classicized=] [=RDF graph=] (which might contain [=blank node=] instances of `rdf:TripleTerm`)
-      could result in a "hybrid" graph that cannot be transformed to a consistent [=Full=] nor [=Classic=] [=RDF graph=].
-      Therefore, such applications should [=classicize=] every graph prior to merging them.
-      Conversely, applications supporting RDF [=Full=] should make sure to apply the reverse transformation
-      to any graph that is known or likely to have been [=classicized=],
-      to avoid creating such "hybrid" graphs.
-      Since these transformations are designed to be <em>idempotent</em>, there is no harm in applying them more than necessary.
-    </p>
-  </section>
-
-  <section>
-    <h2>Algorithms</h2>
-
-    <section id="section-classicize-algo" class="algorithm">
-      <h2>The `classicize` algorithm</h2>
-
-      <p>The algorithm expects one input variable <var>Gᵢ</var> which is an [=RDF graph=]. It returns a [=Classic=] [=RDF graph=].
-      </p>
-
-      <ol>
-        <li>Let <var>Gₒ</var> be an empty [=RDF graph=].</li>
-        <li>Let <var>M</var> be an empty map from [=triple terms=] to [=blank nodes=].</li>
-        <li>Let <var>inputKind</var> be `null`.</li>
-        <li>For each triple (<var>s</var>, <var>p</var>, <var>o</var>) in <var>Gᵢ</var>:<ol>
-          <li>If <var>s</var> is a [=blank node=], <var>p</var> is `rdf:type` and <var>o</var> is `rdf:TripleTerm`, then:<ol>
-            <li id="classicize-error1">If <var>inputKind</var> is `"full"` then exit with an error.</li>
-            <li>Otherwise, set <var>inputKind</var> to `"classic"`.</li>
-          </ol></li>
-          <li>If <var>o</var> is a [=triple term=], then:<ol>
-            <li id="classicize-error2">If <var>inputKind</var> is `"classic"` then exit with an error.</li>
-            <li>Otherwise, set <var>inputKind</var> to `"full"`.</li>
-            <li>Let <var>b</var>, <var>M'</var> and <var>G'</var> be the result of invoking <a href="#section-ctt-algo">`classicize-triple-term`</a> passing <var>o</var> as <var>t</var> and <var>M</var> as <var>Mi</var>.</li>
-            <li>Merge <var>M'</var> into <var>M</var>.
-            <li>Merge <var>G'</var> into <var>Gₒ</var>.
-            <li>Set <var>o</var> to <var>b</var>.
-          </ol></li>
-          <li>Add the triple (<var>s</var>, <var>p</var>, <var>o</var>) to <var>Gₒ</var>.</li>
-        </ol></li>
-        <li>Return <var>Gₒ</var>.</li>
-      </ol>
-    </section>
-
-    <section id="section-ctt-algo" class="algorithm">
-      <h2>The `classicize-triple-term` algorithm</h2>
-
-      <p>This algorithm is responsible for incrementally populating the mapping <var>M</var> and the graph <var>G</var> used internally by the <a href="#section-classicize-algo">`classicize`</a> algorithm. It receives a [=triple term=] as input and processes it recursively (in case its object is itself a [=triple term=]). It returns, among other things, the [=blank node=] minted to replace the [=triple term=] in the transformed [=Classic=] [=RDF graph=].</p>
-
-      <p>This algorithm expects two input variables:
-        a [=triple term=] <var>t</var>,
-        and a map <var>Mᵢ</var> from [=triple terms=] to [=blank nodes=].
-        It returns a [=blank node=] <var>b</var>,
-        a map <var>Mₒ</var> from [=triple terms=] to [=blank nodes=],
-        and a [=Classic=] [=RDF graph=] <var>G</var>.
-      </p>
-
-      <ol>
-        <li>Let <var>Mₒ</var> be an empty map.</li>
-        <li>Let <var>G</var> be an empty [=RDF graph=].</li>
-        <li>Let <var>b</var> be the [=blank node=] associated with <var>t</var> in <var>Mᵢ</var>, if any.
-        <li>Otherwise:<ol>
-          <li>Let <var>s</var>, <var>p</var> and <var>o</var> be the subject, predicate and object of <var>t</var>, respectively.</li>
-          <li>If <var>o</var> is a [=triple term=], then:<ol>
-            <li>Let <var>b'</var>, <var>M'</var> and <var>G'</var> be the result of invoking <a href="#section-ctt-algo">`classicize-triple-term`</a> passing <var>o</var> as <var>t</var> and <var>Mᵢ</var>.</li>
-            <li>Set <var>o</var> to <var>b'</var>.
-            <li>Merge <var>M'</var> into <var>Mₒ</var>.
-            <li>Merge <var>G'</var> into <var>G</var>.
-          </ol></li>
-          <li id="qtt-fresh-bnode">Let <var>b</var> be a fresh blank node.</li>
-          <li>Add the association (<var>t</var>, <var>b</var>) to <var>Mₒ</var>.</li>
-          <li>Add the triples (<var>b</var>, `rdf:type`, `rdf:TripleTerm`), (<var>b</var>, `rdf:ttSubject`, <var>s</var>), (<var>b</var>, `rdf:ttPredicate`, <var>p</var>), and (<var>b</var>, `rdf:ttObject`, <var>o</var>) in <var>G</var>.</li>
-        </ol></li>
-        <li>Return <var>b</var>, <var>Mₒ</var> and <var>G</var>.</li>
-      </ol>
-
-    </section>
-
-    <section id="section-unclassicize-algo" class="algorithm">
-      <h2>The `revert-classicize` algorithm</h2>
-
-      <p class=issue>Write this algorithm</p>
-    </section>
-
-
-  </section>
-
 
 </section>
 
@@ -2281,8 +2174,8 @@
   <h2>Changes between RDF 1.1 and RDF 1.2</h2>
 
   <ul>
-    <li>Added <a href="#section-classic-full-interop" class="sectionRef"></a>
-      for informative mappings between RDF [=Full=] and RDF [=Classic=].</li>
+    <li>Added <a href="#section-version-announcement" class="sectionRef"></a>
+      for announcing RDF versions in RDF documents via the HTTP Content-Type header and/or syntax.</li>
     <li>Added <a href="#section-dataset-quad" class="sectionRef"></a>
       for informative definition of a <a>quad</a>.</li>
    <li>Added <a href="#section-triple-terms-reification" class="sectionRef"></a>
