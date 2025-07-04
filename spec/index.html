@@ -301,14 +301,15 @@
       and to improve readability by abbreviating <a>IRIs</a> that start with one of those <a>namespace IRIs</a>
       by using the corresponding <a>namespace prefix</a>.
       For example,
-      based on the prefix mapping in <a href="#tab-vocab-ns"></a>,
+      based on the prefix mapping in <a href="#tab-vocab-ns">the table above</a>,
       the IRI <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral</code>
       would be abbreviated as <code>rdf:XMLLiteral</code>.
-      Note however that these abbreviations are <em>not</em> valid IRIs (or only coincidentally),
+      Note however that such abbreviations are <em>not</em> meant to be processed directly as IRIs,
       and must not be used in syntactic contexts where IRIs are expected.
-      Namespace IRIs and namespace prefixes are <em>not</em> a formal part of the
-      RDF data model. They are merely a syntactic convenience for
-      abbreviating IRIs.</p>
+      Note also that [=namespace IRIs=] and [=namespace prefixes=] are not a formal part of the RDF data model.
+      Instead, they are merely a syntactic convenience for abbreviating IRIs;
+      for processing, the actual IRIs are reconstructed by replacing the namespace prefixes with the corresponding namespace IRIs.
+    </p>
 
     <p>The term “<dfn class="lint-ignore">namespace</dfn>” on its own does not have a
       well-defined meaning in the context of RDF, but is sometimes informally
