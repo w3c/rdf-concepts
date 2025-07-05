@@ -317,26 +317,29 @@
     <p>A <a>triple term</a> is an [=RDF triple=] used as an [=RDF term=]
       in the [=object=] position of another triple.</p>
 
-    <p>A <a>triple term</a> is not necessarily asserted, allowing
-      statements to be made about other statements that may not be
-      asserted within an <a>RDF graph</a>.
-      This allows statements to be made about relationships that may be contradictory.
-      For a <a>triple term</a> to be asserted,
-      it must also appear in a graph as an <a>asserted triple</a>.</p>
+    <p>This usage of a <a>triple term</a> only functions as a reference to a
+      <a>proposition</a>, and does not in itself imply its truth. For this
+      triple to also be asserted, it must appear in a graph as an <a>asserted
+      triple</a>. This allows for statements to be made about statements
+      independent of their assertion within an <a>RDF graph</a>.
+    </p>
 
-    <p>A <a>triple term</a> can be used as the object of a <a>triple</a> with the predicate <code>rdf:reifies</code>;
-      such a <a>triple</a> is then a <dfn>reifying triple</dfn>.
-      The <a>subject</a> of that <a>triple</a> is called a <dfn>reifier</dfn>.
-      Assertions on the <a>triple term</a> are made using the <a>reifier</a>.
-      A concrete syntax may provide a special notation for specifying <a>reifying triples</a>.</p>
+    <p>
+      When a <a>triple term</a> is used as the object of a <a>triple</a> with
+      the predicate <code>rdf:reifies</code>, such a triple is a
+      <dfn>reifying triple</dfn>.
+      The <a>subject</a> of that triple is called a <dfn>reifier</dfn>.
+      The <a>IRI</a> or <a>blank node</a> denoting a reifier can be the
+      subject or <a>object</a> of other triples.
+      A <a>reifying triple</a> whose object is also an <a>asserted triple</a>
+      is called a <dfn>triple annotation</dfn>.
+    </p>
 
-    <p class="note">Using the <a>reifier</a> as an indirect way of referencing a <a>triple term</a>
-      allows multiple groups of assertions to be separated from each other,
-      which might be necessary if the same <a>triple term</a> was derived from different sources.
-      Assertions are always made using the <a>reifier</a>, which can be the <a>subject</a> or <a>object</a>
-      of different triples.
-      Concrete syntaxes, such as Turtle [[RDF12-TURTLE]],
-      may have shortcuts for capturing a <a>triple term</a> with its <a>reifier</a>.</p>
+    <p>
+      Concrete syntaxes, such as Turtle [[RDF12-TURTLE]], may have shortcuts
+      for specifying <a>reifying triples</a> and <a>triple annotations</a> more
+      succinctly.
+    </p>
 
     <p>The following diagram represents a <a>reifying triple</a> of an unasserted, abstract <a>triple term</a>, and a <a>triple</a> relating the <a>reifier</a> to another resource.</p>
 
@@ -351,7 +354,8 @@
     </figure>
 
     <p>Here is a variation on the graph shown in <a href="#fig-triple-term"></a>. This represents a graph
-      where the <a>triple term</a> corresponds to an <a>asserted triple</a>.
+      where the <a>triple term</a> corresponds to an <a>asserted triple</a>,
+      qualifying the <a>reifying triple</a> as a <a>triple annotation</a>.
     </p>
 
     <figure id="fig-asserted-triple-term">
@@ -365,7 +369,21 @@
       </figcaption>
     </figure>
 
-    <p>Note that a <a>triple term</a> may also have another <a>triple term</a> as an <a>object</a>.</p>
+    <p class="note">
+      The <a>propositions</a> denoted by <a>triple terms</a> are abstract,
+      logical relationships, and assertions are always made about some
+      <a>reifier</a> thereof. There can be multiple, distinct reifiers
+      underlying the same abstract proposition, such as statements with
+      different sources, or circumstances with different characteristics. Since
+      a proposition so reified does not have to hold, it is possible to make
+      statements about any kind of statements, including unasserted contradictions.
+    </p>
+
+    <p class="note">
+      While a <a>triple term</a> may also have another <a>triple term</a> as
+      an <a>object</a>, that is considered an advanced practice beyond the
+      regular use of reifiers.</p>
+
   </section>
 
   <section id="change-over-time">
