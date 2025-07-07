@@ -586,11 +586,11 @@ Accept: text/turtle; version=1.2
   <p>This specification establishes two conformance levels:</p>
 
   <ul>
-    <li><dfn class="export" data-lt="full">Full conformance</dfn>
+    <li><dfn class="export" data-local-lt="full">Full conformance</dfn>
       supports <a data-lt="RDF graph">graphs</a> and <a data-lt="RDF dataset">datasets</a>
       with <a>triples</a> that contain <a>triple terms</a>.
       </li>
-    <li><dfn class="export" data-lt="basic">Basic conformance</dfn>
+    <li><dfn class="export" data-local-lt="basic">Basic conformance</dfn>
       only supports <a data-lt="RDF graph">graphs</a> or <a data-lt="RDF dataset">datasets</a>
       with <a>triples</a> that do not contain <a>triple terms</a>.</li>
   </ul>
@@ -602,7 +602,7 @@ Accept: text/turtle; version=1.2
   <section id="defined-version-labels">
     <h3>Version Labels</h3>
     <p>
-      A <dfn>version label</dfn> is a string that identifies the syntax and semantics conformance
+      A <dfn class="export">version label</dfn> is a string that identifies the syntax and semantics conformance
       for the RDF data.
     </p>
     <table id="tab-version-labels" class="simple">
@@ -681,8 +681,8 @@ Accept: text/turtle; version=1.2
     <h3>Strings in RDF</h3>
 
     <p>RDF uses Unicode [[Unicode]] as the fundamental representation for string values.
-      Within this, and related specifications, the term <dfn id="dfn-rdf-string">string</dfn>,
-      or <a data-lt="string">RDF string</a>,
+      Within this, and related specifications, the term <dfn id="dfn-rdf-string" class="export" data-local-lt="string">RDF string</dfn>,
+      or simply [=string=],
       is used to describe an ordered sequence of zero or more
       <a data-cite="I18N-GLOSSARY#dfn-code-point" class="lint-ignore">Unicode code points</a>
       which are <a data-cite="I18N-GLOSSARY#dfn-scalar-value" class="lint-ignore">Unicode scalar values</a>.
@@ -705,7 +705,7 @@ Accept: text/turtle; version=1.2
 <section id="section-rdf-graph">
   <h2>RDF Graphs</h2>
 
-  <p>An <dfn>RDF graph</dfn> is a set of <a>RDF triples</a>.</p>
+  <p>An <dfn class="export">RDF graph</dfn> is a set of <a>RDF triples</a>.</p>
 
   <p>An [=RDF triple=] that is an element of an [=RDF graph=] is also said to be <dfn id="dfn-asserted-triple" class=export data-lt="asserted triple|asserted triples" data-lt-no-plural=""
       >asserted</dfn> in that [=RDF graph=]
@@ -736,7 +736,7 @@ Accept: text/turtle; version=1.2
 
     <p>The three components (|s|, |p|, |o|) of an [=RDF triple=] are respectively called the <dfn class=export >subject</dfn>, <dfn class=export >predicate</dfn> and <dfn class=export >object</dfn> of the triple.</p>
 
-    <p>The set of <span id="dfn-nodes"><!-- obsolete term--></span><dfn data-lt="node">nodes</dfn> of an <a>RDF graph</a>
+    <p>The set of <span id="dfn-nodes"><!-- obsolete term--></span><dfn class="export" data-lt="RDF node">nodes</dfn> of an <a>RDF graph</a>
       is the set of <a>subjects</a> and <a>objects</a> of the <a>asserted triples</a> of the graph.
       It is possible for a [=predicate=] [=IRI=] to also occur as a [=node=] in
       the same graph.</p>
@@ -763,13 +763,13 @@ Accept: text/turtle; version=1.2
 
     <p><a>IRIs</a>, <a>literals</a>,
       <a>blank nodes</a>, and <a>triple terms</a> are collectively known as
-      <span id="dfn-rdf-terms"><!-- obsolete term--></span><dfn data-lt="rdf term">RDF terms</dfn>.</p>
+      <span id="dfn-rdf-terms"><!-- obsolete term--></span><dfn class="export" data-lt="rdf term">RDF terms</dfn>.</p>
 
     <p>
       [=IRIs=], [=literals=] and [=blank nodes=] are said to be <dfn class="export" data-lt-no-plural>atomic</dfn> [=RDF terms=].
     </p>
 
-    <p><dfn>RDF term equality</dfn>:
+    <p><dfn class="export">RDF term equality</dfn>:
       Two [=RDF terms=] |t| and <var>t'</var> are equal (the same [=RDF term=]) if and only if
       one of the following four conditions holds:</p>
 
@@ -799,7 +799,7 @@ Accept: text/turtle; version=1.2
       [=triple term=] [=appearing=] in that graph.</p>
 
     <p>
-      An [=RDF term=] is said to be <dfn>ground</dfn> if any of the following three conditions holds:
+      An [=RDF term=] is said to be <dfn class="export">ground</dfn> if any of the following three conditions holds:
     </p>
 
     <ul>
@@ -819,7 +819,7 @@ Accept: text/turtle; version=1.2
   <section id="section-IRIs">
     <h3>IRIs</h3>
 
-    <p>An <dfn data-lt="iri"><abbr title="Internationalized Resource Identifier">IRI</abbr></dfn>
+    <p>An <dfn class="export" data-lt="iri"><abbr title="Internationalized Resource Identifier">IRI</abbr></dfn>
       (Internationalized Resource Identifier) within an RDF graph
       is a <a>string</a> that conforms to the syntax
       defined in RFC 3987 [[!RFC3987]].</p>
@@ -929,18 +929,18 @@ Accept: text/turtle; version=1.2
 
     <p>Literals are used for values such as strings, numbers, and dates.</p>
 
-    <p>A <dfn data-local-lt="RDF literal">literal</dfn> consists of
+    <p>A <dfn class="export" data-lt="RDF literal">literal</dfn> consists of
       two, three, or four components, as below:</p>
 
     <ol>
-      <li>A <dfn>lexical form</dfn>, being an <a data-lt="string">RDF string</a>.
-      <li>A <dfn>datatype IRI</dfn>, being an <a>IRI</a>
+      <li>A <dfn class="export">lexical form</dfn>, being an <a data-lt="string">RDF string</a>.
+      <li>A <dfn class="export">datatype IRI</dfn>, being an <a>IRI</a>
         identifying a datatype that determines how the lexical form maps
         to a <a>literal value</a>.</li>
       <li>If and only if the <a>datatype IRI</a> is
         <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#langString</code> or
         <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#dirLangString</code>, a
-        non-empty <dfn>language tag</dfn> as defined by [[!BCP47]]. The
+        non-empty <dfn class="export">language tag</dfn> as defined by [[!BCP47]]. The
         language tag MUST be well-formed according to
         <a data-cite="bcp47#section-2.2.9">section 2.2.9</a>
         of [[!BCP47]],
@@ -948,15 +948,15 @@ Accept: text/turtle; version=1.2
         Two [[!BCP47]]-complying strings that differ only by case represent the same [=language tag=].</li>
       <li>If and only if the <a>datatype IRI</a> is
         <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#dirLangString</code>,
-        a <dfn>base direction</dfn> that MUST be one of the following:<ul>
+        a <dfn class="export">base direction</dfn> that MUST be one of the following:<ul>
           <li>`ltr`, indicating that the initial text direction is set to left-to-right</li>
           <li>`rtl`, indicating that the initial text direction is set to right-to-left</li>
         </ul></li>
     </ol>
 
-    <p>A literal is a <dfn>language-tagged string</dfn> if the [=language tag=]
+    <p>A literal is a <dfn class="export">language-tagged string</dfn> if the [=language tag=]
       is present and the [=base direction=] is <em>not</em> present.
-      A literal is a <dfn id="dfn-dir-lang-string">directional language-tagged string</dfn>
+      A literal is a <dfn id="dfn-dir-lang-string" class="export">directional language-tagged string</dfn>
       if both the [=language tag=] and the [=base direction=] are present.
     </p>
 
@@ -1023,7 +1023,7 @@ Accept: text/turtle; version=1.2
     <section>
       <h2>Literal value</h2>
 
-        <p>The <dfn>literal value</dfn> associated with a <a>literal</a> is defined as follows.</p>
+        <p>The <dfn class="export">literal value</dfn> associated with a <a>literal</a> is defined as follows.</p>
 
       <ul>
         <li>If the literal is a <a>language-tagged string</a>,
@@ -1038,7 +1038,7 @@ Accept: text/turtle; version=1.2
               of the <a>datatype</a>, then the literal value is the result of applying
               the <a>lexical-to-value mapping</a> of the datatype to the
               <a>lexical form</a>.</li>
-            <li>Otherwise, the literal is <dfn data-lt-no-plural>ill-typed</dfn> and no literal value can be
+            <li>Otherwise, the literal is <dfn class="export" data-lt-no-plural>ill-typed</dfn> and no literal value can be
                associated with the literal. Such a case produces a semantic
                [=inconsistency=], but it is not <em>syntactically</em> ill-formed.
                Implementations SHOULD accept [=ill-typed=] literals and produce RDF
@@ -1072,7 +1072,7 @@ Accept: text/turtle; version=1.2
   <section id="section-blank-nodes">
     <h3>Blank Nodes</h3>
 
-    <p><dfn data-lt="blank node">Blank nodes</dfn> are disjoint from
+    <p><dfn class="export" data-lt="blank node">Blank nodes</dfn> are disjoint from
       <a>IRIs</a> and <a>literals</a>.  Otherwise,
       the set of possible blank nodes is arbitrary.  RDF makes no reference to
       any internal structure of blank nodes.</p>
@@ -1236,15 +1236,15 @@ Accept: text/turtle; version=1.2
 <section id="section-dataset">
   <h2>RDF Datasets</h2>
 
-  <p>An <dfn>RDF dataset</dfn> is a collection of
+  <p>An <dfn class="export">RDF dataset</dfn> is a collection of
     <a>RDF graphs</a>, and comprises:</p>
 
   <ul>
-    <li>Exactly one <dfn>default graph</dfn>, being an <a>RDF graph</a>.
+    <li>Exactly one <dfn class="export">default graph</dfn>, being an <a>RDF graph</a>.
       The default graph does not have a name and MAY be empty.</li>
-    <li>Zero or more <span id="dfn-named-graphs"><!-- obsolete term--></span><dfn data-lt="named graph">named graphs</dfn>.
+    <li>Zero or more <span id="dfn-named-graphs"><!-- obsolete term--></span><dfn class="export" data-lt="named graph">named graphs</dfn>.
       Each named graph is a pair consisting of an <a>IRI</a> or a blank node
-      (the <dfn>graph name</dfn>), and an <a>RDF graph</a>.
+      (the <dfn class="export">graph name</dfn>), and an <a>RDF graph</a>.
       Graph names are unique within an RDF dataset.</li>
   </ul>
 
@@ -1348,15 +1348,15 @@ Accept: text/turtle; version=1.2
     <code><a>rdf:JSON</a></code>, <code><a>rdf:HTML</a></code>, and <code><a>rdf:XMLLiteral</a></code>.
   </p>
 
-  <p>A <dfn>datatype</dfn> consists of a <a>lexical space</a>,
+  <p>A <dfn class="export">datatype</dfn> consists of a <a>lexical space</a>,
     a <a>value space</a> and a <a>lexical-to-value mapping</a>, and
     is identified by one or more <a>IRIs</a>.</p>
 
-  <p>The <dfn>lexical space</dfn> of a datatype is a set of <a>strings</a>.</p>
+  <p>The <dfn class="export">lexical space</dfn> of a datatype is a set of <a>strings</a>.</p>
 
-  <p>The <dfn>lexical-to-value mapping</dfn> of a datatype is a set of
+  <p>The <dfn class="export">lexical-to-value mapping</dfn> of a datatype is a set of
     pairs whose first element belongs to the <a>lexical space</a>,
-    and the second element belongs to the <dfn>value space</dfn>
+    and the second element belongs to the <dfn class="export">value space</dfn>
     of the datatype. Each member of the lexical space is paired with exactly
     one value, and is a <em>lexical representation</em>
     of that value. The mapping can be seen as a function
@@ -1432,7 +1432,7 @@ Accept: text/turtle; version=1.2
       is the name of a datatype, denote the built-in datatypes defined in
       <em>[[[XMLSCHEMA11-2]]]</em> [[!XMLSCHEMA11-2]]. The XML Schema built-in types
       listed in the following table are the
-      <dfn>RDF-compatible XSD types</dfn>. Their use is RECOMMENDED.</p>
+      <dfn class="export">RDF-compatible XSD types</dfn>. Their use is RECOMMENDED.</p>
 
     <p>Readers might note that the only safe datatypes for transferring
       binary information are `xsd:hexBinary` and `xsd:base64Binary`.</p>
@@ -1735,7 +1735,7 @@ Accept: text/turtle; version=1.2
     <p>RDF provides for HTML content as a possible <a>literal value</a>.
       This allows markup in literal values. Such content is indicated
       in an <a>RDF graph</a> using a <a>literal</a> whose <a>datatype</a>
-      is set to <code><dfn>rdf:HTML</dfn></code>.</p>
+      is set to <code><dfn class="export">rdf:HTML</dfn></code>.</p>
 
     <p>The <code>rdf:HTML</code> datatype is defined as follows:</p>
 
@@ -1788,7 +1788,7 @@ Accept: text/turtle; version=1.2
 
     <p>RDF provides for XML content as a possible <a>literal value</a>.
       Such content is indicated in an <a>RDF graph</a> using a <a>literal</a>
-      whose <a>datatype</a> is set to <code><dfn>rdf:XMLLiteral</dfn></code>.</p>
+      whose <a>datatype</a> is set to <code><dfn class="export">rdf:XMLLiteral</dfn></code>.</p>
 
     <p>The <code>rdf:XMLLiteral</code> datatype is defined as follows:</p>
 
@@ -1839,7 +1839,7 @@ Accept: text/turtle; version=1.2
     <p>RDF provides for JSON content as a possible <a>literal value</a>.
       This includes allowing markup in literal values. Such content is indicated in an
       <a>RDF graph</a> as a <a>literal</a> whose <a>datatype</a> is set
-      to <code><dfn>rdf:JSON</dfn></code>.</p>
+      to <code><dfn class="export">rdf:JSON</dfn></code>.</p>
 
     <p>The <code>rdf:JSON</code> datatype is defined as follows:</p>
 
