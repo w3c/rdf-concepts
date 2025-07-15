@@ -325,9 +325,10 @@
       A <dfn>reifying triple</dfn> is a triple where the <a>predicate</a> is <code>rdf:reifies</code>
       and the <a>object</a> is a <a>triple term</a>.
       The <a>subject</a> of that triple is called a <dfn>reifier</dfn>, and can be the
-    subject or object of other triples.
-      A <a>reifying triple</a> whose object is also an <a>asserted triple</a>
-      is called a <dfn>triple annotation</dfn>.
+      subject or object of other triples.
+      When the triple term of a <a>reifying triple</a> also [=appears=] in the
+      same graph as an <a>asserted triple</a>, the subset of triples that share
+      the same <a>reifier</a> as subject is called a <dfn>triple annotation</dfn>.
     </p>
 
     <p>
@@ -349,17 +350,17 @@
     </figure>
 
     <p>Here is a variation on the graph shown in <a href="#fig-triple-term"></a>. This represents a graph
-      where the <a>triple term</a> corresponds to an <a>asserted triple</a>,
-      qualifying the <a>reifying triple</a> as a <a>triple annotation</a>.
+      where an <a>asserted triple</a> corresponds to the <a>triple term</a> object of a <a>reifying triple</a>,
+      qualifying the description about this <a>reifier</a> as a <a>triple annotation</a>.
     </p>
 
     <figure id="fig-asserted-triple-term">
       <a href="asserted-triple-term.svg">
         <object data="asserted-triple-term.svg" aria-describedby="fig-asserted-triple-term-alt"
-          aria-label="An RDF graph containing a reifying triple where the triple term corresponds to an asserted triple"></object>
+          aria-label="An RDF graph containing a triple annotation, where the triple term of a reifying triple corresponds to an asserted triple"></object>
       </a>
       <figcaption id="fig-asserted-triple-term-alt">
-        An <a>RDF graph</a> containing a <a>triple annotation</a>, which is a <a>reifying triple</a> whose <a>triple term</a> corresponds to an <a>asserted triple</a>.
+        An <a>RDF graph</a> containing a <a>triple annotation</a>, where the <a>triple term</a> of a <a>reifying triple</a> corresponds to an <a>asserted triple</a>.
         The diagram represents the proposition as a fact using the asserted triple, meaning that the relationship holds.
       </figcaption>
     </figure>
