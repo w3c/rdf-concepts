@@ -316,8 +316,8 @@
 
     <p>A <a>triple term</a> is an [=RDF triple=] used as an [=RDF term=]
       in another triple. This use is a reference to a <a>proposition</a>. For
-      the triple term to also be asserted, it must appear in a graph as an <a>asserted
-      triple</a>. This allows for statements to be made about statements
+      the triple term to also be asserted, it must [=appear=] in the same graph as both an <a>asserted
+      triple</a> and an unasserted <a>triple term</a>. This allows for statements to be made about statements
       independent of their assertion within an <a>RDF graph</a>.
     </p>
 
@@ -327,7 +327,7 @@
     <p>
       A <dfn>reifying triple</dfn> is a triple where the <a>predicate</a> is <code>rdf:reifies</code>
       and the <a>object</a> is a <a>triple term</a>.
-      The <a>subject</a> of that triple is called a <dfn>reifier</dfn>, and can be the
+      The <a>subject</a> of that triple is called a <dfn>reifier</dfn>, and it can be the
       subject or object of other triples.
       When the triple term of a <a>reifying triple</a> also [=appears=] in the
       same graph as an <a>asserted triple</a>, the subset of triples that share
