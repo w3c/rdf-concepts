@@ -319,31 +319,33 @@
     <h3>Triple Terms and Reification</h3>
 
     <p>A <a>triple term</a> is an [=RDF triple=] used as an [=RDF term=]
-      in the [=object=] position of another triple.</p>
+      in another triple. This use is a reference to a <a>proposition</a>. For
+      the triple term to also be asserted, it must [=appear=] in the same graph as both an <a>asserted
+      triple</a> and an unasserted <a>triple term</a>. This allows for statements to be made about statements
+      independent of their assertion within an <a>RDF graph</a>.
+    </p>
 
-    <p>A <a>triple term</a> is not necessarily asserted, allowing
-      statements to be made about other statements that may not be
-      asserted within an <a>RDF graph</a>.
-      This allows statements to be made about relationships that may be contradictory.
-      For a <a>triple term</a> to be asserted in a graph,
-      it must appear as an <a>asserted triple</a> in that same graph.</p>
+    <p>[=RDF terms=] that [=appear=] in a [=triple term=] have the same
+      <a data-lt="denotes">denotation</a> as when they appear in an
+      [=asserted triple=] in the <a data-lt="RDF graph">graph</a>.
+      For this reason, we say that triple terms are
+      <dfn class="lint-ignore">transparent</dfn>.</p>
 
-    <p>RDF terms that appear in a triple term have the same denotation as when they appear in an asserted triple in the graph. 
-      For this reason, we say that triple terms are <i>transparent</i>.</p>
+    <p>
+      A <dfn>reifying triple</dfn> is a triple where the <a>predicate</a> is <code>rdf:reifies</code>
+      and the <a>object</a> is a <a>triple term</a>.
+      The <a>subject</a> of that triple is called a <dfn>reifier</dfn>, and it can be the
+      subject or object of other triples.
+      When the triple term of a <a>reifying triple</a> also [=appears=] in the
+      same graph as an <a>asserted triple</a>, the subset of triples that share
+      the same <a>reifier</a> as subject is called a <dfn>triple annotation</dfn>.
+    </p>
 
-    <p>A <a>triple term</a> can be used as the object of a <a>triple</a> with the predicate <code>rdf:reifies</code>;
-      such a <a>triple</a> is then a <dfn>reifying triple</dfn>.
-      The <a>subject</a> of that <a>triple</a> is called a <dfn>reifier</dfn>.
-      Assertions on the <a>triple term</a> are made using the <a>reifier</a>.
-      A concrete syntax may provide a special notation for specifying <a>reifying triples</a>.</p>
-
-    <p class="note">Using the <a>reifier</a> as an indirect way of referencing a <a>triple term</a>
-      allows multiple groups of assertions to be separated from each other,
-      which might be necessary if the same <a>triple term</a> was derived from different sources.
-      Assertions are always made using the <a>reifier</a>, which can be the <a>subject</a> or <a>object</a>
-      of different triples.
-      Concrete syntaxes, such as Turtle [[RDF12-TURTLE]],
-      may have shortcuts for capturing a <a>triple term</a> with its <a>reifier</a>.</p>
+    <p>
+      Concrete syntaxes, such as Turtle [[RDF12-TURTLE]], may have shortcuts
+      for specifying <a>reifying triples</a> and <a>triple annotations</a> more
+      succinctly.
+    </p>
 
     <p>The following diagram represents a <a>reifying triple</a> of an unasserted, abstract <a>triple term</a>, and a <a>triple</a> relating the <a>reifier</a> to another resource.</p>
 
@@ -358,21 +360,41 @@
     </figure>
 
     <p>Here is a variation on the graph shown in <a href="#fig-triple-term"></a>. This represents a graph
-      where the <a>triple term</a> corresponds to an <a>asserted triple</a>.
+      where an <a>asserted triple</a> corresponds to the <a>triple term</a> object of a <a>reifying triple</a>,
+      qualifying the description about this <a>reifier</a> as a <a>triple annotation</a>.
     </p>
 
     <figure id="fig-asserted-triple-term">
       <a href="asserted-triple-term.svg">
         <object data="asserted-triple-term.svg" aria-describedby="fig-asserted-triple-term-alt"
-          aria-label="An RDF graph containing a reifying triple where the triple term corresponds to an asserted triple"></object>
+          aria-label="An RDF graph containing a triple annotation, where the triple term of a reifying triple corresponds to an asserted triple"></object>
       </a>
       <figcaption id="fig-asserted-triple-term-alt">
-        An <a>RDF graph</a> containing a <a>reifying triple</a> where the <a>triple term</a> corresponds to an <a>asserted triple</a>.
+        An <a>RDF graph</a> containing a <a>triple annotation</a>, where the <a>triple term</a> of a <a>reifying triple</a> corresponds to an <a>asserted triple</a>.
         The diagram represents the proposition as a fact using the asserted triple, meaning that the relationship holds.
       </figcaption>
     </figure>
 
-    <p>Note that a <a>triple term</a> may also have another <a>triple term</a> as an <a>object</a>.</p>
+    <div class="note">
+      <p><a>Triple terms</a> always denote abstract, logical <a>propositions</a>,
+        while <a>reifiers</a> may denote a variety of things that are related
+        to these propositions (such as a statement or belief that the
+        proposition holds, or an event or circumstance that makes the
+        proposition true).
+        It is therefore expected that triple terms are commonly used as
+        <a>objects</a> of <a>reifying triples</a>, and that the reifiers
+        (rather than the triple terms) are used in further descriptions.</p>
+      <p>
+        There can be multiple, distinct reifiers related to the same abstract
+        proposition, such as statements with different sources, or
+        circumstances with different characteristics. One reifier may also be
+        used to reify multiple, distinct propositions, expressing different
+        propositional aspects using the same reifier.</p>
+      <p>Since a proposition so reified does not have to hold, it is possible
+        to make statements about any kind of statement, including an unasserted
+        statement that contradicts another statement, whether asserted or not.</p>
+    </div>
+
   </section>
 
   <section id="change-over-time">
