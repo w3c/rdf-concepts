@@ -608,11 +608,11 @@ Accept: text/turtle; version=1.2
   <p>This specification establishes two conformance levels:</p>
 
   <ul>
-    <li><dfn class="export" data-local-lt="full">Full conformance</dfn>
+    <li><dfn id="dfn-full" class="export" data-local-lt="full">Full conformance</dfn>
       supports <a data-lt="RDF graph">graphs</a> and <a data-lt="RDF dataset">datasets</a>
       with <a>triples</a> that contain <a>triple terms</a>.
       </li>
-    <li><dfn class="export" data-local-lt="basic">Basic conformance</dfn>
+    <li><dfn id="dfn-basic" class="export" data-local-lt="basic">Basic conformance</dfn>
       only supports <a data-lt="RDF graph">graphs</a> or <a data-lt="RDF dataset">datasets</a>
       with <a>triples</a> that do not contain <a>triple terms</a>.</li>
   </ul>
@@ -758,7 +758,7 @@ Accept: text/turtle; version=1.2
 
     <p>The three components (|s|, |p|, |o|) of an [=RDF triple=] are respectively called the <dfn class=export >subject</dfn>, <dfn class=export >predicate</dfn> and <dfn class=export >object</dfn> of the triple.</p>
 
-    <p>The set of <span id="dfn-nodes"><!-- obsolete term--></span><dfn class="export" data-lt="RDF node">nodes</dfn> of an <a>RDF graph</a>
+    <p>The set of <span id="dfn-nodes"><!-- obsolete term--></span><dfn id="dfn-node" class="export" data-lt="RDF node">nodes</dfn> of an <a>RDF graph</a>
       is the set of <a>subjects</a> and <a>objects</a> of the <a>asserted triples</a> of the graph.
       It is possible for a [=predicate=] [=IRI=] to also occur as a [=node=] in
       the same graph.</p>
