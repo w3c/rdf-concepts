@@ -271,10 +271,10 @@
     <p>The <a>IRIs</a> in an <a>RDF vocabulary</a> often begin with
       a common substring known as a <dfn>namespace IRI</dfn>.
       Some namespace IRIs are associated by convention with a short name
-      known as a <dfn>namespace prefix</dfn>. Some examples:
+      known as a <dfn>namespace prefix</dfn>.
 
     <table id="tab-vocab-ns" class="simple">
-      <caption>Some example namespace prefixes and IRIs</caption>
+      <caption>Some namespace prefixes and IRIs used in this specification</caption>
       <tr>
         <th>Namespace prefix</th>
         <th>Namespace IRI</th>
@@ -295,16 +295,20 @@
       </tr>
     </table>
 
-    <p>In some serialization formats it is common to abbreviate <a>IRIs</a>
-      that start with <a>namespace IRIs</a> by using a
-      <a>namespace prefix</a> in order to assist readability. For example, the IRI
-      <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral</code>
+    <p>In some serialization formats, it is common
+      to associate some [=namespace IRIs=] with arbitrary [=namespace prefixes=],
+      and to improve readability by abbreviating <a>IRIs</a> that start with one of those <a>namespace IRIs</a>
+      by using the corresponding <a>namespace prefix</a>.
+      For example,
+      based on the prefix mapping in <a href="#tab-vocab-ns">the table above</a>,
+      the IRI <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral</code>
       would be abbreviated as <code>rdf:XMLLiteral</code>.
-      Note however that these abbreviations are <em>not</em> valid IRIs,
-      and must not be used in contexts where IRIs are expected.
-      Namespace IRIs and namespace prefixes are <em>not</em> a formal part of the
-      RDF data model. They are merely a syntactic convenience for
-      abbreviating IRIs.</p>
+      Note however that such abbreviations are <em>not</em> meant to be processed directly as IRIs,
+      and are not to be used in syntactic contexts where IRIs are expected.
+      Note also that [=namespace IRIs=] and [=namespace prefixes=] are not a formal part of the RDF data model.
+      They are merely a syntactic convenience for abbreviating IRIs;
+      for processing, the actual IRIs are reconstructed by replacing each namespace prefix with the corresponding namespace IRI.
+    </p>
 
     <p>The term “<dfn class="lint-ignore">namespace</dfn>” on its own does not have a
       well-defined meaning in the context of RDF, but is sometimes informally
@@ -315,28 +319,33 @@
     <h3>Triple Terms and Reification</h3>
 
     <p>A <a>triple term</a> is an [=RDF triple=] used as an [=RDF term=]
-      in the [=object=] position of another triple.</p>
+      in another triple. This use is a reference to a <a>proposition</a>. For
+      the triple term to also be asserted, it must [=appear=] in the same graph as both an <a>asserted
+      triple</a> and an unasserted <a>triple term</a>. This allows for statements to be made about statements
+      independent of their assertion within an <a>RDF graph</a>.
+    </p>
 
-    <p>A <a>triple term</a> is not necessarily asserted, allowing
-      statements to be made about other statements that may not be
-      asserted within an <a>RDF graph</a>.
-      This allows statements to be made about relationships that may be contradictory.
-      For a <a>triple term</a> to be asserted,
-      it must also appear in a graph as an <a>asserted triple</a>.</p>
+    <p>[=RDF terms=] that [=appear=] in a [=triple term=] have the same
+      <a data-lt="denotes">denotation</a> as when they appear in an
+      [=asserted triple=] in the <a data-lt="RDF graph">graph</a>.
+      For this reason, we say that triple terms are
+      <dfn class="lint-ignore">transparent</dfn>.</p>
 
-    <p>A <a>triple term</a> can be used as the object of a <a>triple</a> with the predicate <code>rdf:reifies</code>;
-      such a <a>triple</a> is then a <dfn>reifying triple</dfn>.
-      The <a>subject</a> of that <a>triple</a> is called a <dfn>reifier</dfn>.
-      Assertions on the <a>triple term</a> are made using the <a>reifier</a>.
-      A concrete syntax may provide a special notation for specifying <a>reifying triples</a>.</p>
+    <p>
+      A <dfn>reifying triple</dfn> is a triple where the <a>predicate</a> is <code>rdf:reifies</code>
+      and the <a>object</a> is a <a>triple term</a>.
+      The <a>subject</a> of that triple is called a <dfn>reifier</dfn>, and it can be the
+      subject or object of other triples.
+      When the triple term of a <a>reifying triple</a> also [=appears=] in the
+      same graph as an <a>asserted triple</a>, the subset of triples that share
+      the same <a>reifier</a> as subject is called a <dfn>triple annotation</dfn>.
+    </p>
 
-    <p class="note">Using the <a>reifier</a> as an indirect way of referencing a <a>triple term</a>
-      allows multiple groups of assertions to be separated from each other,
-      which might be necessary if the same <a>triple term</a> was derived from different sources.
-      Assertions are always made using the <a>reifier</a>, which can be the <a>subject</a> or <a>object</a>
-      of different triples.
-      Concrete syntaxes, such as Turtle [[RDF12-TURTLE]],
-      may have shortcuts for capturing a <a>triple term</a> with its <a>reifier</a>.</p>
+    <p>
+      Concrete syntaxes, such as Turtle [[RDF12-TURTLE]], may have shortcuts
+      for specifying <a>reifying triples</a> and <a>triple annotations</a> more
+      succinctly.
+    </p>
 
     <p>The following diagram represents a <a>reifying triple</a> of an unasserted, abstract <a>triple term</a>, and a <a>triple</a> relating the <a>reifier</a> to another resource.</p>
 
@@ -351,38 +360,61 @@
     </figure>
 
     <p>Here is a variation on the graph shown in <a href="#fig-triple-term"></a>. This represents a graph
-      where the <a>triple term</a> corresponds to an <a>asserted triple</a>.
+      where an <a>asserted triple</a> corresponds to the <a>triple term</a> object of a <a>reifying triple</a>,
+      qualifying the description about this <a>reifier</a> as a <a>triple annotation</a>.
     </p>
 
     <figure id="fig-asserted-triple-term">
       <a href="asserted-triple-term.svg">
         <object data="asserted-triple-term.svg" aria-describedby="fig-asserted-triple-term-alt"
-          aria-label="An RDF graph containing a reifying triple where the triple term corresponds to an asserted triple"></object>
+          aria-label="An RDF graph containing a triple annotation, where the triple term of a reifying triple corresponds to an asserted triple"></object>
       </a>
       <figcaption id="fig-asserted-triple-term-alt">
-        An <a>RDF graph</a> containing a <a>reifying triple</a> where the <a>triple term</a> corresponds to an <a>asserted triple</a>.
+        An <a>RDF graph</a> containing a <a>triple annotation</a>, where the <a>triple term</a> of a <a>reifying triple</a> corresponds to an <a>asserted triple</a>.
         The diagram represents the proposition as a fact using the asserted triple, meaning that the relationship holds.
       </figcaption>
     </figure>
 
+    <div class="note">
+      <p><a>Triple terms</a> always denote abstract, logical <a>propositions</a>,
+        while <a>reifiers</a> may denote a variety of things that are related
+        to these propositions (such as a statement or belief that the
+        proposition holds, or an event or circumstance that makes the
+        proposition true).
+        It is therefore expected that triple terms are commonly used as
+        <a>objects</a> of <a>reifying triples</a>, and that the reifiers
+        (rather than the triple terms) are used in further descriptions.</p>
+      <p>
+        There can be multiple, distinct reifiers related to the same abstract
+        proposition, such as statements with different sources, or
+        circumstances with different characteristics. One reifier may also be
+        used to reify multiple, distinct propositions, expressing different
+        propositional aspects using the same reifier.</p>
+      <p>Since a proposition so reified does not have to hold, it is possible
+        to make statements about any kind of statement, including an unasserted
+        statement that contradicts another statement, whether asserted or not.</p>
+    </div>
+
     <p>Note that a <a>triple term</a> may also have another <a>triple term</a> as an <a>object</a>.</p>
 
-   <p class="note">
-	This document advises the reader to understand that
-	an assertion on a reified triple 
-	is an assertion on an asserted triple of the same form, 
-	if such a triple occurs in a graph as both a reified triple 
-	and an asserted triple.
-	However, this understanding is not backed by the model-theoretic semantics 
-	as laid out in RDF 1.2 Semantics;
-	i.e., co-reference is not defined via a model-theoretic formalisation of
-	<a href="https://www.w3.org/TR/rdf12-concepts/#dfn-denote">denotation</a>,
-	but relies on an operational semantics of
-	<a href="https://w3c.github.io/rdf-semantics/spec/#dfn-identify">identification</a>, 
-	established via best practices, examples, and convention
-	in this document, RDF 1.2 Primer, and RDF 1.2 Note on triple terms (tbd).
-   </p>
+   <div class="note">
+     <p>This document advises the reader to understand that
+	    an assertion on a reified triple 
+	    is an assertion on an asserted triple of the same form, 
+	    if such a triple occurs in a graph as both a reified triple 
+	    and an asserted triple.
+	    However, this understanding is not backed by the model-theoretic semantics 
+	    as laid out in RDF 1.2 Semantics;
+	    i.e., co-reference is not defined via a model-theoretic formalisation of
+	    <a href="https://www.w3.org/TR/rdf12-concepts/#dfn-denote">denotation</a>,
+	    but relies on an operational semantics of
+	    <a href="https://w3c.github.io/rdf-semantics/spec/#dfn-identify">identification</a>, 
+	    established via best practices, examples, and convention
+	    in this document, RDF 1.2 Primer, and RDF 1.2 Note on triple terms (tbd).</p>
+   </div>
 	  
+    
+    
   </section>
 
   <section id="change-over-time">
@@ -596,11 +628,11 @@ Accept: text/turtle; version=1.2
   <p>This specification establishes two conformance levels:</p>
 
   <ul>
-    <li><dfn class="no-export lint-ignore" data-lt="full">Full conformance</dfn>
+    <li><dfn class="export" data-local-lt="full">Full conformance</dfn>
       supports <a data-lt="RDF graph">graphs</a> and <a data-lt="RDF dataset">datasets</a>
       with <a>triples</a> that contain <a>triple terms</a>.
       </li>
-    <li><dfn class="no-export lint-ignore" data-lt="basic">Basic conformance</dfn>
+    <li><dfn class="export" data-local-lt="basic">Basic conformance</dfn>
       only supports <a data-lt="RDF graph">graphs</a> or <a data-lt="RDF dataset">datasets</a>
       with <a>triples</a> that do not contain <a>triple terms</a>.</li>
   </ul>
@@ -612,7 +644,7 @@ Accept: text/turtle; version=1.2
   <section id="defined-version-labels">
     <h3>Version Labels</h3>
     <p>
-      A <dfn>version label</dfn> is a string that identifies the syntax and semantics conformance
+      A <dfn class="export">version label</dfn> is a string that identifies the syntax and semantics conformance
       for the RDF data.
     </p>
     <table id="tab-version-labels" class="simple">
@@ -691,8 +723,8 @@ Accept: text/turtle; version=1.2
     <h3>Strings in RDF</h3>
 
     <p>RDF uses Unicode [[Unicode]] as the fundamental representation for string values.
-      Within this, and related specifications, the term <dfn id="dfn-rdf-string">string</dfn>,
-      or <a data-lt="string">RDF string</a>,
+      Within this and related specifications, the term <dfn id="dfn-rdf-string" class="export" data-local-lt="string">RDF string</dfn>,
+      or simply [=string=],
       is used to describe an ordered sequence of zero or more
       <a data-cite="I18N-GLOSSARY#dfn-code-point" class="lint-ignore">Unicode code points</a>
       which are <a data-cite="I18N-GLOSSARY#dfn-scalar-value" class="lint-ignore">Unicode scalar values</a>.
@@ -715,7 +747,7 @@ Accept: text/turtle; version=1.2
 <section id="section-rdf-graph">
   <h2>RDF Graphs</h2>
 
-  <p>An <dfn>RDF graph</dfn> is a set of <a>RDF triples</a>.</p>
+  <p>An <dfn class="export">RDF graph</dfn> is a set of <a>RDF triples</a>.</p>
 
   <p>An [=RDF triple=] that is an element of an [=RDF graph=] is also said to be <dfn id="dfn-asserted-triple" class=export data-lt="asserted triple|asserted triples" data-lt-no-plural=""
       >asserted</dfn> in that [=RDF graph=]
@@ -746,7 +778,7 @@ Accept: text/turtle; version=1.2
 
     <p>The three components (|s|, |p|, |o|) of an [=RDF triple=] are respectively called the <dfn class=export >subject</dfn>, <dfn class=export >predicate</dfn> and <dfn class=export >object</dfn> of the triple.</p>
 
-    <p>The set of <span id="dfn-nodes"><!-- obsolete term--></span><dfn data-lt="node">nodes</dfn> of an <a>RDF graph</a>
+    <p>The set of <span id="dfn-nodes"><!-- obsolete term--></span><dfn class="export" data-lt="RDF node">nodes</dfn> of an <a>RDF graph</a>
       is the set of <a>subjects</a> and <a>objects</a> of the <a>asserted triples</a> of the graph.
       It is possible for a [=predicate=] [=IRI=] to also occur as a [=node=] in
       the same graph.</p>
@@ -773,13 +805,13 @@ Accept: text/turtle; version=1.2
 
     <p><a>IRIs</a>, <a>literals</a>,
       <a>blank nodes</a>, and <a>triple terms</a> are collectively known as
-      <span id="dfn-rdf-terms"><!-- obsolete term--></span><dfn data-lt="rdf term">RDF terms</dfn>.</p>
+      <span id="dfn-rdf-terms"><!-- obsolete term--></span><dfn class="export" data-lt="rdf term">RDF terms</dfn>.</p>
 
     <p>
       [=IRIs=], [=literals=] and [=blank nodes=] are said to be <dfn class="export" data-lt-no-plural>atomic</dfn> [=RDF terms=].
     </p>
 
-    <p><dfn>RDF term equality</dfn>:
+    <p><dfn class="export">RDF term equality</dfn>:
       Two [=RDF terms=] |t| and <var>t'</var> are equal (the same [=RDF term=]) if and only if
       one of the following four conditions holds:</p>
 
@@ -809,7 +841,7 @@ Accept: text/turtle; version=1.2
       [=triple term=] [=appearing=] in that graph.</p>
 
     <p>
-      An [=RDF term=] is said to be <dfn>ground</dfn> if any of the following three conditions holds:
+      An [=RDF term=] is said to be <dfn class="export">ground</dfn> if any of the following three conditions holds:
     </p>
 
     <ul>
@@ -829,7 +861,7 @@ Accept: text/turtle; version=1.2
   <section id="section-IRIs">
     <h3>IRIs</h3>
 
-    <p>An <dfn data-lt="iri"><abbr title="Internationalized Resource Identifier">IRI</abbr></dfn>
+    <p>An <dfn class="export" data-lt="iri"><abbr title="Internationalized Resource Identifier">IRI</abbr></dfn>
       (Internationalized Resource Identifier) within an RDF graph
       is a <a>string</a> that conforms to the syntax
       defined in RFC 3987 [[!RFC3987]].</p>
@@ -939,18 +971,18 @@ Accept: text/turtle; version=1.2
 
     <p>Literals are used for values such as strings, numbers, and dates.</p>
 
-    <p>A <dfn data-local-lt="RDF literal">literal</dfn> consists of
+    <p>A <dfn class="export" data-lt="RDF literal">literal</dfn> consists of
       two, three, or four components, as below:</p>
 
     <ol>
-      <li>A <dfn>lexical form</dfn>, being an <a data-lt="string">RDF string</a>.
-      <li>A <dfn>datatype IRI</dfn>, being an <a>IRI</a>
+      <li>A <dfn class="export">lexical form</dfn>, being an <a data-lt="string">RDF string</a>.</li>
+      <li>A <dfn class="export">datatype IRI</dfn>, being an <a>IRI</a>
         identifying a datatype that determines how the lexical form maps
         to a <a>literal value</a>.</li>
       <li>If and only if the <a>datatype IRI</a> is
         <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#langString</code> or
         <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#dirLangString</code>, a
-        non-empty <dfn>language tag</dfn> as defined by [[!BCP47]]. The
+        non-empty <dfn class="export">language tag</dfn> as defined by [[!BCP47]]. The
         language tag MUST be well-formed according to
         <a data-cite="bcp47#section-2.2.9">section 2.2.9</a>
         of [[!BCP47]],
@@ -958,15 +990,15 @@ Accept: text/turtle; version=1.2
         Two [[!BCP47]]-complying strings that differ only by case represent the same [=language tag=].</li>
       <li>If and only if the <a>datatype IRI</a> is
         <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#dirLangString</code>,
-        a <dfn>base direction</dfn> that MUST be one of the following:<ul>
+        a <dfn class="export">base direction</dfn> that MUST be one of the following:<ul>
           <li>`ltr`, indicating that the initial text direction is set to left-to-right</li>
           <li>`rtl`, indicating that the initial text direction is set to right-to-left</li>
         </ul></li>
     </ol>
 
-    <p>A literal is a <dfn>language-tagged string</dfn> if the [=language tag=]
+    <p>A literal is a <dfn class="export">language-tagged string</dfn> if the [=language tag=]
       is present and the [=base direction=] is <em>not</em> present.
-      A literal is a <dfn id="dfn-dir-lang-string">directional language-tagged string</dfn>
+      A literal is a <dfn id="dfn-dir-lang-string" class="export">directional language-tagged string</dfn>
       if both the [=language tag=] and the [=base direction=] are present.
     </p>
 
@@ -1033,7 +1065,7 @@ Accept: text/turtle; version=1.2
     <section>
       <h2>Literal value</h2>
 
-        <p>The <dfn>literal value</dfn> associated with a <a>literal</a> is defined as follows.</p>
+        <p>The <dfn class="export">literal value</dfn> associated with a <a>literal</a> is defined as follows.</p>
 
       <ul>
         <li>If the literal is a <a>language-tagged string</a>,
@@ -1048,7 +1080,7 @@ Accept: text/turtle; version=1.2
               of the <a>datatype</a>, then the literal value is the result of applying
               the <a>lexical-to-value mapping</a> of the datatype to the
               <a>lexical form</a>.</li>
-            <li>Otherwise, the literal is <dfn data-lt-no-plural>ill-typed</dfn> and no literal value can be
+            <li>Otherwise, the literal is <dfn class="export" data-lt-no-plural>ill-typed</dfn> and no literal value can be
                associated with the literal. Such a case produces a semantic
                [=inconsistency=], but it is not <em>syntactically</em> ill-formed.
                Implementations SHOULD accept [=ill-typed=] literals and produce RDF
@@ -1082,7 +1114,7 @@ Accept: text/turtle; version=1.2
   <section id="section-blank-nodes">
     <h3>Blank Nodes</h3>
 
-    <p><dfn data-lt="blank node">Blank nodes</dfn> are disjoint from
+    <p><dfn class="export" data-lt="blank node">Blank nodes</dfn> are disjoint from
       <a>IRIs</a> and <a>literals</a>.  Otherwise,
       the set of possible blank nodes is arbitrary.  RDF makes no reference to
       any internal structure of blank nodes.</p>
@@ -1125,12 +1157,6 @@ Accept: text/turtle; version=1.2
     <p>Triple term equality:
       Since triple terms are [=triples=], equality of triple terms is the same as [=triple equality=].</p>
       
-    <p class="note">Every <a>triple</a> with a <a>triple term</a> as its [=object=] SHOULD
-      use <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#reifies</code> (<code>rdf:reifies</code>)
-      as its <a>predicate</a>.
-      Every <a>triple</a> whose <a>object</a> is not a <a>triple term</a> SHOULD NOT
-      use <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#reifies</code> (<code>rdf:reifies</code>)
-      as its <a>predicate</a>.</p>
   </section>
 
   <section id="graph-isomorphism">
@@ -1246,15 +1272,15 @@ Accept: text/turtle; version=1.2
 <section id="section-dataset">
   <h2>RDF Datasets</h2>
 
-  <p>An <dfn>RDF dataset</dfn> is a collection of
+  <p>An <dfn class="export">RDF dataset</dfn> is a collection of
     <a>RDF graphs</a>, and comprises:</p>
 
   <ul>
-    <li>Exactly one <dfn>default graph</dfn>, being an <a>RDF graph</a>.
+    <li>Exactly one <dfn class="export">default graph</dfn>, being an <a>RDF graph</a>.
       The default graph does not have a name and MAY be empty.</li>
-    <li>Zero or more <span id="dfn-named-graphs"><!-- obsolete term--></span><dfn data-lt="named graph">named graphs</dfn>.
+    <li>Zero or more <span id="dfn-named-graphs"><!-- obsolete term--></span><dfn class="export" data-lt="named graph">named graphs</dfn>.
       Each named graph is a pair consisting of an <a>IRI</a> or a blank node
-      (the <dfn>graph name</dfn>), and an <a>RDF graph</a>.
+      (the <dfn class="export">graph name</dfn>), and an <a>RDF graph</a>.
       Graph names are unique within an RDF dataset.</li>
   </ul>
 
@@ -1358,15 +1384,15 @@ Accept: text/turtle; version=1.2
     <code><a>rdf:JSON</a></code>, <code><a>rdf:HTML</a></code>, and <code><a>rdf:XMLLiteral</a></code>.
   </p>
 
-  <p>A <dfn>datatype</dfn> consists of a <a>lexical space</a>,
+  <p>A <dfn class="export">datatype</dfn> consists of a <a>lexical space</a>,
     a <a>value space</a> and a <a>lexical-to-value mapping</a>, and
     is identified by one or more <a>IRIs</a>.</p>
 
-  <p>The <dfn>lexical space</dfn> of a datatype is a set of <a>strings</a>.</p>
+  <p>The <dfn class="export">lexical space</dfn> of a datatype is a set of <a>strings</a>.</p>
 
-  <p>The <dfn>lexical-to-value mapping</dfn> of a datatype is a set of
+  <p>The <dfn class="export">lexical-to-value mapping</dfn> of a datatype is a set of
     pairs whose first element belongs to the <a>lexical space</a>,
-    and the second element belongs to the <dfn>value space</dfn>
+    and the second element belongs to the <dfn class="export">value space</dfn>
     of the datatype. Each member of the lexical space is paired with exactly
     one value, and is a <em>lexical representation</em>
     of that value. The mapping can be seen as a function
@@ -1442,7 +1468,7 @@ Accept: text/turtle; version=1.2
       is the name of a datatype, denote the built-in datatypes defined in
       <em>[[[XMLSCHEMA11-2]]]</em> [[!XMLSCHEMA11-2]]. The XML Schema built-in types
       listed in the following table are the
-      <dfn>RDF-compatible XSD types</dfn>. Their use is RECOMMENDED.</p>
+      <dfn class="export">RDF-compatible XSD types</dfn>. Their use is RECOMMENDED.</p>
 
     <p>Readers might note that the only safe datatypes for transferring
       binary information are `xsd:hexBinary` and `xsd:base64Binary`.</p>
@@ -1745,7 +1771,7 @@ Accept: text/turtle; version=1.2
     <p>RDF provides for HTML content as a possible <a>literal value</a>.
       This allows markup in literal values. Such content is indicated
       in an <a>RDF graph</a> using a <a>literal</a> whose <a>datatype</a>
-      is set to <code><dfn>rdf:HTML</dfn></code>.</p>
+      is set to <code><dfn class="export">rdf:HTML</dfn></code>.</p>
 
     <p>The <code>rdf:HTML</code> datatype is defined as follows:</p>
 
@@ -1798,7 +1824,7 @@ Accept: text/turtle; version=1.2
 
     <p>RDF provides for XML content as a possible <a>literal value</a>.
       Such content is indicated in an <a>RDF graph</a> using a <a>literal</a>
-      whose <a>datatype</a> is set to <code><dfn>rdf:XMLLiteral</dfn></code>.</p>
+      whose <a>datatype</a> is set to <code><dfn class="export">rdf:XMLLiteral</dfn></code>.</p>
 
     <p>The <code>rdf:XMLLiteral</code> datatype is defined as follows:</p>
 
@@ -1849,7 +1875,7 @@ Accept: text/turtle; version=1.2
     <p>RDF provides for JSON content as a possible <a>literal value</a>.
       This includes allowing markup in literal values. Such content is indicated in an
       <a>RDF graph</a> as a <a>literal</a> whose <a>datatype</a> is set
-      to <code><dfn>rdf:JSON</dfn></code>.</p>
+      to <code><dfn class="export">rdf:JSON</dfn></code>.</p>
 
     <p>The <code>rdf:JSON</code> datatype is defined as follows:</p>
 
