@@ -1206,46 +1206,6 @@ Accept: text/turtle; version=1.2
       &quot;<bdo dir="ltr" lang="he">ספרים בינלאומיים!</bdo>&quot;</p>
   </section>
 
-  <section id="section-skolemization">
-    <h3>Replacing Blank Nodes with IRIs</h3>
-
-    <p>Blank nodes do not have identifiers in the RDF abstract syntax. The
-      <a>blank node identifiers</a> introduced
-      by some concrete syntaxes have only
-      local scope and are purely an artifact of the serialization.</p>
-
-    <p>In situations where stronger identification is needed, systems MAY
-      systematically replace some or all of the blank nodes in an RDF graph
-      with <a>IRIs</a>.  Systems wishing to do this SHOULD
-      mint a new, globally
-      unique IRI (a <dfn class="export">Skolem IRI</dfn>) for each blank node so replaced.</p>
-
-    <p>This transformation does not appreciably change the meaning of an
-      RDF graph, provided that the Skolem IRIs do not occur anywhere else.
-      It does however permit other graphs
-      to subsequently use the Skolem IRIs, which is not possible
-      with blank nodes.</p>
-
-    <p>Systems may wish to mint Skolem IRIs in such a way that they can
-      recognize the IRIs as having been introduced solely to replace blank
-      nodes. This allows a system to map IRIs back to blank nodes
-      if needed.</p>
-
-    <p>Systems that want Skolem IRIs to be recognizable outside of the system
-      boundaries SHOULD use a well-known IRI [[RFC8615]] with the registered
-      name <code>genid</code>. This is an IRI that uses the HTTP or HTTPS scheme,
-      or another scheme that has been specified to use well-known IRIs, and whose
-      path component starts with <code>/.well-known/genid/</code>.
-
-    <p>For example, the authority responsible for the domain
-      <code>example.com</code> could mint the following recognizable Skolem IRI:</p>
-
-    <pre>http://example.com/.well-known/genid/d26a2d0e98334696f4ad70a677abc1f6</pre>
-
-    <p class="note">RFC 8615 [[RFC8615]] only specifies well-known URIs,
-      not IRIs. For the purpose of this document, a well-known IRI is any
-      IRI that results in a well-known <a>URI</a> after IRI-to-URI mapping [[!RFC3987]].</p>
-  </section>
 
 </section>
 
@@ -1976,6 +1936,47 @@ Accept: text/turtle; version=1.2
       and suggests defining a new datatype for unordered maps.</p>
   </section>
 
+</section>
+
+<section id="section-skolemization">
+  <h2>Replacing Blank Nodes with IRIs</h2>
+
+  <p>Blank nodes do not have identifiers in the RDF abstract syntax. The
+    <a>blank node identifiers</a> introduced
+    by some concrete syntaxes have only
+    local scope and are purely an artifact of the serialization.</p>
+
+  <p>In situations where stronger identification is needed, systems MAY
+    systematically replace some or all of the blank nodes in an RDF graph
+    with <a>IRIs</a>.  Systems wishing to do this SHOULD
+    mint a new, globally
+    unique IRI (a <dfn class="export">Skolem IRI</dfn>) for each blank node so replaced.</p>
+
+  <p>This transformation does not appreciably change the meaning of an
+    RDF graph, provided that the Skolem IRIs do not occur anywhere else.
+    It does however permit other graphs
+    to subsequently use the Skolem IRIs, which is not possible
+    with blank nodes.</p>
+
+  <p>Systems may wish to mint Skolem IRIs in such a way that they can
+    recognize the IRIs as having been introduced solely to replace blank
+    nodes. This allows a system to map IRIs back to blank nodes
+    if needed.</p>
+
+  <p>Systems that want Skolem IRIs to be recognizable outside of the system
+    boundaries SHOULD use a well-known IRI [[RFC8615]] with the registered
+    name <code>genid</code>. This is an IRI that uses the HTTP or HTTPS scheme,
+    or another scheme that has been specified to use well-known IRIs, and whose
+    path component starts with <code>/.well-known/genid/</code>.
+
+  <p>For example, the authority responsible for the domain
+    <code>example.com</code> could mint the following recognizable Skolem IRI:</p>
+
+  <pre>http://example.com/.well-known/genid/d26a2d0e98334696f4ad70a677abc1f6</pre>
+
+  <p class="note">RFC 8615 [[RFC8615]] only specifies well-known URIs,
+    not IRIs. For the purpose of this document, a well-known IRI is any
+    IRI that results in a well-known <a>URI</a> after IRI-to-URI mapping [[!RFC3987]].</p>
 </section>
 
 <section id="privacy" class="appendix informative">
