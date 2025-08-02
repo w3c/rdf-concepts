@@ -1002,7 +1002,7 @@ Accept: text/turtle; version=1.2
     </ul>
 
     <section>
-      <h2>Representation of literals</h2>
+      <h4>Representation of literals</h4>
 
       <p>Some concrete syntaxes MAY support
         <dfn data-lt="simple literal" class="export">simple literals</dfn> consisting of only a
@@ -1043,7 +1043,7 @@ Accept: text/turtle; version=1.2
     </section>
 
     <section>
-      <h2>Literal value</h2>
+      <h4>Literal value</h4>
 
         <p>The <dfn class="export">literal value</dfn> associated with a <a>literal</a> is defined as follows.</p>
 
@@ -1089,6 +1089,40 @@ Accept: text/turtle; version=1.2
         same literal <a>RDF term</a> because their
         <a>lexical forms</a> differ.</p>
     </section>
+
+    <section id="section-text-direction" class="informative">
+      <h4>Initial text direction</h4>
+
+      <p>The <a>base direction</a> of a <a>directional language-tagged string</a>
+        provides a means of establishing the initial direction of text,
+        including text which is a mixture of right-to-left and left-to-right scripts.
+        The [=Unicode Bidirectional Algorithm=] [[?I18N-Glossary]] provides support for automatically rendering
+        a sequence of characters in logical order,
+        so that they are visually ordered as expected,
+        but this is not sufficient to correctly render bidirectional text.</p>
+
+      <p>For example, some text with a language tag "`he`" might be displayed
+        in a left-to-right context (such as an English web page) as
+        <bdi dir="ltr">פעילות הבינאום, W3C</bdi>, which is incorrect. When provided
+        to a user agent including base direction information (such as using
+        HTML's `dir` attribute) it can then be correctly presented as:
+      </p>
+      <div lang="he" dir="rtl">פעילות הבינאום, W3C</div>
+
+      <p>In the absence of an explicit initial text direction,
+        the [=Unicode Bidirectional Algorithm=] detects the text direction from the content.
+        This depends on the first strongly directional character in the text
+        or on the context.
+        To avoid [=spillover effects=], users need to employ [=bidi isolation=] 
+        whenever text is inserted into a larger document.
+        For example,
+        &quot;<code>&lt;bdi lang="he"&gt;ספרים בינלאומיים!&lt;/bdi&gt;</code>&quot;
+        displays the Hebrew characters in a right-to-left fashion
+        — i.e., as &quot;<bdi lang="he">ספרים בינלאומיים!</bdi>&quot;
+        — while they would be stored in memory as
+        &quot;<bdo dir="ltr" lang="he">ספרים בינלאומיים!</bdo>&quot;</p>
+    </section>
+
   </section>
 
   <section id="section-blank-nodes">
@@ -1171,39 +1205,6 @@ Accept: text/turtle; version=1.2
       a new blank node to give <var>G'</var>. Graph isomorphism
       is needed to support the RDF Test Cases [[RDF11-TESTCASES]] specification.</p>
 
-  </section>
-
-  <section id="section-text-direction" class="informative">
-    <h3>Initial Text Direction</h3>
-
-    <p>The <a>base direction</a> of a <a>directional language-tagged string</a>
-      provides a means of establishing the initial direction of text,
-      including text which is a mixture of right-to-left and left-to-right scripts.
-      The [=Unicode Bidirectional Algorithm=] [[?I18N-Glossary]] provides support for automatically rendering
-      a sequence of characters in logical order,
-      so that they are visually ordered as expected,
-      but this is not sufficient to correctly render bidirectional text.</p>
-
-    <p>For example, some text with a language tag "`he`" might be displayed
-      in a left-to-right context (such as an English web page) as
-      <bdi dir="ltr">פעילות הבינאום, W3C</bdi>, which is incorrect. When provided
-      to a user agent including base direction information (such as using
-      HTML's `dir` attribute) it can then be correctly presented as:
-    </p>
-    <div lang="he" dir="rtl">פעילות הבינאום, W3C</div>
-
-    <p>In the absence of an explicit initial text direction,
-      the [=Unicode Bidirectional Algorithm=] detects the text direction from the content.
-      This depends on the first strongly directional character in the text
-      or on the context.
-      To avoid [=spillover effects=], users need to employ [=bidi isolation=] 
-      whenever text is inserted into a larger document.
-      For example,
-      &quot;<code>&lt;bdi lang="he"&gt;ספרים בינלאומיים!&lt;/bdi&gt;</code>&quot;
-      displays the Hebrew characters in a right-to-left fashion
-      — i.e., as &quot;<bdi lang="he">ספרים בינלאומיים!</bdi>&quot;
-      — while they would be stored in memory as
-      &quot;<bdo dir="ltr" lang="he">ספרים בינלאומיים!</bdo>&quot;</p>
   </section>
 
 
