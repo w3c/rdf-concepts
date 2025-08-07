@@ -1844,9 +1844,9 @@ Accept: text/turtle; version=1.2
         <a>strings</a>,
         numbers (<a data-cite="XMLSCHEMA11-2#double"><strong>xsd:double</strong></a>),
         <a data-cite="INFRA#ordered-map">maps</a>
-        (mapping <a>strings</a> to values in the <a href="#JSON-value-space">value space</a> where the order of <a data-cite="INFRA#map-entry">map entries</a> is not significant),
+        mapping <a>strings</a> to values in the <a href="#JSON-value-space">value space</a> where the key-value pairs are ordered by key (using <a data-cite="I18N-GLOSSARY#dfn-code-point" class="lint-ignore">Unicode code points</a> order),
         <a data-cite="INFRA#list">lists</a>
-        (of values in the <a href="#JSON-value-space">value space</a>), and
+        of values in the <a href="#JSON-value-space">value space</a>, and
         literal values (<a data-cite="INFRA#boolean">`true`, `false`</a>, and <a data-cite="INFRA#nulls">`null`</a>)
         from [[[INFRA]]] [[INFRA]] and [[[XMLSCHEMA11-2]]] [[XMLSCHEMA11-2]].
 
@@ -1854,37 +1854,7 @@ Accept: text/turtle; version=1.2
           and <a data-cite="INFRA#list">lists</a> does not include values having themselves as members,
           which cannot be represented in JSON.</p>
 
-        <p>Two values (|a| and |b|) are considered equal if any of the following are true:
-          <ul>
-            <li>They are the same <a>string</a>,
-              number (<a data-cite="XMLSCHEMA11-2#double"><strong>xsd:double</strong></a>), or
-              literal value.</li>
-            <li>They are both <a data-cite="INFRA#list">lists</a> containing <a data-cite="INFRA#list-item">items</a>
-              which are pairwise equal – meaning that each <a data-cite="INFRA#list-item">item</a>
-              in |a| is equal the <a data-cite="INFRA#list-item">item</a>
-              at the corresponding index in |b|,
-              and both |a| and |b| have the same <a data-cite="INFRA#list-size">size</a>.</li>
-            <li>They are both <a data-cite="INFRA#ordered-map">maps</a> with equal <a data-cite="INFRA#map-entry">entries</a>
-              – meaning that for each entry <var>e<sub>a</sub></var> in |a|
-              there exists an entry <var>e<sub>b</sub></var> in |b|
-              such that the <a data-cite="INFRA#map-key">key</a> in <var>e<sub>a</sub></var>
-              equals the <a data-cite="INFRA#map-key">key</a> in <var>e<sub>b</sub></var>,
-              the <a data-cite="INFRA#map-value">value</a> in <var>e<sub>a</sub></var>
-              equals the <a data-cite="INFRA#map-value">value</a> in <var>e<sub>b</sub></var>,
-              and both |a| and |b| have the same <a data-cite="INFRA#map-size">size</a>.
-              <div class="note">Two JSON Objects containing maps which are serialized with entries in a different order will be equal under this definition when transformed to the value space.
-              For example, `{ "a": 1, "b": 2 } and { "b": 2, "a": 1 }` are considered equal.
-              As a result of the value space being defined using terminology from [[INFRA]],
-              property values which can contain more than one item, such as <a data-cite="INFRA#list">lists</a> and <a data-cite="INFRA#ordered-map">maps</a>,
-              are explicitly ordered.
-              All list-like value structures in [[INFRA]] are ordered,
-              whether or not that order is significant.
-              For the purposes of this specification, unless otherwise stated,
-              <a data-cite="INFRA#ordered-map">map</a> ordering is not important
-              and implementations are not expected to produce or consume deterministically ordered values.
-              </div>
-            </li>
-          </ul>
+        <p>Two values are considered equal if and only if they are the same element of the value space.</p>
       </dd> 
 
       <dt id="JSON-mapping">The <a>lexical-to-value mapping</a></dt>
@@ -1900,8 +1870,9 @@ Accept: text/turtle; version=1.2
             by transforming each object member into a <a data-cite="INFRA#map-entry">map entry</a>
             with the <a data-cite="INFRA#map-key">key</a> taken from the member name and
             <a data-cite="INFRA#map-value">value</a> taken by performing this mapping
-            to the member value.
-            <a data-cite="INFRA#map-entry">Map entries</a> are treated as being unordered.
+            to the member value,
+            and sorting the entryes by key ()
+            (using <a data-cite="I18N-GLOSSARY#dfn-code-point" class="lint-ignore">Unicode code points</a> order).
           </li>
           <li>A <a data-cite="RFC8259#section-5">JSON Array</a> is mapped to a <a data-cite="INFRA#list">list</a>
             such that this <a data-cite="INFRA#list">list</a> contains as many
@@ -1932,6 +1903,9 @@ Accept: text/turtle; version=1.2
         </ul>
       </dd>
     </dl>
+    <p class="note">
+      The constraint to order map entries in the value space is only meant to make the order of object-member the lexical space irrelevant. In other word, it ensures that both lexical values <code>{"a": "b", "c": "d"}</code> and <code>{"c": "d", "a": "b"}</code> are mapped to the same element of the value space. Implementations may omit to sort the entries, as long as they treat the maps in the value space as unordered.
+    </p>
     <p class="issue" data-number="116">The issue refers to the use
       of <a data-cite="INFRA#ordered-map">ordered map</a>
       from [[INFRA]] for describing the value space of <a data-cite="RFC8259#section-4">JSON Objects</a>
