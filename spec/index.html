@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="color-scheme" content="light dark">
-  <title>RDF 1.2 Concepts and Abstract Syntax</title>
+  <title>RDF 1.2 Concepts and Abstract Data Model</title>
   <script src="https://www.w3.org/Tools/respec/respec-w3c" class="remove"></script>
   <script src="./common/local-biblio.js" class="remove"></script>
   <script src="./common/fixup.js" class="remove"></script>
@@ -77,9 +77,9 @@
 <section id="abstract">
   <p>The Resource Description Framework (RDF) is a framework for
     representing information on the Web.
-    This document defines an abstract syntax
+    This document defines an abstract data model
     which serves to link all RDF-based languages and specifications.
-    The abstract syntax has two key data structures:</p>
+    The abstract model has two key data structures:</p>
   <ul>
     <li>RDF graphs are sets of subject-predicate-object triples,
       where the elements may be IRIs, blank nodes, datatyped literals, or triple terms.
@@ -119,7 +119,7 @@
   <p>The <em>Resource Description Framework</em> (RDF) is a framework
   for representing information on the Web.</p>
 
-  <p>This document defines an abstract syntax
+  <p>This document defines an abstract data model
   which serves to link all RDF-based languages and specifications,
   including the following:</p>
 
@@ -135,9 +135,9 @@
   </ul>
 
   <section id="data-model">
-    <h3>Graph-based Abstract Syntax</h3>
+    <h3>Graph-based Abstract Data Model</h3>
 
-    <p>The core structure of the abstract syntax is a set of
+    <p>The core structure of the abstract model is a set of
       <a data-lt="RDF triple">triples</a>, each consisting of a <a>subject</a>,
       a <a>predicate</a> and an <a>object</a>. A set of such triples is called
       an <a>RDF graph</a>. An RDF graph can be visualized as a node and
@@ -305,7 +305,7 @@
       would be abbreviated as <code>rdf:XMLLiteral</code>.
       Note however that such abbreviations are <em>not</em> meant to be processed directly as IRIs,
       and are not to be used in syntactic contexts where IRIs are expected.
-      Note also that [=namespace IRIs=] and [=namespace prefixes=] are not a formal part of the RDF abstract syntax.
+      Note also that [=namespace IRIs=] and [=namespace prefixes=] are not a formal part of the RDF abstract model.
       They are merely a syntactic convenience for abbreviating IRIs;
       for processing, the actual IRIs are reconstructed by replacing each namespace prefix with the corresponding namespace IRI.
     </p>
@@ -400,7 +400,7 @@
   <section id="change-over-time">
     <h3>RDF and Change over Time</h3>
 
-    <p>The RDF abstract syntax is <em>atemporal</em>: <a>RDF graphs</a>
+    <p>The RDF abstract model is <em>atemporal</em>: <a>RDF graphs</a>
       are static snapshots of information.</p>
 
     <p>However, <a>RDF graphs</a> can express information
@@ -595,13 +595,13 @@ Accept: text/turtle; version=1.2
 </section>
 
 <section id="conformance">
-  <p>This specification, <em>RDF 1.2 Concepts and Abstract Syntax</em>,
-    defines an abstract syntax and related terminology for use in
+  <p>This specification, <em>RDF 1.2 Concepts and Abstract Model</em>,
+    defines an abstract model and related vocabulary for use in
     other specifications, such as
     <a>concrete RDF syntaxes</a>,
     API specifications, and query languages.
     Implementations cannot directly conform to
-    <em>RDF 1.2 Concepts and Abstract Syntax</em>,
+    <em>RDF 1.2 Concepts and Abstract Model</em>,
     but can conform to such other specifications that normatively
     reference terms defined here.</p>
 
@@ -847,7 +847,8 @@ Accept: text/turtle; version=1.2
       is a <a>string</a> that conforms to the syntax
       defined in RFC 3987 [[!RFC3987]].</p>
 
-    <p>An IRI in the RDF abstract syntax 
+    <p>An IRI in the RDF abstract model
+      <!-- this passeage does not discuss abstract syntax. it concerns concrete systax -->
       MUST be <a data-cite="RFC3986#section-5">resolved</a> per [[RFC3986]] and
       MUST NOT be a <a data-cite="RFC3986#section-4.2">relative reference</a>.
       An IRI MAY contain a <a data-cite="RFC3986#section-3.5">fragment identifier</a>.
@@ -859,7 +860,7 @@ Accept: text/turtle; version=1.2
       <a data-cite="I18N-GLOSSARY#dfn-code-point" class="lint-ignore">Unicode code points</a>,
       as in Simple String Comparison in
       <a data-cite="rfc3987#section-5.3.1">section 5.3.1</a> of [[!RFC3987]].
-      (This is done in the abstract syntax, so the IRIs are resolved
+      (This is done in the abstract model, so the IRIs are resolved
       IRIs with no escaping or encoding.)
       Further normalization MUST NOT be performed before this comparison. </p>
 
@@ -877,7 +878,7 @@ Accept: text/turtle; version=1.2
         An IRI reference is common usage of an Internationalized Resource Identifier.
         An IRI reference refers to either a resolved <a>IRI</a> or <a>relative IRI reference</a>,
         as described by the <em>IRI-reference</em> production in <a href="#iri-abnf" class="sectionRef"></a>.
-        The abstract syntax uses only fully resolved <a>IRIs</a>.
+        The abstract model uses only fully resolved <a>IRIs</a>.
         When IRIs are used in operations that are only
         defined for URIs, they must first be converted according to
         the mapping defined in
@@ -1008,7 +1009,7 @@ Accept: text/turtle; version=1.2
       <p>Some concrete syntaxes MAY support
         <dfn data-lt="simple literal" class="export">simple literals</dfn> consisting of only a
         <a>lexical form</a> without any <a>datatype IRI</a>, <a>language tag</a>, or <a>base direction</a>.
-        Simple literals are syntactic sugar for abstract syntax
+        Simple literals are syntactic sugar for data model
         <a>literals</a>
         with the <a>datatype IRI</a>
         <code>http://www.w3.org/2001/XMLSchema#string</code>
@@ -1037,7 +1038,7 @@ Accept: text/turtle; version=1.2
         In RDF 1.1, `"chat"@fr` and `"chat"@FR` represent two distinct terms,
         but implementations may replace either with the other via some form of normalization.
         In RDF 1.2, they represent the exact same literal,
-        i.e., the case difference in the concrete syntax does not propagate into the abstract syntax.
+        i.e., the case difference in the concrete syntax does not propagate into the abstract model.
         Since many RDF 1.1 implementations do normalize language tags internally, they will not be impacted by this change.
       </aside>
 
@@ -1145,7 +1146,7 @@ Accept: text/turtle; version=1.2
       They are always locally scoped to the file or RDF store,
       and are <em>not</em> persistent or portable identifiers
       for blank nodes. Blank node identifiers are <em>not</em>
-      part of the RDF abstract syntax, but are entirely dependent
+      part of the RDF abstract model, but are entirely dependent
       on the concrete syntax or implementation. The syntactic restrictions
       on blank node identifiers, if any, therefore also depend on
       the concrete RDF syntax or implementation.  Implementations that handle blank node
@@ -1943,7 +1944,7 @@ Accept: text/turtle; version=1.2
 <section id="section-skolemization">
   <h2>Replacing Blank Nodes with IRIs</h2>
 
-  <p>Blank nodes do not have identifiers in the RDF abstract syntax. The
+  <p>Blank nodes do not have identifiers in the RDF abstract model. The
     <a>blank node identifiers</a> introduced
     by some concrete syntaxes have only
     local scope and are purely an artifact of the serialization.</p>
@@ -1999,7 +2000,7 @@ Accept: text/turtle; version=1.2
 <section id="security" class="appendix informative">
   <h2>Security Considerations</h2>
 
-  <p>The RDF Abstract Syntax is not used directly for conveying information,
+  <p>The RDF Abstract Model is not used directly for conveying information,
     although concrete serialization forms are specifically intended to do so.</p>
 
   <p>Applications MAY evaluate given data to infer more assertions or to dereference <a>IRIs</a>,
@@ -2215,7 +2216,7 @@ Accept: text/turtle; version=1.2
     <li>Improved the use of IRI terminology,
       and added <a href="#iri-abnf" class="sectionRef"></a>.
       This improves the language using <a>relative IRI references</a>
-      and clarifies that, in the abstract syntax, IRIs are resolved,
+      and clarifies that, in the abstract model, IRIs are resolved,
       avoiding the incorrect use of "absolute IRI".</li>
     <li>Changed reference from DOM4, which was not a recommendation at the time, to [[DOM]],
       making the definitions of <a>rdf:HTML</a> and <a>rdf:XMLLiteral</a> datatypes normative.</li>
