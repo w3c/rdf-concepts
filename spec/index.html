@@ -1842,14 +1842,14 @@ Accept: text/turtle; version=1.2
       <dd>is the smallest set containing
         <a>strings</a>,
         numbers (<a data-cite="XMLSCHEMA11-2#double"><strong>xsd:double</strong></a>),
-        <a data-cite="INFRA#ordered-map">maps</a>
-        mapping <a>strings</a> to values in the <a href="#JSON-value-space">value space</a> where the key-value pairs are ordered by key (using <a data-cite="I18N-GLOSSARY#dfn-code-point" class="lint-ignore">Unicode code point</a> order),
+        finite unordered maps
+        mapping <a>strings</a> to values in the <a href="#JSON-value-space">value space</a>,
         <a data-cite="INFRA#list">lists</a>
         of values in the <a href="#JSON-value-space">value space</a>, and
         literal values (<a data-cite="INFRA#boolean">`true`, `false`</a>, and <a data-cite="INFRA#nulls">`null`</a>)
         from [[[INFRA]]] [[INFRA]] and [[[XMLSCHEMA11-2]]] [[XMLSCHEMA11-2]].
 
-        <p class="note">The value space of <a data-cite="INFRA#ordered-map">maps</a>
+        <p class="note">The value space of finite unordered maps
           and <a data-cite="INFRA#list">lists</a> does not include values having themselves as members,
           which cannot be represented in JSON.</p>
 
@@ -1860,18 +1860,16 @@ Accept: text/turtle; version=1.2
       <dd>maps every element of the lexical space to the result of parsing it into a
         <a>string</a>,
         number (<a data-cite="XMLSCHEMA11-2#double"><strong>xsd:double</strong></a>),
-        <a data-cite="INFRA#ordered-map">map</a>,
+        finite unordered map,
         <a data-cite="INFRA#list">list</a>, or
         literal value (<a data-cite="INFRA#boolean">`true`, `false`</a>, and <a data-cite="INFRA#nulls">`null`</a>).
 
         <ul>
-          <li>A <a data-cite="RFC8259#section-4">JSON Object</a> is mapped to a <a data-cite="INFRA#ordered-map">map</a>
+          <li>A <a data-cite="RFC8259#section-4">JSON Object</a> is mapped to a finite unordered map
             by transforming each object member into a <a data-cite="INFRA#map-entry">map entry</a>
             with the <a data-cite="INFRA#map-key">key</a> taken from the member name and
             <a data-cite="INFRA#map-value">value</a> taken by performing this mapping
-            to the member value,
-            and sorting the entries by key ()
-            (using <a data-cite="I18N-GLOSSARY#dfn-code-point" class="lint-ignore">Unicode code points</a> order).
+            to the member value.
           </li>
           <li>A <a data-cite="RFC8259#section-5">JSON Array</a> is mapped to a <a data-cite="INFRA#list">list</a>
             such that this <a data-cite="INFRA#list">list</a> contains as many
@@ -1903,12 +1901,11 @@ Accept: text/turtle; version=1.2
       </dd>
     </dl>
     <p class="note">
-      The constraint to order map entries in the value space is only meant to make the order of object-member the lexical space irrelevant. In other word, it ensures that both lexical values <code>{"a": "b", "c": "d"}</code> and <code>{"c": "d", "a": "b"}</code> are mapped to the same element of the value space. Implementations may omit to sort the entries, as long as they treat the maps in the value space as unordered.
+      The finite unordered maps can be implemented with <a data-cite="INFRA#ordered-map">ordered maps</a> [[INFRA]]
+      by systematically sorting key-value pairs by key (using <a data-cite="I18N-GLOSSARY#dfn-code-point" class="lint-ignore">Unicode code point</a> order).
+      This ensures that lexical forms that differ only in the order of object members are mapped to the same element of the value space
+      (e.g. <code>{"a": "b", "c": "d"}</code> and <code>{"c": "d", "a": "b"}</code>).
     </p>
-    <p class="issue" data-number="116">The issue refers to the use
-      of <a data-cite="INFRA#ordered-map">ordered map</a>
-      from [[INFRA]] for describing the value space of <a data-cite="RFC8259#section-4">JSON Objects</a>
-      and suggests defining a new datatype for unordered maps.</p>
   </section>
 
 </section>
