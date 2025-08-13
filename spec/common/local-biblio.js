@@ -67,23 +67,22 @@ var localBibliography = {
   },
   "RDF12-NEW": {
     "authors": [
-        "David Wood"
+        "The W3C RDF &amp; SPARQL Working Group"
     ],
     "href": "https://w3c.github.io/rdf-new/spec/",
     "title": "What’s New in RDF 1.2",
     "rawDate": "2022-01-01",
-    "status": "DNOTE",
+    "status": "ED",
     "publisher": "W3C"
   },
-  "RDF12-PRIMER": {
+  "RDF12-INTEROP": {
     "authors": [
-        "Guus Schreiber",
-        "Yves Raimond"
+        "Pierre-Antoine Champin"
     ],
-    "href": "https://w3c.github.io/rdf-primer/spec/",
-    "title": "RDF 1.2 Primer",
-    "rawDate": "2022-01-01",
-    "status": "DNOTE",
+    "href": "https://w3c.github.io/rdf-interop/spec/",
+    "title": "RDF 1.2 Interoperability",
+    "rawDate": "2025-06-27",
+    "status": "ED",
     "publisher": "W3C"
   },
  "SPARQL12-NEW": {
@@ -93,7 +92,7 @@ var localBibliography = {
     "href": "https://w3c.github.io/sparql-new/spec/",
     "title": "What’s New in SPARQL 1.2",
     "rawDate": "2022-01-01",
-    "status": "WD",
+    "status": "ED",
     "publisher": "W3C"
   },
   "SPARQL12-CONCEPTS": {
@@ -103,7 +102,7 @@ var localBibliography = {
     "href": "https://w3c.github.io/sparql-concepts/spec/",
     "title": "SPARQL 1.2 Concepts",
     "rawDate": "2022-01-01",
-    "status": "WD",
+    "status": "ED",
     "publisher": "W3C"
   },
 };
