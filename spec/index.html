@@ -1933,16 +1933,18 @@ Accept: text/turtle; version=1.2
     mint a new, globally
     unique IRI (a <dfn class="export">Skolem IRI</dfn>) for each blank node so replaced.</p>
 
-  <p>This transformation does not appreciably change the meaning of an
-    RDF graph, provided that the Skolem IRIs do not occur anywhere else.
-    It does however permit other graphs
+  <p>This transformation produces a new graph which entails the original one (see also <a data-cite="RDF12-SEMANTICS#skolemization">).
+    In this context it is important to note that Skolem IRIs and blank nodes are different in nature: while IRIs directly represent resources, blank nodes only ensure 
+     the existence of a resource. By producing Skolem IRIs we create instances of these resources.    
+	  As such IRIs are no longer local, this permits other graphs
     to subsequently use the Skolem IRIs, which is not possible
     with blank nodes.</p>
 
   <p>Systems may wish to mint Skolem IRIs in such a way that they can
     recognize the IRIs as having been introduced solely to replace blank
-    nodes. This allows a system to map IRIs back to blank nodes
-    if needed.</p>
+    nodes. In some contexts, this allows a system to map IRIs back to blank nodes
+    if needed. 
+  </p>
 
   <p>Systems that want Skolem IRIs to be recognizable outside of the system
     boundaries SHOULD use a well-known IRI [[RFC8615]] with the registered
