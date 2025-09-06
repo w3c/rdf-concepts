@@ -149,14 +149,47 @@
         <object data="rdf-graph.svg"
           aria-label="An RDF graph with two nodes (Subject and Object) and an arc (Predicate) connecting them"></object>
       </a>
-      <figcaption>An RDF graph with two nodes (Subject and Object) and an arc (Predicate) connecting them</figcaption>
+      <figcaption>An RDF graph with two nodes (Subject and Object) and an arc (Predicate) connecting them.</figcaption>
     </figure>
 
     <p>There can be four kinds of <a>nodes</a> in an
       <a>RDF graph</a>: <a>IRIs</a>, <a>literals</a>,
       <a>blank nodes</a>, and <a>triple terms</a>.</p>
-    <!--
-    <p class="issue" data-number="129">There is a mixture of "Abstract Syntax" and "Data Model". We should have a consistent way to say "Abstract Syntax" vs "Data Model". One way is to use "Abstract Syntax" as the basis of semantics and usually say "Data Model" in Concepts otherwise.</p> -->
+
+    <p>This is a mathematical structure, and when one term appears in multiple
+      triples, these are simply multiple occurrences of that same term. For
+      example, in a graph containing two triples (here expressed in common
+      <a href="https://en.wikipedia.org/wiki/Set_(mathematics)">set</a> and
+      <a href="https://en.wikipedia.org/wiki/Tuple">tuple</a> notation, and
+      using abstract names as distinct terms):</p>
+    <pre class="box">
+    { (R1, P1, R3),
+      (R2, P2, R3) }
+    </pre>
+    <p>the term R3 is the same single term used twice, and there are five terms
+      in total. This is more readily shown in two-dimensional graph diagrams,
+      where one single node can simply be connected from or to multiple other
+      nodes using labelled arcs.</p>
+    <figure id="fig-rdf-graph-arcs">
+      <a href="rdf-graph-arcs.svg">
+        <object data="rdf-graph-arcs.svg"
+          aria-label="An RDF graph with thee nodes (R1, R2, and R3) and two arcs (P1 and P2) connecting R1 and R2 to R3"></object>
+      </a>
+      <figcaption>An RDF graph with thee nodes (R1, R2, and R3) and two arcs (P1 and P2) connecting R1 and R2 to R3.</figcaption>
+    </figure>
+
+    <p>This abstract data model can be encoded in different ways while
+      preserving the same stucture, as described in [[[#rdf-documents]]].</p>
+
+    <aside class="note">
+      The graph structure of the abstract data model is not a conceptual model.
+      It is a symbolic, structural basis for such modelling, enabling
+      definition and use of <a data-lt="vocabularies">RDF vocabularies</a>, and
+      semantic
+      <dfn data-cite="RDF12-SEMANTICS#dfn-interpretation">interpretation</dfn>
+      [[RDF12-SEMANTICS]].
+      Practical examples are given in the [[[RDF12-PRIMER]]] [[RDF12-PRIMER]].
+    </aside>
   </section>
 
   <section id="resources-and-statements">
@@ -255,7 +288,7 @@
       unique identifiers in a graph data model that describes resources.
       However, those interactions are critical to the concept of
       [[[LINKED-DATA]]], [[LINKED-DATA]],
-      which uses the RDF abstract syntax and serialization formats.</p>
+      which uses the RDF <a>abstract syntax</a> and serialization formats.</p>
   </section>
 
   <section id="vocabularies">
@@ -536,6 +569,74 @@
       and different ordering of triples. While these aspects can have great
       effect on the convenience of working with the <a>RDF document</a>,
       they are not significant for its meaning.</p>
+
+    <p>The basis for <a>concrete RDF syntaxes</a> is the structure of the
+      <a href="#data-model">abstract data model</a>,
+      called the <dfn>abstract syntax</dfn>;
+      summarized in the following two tables.</p>
+    <table id="tab-graph-abstract-syntax" class="simple">
+      <caption>The abstract syntax of RDF graphs</caption>
+      <tr>
+        <th>Production</th>
+        <th>Defined as</th>
+      </tr>
+      <tr>
+        <td><a>RDF graph</a></td>
+        <td><em>a set of zero or more</em> <a>triples</a></td>
+      </tr>
+      <tr>
+        <td>triple</td>
+        <td><em>a 3-tuple of</em>
+          <a>subject</a>, <a>predicate</a>, <a>object</a></td>
+      </tr>
+      <tr>
+        <td>subject</td>
+        <td><em>either</em> <a>IRI</a>
+          <em>or</em> <a>Blank node</a></td>
+      </tr>
+      <tr>
+        <td>predicate</td>
+        <td><a>IRI</a></td>
+      </tr>
+      <tr>
+        <td>object</td>
+        <td><em>either</em> <a>IRI</a>
+          <em>or</em> <a>Blank node</a>
+          <em>or</em> <a>Literal</a>
+          <em>or</em> <a>triple term</a></td>
+      </tr>
+      <tr>
+        <td>triple term</td>
+        <td><a>triple</a></td>
+      </tr>
+    </table>
+    <br>
+    <table id="tab-dataset-abstract-syntax" class="simple">
+      <caption>The abstract syntax of RDF datasets</caption>
+      <tr>
+        <th>Production</th>
+        <th>Defined as</th>
+      </tr>
+      <tr>
+        <td><a>RDF dataset</a></td>
+        <td><em>a pair of one</em> <a>default graph</a>,
+          <em>and a set of zero or more</em> <a>named graphs</a></td>
+      </tr>
+      <tr>
+        <td>default graph</td>
+        <td><a>RDF graph</a></td>
+      </tr>
+      <tr>
+        <td>named graph</td>
+        <td><em>a pair of</em>
+          <a>graph name</a>, <a>RDF graph</a></td>
+      </tr>
+      <tr>
+        <td>graph name</td>
+        <td><em>either</em> <a>IRI</a>
+          <em>or</em> <a>Blank node</a></td>
+      </tr>
+    </table>
   </section>
 
   <section id="section-version-announcement">
@@ -847,8 +948,8 @@ Accept: text/turtle; version=1.2
       is a <a>string</a> that conforms to the syntax
       defined in RFC 3987 [[!RFC3987]].</p>
 
-    <p>An IRI in the RDF abstract syntax
-      <!-- this passeage does not discuss abstract syntax. it concerns concrete systax -->
+    <p>For an IRI in a <a data-lt="concrete RDF syntax">concrete syntax</a> to conform to the
+      <a>abstract syntax</a>, it
       MUST be <a data-cite="RFC3986#section-5">resolved</a> per [[RFC3986]] and
       MUST NOT be a <a data-cite="RFC3986#section-4.2">relative reference</a>.
       An IRI MAY contain a <a data-cite="RFC3986#section-3.5">fragment identifier</a>.
@@ -1009,7 +1110,7 @@ Accept: text/turtle; version=1.2
       <p>Some concrete syntaxes MAY support
         <dfn data-lt="simple literal" class="export">simple literals</dfn> consisting of only a
         <a>lexical form</a> without any <a>datatype IRI</a>, <a>language tag</a>, or <a>base direction</a>.
-        Simple literals are syntactic sugar for abstract syntax
+        Simple literals are syntactic sugar for <a>abstract syntax</a>
         <a>literals</a>
         with the <a>datatype IRI</a>
         <code>http://www.w3.org/2001/XMLSchema#string</code>
