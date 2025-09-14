@@ -352,7 +352,11 @@ As an [=RDF triple=], it encodes a <a>proposition</a>.
     </p>
 
     <p>Here is a variation on the graph shown in <a href="#fig-triple-term"></a>. This represents a graph
-      where an <a>asserted triple</a> corresponds to the <a>triple term</a> object of a <a>reifying triple</a>. </p>
+      where an <a>asserted triple</a> corresponds to the <a>triple term</a> object of a <a>reifying triple</a>. 
+    In this case, 
+      the subset of triples including the <a>reifier</a> as subject&mdash;for instance, providing metadata as in these examples&mdash;
+      is called a <dfn>triple annotation</dfn>.
+    </p>
 
     <figure id="fig-asserted-triple-term">
       <a href="asserted-triple-term.svg">
@@ -364,12 +368,6 @@ As an [=RDF triple=], it encodes a <a>proposition</a>.
         Due to the asserted triple, the diagram represents the proposition as a fact, meaning that the relationship holds.
       </figcaption>
     </figure>
-
-    <p>Here, the triple term of a <a>reifying triple</a> also [=appears=] in the
-      same graph as an <a>asserted triple</a>. In this case, 
-      the subset of triples including the <a>reifier</a> as subject&mdash;for instance, providing metadata as in these examples&mdash;
-      is called a <dfn>triple annotation</dfn>.
-    </p>
 
     <p>Finally, [=RDF terms=] that [=appear=] in a [=triple term=] have the same
       <a data-lt="denotes">denotation</a> as when they appear in an
