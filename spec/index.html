@@ -320,36 +320,16 @@
 
     <p>A <a>triple term</a> is an [=RDF triple=] used as an [=RDF term=]
       in another triple. 
-      
-<!-- When read literally, one could understand this to say that a triple term _references_ (whatever references may mean here) a proposition. But, I think it is simply meant that a triple term encodes a proposition, just like an RDF triple (?) If so, then perhaps the ambiguity could be removed by the following. 
--->
-<!-- original:
-      This use is a reference to a <a>proposition</a>. 
--->
 As an [=RDF triple=], it encodes a <a>proposition</a>.
-    
-<!-- To reduce the complexity of the introduction, I propose moving the parts on asserted vs. non-asserted (including the part on triple annotations) and referential transparency to later...-->
-
     <p>
       A <dfn>reifying triple</dfn> is a triple where the <a>predicate</a> is <code>rdf:reifies</code>
       and the <a>object</a> is a <a>triple term</a>.
       The <a>subject</a> of that triple is called a <dfn>reifier</dfn>, and it can be the
       subject or object of other triples.
-<!-- 
-    The descriptions here are very abstract.
-    This part describes how it could be useful to use reifiers in other triples.
-    I realize that this may be considered "non-normative" (and that there is a note on it later, and that the figures already illustrate this). 
-    But I feel that the text should also have an indication as to why one would want do such a thing.
--->
      For instance, those other triples, i.e., which also include the [=reifier=] as subject or object, can provide metadata about the [=reifier=]'s associated [=triple term=].
     </p>
 
     <p>
-<!-- Removing the "unasserted, abstract" part as this is now discussed below. (Also, note that "abstract" had not been used yet to describe triple terms; so, a reader could wonder whether "abstract" triple terms are the same as triple terms, or different). Also, as above, I slightly rewrote part of it to describe why the second triple could be useful.
--->
-<!-- original:  
-The following diagram represents a <a>reifying triple</a> of an unasserted, abstract <a>triple term</a>, and a <a>triple</a> relating the <a>reifier</a> to another resource. 
--->
       For instance, the following diagram represents a <a>reifying triple</a> of a <a>triple term</a>, together with a <a>triple</a> including the <a>reifier</a> as subject, which provides metadata about the <a>triple term</a> (here, describing provenance).</p>
 
     <figure id="fig-triple-term">
@@ -358,37 +338,14 @@ The following diagram represents a <a>reifying triple</a> of an unasserted, abst
           aria-label="An RDF graph containing a triple that references an unasserted triple term (with grey dashed arc) via a reifier"></object>
       </a>
       <figcaption id="fig-triple-term-alt">
-<!-- Removing "abstract" here (an alternative is explicitly defining "abstract triple term") -->
         An <a>RDF graph</a> containing a <a>reifying triple</a> that references a <a>triple term</a> (which is unasserted, depicted using a grey, dashed arc) from a <a>reifier</a>; and a triple describing this reifier.
       </figcaption>
     </figure>
 
     <p>
       In this example, the [=proposition=] encoded by the [=triple term=] (<code>:Alice</code>'s name being <code>"Alice"</code>) is not asserted.
-
-      <!-- The formulation here is a bit confusing to me. 
-
-Would this be equivalent to the following (using "x" for "triple term", and "y" for "asserted triple"): 
-"for 'x' to also be asserted, it must appear as both a 'y' and an 'x'".
-
-If so, the latter part on "[appear as] an 'x'" seems to be already implied by the fact you are talking about an 'x'. 
-
-It would be less confusing to say "for 'x' to also be asserted, it must also appear as a 'y'".
-
-The problem with the confusion is that I actually read it as "s p o ." not being assertable without its occurrence as an unasserted triple term "<<s p o>>" as well. 
--->
-<!-- original:
-      For the triple term to also be asserted, it must [=appear=] in the same graph as both an <a>asserted
-      triple</a> and an unasserted <a>triple term</a>. 
--->
       For the [=triple term=] to also be asserted, it must also [=appear=] in the same graph as an <a>asserted
       triple</a>. 
-
-<!-- Spelling out the below statement a bit more.
--->
-<!-- original:
- This allows for statements to be made about statements
-      independent of their assertion within an <a>RDF graph</a>. -->
 
  By using non-asserted triple terms, as in the figure, one can make statements about unasserted statements; 
  for instance, in case one is unsure whether <code>:Alice</code>'s name is actually <code>"Alice"</code>.
@@ -397,10 +354,6 @@ The problem with the confusion is that I actually read it as "s p o ." not being
     <p>Here is a variation on the graph shown in <a href="#fig-triple-term"></a>. This represents a graph
       where an <a>asserted triple</a> corresponds to the <a>triple term</a> object of a <a>reifying triple</a>. </p>
 
-<!-- removing this part (now described below):
-      qualifying the description about this <a>reifier</a> as a <a>triple annotation</a>.
--->
-
     <figure id="fig-asserted-triple-term">
       <a href="asserted-triple-term.svg">
         <object data="asserted-triple-term.svg" aria-describedby="fig-asserted-triple-term-alt"
@@ -408,22 +361,9 @@ The problem with the confusion is that I actually read it as "s p o ." not being
       </a>
       <figcaption id="fig-asserted-triple-term-alt">
         An <a>RDF graph</a> containing a <a>triple annotation</a>, where the <a>triple term</a> of a <a>reifying triple</a> corresponds to an <a>asserted triple</a>.
-<!-- 
-Slightly rewriting the below statement.        
--->
-<!-- original:
-The diagram represents the proposition as a fact using the asserted triple, meaning that the relationship holds.
--->
         Due to the asserted triple, the diagram represents the proposition as a fact, meaning that the relationship holds.
       </figcaption>
     </figure>
-
-<!-- I found the sentence to be quite difficult to read - here is an attempt to simplify. -->
-<!-- original:
-    <p>When the triple term of a <a>reifying triple</a> also [=appears=] in the
-      same graph as an <a>asserted triple</a>, the subset of triples that share
-      the same <a>reifier</a> as subject is called a <dfn>triple annotation</dfn>.</p>
--->
 
     <p>Here, the triple term of a <a>reifying triple</a> also [=appears=] in the
       same graph as an <a>asserted triple</a>. In this case, 
@@ -434,7 +374,6 @@ The diagram represents the proposition as a fact using the asserted triple, mean
     <p>Finally, [=RDF terms=] that [=appear=] in a [=triple term=] have the same
       <a data-lt="denotes">denotation</a> as when they appear in an
       [=asserted triple=] in the <a data-lt="RDF graph">graph</a>.
-<!-- Adding an example here -->
 For instance, the term <code>:Alice</code> from a [=triple term=] and <code>:Alice</code> in an [=asserted triple=] both denote the same resource.
       For this reason, we say that triple terms are
       <dfn class="lint-ignore">transparent</dfn>.</p>
@@ -446,27 +385,22 @@ For instance, the term <code>:Alice</code> from a [=triple term=] and <code>:Ali
     </p>
 
     <div class="note">
-<!-- RDF triples (which triple terms are) are said to encode propositions, not denote them. AFAIK, terms in RDF denote resources. -->
       <p><a>Triple terms</a> always denote abstract, logical <a>propositions</a>,
         while <a>reifiers</a> may denote a variety of things that are related
         to these propositions (such as a statement or belief that the
         proposition holds, or an event or circumstance that makes the
         proposition true). 
-<!-- Could an example be given here? -->
         It is therefore expected that triple terms are commonly used as
         <a>objects</a> of <a>reifying triples</a>, and that the reifiers
         (rather than the triple terms) are used in further descriptions.
-<!-- Adding this part to avoid confusion (we're not talking about anything new) -->
-        This section describes this common usage.
+        <a href="#section-triple-terms-reification">Section 1.5</a> describes this common usage.
       </p>
       <p>
         There can be multiple, distinct reifiers related to the same abstract
         proposition, such as statements with different sources, or
         circumstances with different characteristics. One reifier may also be
         used to reify multiple, distinct propositions, 
-<!-- what is a propositional aspect? -->
         expressing different propositional aspects using the same reifier.</p>
-<!-- unsure what "a proposition so reified" meant -->
       <p>Since a proposition that is reified does not have to hold, it is possible
         to make statements about any kind of statement, including an unasserted
         statement that contradicts another statement, whether asserted or not.</p>
