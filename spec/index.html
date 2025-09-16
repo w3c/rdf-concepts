@@ -326,11 +326,16 @@ As an [=RDF triple=], it denotes a <a>proposition</a>.
       and the <a>object</a> is a <a>triple term</a>.
       The <a>subject</a> of that triple is called a <dfn>reifier</dfn>, and it can be the
       subject or object of other triples.
-     For example, those other triples, i.e., which also include the [=reifier=] as subject or object, can provide metadata about the [=reifier=]'s associated [=triple term=].
+    </p>
+    <p>
+      A [=reifier=] may denote a variety of things that are related to the triple term's [=proposition=], 
+      such as a statement or belief that the [=proposition=] holds.
+      It is expected that the [=reifiers=] (rather than the [=triple terms=]) are used in further descriptions.
+    This section describes this common usage.
     </p>
 
     <p>
-      For example, the following diagram represents a <a>reifying triple</a> of a <a>triple term</a>, together with a <a>triple</a> including the <a>reifier</a> as subject, which provides metadata about the <a>triple term</a> (here, describing provenance).</p>
+      For example, the following diagram represents a <a>reifying triple</a> of a <a>triple term</a>, together with a <a>triple</a> that further describes the <a>reifier</a>.</p>
 
     <figure id="fig-triple-term">
       <a href="triple-term.svg">
@@ -391,7 +396,7 @@ For example, the term <code>:Alice</code> from a [=triple term=] and <code>:Alic
         It is expected that triple terms are commonly used as
         <a>objects</a> of <a>reifying triples</a>, and that the reifiers
         (rather than the triple terms) are used in further descriptions.
-        <a href="#section-triple-terms-reification">Section 1.5</a> describes this common usage.
+        <a href="#section-triple-terms-reification">This section</a> describes this common usage.
       </p>
       <p>
         There can be multiple, distinct reifiers related to the same abstract
