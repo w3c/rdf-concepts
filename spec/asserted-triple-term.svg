@@ -16,11 +16,11 @@
     </g>
     <g transform="translate(180, 2)">
       <path d="M0,0 92,0" class="arrow"/>
-      <text x="26" y="-8">:name</text>
+      <text x="6" y="-8">:familyName</text>
     </g>
     <g transform="translate(363, 0)">
       <ellipse rx="80" ry="36"/>
-      <text class="middle" y="6">"Alice"</text>
+      <text class="middle" y="6">"Liddell"</text>
     </g>
   </g>
 
