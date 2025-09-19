@@ -10,15 +10,15 @@
   </defs>
 
   <g transform="translate(0, 48)">
-    <g transform="translate(100, 0)">
+    <g transform="translate(84, 0)">
       <ellipse rx="80" ry="36"/>
       <text class="middle" y="6">:Alice</text>
     </g>
-    <g transform="translate(180, 2)">
-      <path d="M0,0 92,0" class="arrow"/>
-      <text x="6" y="-8">:familyName</text>
+    <g transform="translate(164, 2)">
+      <path d="M0,0 124,0" class="arrow"/>
+      <text x="20" y="-8">:familyName</text>
     </g>
-    <g transform="translate(363, 0)">
+    <g transform="translate(379, 0)">
       <ellipse rx="80" ry="36"/>
       <text class="middle" y="6">"Liddell"</text>
     </g>
