@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 464 180">
+
+  <style>@import url('figure.css')</style>
+
+  <defs>
+    <marker id="arrowhead" orient="auto-start-reverse" markerWidth="10" markerHeight="10"
+            refX="0" refY="5">
+      <path d="M0,0 V10 L10,5 Z" fill="context-stroke" />
+    </marker>
+  </defs>
+
+  <g transform="translate(104 40)">
+    <g>
+      <ellipse rx="70" ry="26"/>
+      <text class="middle" y="5" font-size="16">R1</text>
+    </g>
+    <g transform="translate(70 0)">
+      <text class="middle" x="52" y="-5" font-size="16">P1</text>
+      <path d="M0,0 103,35" class="arrow"/>
+    </g>
+    <g transform="translate(0 90)">
+      <ellipse rx="70" ry="26"/>
+      <text class="middle" y="5" font-size="16">R2</text>
+    </g>
+    <g transform="translate(70 90)">
+      <text class="middle" x="52" y="10" font-size="16">P2</text>
+      <path d="M0,0 103,-35" class="arrow"/>
+    </g>
+    <g transform="translate(251 45)">
+      <ellipse rx="70" ry="26"/>
+      <text class="middle" y="5" font-size="16">R3</text>
+    </g>
+  </g>
+
+</svg>
