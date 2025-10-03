@@ -46,7 +46,19 @@
       doJsonLd:     true,
       wgPublicList: "public-rdf-star-wg",
       maxTocLevel: 2,
+      postProcess: [moveGreggAsLeadEditor],
     };
+
+    function moveGreggAsLeadEditor(config, doc, utils) {
+      const dl = doc.querySelector(".head details dl");
+      const editors = dl.querySelector("dt:nth-of-type(6)");
+      const gregg = dl.querySelector("dt:nth-of-type(7) + dd");
+      dl.removeChild(gregg);
+      const leadEditor = editors.cloneNode();
+      leadEditor.innerText = "Lead Editor";
+      dl.insertBefore(leadEditor, editors);
+      dl.insertBefore(gregg, editors);
+    }
   </script>
   <style>
     body:has(input[type='radio'][value='light']:checked) { color-scheme: light }
@@ -76,8 +88,6 @@
 
   .inmemoriam {
     font-style: italic;
-    display: inline-block;
-    margin-bottom: 0.8em;
   }
   </style>
   <!-- Link CSS used by SVGs, to make Echidna discover and bundle it. -->
