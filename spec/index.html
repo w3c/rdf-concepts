@@ -22,17 +22,22 @@
       editors:  [
         { name: "Olaf Hartig", w3cid: "112469"},
         { name: "Pierre-Antoine Champin", w3cid: "129656"},
-        { name: "Gregg Kellogg", w3cid: "44770" },
         { name: "Andy Seaborne", w3cid: "29909" }
       ],
 
       formerEditors: [
-        { name: "Richard Cyganiak" },
-        { name: "David Wood", note: "Chair" },
-        { name: "Markus Lanthaler" },
-        { name: "Graham Klyne" },
-        { name: "Jeremy J. Carroll" },
-        { name: "Brian McBride" }
+        {
+          name: "Gregg Kellogg",
+          retiredDate: "2025-09-06",
+          extras: [{name: "in memoriam", class: "inmemoriam"}],
+
+        },
+        { name: "Richard Cyganiak", note: "RDF 1.1" },
+        { name: "David Wood", note: "RDF 1.1, Chair" },
+        { name: "Markus Lanthaler", note: "RDF 1.1" },
+        { name: "Graham Klyne", note: "RDF 1.0" },
+        { name: "Jeremy J. Carroll", note: "RDF 1.0" },
+        { name: "Brian McBride", note: "RDF 1.0" }
       ],
 
       xref: ["I18N-GLOSSARY", "INFRA"],
@@ -67,6 +72,12 @@
     font-weight: bold;
     counter-increment: numsection;
     content: counters(numsection, ".") ") ";
+  }
+
+  .inmemoriam {
+    font-style: italic;
+    display: inline-block;
+    margin-bottom: 0.8em;
   }
   </style>
   <!-- Link CSS used by SVGs, to make Echidna discover and bundle it. -->
