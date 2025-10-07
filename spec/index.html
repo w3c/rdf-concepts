@@ -20,18 +20,21 @@
       prevRecShortname:     "rdf11-concepts",
 
       editors:  [
+        {
+          name: "Gregg Kellogg",
+          w3cid: "44770",
+          //retiredDate: "2025-09-06", // Respec would automatically move Gregg to the 'Former Editors' section
+          note: "until 2025-09-06",
+          extras: [
+            {name: "in memoriam", class: "former"},
+          ],
+        },
         { name: "Olaf Hartig", w3cid: "112469"},
         { name: "Pierre-Antoine Champin", w3cid: "129656"},
         { name: "Andy Seaborne", w3cid: "29909" }
       ],
 
       formerEditors: [
-        {
-          name: "Gregg Kellogg",
-          retiredDate: "2025-09-06",
-          extras: [{name: "in memoriam", class: "inmemoriam"}],
-
-        },
         { name: "Richard Cyganiak", note: "RDF 1.1" },
         { name: "David Wood", note: "RDF 1.1, Chair" },
         { name: "Markus Lanthaler", note: "RDF 1.1" },
@@ -46,19 +49,7 @@
       doJsonLd:     true,
       wgPublicList: "public-rdf-star-wg",
       maxTocLevel: 2,
-      postProcess: [moveGreggAsLeadEditor],
     };
-
-    function moveGreggAsLeadEditor(config, doc, utils) {
-      const dl = doc.querySelector(".head details dl");
-      const editors = dl.querySelector("dt:nth-of-type(6)");
-      const gregg = dl.querySelector("dt:nth-of-type(7) + dd");
-      dl.removeChild(gregg);
-      const leadEditor = editors.cloneNode();
-      leadEditor.innerText = "Lead editor:";
-      dl.insertBefore(leadEditor, editors);
-      dl.insertBefore(gregg, editors);
-    }
   </script>
   <style>
     body:has(input[type='radio'][value='light']:checked) { color-scheme: light }
@@ -86,7 +77,7 @@
     content: counters(numsection, ".") ") ";
   }
 
-  .inmemoriam {
+  .former {
     font-style: italic;
   }
   </style>
