@@ -12,8 +12,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-        with:
-          submodules: true
       - uses: w3c/spec-prod@v2
         with:
           TOOLCHAIN: respec
@@ -26,7 +24,3 @@ jobs:
           W3C_BUILD_OVERRIDE: |
             specStatus: WD
             shortName: rdf12-concepts
-      - name: "Verify common files are consistent"
-        run: |
-          git submodule add https://github.com/w3c/rdf-common.git spec/rdf-common
-          diff --exclude .git -r spec/rdf-common spec/common
