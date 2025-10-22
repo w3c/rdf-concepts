@@ -994,8 +994,8 @@ Accept: text/turtle; version=1.2
 
     <p class="note">For convenience, a complete [[ABNF]] grammar
       from [[RFC3987]] is provided in <a href="#iri-abnf" class="sectionRef"></a>.</p>
-
-    <div class="note" id="note-iris">
+    
+    <div class="note">
       <p><strong>URIs and IRIs:</strong>
         IRIs are a generalization of
         <dfn data-lt="URI" data-lt-noDefault><abbr title="Uniform Resource Identifier">URI</abbr>s</dfn>
@@ -1021,35 +1021,69 @@ Accept: text/turtle; version=1.2
         but is based on a processing model important for implementation
         within web browsers and are not described using an [[ABNF]] grammar.
       </p>
+    </div>
 
-      <p><strong>Relative IRI references:</strong>
+    <section id="reference-iris" class="informative">
+      <h4>RDF Reference IRIs</h4>
+      <p>
+        This section is advice to data publishers.
+      </p>
+      <p>
+        <a>IRIs</a> are used to denote <a>resources</a> and should identify the same
+        resource regardless of where the IRI reference is used.
+        [[RFC3987]] defines a syntax that can express
+        IRIs which do not meet the requirement of being a global reference.
+        URI schemes add addition requirements; for example, the 
+        <a data-cite="rfc7230#section-2.7.1">HTTP URI scheme</a> defines 
+        <a data-cite="rfc7230#http-URI">`http-URI`</a>, which
+        requires the presence of a non-empty host name, and, as a consequence, 
+        the path component will start with `/`. 
+        The [[RFC3987]] syntax permits `http:abcd` and `http:///abcd` 
+        which do not meet the HTTP URI scheme.
+      </p>
+      <p>
+        An <dfn data-lt="RDF reference">RDF Reference IRI</dfn>,
+        sometimes just <a>RDF Reference</a>,
+        is an <a>IRI</a> that is suitable for use as a global reference.
+      </p>
+      
+      <p>
+        <b>Reference Resolution:</b>
+        An <a>RDF Reference IRI</a> is unchanged by
+        <a data-cite="RFC3986#section-5">reference resolution</a>. 
+        The <a data-cite="RFC3986#section-3.3">path component</a> 
+        starts with a `/` character and does not contain `.` or `..` segments.
+      </p>
+      <p>
+        <strong>Relative IRI references:</strong>
         Some <a>concrete RDF syntaxes</a> permit
         <span id="dfn-relative-iris"><!-- obsolete term--></span>
-        <dfn id="dfn-relative-iri" data-lt="relative iri reference">relative IRI references</dfn> as a convenient shorthand
-        that allows authoring of documents independently from their final
-        publishing location.
-        Relative IRI references must be
+        <dfn id="dfn-relative-iri" data-lt="relative iri reference">relative IRI references</dfn>
+        as a convenient shorthand that allows authoring of documents independently from their final 
+        publishing location. Relative IRI references must be
         <a data-cite="rfc3986#section-5.2">resolved against</a> a
         <dfn class="export">base IRI</dfn>.
         Therefore, the RDF graph serialized in such syntaxes is well-defined only
-        if a <a data-cite="rfc3986#section-5.1">base IRI
-        can be established</a> [[RFC3986]].</p>
+        if a <a data-cite="rfc3986#section-5.1">base IRI can be established</a> [[RFC3986]].
+      </p>
 
-      <p><strong>URI Schemes:</strong>
-        Implementations are encouraged to enforce the scheme-specific rules of
+      <p>
+        <strong>URI Schemes:</strong>
+        Implementations are encouraged to follow the scheme-specific rules of
         the common schemes, such as the
-        <a data-cite="RFC7230#section-2.7.1">scheme rules for HTTP/HTTPS</a> and the
+        <a data-cite="RFC7230#section-2.7">scheme rules for HTTP/HTTPS</a> and the
         <a data-cite="did-core#identifier">DID syntax</a>.
         Implementations ignore URI scheme rules
         for schemes they do not recognize. 
       </p>
 
-      <p><strong>IRI normalization:</strong>
+      <p>
+        <strong>IRI normalization:</strong>
         Interoperability problems can be avoided by minting
         only IRIs that are normalized according to
         <a data-cite="rfc3987#section-5">Section 5</a>
         of [[!RFC3987]]. 
-        </p>
+      </p>
 
       <ul>
         <li>Use lowercase characters in scheme names.</li>
@@ -1073,7 +1107,7 @@ Accept: text/turtle; version=1.2
           (ASCII, punycode-encoded name]) for Internationalized Domain Names [[RFC5890]] in IRIs.</li>
         <li>Use IRIs in Unicode [=Normalization Form C=] [[I18N-Glossary]].</li>
       </ul>
-    </div>
+    </section>
   </section>
 
   <section id="section-Graph-Literal">
