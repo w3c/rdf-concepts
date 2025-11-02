@@ -1026,29 +1026,29 @@ Accept: text/turtle; version=1.2
     <section id="reference-iris" class="informative">
       <h4>RDF Reference IRIs</h4>
       <p>
-        This section is advice to data publishers.
+        This section provides advice to data publishers.
       </p>
       <p>
-        <a>IRIs</a> are used to denote <a>resources</a> and should identify the same
-        resource regardless of where the IRI reference is used.
-        [[RFC3987]] defines a syntax that can express
+        <a>IRIs</a> are used to denote <a>resources</a>, and each IRI should identify the same
+        resource regardless of where that IRI is used.
+        Note that the general syntax for IRIs, defined by [[RFC3987]], can express
         IRIs which do not meet the requirement of being a global reference.
-        URI schemes add addition requirements; for example, the 
+        Some URI schemes add additional requirements; for example, the 
         <a data-cite="rfc7230#section-2.7.1">HTTP URI scheme</a> defines 
         <a data-cite="rfc7230#http-URI">`http-URI`</a>, which
         requires the presence of a non-empty host name, and, as a consequence, 
         the path component will start with `/`. 
-        The [[RFC3987]] syntax permits `http:abcd` and `http:///abcd` 
-        which do not meet the HTTP URI scheme.
+        The [[RFC3987]] syntax permits IRIs such as `http:abcd` and `http:///abcd`,
+        but these are invalid because they do not satisfy the HTTP URI scheme definition.
       </p>
       <p>
         An <dfn data-lt="RDF reference">RDF Reference IRI</dfn>,
-        sometimes just <a>RDF Reference</a>,
+        sometimes just called <a>RDF Reference</a>,
         is an <a>IRI</a> that is suitable for use as a global reference.
       </p>
       
       <p>
-        <b>Reference Resolution:</b>
+        <strong>Reference Resolution:</strong>
         An <a>RDF Reference IRI</a> is unchanged by
         <a data-cite="RFC3986#section-5">reference resolution</a>. 
         The <a data-cite="RFC3986#section-3.3">path component</a> 
@@ -1059,9 +1059,9 @@ Accept: text/turtle; version=1.2
         Some <a>concrete RDF syntaxes</a> permit
         <span id="dfn-relative-iris"><!-- obsolete term--></span>
         <dfn id="dfn-relative-iri" data-lt="relative iri reference">relative IRI references</dfn>
-        (production `irelative-ref` in the <a href="#iri-abnf">IRI Grammar</a>)
-        as a convenient shorthand that allows authoring of documents independently from their final 
-        publishing location. Relative IRI references must be
+        (see the `irelative-ref` production in the <a href="#iri-abnf">IRI Grammar</a>)
+        as a convenient shorthand that allows RDF documents to be authored without knowing
+        their final publishing location. Relative IRI references must be
         <a data-cite="rfc3986#section-5.2">resolved against</a> a
         <dfn class="export">base IRI</dfn>.
         Therefore, the RDF graph serialized in such syntaxes is well-defined only
