@@ -389,8 +389,8 @@
       subject or object of other triples.
     </p>
     <p>
-      A [=reifier=] may denote a variety of things that are related to the triple term's [=proposition=], 
-      such as a statement or belief that the [=proposition=] holds.
+      A [=reifier=] may denote a variety of things that are related to the triple term's [=proposition=]: 
+      such as a statement or belief that the [=proposition=] holds, or an event or circumstance that makes the proposition true.
       It is expected that the [=reifiers=] (rather than the [=triple terms=]) will be used in further statements.
       This section briefly describes this common usage.
       For more examples, refer to the [[[RDF12-PRIMER]]] [[RDF12-PRIMER]].
@@ -419,7 +419,7 @@
  for example, if one is unsure whether <code>:Alice</code>'s family name is actually <code>"Liddell"</code>.
     </p>
 
-    <p>Here is a variation on the graph shown in <a href="#fig-triple-term"></a>. This represents a graph
+    <p>As another example, the following diagram represents a graph
       where an <a>asserted triple</a> corresponds to the <a>triple term</a> object of a <a>reifying triple</a>. 
     In this case, 
       the subset of triples including the <a>reifier</a> as subject&mdash;as illustrated in these examples&mdash;
@@ -436,6 +436,13 @@
         Due to the asserted triple, the diagram represents the proposition as a fact, meaning that the relationship holds.
       </figcaption>
     </figure>
+
+    <p>
+      In this example, the [=proposition=] denoted by the [=triple term=] (<code>:Alice</code>'s family name being <code>"Liddell"</code>) is claimed to be true, 
+      as it corresponds to an [=asserted triple=]. 
+      The [=triple annotation=] describes a concrete circumstance underlying the proposition, namely, that it was applicable until
+      <code>:Alice</code>'s marriage on September 15th 1880.
+    </p>
 
     <p>
       Concrete syntaxes, such as Turtle [[RDF12-TURTLE]], may have shortcuts
