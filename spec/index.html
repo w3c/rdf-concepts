@@ -791,9 +791,22 @@ Accept: text/turtle; version=1.2
       </tbody>
     </table>
 
-    <p>For serializations supporting in-line version announcement,
+    <p>
+      Data conforming to version "1.1" is valid as data with version "1.2-basic", 
+      and data conforming to version "1.2-basic" is valid as data with version "1.2".
+      Data conforming to version "1.1" has the same semantics 
+      under [[[RDF11-MT]]] and under [[[RDF12-SEMANTICS]]].
+    </p>
+
+    <p>
+      See [[[RDF-INTEROP]]] for details of encoding "1.2" as "1.2-basic".
+    </p>
+
+    <p>
+      For serializations supporting in-line version announcement,
       the version announcement SHOULD be made early in the document
-      and certainly before serializing any feature depending on that version.</p>
+      and certainly before serializing any feature depending on that version.
+    </p>
 
     <section id="server-considerations" class="informative">
       <h4>Server Considerations</h4>
@@ -802,7 +815,7 @@ Accept: text/turtle; version=1.2
 
       <ol>
         <li>Eliminate <a>triple terms</a> by using an algorithm such
-          as <i>basic encoding</i> as defined in [[RDF-INTEROP]] (downgrading from version "1.2" to "1.2-basic").
+          as <i>basic encoding</i> as defined in [[[RDF-INTEROP]]] (downgrading from version "1.2" to "1.2-basic").
           </li>
         <li>Replace <a>directional language-tagged strings</a>
           by <a>literals</a> with a <a>datatype IRI</a> that
