@@ -1286,28 +1286,50 @@ Accept: text/turtle; version=1.2
         The [=Unicode Bidirectional Algorithm=] [[?I18N-Glossary]] provides support for automatically rendering
         a sequence of characters in logical order,
         so that they are visually ordered as expected,
-        but this is not sufficient to correctly render bidirectional text.</p>
+        but this is not always sufficient to correctly render bidirectional text.
 
-      <p>For example, some text with a language tag "`he`" might be displayed
-        in a left-to-right context (such as an English web page) as
-        <bdi dir="ltr">פעילות הבינאום, W3C</bdi>, which is incorrect. When provided
-        to a user agent including base direction information (such as using
-        HTML's `dir` attribute) it can then be correctly presented as:
-      </p>
-      <div lang="he" dir="rtl">פעילות הבינאום, W3C</div>
+      <p>
+        Consider the arabic translation of the book title "HTML and CSS: Designing Websites".
+        In a left-to-right context (such as an English web page),
+        with proper [=bidi isolation=] but <em>without</em> an explicit base direction,
+        it would be incorrectly displayed as follows:
+      <p class=example>HTML و CSS: تصميم مواقع الويب
+      <p>while the correct rendering is as follows:
+      <p class=example dir="rtl">HTML و CSS: تصميم مواقع الويب
 
-      <p>In the absence of an explicit initial text direction,
-        the [=Unicode Bidirectional Algorithm=] detects the text direction from the content.
-        This depends on the first strongly directional character in the text
-        or on the context.
-        To avoid [=spillover effects=], users need to employ [=bidi isolation=] 
-        whenever text is inserted into a larger document.
-        For example,
-        &quot;<code>&lt;bdi lang="he"&gt;ספרים בינלאומיים!&lt;/bdi&gt;</code>&quot;
-        displays the Hebrew characters in a right-to-left fashion
-        — i.e., as &quot;<bdi lang="he">ספרים בינלאומיים!</bdi>&quot;
-        — while they would be stored in memory as
-        &quot;<bdo dir="ltr" lang="he">ספרים בינלאומיים!</bdo>&quot;</p>
+      <p>
+        That example demonstrates the importance of using [=directional language-tagged strings=]
+        instead of simple [=language-tagged strings=]
+        in contexts where bidirectional text can be encountered.
+
+      <p>
+        Note that in more complex situations, even the base direction may not be sufficient to correctly render the string.
+        Consider the following example:
+      <p class=example dir="ltr">&quot;<bdi dir="rtl">HTML و CSS: تصميم مواقع الويب</bdi>&quot; is the arabic title of the book.
+
+      <p>
+        For such cases, the best practice is to use datatypes such as <a href="#section-html">`rdf:HTML`</a>
+        or <a href="section-XMLLiteral">`rdf:XMLLiteral`</a>.
+        For the example above, once could use a literal with datatype `rdf:HTML` and the following [=lexical form=]:
+
+      <p class=example><code>
+        &lt;bdi dir="ltr"&gt;&amp;quot;&lt;bdi dir="rtl"&gt;HTML و CSS: تصميم مواقع الويب&lt;/bdi&gt;&amp;quot; is the arabic title of the book.&lt;/bdi&gt;
+      </code>
+
+      <p>
+        If the use of those strucured datatypes is not an option,
+        such complex cases can also be managed in [=directional language-tagged strings=]
+        using Unicode bidirectional control characters.
+        These control characters isolate parts of the text to ensure correct rendering under the [=Unicode Bidirectional Algorithm=].
+
+      <div class=note>
+        <p dir="auto">For more details, see:</p>
+        <ul dir="auto">
+        <li><a href="https://www.w3.org/International/articles/inline-bidi-markup/uba-basics" rel="nofollow">Unicode Bidirectional Algorithm basics</a></li>
+        <li><a href="https://www.w3.org/International/questions/qa-bidi-controls" rel="nofollow">Unicode controls vs. markup for bidi support</a></li>
+        <li><a href="https://www.w3.org/International/questions/qa-bidi-unicode-controls" rel="nofollow">How to use Unicode controls for bidi text</a></li>
+        </ul>
+      </div>
     </section>
 
   </section>
