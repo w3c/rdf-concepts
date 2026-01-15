@@ -1267,34 +1267,39 @@ Accept: text/turtle; version=1.2
         In a left-to-right context (such as an English web page),
         with proper [=bidi isolation=] but <em>without</em> an explicit base direction,
         it would be incorrectly displayed as follows:
-      <p class=example>HTML و CSS: تصميم مواقع الويب
-      <p>while the correct rendering is as follows:
-      <p class=example dir="rtl">HTML و CSS: تصميم مواقع الويب
+      </p>
+      <p class=example>HTML و CSS: تصميم مواقع الويب</p>
+      <p>while the correct rendering is as follows:</p>
+      <p class=example dir="rtl">HTML و CSS: تصميم مواقع الويب</p>
 
       <p>
         That example demonstrates the importance of using [=directional language-tagged strings=]
         instead of simple [=language-tagged strings=]
         in contexts where bidirectional text can be encountered.
+      </p>
 
       <p>
         Note that in more complex situations, even the base direction may not be sufficient to correctly render the string.
         Consider the following example:
-      <p class=example dir="ltr">&quot;<bdi dir="rtl">HTML و CSS: تصميم مواقع الويب</bdi>&quot; is the arabic title of the book.
+      </p>
+      <p class=example dir="ltr">&quot;<bdi dir="rtl">HTML و CSS: تصميم مواقع الويب</bdi>&quot; is the arabic title of the book.</p>
 
       <p>
         For such cases, the best practice is to use datatypes such as <a href="#section-html">`rdf:HTML`</a>
         or <a href="section-XMLLiteral">`rdf:XMLLiteral`</a>.
         For the example above, once could use a literal with datatype `rdf:HTML` and the following [=lexical form=]:
+      </p>
 
       <p class=example><code>
         &lt;bdi dir="ltr"&gt;&amp;quot;&lt;bdi dir="rtl"&gt;HTML و CSS: تصميم مواقع الويب&lt;/bdi&gt;&amp;quot; is the arabic title of the book.&lt;/bdi&gt;
-      </code>
+      </code></p>
 
       <p>
         If the use of those strucured datatypes is not an option,
         such complex cases can also be managed in [=directional language-tagged strings=]
         using Unicode bidirectional control characters.
         These control characters isolate parts of the text to ensure correct rendering under the [=Unicode Bidirectional Algorithm=].
+      </p>
 
       <div class=note>
         <p dir="auto">For more details, see:</p>
