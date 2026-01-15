@@ -2184,10 +2184,10 @@ Accept: text/turtle; version=1.2
 
   <p>
     <a href="#graph-isomorphism">Comparing</a> graphs,
-    <a href="https://www.w3.org/TR/sparql12-query/">querying</a> them,
     or <a href="https://www.w3.org/TR/rdf12-semantics/#simple_entailment_properties">reasoning</a> with them,
     often relies on computing <em>(sub)graph isomorphism</em>,
     which is known to be computationally complex in the worst case.
+    <a href="https://www.w3.org/TR/sparql12-query/">Querying</a> graphs can also involve computationally complex operations.
     This means that malicious graphs can be constructed to cause RDF implementations to stall or run out of memory.
     Implementations processing graphs from untrusted sources are expected to provide mitigations;
     examples are given in the section on <a data-cite="RDF-CANON#dataset-poisoning">Dataset Poisoning</a> in [[RDF-CANON]].
