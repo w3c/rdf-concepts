@@ -1279,27 +1279,23 @@ Accept: text/turtle; version=1.2
       </p>
 
       <p>
-        Note that in more complex situations, even the base direction may not be sufficient to correctly render the string.
-        Consider the following example:
+        Note that the language and base direction address string external bidirectional issues,
+        including <a href="https://www.w3.org/TR/i18n-glossary/#dfn-spillover-effects">spillover</a>
+        problems. It does not address string internal directional issues,
+        which may occurr in more complex examples, such as the following:
       </p>
       <p class=example dir="ltr">&quot;<bdi dir="rtl" lang="ar">HTML و CSS: تصميم مواقع الويب</bdi>&quot; is the arabic title of the book.</p>
 
       <p>
-        For such cases, the best practice is to use datatypes such as <a href="#section-html">`rdf:HTML`</a>
-        or <a href="section-XMLLiteral">`rdf:XMLLiteral`</a>.
-        For the example above, one could use a literal with datatype `rdf:HTML` and the following [=lexical form=]:
+        A [=directional language-tagged string=]
+        representing that example will have the language tag `en` and the base direction `ltr`,
+        but also requires specific Unicode control characters to mark the text between the quotes as `rtl`.
       </p>
 
-      <p class=example><code>
-        &lt;bdi dir="ltr" lang="en"&gt;&amp;quot;&lt;bdi dir="rtl" lang="ar"&gt;HTML و CSS: تصميم مواقع الويب&lt;/bdi&gt;&amp;quot; is the arabic title of the book.&lt;/bdi&gt;
-      </code></p>
-
-      <p>
-        If the use of those strucured datatypes is not an option,
-        such complex cases can also be managed in [=directional language-tagged strings=]
-        using Unicode bidirectional control characters.
-        These control characters isolate parts of the text to ensure correct rendering under the [=Unicode Bidirectional Algorithm=].
-      </p>
+      <div class=note>
+        Other datatypes provide their own way to encode language and bidirectional text,
+        e.g. <a href="#section-html">`rdf:HTML`</a> or <a href="section-XMLLiteral">`rdf:XMLLiteral`</a>.
+      </div>
 
       <div class=note>
         <p dir="auto">For more details, see:</p>
