@@ -1268,9 +1268,9 @@ Accept: text/turtle; version=1.2
         with proper [=bidi isolation=] but <em>without</em> an explicit base direction,
         it would be incorrectly displayed as follows:
       </p>
-      <p class=example>HTML و CSS: تصميم مواقع الويب</p>
+      <p class=example lang="ar">HTML و CSS: تصميم مواقع الويب</p>
       <p>while the correct rendering is as follows:</p>
-      <p class=example dir="rtl">HTML و CSS: تصميم مواقع الويب</p>
+      <p class=example dir="rtl" lang="ar">HTML و CSS: تصميم مواقع الويب</p>
 
       <p>
         That example demonstrates the importance of using [=directional language-tagged strings=]
@@ -1282,7 +1282,7 @@ Accept: text/turtle; version=1.2
         Note that in more complex situations, even the base direction may not be sufficient to correctly render the string.
         Consider the following example:
       </p>
-      <p class=example dir="ltr">&quot;<bdi dir="rtl">HTML و CSS: تصميم مواقع الويب</bdi>&quot; is the arabic title of the book.</p>
+      <p class=example dir="ltr">&quot;<bdi dir="rtl" lang="ar">HTML و CSS: تصميم مواقع الويب</bdi>&quot; is the arabic title of the book.</p>
 
       <p>
         For such cases, the best practice is to use datatypes such as <a href="#section-html">`rdf:HTML`</a>
@@ -1291,7 +1291,7 @@ Accept: text/turtle; version=1.2
       </p>
 
       <p class=example><code>
-        &lt;bdi dir="ltr"&gt;&amp;quot;&lt;bdi dir="rtl"&gt;HTML و CSS: تصميم مواقع الويب&lt;/bdi&gt;&amp;quot; is the arabic title of the book.&lt;/bdi&gt;
+        &lt;bdi dir="ltr" lang="en"&gt;&amp;quot;&lt;bdi dir="rtl" lang="ar"&gt;HTML و CSS: تصميم مواقع الويب&lt;/bdi&gt;&amp;quot; is the arabic title of the book.&lt;/bdi&gt;
       </code></p>
 
       <p>
