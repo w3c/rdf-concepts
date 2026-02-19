@@ -1063,13 +1063,21 @@ Accept: text/turtle; version=1.2
         sometimes called simply <a>RDF Reference</a>,
         is an <a>IRI</a> that is suitable for use as a global reference.
       </p>
-      
       <p>
         <strong>Reference Resolution:</strong>
         An <a>RDF Reference IRI</a> is unchanged by
         <a data-cite="RFC3986#section-5">reference resolution</a>. 
-        The <a data-cite="RFC3986#section-3.3">path component</a> 
+        In URI schemes such as `http` and `https`,
+        the
+        <a data-cite="RFC3986#section-3.3">path component</a>
+        is part of the hierarchy visible to the 
+        resolution algorithm. When resolved, the
+        <a data-cite="RFC3986#section-3.3">path component</a> 
         starts with a `/` character and does not contain `.` or `..` segments.
+        In URI schemes such as `did` and `urn`,
+        components after the scheme delimiter (the first `:`),
+        are not subject to <a data-cite="RFC3986#section-5">resolution</a>.
+        See <a href="RFC3986#section-1.2.3">Hierarchical Identifiers</a>.
       </p>
       <p>
         <strong>Relative IRI references:</strong>
@@ -1084,7 +1092,6 @@ Accept: text/turtle; version=1.2
         Therefore, the RDF graph serialized in such syntaxes is well-defined only
         if a <a data-cite="rfc3986#section-5.1">base IRI can be established</a> [[RFC3986]].
       </p>
-
       <p>
         <strong>URI Schemes:</strong>
         Implementations are encouraged to follow the scheme-specific rules of
@@ -1094,7 +1101,6 @@ Accept: text/turtle; version=1.2
         Implementations ignore URI scheme rules
         for schemes they do not recognize. 
       </p>
-
       <p>
         <strong>IRI normalization:</strong>
         Interoperability problems can be avoided by minting
