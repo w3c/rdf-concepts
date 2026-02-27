@@ -1067,13 +1067,15 @@ Accept: text/turtle; version=1.2
         <strong>Reference Resolution:</strong>
         An <a>RDF Reference IRI</a> is unchanged by
         <a data-cite="RFC3986#section-5">reference resolution</a>. 
-        In URI schemes such as `http` and `https`,
-        the
+        In URI schemes such as `http` and `https`, the
         <a data-cite="RFC3986#section-3.3">path component</a>
         is part of the hierarchy visible to the 
         resolution algorithm. When resolved, the
         <a data-cite="RFC3986#section-3.3">path component</a> 
         starts with a `/` character and does not contain `.` or `..` segments.
+        For example, `https://example/data` resolved against any base IRI
+        is `https://example/data` (unchanged), whereas `https://example/path/../data` 
+        resolved against an arbitrary base IRI is `https://example.com/data`.
       </p>
       <p>
         <strong>Relative IRI references:</strong>
