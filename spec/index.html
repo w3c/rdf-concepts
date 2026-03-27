@@ -207,7 +207,7 @@
     </figure>
 
     <p>This abstract data model can be encoded in different ways while
-      preserving the same stucture, as described in [[[#rdf-documents]]].</p>
+      preserving the same structure, as described in [[[#rdf-documents]]].</p>
 
     <aside class="note">
       The graph structure of the abstract data model is not a conceptual model.
@@ -690,7 +690,7 @@ For example, the term <code>:Alice</code> from a [=triple term=] and <code>:Alic
       If they differ,
       parsers use the version from the media-type parameter and might emit a warning about the mismatch.</p>
 
-    <p>To retain compability that is as broad as possible with older parsers,
+    <p>To retain compatibility that is as broad as possible with older parsers,
       only RDF documents that make use of RDF 1.2-specific functionality
       are encouraged to announce their version (i.e., for RDF documents that do not make use
       of RDF 1.2-specific functionality it is discouraged to announce a version).</p>
@@ -812,17 +812,22 @@ Accept: text/turtle; version=1.2
       <p>When serializing a graph or dataset which uses features incompatible
         with a requested version, servers can consider different alternatives:</p>
 
-      <ol>
-        <li>Eliminate <a>triple terms</a> by using an algorithm such
-          as <i>basic encoding</i> as defined in [[[RDF-INTEROP]]] (downgrading from version "1.2" to "1.2-basic").
-          </li>
-        <li>Replace <a>directional language-tagged strings</a>
-          by <a>literals</a> with a <a>datatype IRI</a> that
-          uses the <a data-cite="JSON-LD11#the-i18n-namespace">`i18n` namespace</a>, as defined in [[JSON-LD11]]
+      <ul>
+        <li>Rewrite the data in an information-preserving way, for example:<ul>
+          <li>Eliminate <a>triple terms</a> by using
+          <i>basic encoding</i>, as defined in [[[RDF-INTEROP]]] (downgrading from version "1.2" to "1.2-basic").
+          <li>Replace <a>directional language-tagged strings</a>
+          with <a>literals</a> of a <a>datatype IRI</a>
+          in the <a data-cite="JSON-LD11#the-i18n-namespace">`i18n` namespace</a>, as defined in [[JSON-LD11]]
           (downgrading from version "1.2" or "1.2-basic" to "1.1").</li>
+          </ul></li>
+        <li>Truncate the data to remove the incompatible features:<ul>
+          <li>Drop any <a>triple</a> that contains a <a>triple term</a>  (downgrading from version "1.2" to "1.2-basic").
+          <li>Turn <a>directional language-tagged strings</a> into <a>language-tagged string</a> by dropping their base direction (downgrading from version "1.2" or "1.2-basic" to "1.1").
+          </ul></li>
         <li>Return `406 "Not Acceptable"`.</li>
         <li>Ignore the requested version and return a native representation.</li>
-      </ol>
+      </ul>
 
       <p class="note">The suggestion here is to follow the
         <a href="https://en.wikipedia.org/wiki/Robustness_principle">Robustness principle</a>
