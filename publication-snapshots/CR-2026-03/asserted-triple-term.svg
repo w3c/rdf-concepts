@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0.0 0.0 464 324">
+
+  <style>@import url('figure.css')</style>
+
+  <defs>
+    <marker id="arrowhead" orient="auto-start-reverse" markerWidth="10" markerHeight="10"
+            refX="0" refY="5">
+      <path d="M0,0 V10 L10,5 Z" fill="context-stroke" />
+    </marker>
+  </defs>
+
+  <g transform="translate(0, 48)">
+    <g transform="translate(84, 0)">
+      <ellipse rx="80" ry="36"/>
+      <text class="middle" y="6">:Alice</text>
+    </g>
+    <g transform="translate(164, 2)">
+      <path d="M0,0 124,0" class="arrow"/>
+      <text x="20" y="-8">:familyName</text>
+    </g>
+    <g transform="translate(379, 0)">
+      <ellipse rx="80" ry="36"/>
+      <text class="middle" y="6">"Liddell"</text>
+    </g>
+  </g>
+
+  <g transform="translate(230, 60)">
+    <path d="m 0,1 c -8,16 -16,24 0,34 s 0,24 0,37" class="reifies"/>
+    <text class="italic" dx="16" dy="50">rdf:reifies</text>
+  </g>
+
+  <g transform="translate(228, 150)">
+    <ellipse rx="48" ry="18"/>
+    <text class="middle italic" y="6">:rei-1</text>
+  </g>
+
+  <g transform="translate(230, 84)">
+    <path d="M0,84 0,140" class="arrow"/>
+    <text x="8" y="118">:accordingTo</text>
+  </g>
+
+  <g transform="translate(230, 272)">
+    <ellipse rx="80" ry="36"/>
+    <text class="middle" y="6">:Bob</text>
+  </g>
+
+</svg>
