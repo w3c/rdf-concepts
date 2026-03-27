@@ -1289,7 +1289,7 @@ Accept: text/turtle; version=1.2
         but this is not always sufficient to correctly render bidirectional text.
 
       <p>
-        Consider the arabic translation of the book title "HTML and CSS: Designing Websites".
+        Consider the Arabic translation of the book title "HTML and CSS: Designing Websites".
         In a left-to-right context (such as an English web page),
         with proper [=bidi isolation=] but <em>without</em> an explicit base direction,
         it would be incorrectly displayed as follows:
@@ -1307,16 +1307,16 @@ Accept: text/turtle; version=1.2
       <p>
         Note that the language and base direction address string external bidirectional issues,
         related to correctly displaying the string in context
-        (e.g. avoiding <a href="https://www.w3.org/TR/i18n-glossary/#dfn-spillover-effects">spillover</a>
-        problems). It does not address string internal directional issues,
-        which may occurr in more complex examples, such as the following:
+        (e.g., avoiding <a href="https://www.w3.org/TR/i18n-glossary/#dfn-spillover-effects">spillover</a>
+        problems). It does not address directional issues internal to the string,
+        which may occur in more complex examples, such as the following:
       </p>
-      <p class=example dir="ltr">&quot;<bdi dir="rtl" lang="ar">HTML و CSS: تصميم مواقع الويب</bdi>&quot; is the arabic title of the book.</p>
+      <p class=example dir="ltr">&quot;<bdi dir="rtl" lang="ar">HTML و CSS: تصميم مواقع الويب</bdi>&quot; is the Arabic title of the book.</p>
 
       <p>
         A [=directional language-tagged string=]
         representing that example will have the language tag `en` and the base direction `ltr`,
-        but also requires specific Unicode control characters to mark the text between the quotes as `rtl`.
+        but also requires specific Unicode bidirectional formatting characters to isolate and mark the text between the quotes as `rtl`.
       </p>
 
       <div class=note>
