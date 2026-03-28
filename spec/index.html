@@ -816,14 +816,15 @@ Accept: text/turtle; version=1.2
         <li>Rewrite the data in an information-preserving way, for example:<ul>
           <li>Eliminate <a>triple terms</a> by using
           <i>basic encoding</i>, as defined in [[[RDF-INTEROP]]] (downgrading from version "1.2" to "1.2-basic").
+          </li>
           <li>Replace <a>directional language-tagged strings</a>
-          with <a>literals</a> of a <a>datatype IRI</a>
+          with typed <a>literals</a> having a <a>datatype IRI</a>
           in the <a data-cite="JSON-LD11#the-i18n-namespace">`i18n` namespace</a>, as defined in [[JSON-LD11]]
           (downgrading from version "1.2" or "1.2-basic" to "1.1").</li>
           </ul></li>
         <li>Truncate the data to remove the incompatible features:<ul>
-          <li>Drop any <a>triple</a> that contains a <a>triple term</a>  (downgrading from version "1.2" to "1.2-basic").
-          <li>Turn <a>directional language-tagged strings</a> into <a>language-tagged string</a> by dropping their base direction (downgrading from version "1.2" or "1.2-basic" to "1.1").
+          <li>Drop any <a>triple</a> that contains a <a>triple term</a> (downgrading from version "1.2" to "1.2-basic").</li>
+          <li>Turn <a>directional language-tagged strings</a> into <a>language-tagged string</a> by dropping their base direction (downgrading from version "1.2" or "1.2-basic" to "1.1").</li>
           </ul></li>
         <li>Return `406 "Not Acceptable"`.</li>
         <li>Ignore the requested version and return a native representation.</li>
