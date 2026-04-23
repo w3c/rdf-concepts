@@ -1525,6 +1525,11 @@ Accept: text/turtle; version=1.2
       and quads with the same graph name
       supply the triples of the <a>named graph</a> with that name.</p>
 
+    <p>There are cases, however, where the representation of an <a>RDF dataset</a> as a set of <a>quads</a> is lossy:
+      an <a>RDF dataset</a> containing an empty <a>named graph</a> (|n|, ∅)
+      will be undistinguishable from an <a>RDF dataset</a> containing no graph named |n|.
+    </p>
+
     <p class="note">Although a <a>quad</a> without a <a>graph name</a>
       consists of the same three components as a <a>triple</a>,
       it is a distinct concept,
