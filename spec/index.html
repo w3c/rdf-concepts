@@ -55,8 +55,6 @@
     };
   </script>
   <style>
-    body:has(input[type='radio'][value='light']:checked) { color-scheme: light }
-    body:has(input[type='radio'][value='dark']:checked) { color-scheme: dark }
     figure { text-align: center }
     figure > a { display: block }
     figure > a > object { max-width: 40em; pointer-events: none }
@@ -64,7 +62,6 @@
     table.simple td, table th { border: 1px solid #444; padding: 0.2em 0.5em; }
     ol ol { list-style-type: lower-latin; }
     .grammar td { font-family: monospace;}
-    .grammar-literal { color: gray;}
     code {color: #ff4500;}  /* Old W3C Style */
     div.abnf {margin-left: 1em;}
 
@@ -79,10 +76,6 @@
     font-weight: bold;
     counter-increment: numsection;
     content: counters(numsection, ".") ") ";
-  }
-
-  .former {
-    font-style: italic;
   }
   </style>
   <!-- Link CSS used by SVGs, to make Echidna discover and bundle it. -->
