@@ -151,7 +151,7 @@
   <ul>
     <li>the formal model-theoretic semantics for RDF [[RDF12-SEMANTICS]]</li>
 
-    <li>serialization syntaxes for storing and exchanging RDF such as [[[RDF12-N-TRIPLES]]] [[RDF12-N-TRIPLES]], [[[RDF12-TURTLE]]] [[RDF12-TURTLE]],
+    <li>serialization syntaxes for storing and exchanging RDF such as [[[RDF12-XML]]] [[RDF12-XML]], [[[RDF12-TURTLE]]] [[RDF12-TURTLE]],
       and [[[JSON-LD11]]] [[JSON-LD11]]</li>
 
     <li>the [[[SPARQL12-QUERY]]] [[SPARQL12-QUERY]]</li>
@@ -866,11 +866,14 @@ Accept: text/turtle; version=1.2
 </p>
 
     <p>A string is identical to another string if it consists of the same sequence of code points.
-      An implementation MAY determine string equality by comparing the
+    </p>
+    <p class="note">
+      An implementation can determine string equality by comparing the
       <a data-cite="I18N-GLOSSARY#dfn-code-unit">code units</a> of two strings
       that use the same <a data-cite="I18N-GLOSSARY#dfn-character-encoding">Unicode character encoding</a>
       (UTF-8 or UTF-16) without decoding the string into a
-      <a data-cite="I18N-GLOSSARY#dfn-code-point" class="lint-ignore">Unicode code point</a> sequence.</p>
+      <a data-cite="I18N-GLOSSARY#dfn-code-point" class="lint-ignore">Unicode code point</a> sequence.
+    </p>
   </section>
 </section>
 
@@ -1162,7 +1165,9 @@ Accept: text/turtle; version=1.2
         <dfn class="export">base direction</dfn> that MUST be one of the following:<ul>
           <li>`ltr`, indicating that the initial text direction is set to left-to-right</li>
           <li>`rtl`, indicating that the initial text direction is set to right-to-left</li>
-        </ul></li>
+        </ul>
+        Textual representations of [=base direction=]s MUST always be lowercase.
+      </li>
     </ol>
 
     <p>A literal is a <dfn class="export">language-tagged string</dfn> if the [=language tag=]
