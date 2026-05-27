@@ -1503,7 +1503,7 @@ Accept: text/turtle; version=1.2
   </section>
 
   <section id="section-dataset-quad" class="informative">
-    <h3>Dataset as a Set of Quads</h3>
+    <h3>Quads</h3>
 
     <p>A <dfn>quad</dfn> is a <a>triple</a> associated with an optional <a>graph name</a>
       and is used when referring to triples within an <a>RDF dataset</a>.
@@ -1512,15 +1512,10 @@ Accept: text/turtle; version=1.2
     <p>A <a>quad</a> can be represented as a tuple composed of <a>subject</a>, <a>predicate</a>, <a>object</a>,
       and an optional <a>graph name</a>.</p>
 
-    <p>An <a>RDF dataset</a> can be considered to be a set of <a>quads</a>
+    <p>A set of quads can be considered as an <a>RDF dataset</a>,
       where quads with no <a>graph name</a> supply the <a>triples</a> of the <a>default graph</a>,
       and quads with the same graph name
-      supply the triples of the <a>named graph</a> with that name.</p>
-
-    <p>There are cases, however, where the representation of an <a>RDF dataset</a> as a set of <a>quads</a> is lossy:
-      an <a>RDF dataset</a> containing an empty <a>named graph</a> (|n|, ∅)
-      will be undistinguishable from an <a>RDF dataset</a> containing no graph named |n|.
-    </p>
+      supply the triples of a <a>named graph</a> with that name.</p>
 
     <p class="note">Although a <a>quad</a> without a <a>graph name</a>
       consists of the same three components as a <a>triple</a>,
