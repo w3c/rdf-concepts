@@ -2184,11 +2184,17 @@ Accept: text/turtle
           </ul></li>
         <li>Truncate the data to remove the incompatible features:<ul>
           <li>Drop any <a>triple</a> that contains a <a>triple term</a> (downgrading from version "1.2" to "1.2-basic").</li>
-          <li>Turn <a>directional language-tagged strings</a> into <a>language-tagged string</a> by dropping their base direction (downgrading from version "1.2" or "1.2-basic" to "1.1").</li>
+          <li>Turn <a>directional language-tagged strings</a> into <a>language-tagged string</a> by dropping their <a>base direction</a> (downgrading from version "1.2" or "1.2-basic" to "1.1").</li>
           </ul></li>
         <li>Return `406 "Not Acceptable"`.</li>
         <li>Ignore the requested version and return a native representation.</li>
       </ul>
+
+      <p>The strategies above are not an exhaustive list.
+        Neither are they exclusive.
+        For example, an implementation may chose to rewrite <a>triple terms</a> and truncate <a>base directions</a>,
+        or to rewrite <a>directional language-tagged strings</a> but return `406 "Not Acceptable"` in the presence of <a>triple terms</a>.
+      </p>
 
     </section>
 
