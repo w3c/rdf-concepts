@@ -787,7 +787,7 @@ Content-Type: text/turtle; version=1.2
       <a href="https://en.wikipedia.org/wiki/Robustness_principle">robustness principle</a>
       (also known as Postel's Law):
       "be conservative in what you send, be liberal in what you accept".
-      In this context, it means that
+      In this context, it means the following:
       <ul>
         <li>implementations that produce data should announce the minimal version of RDF this data complies with, in any way that is compatible with that version; and that</li>
         <li>implementations that consume data should be ready to accept the data even if no version is announced or the announced version is not consistent with the RDF features used in this data.</li>
@@ -2153,7 +2153,7 @@ Accept: text/turtle; version=1.2
       of the requested media type but potentially having a `version` other than what was
       requested.</p>
 
-    <p>Note that a client does not have to use the `version` parameter in the `Accept` header. A request can simply look like:</p>
+    <p>Note that a client does not have to use the `version` parameter in the `Accept` header. A request can simply look like this:</p>
 
     <pre class="box http">GET /document HTTP/1.1
 Host: example.com
