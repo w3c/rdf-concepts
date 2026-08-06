@@ -678,23 +678,23 @@ For example, the term <code>:Alice</code> from a [=triple term=] and <code>:Alic
 
     <p>To allow RDF parsers to error or warn about unsupported RDF versions as early as possible,
       RDF serialization formats are expected to allow a version to be specified,
-      via either a media-type parameter,
+      via either a media type parameter,
       a version announcement in a format-specific syntax,
-      or both.</p>
-
-    <p>When the version is indicated both in a media-type parameter and in syntax,
-      they are expected to be the same.
-      If they differ,
-      parsers use the version from the media-type parameter and might emit a warning about the mismatch.</p>
+      or both.
+      Section <a href="#defined-version-labels" class="sectionRef"></a> defines standard <a>version labels</a>
+      for these mechanisms.
+    </p>
 
     <p>To retain compatibility that is as broad as possible with older parsers,
       only RDF documents that make use of RDF 1.2-specific functionality
       are encouraged to announce their version (i.e., for RDF documents that do not make use
-      of RDF 1.2-specific functionality it is discouraged to announce a version).</p>
+      of RDF 1.2-specific functionality,
+      and therefore are compatible with RDF 1.1 systems,
+      it is discouraged to announce a version).</p>
 
     <p>To announce the version in the HTTP responses using the <code>Content-Type</code> header,
       the server is expected to use the <code>version</code> parameter,
-      as illustrated in the following example response.</p>
+      as illustrated in the following example response:</p>
 
     <pre class="box http">HTTP/1.1 200 OK
 Content-Type: text/turtle; version=1.2
@@ -702,29 +702,12 @@ Content-Type: text/turtle; version=1.2
 
     <p>Servers are also expected to announce the version in-line,
       when the format supports in-line version announcement
-      (such as [[[RDF12-TURTLE]]] [[RDF12-TURTLE]]).</p>
+      (such as <a data-cite="RDF12-TURTLE#sec-version"></a> [[RDF12-TURTLE]]).</p>
 
-    <p>When requesting an RDF document from an HTTP server, a client 
-      can use the <code>version</code> parameter 
-      during <a data-cite="webarch#frag-coneg">content negotiation</a> [[WEBARCH]],
-      by including it in the <code>Accept</code> request header,
-      as illustrated in the following example request.</p>
-	
-    <pre class="box http">GET /document.ttl HTTP/1.1
-Host: example.com
-Accept: text/turtle; version=1.2
-    </pre>
-    <p>
-      Section <a href="#defined-version-labels" class="sectionRef"></a> defines <a>version labels</a>
-      to be used with the <code>version</code> parameter and in <a>concrete RDF syntax</a>.
-    </p>
-
-    <p class="note">As HTTP <a data-cite="webarch#frag-coneg">content negotiation</a> is advisory,
-      clients receiving a document should be prepared to properly handle a document
-      of the requested media type but potentially having a `version` other than what was
-      requested.
-      Clients may consider down-grading the content to an appropriate version themselves
-      as discussed in <a href="#server-considerations" class="sectionRef"></a>.</p>
+    <p>When the version is indicated both in a media type parameter and in syntax,
+      they are expected to be the same.
+      Otherwise,
+      parsers might signal an error or a warning about the mismatch.</p>
   </section>
 </section>
 
@@ -794,59 +777,30 @@ Accept: text/turtle; version=1.2
     </p>
 
     <p>
-      See [[[?RDF-INTEROP]]] for details of encoding "1.2" as "1.2-basic".
-    </p>
-
-    <p>
       For serializations supporting in-line version announcement,
       the version announcement SHOULD be made early in the document
       and certainly before serializing any feature depending on that version.
     </p>
 
-    <section id="server-considerations" class="informative">
-      <h4>Server Considerations</h4>
-      <p>When serializing a graph or dataset which uses features incompatible
-        with a requested version, servers can consider different alternatives:</p>
-
+    <div class="note">
+      Implementations are encouraged to apply the
+      <a href="https://en.wikipedia.org/wiki/Robustness_principle">robustness principle</a>
+      (also known as Postel's Law):
+      "be conservative in what you send, be liberal in what you accept".
+      In this context, it means the following:
       <ul>
-        <li>Rewrite the data in an information-preserving way, for example:<ul>
-          <li>Eliminate <a>triple terms</a> by using
-          <i>basic encoding</i>, as defined in [[[RDF-INTEROP]]] (downgrading from version "1.2" to "1.2-basic").
-          </li>
-          <li>Replace <a>directional language-tagged strings</a>
-          with typed <a>literals</a> having a <a>datatype IRI</a>
-          in the <a data-cite="JSON-LD11#the-i18n-namespace">`i18n` namespace</a>, as defined in [[JSON-LD11]]
-          (downgrading from version "1.2" or "1.2-basic" to "1.1").</li>
-          </ul></li>
-        <li>Truncate the data to remove the incompatible features:<ul>
-          <li>Drop any <a>triple</a> that contains a <a>triple term</a> (downgrading from version "1.2" to "1.2-basic").</li>
-          <li>Turn <a>directional language-tagged strings</a> into <a>language-tagged string</a> by dropping their base direction (downgrading from version "1.2" or "1.2-basic" to "1.1").</li>
-          </ul></li>
-        <li>Return `406 "Not Acceptable"`.</li>
-        <li>Ignore the requested version and return a native representation.</li>
+        <li>Implementations that produce data should announce the minimal version of RDF this data complies with,
+          in any way that is compatible with that version.</li>
+        <li>Implementations that consume data should be ready to accept the data
+          even if no version is announced
+          or the announced version is not consistent with the RDF features used in this data.</li>
       </ul>
+    </div>
 
-      <p class="note">The suggestion here is to follow the
-        <a href="https://en.wikipedia.org/wiki/Robustness_principle">Robustness principle</a>
-        (also known as Postel's Law):
-        servers should be conservative in what they send, be liberal in what they accept.</p>
-    </section>
-
-    <section id="client-considerations" class="informative">
-      <h4>Client Considerations</h4>
-      <p>If a document has no stated `version` (either by HTTP header or internal),
-        systems can assume the version is `"1.2"`, which continues to
-        support all prior RDF versions.</p>
-      <p>When parsing a document with conflicting versions,
-        or when parsing a document using unsupported versions, a parser
-        may do any of the following:</p>
-      <ul>
-        <li>Ignore the version directive.</li>
-        <li>Raise an error and abort.</li>
-        <li>Issue a warning and ignore the triple.</li>
-        <li>Parse the structure and only emit triples consistent with the declared version.</li>
-      </ul>
-    </section>
+    <p>
+      See Appendix <a href="#sec-version-conneg"></a> for a discussion on content-negotiating specific RDF versions,
+      and [[[?RDF-INTEROP]]] [[?RDF-INTEROP]] for details of encoding "1.2" as "1.2-basic".
+    </p>
   </section>
 
   <section id="rdf-strings">
@@ -2129,7 +2083,7 @@ Accept: text/turtle; version=1.2
 
 </section>
 
-<section id="section-skolemization">
+<section id="section-skolemization" class="appendix">
   <h2>Replacing Blank Nodes with IRIs</h2>
 
   <p>Blank nodes do not have identifiers in the RDF abstract data model. The
@@ -2172,6 +2126,101 @@ Accept: text/turtle; version=1.2
   <p class="note">RFC 8615 [[RFC8615]] only specifies well-known URIs,
     not IRIs. For the purpose of this document, a well-known IRI is any
     IRI that results in a well-known <a>URI</a> after IRI-to-URI mapping [[!RFC3987]].</p>
+</section>
+
+<section id="sec-version-conneg" class="appendix informative">
+  <h2>RDF versions and HTTP content-negotiation</h2>
+
+    <p>In addition to supporting inline version announcements,
+    concrete syntaxes for RDF 1.2, such as [[[RDF12-TURTLE]]] [[RDF12-TURTLE]],
+    accept a `version` parameter in their media type.
+    This enables servers (or clients sending data)
+    to advertise RDF versions in the HTTP `Content-Type` header:
+    </p>
+
+    <pre class="box http">HTTP/1.1 200 OK
+Content-Type: text/turtle; version=1.2
+    </pre>
+
+    <p>This also enables clients to use
+      <a data-cite="webarch#frag-coneg">content negotiation</a> [[WEBARCH]]
+      to request a specific version,
+      by including it in the <code>Accept</code> request header,
+      as illustrated in the following example request:</p>
+
+    <pre class="box http">GET /document HTTP/1.1
+Host: example.com
+Accept: text/turtle; version=1.2
+    </pre>
+
+    <p>As HTTP content negotiation is advisory,
+      clients receiving a document should be prepared to properly handle a document
+      of the requested media type but potentially having a `version` other than what was
+      requested.</p>
+
+    <p>Note that a client does not have to use the `version` parameter in
+      the `Accept` header. A request can simply look like this:</p>
+
+
+    <pre class="box http">GET /document HTTP/1.1
+Host: example.com
+Accept: text/turtle
+    </pre>
+
+    <p>This carries no implication about the parsing capabilities of the client.
+      However, a conservative approach would be to assume that this client only
+      supports Turtle 1.1.
+    </p>
+
+    <section id="server-considerations" class="informative">
+      <h2>Server Considerations</h2>
+      <p>When serializing a graph or dataset which uses features incompatible
+        with a requested version, servers can consider different alternatives:</p>
+
+      <ul>
+        <li>Rewrite the data in an information-preserving way, for example:<ul>
+          <li>Eliminate <a>triple terms</a> by using
+          <i>basic encoding</i>, as defined in [[[RDF-INTEROP]]] (downgrading from version "1.2" to "1.2-basic").
+          </li>
+          <li>Replace <a>directional language-tagged strings</a>
+          with typed <a>literals</a> having a <a>datatype IRI</a>
+          in the <a data-cite="JSON-LD11#the-i18n-namespace">`i18n` namespace</a>, as defined in [[JSON-LD11]]
+          (downgrading from version "1.2" or "1.2-basic" to "1.1").</li>
+          </ul></li>
+        <li>Truncate the data to remove the incompatible features:<ul>
+          <li>Drop any <a>triple</a> that contains a <a>triple term</a> (downgrading from version "1.2" to "1.2-basic").</li>
+          <li>Turn <a>directional language-tagged strings</a> into <a>language-tagged string</a> by dropping their <a>base direction</a> (downgrading from version "1.2" or "1.2-basic" to "1.1").</li>
+          </ul></li>
+        <li>Return `406 "Not Acceptable"`.</li>
+        <li>Ignore the requested version and return a native representation.</li>
+      </ul>
+
+      <p>The strategies above are not an exhaustive list.
+        Neither are they exclusive.
+        For example, an implementation may choose to rewrite <a>triple terms</a>
+        and truncate <a>base directions</a>,
+        or to rewrite <a>directional language-tagged strings</a>
+        but return `406 "Not Acceptable"` in the presence of <a>triple terms</a>.
+      </p>
+
+    </section>
+
+    <section id="client-considerations" class="informative">
+      <h2>Client Considerations</h2>
+      <p>If a document has no stated `version` (either by HTTP header or internal),
+        clients should assume the maximum version that they support.</p>
+      <p>When parsing a document with conflicting versions,
+        or when parsing a document using unsupported versions, a parser
+        may do any of the following:</p>
+      <ul>
+        <li>Ignore the version directive.</li>
+        <li>Raise an error and abort.</li>
+        <li>Issue a warning and ignore the triples that use unrecognized features.</li>
+        <li>Parse the structure and only emit triples consistent with the declared version.</li>
+      </ul>
+    </section>
+
+
 </section>
 
 <section id="privacy" class="appendix informative">
