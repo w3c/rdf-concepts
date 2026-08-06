@@ -694,7 +694,7 @@ For example, the term <code>:Alice</code> from a [=triple term=] and <code>:Alic
 
     <p>To announce the version in the HTTP responses using the <code>Content-Type</code> header,
       the server is expected to use the <code>version</code> parameter,
-      as illustrated in the following example response.</p>
+      as illustrated in the following example response:</p>
 
     <pre class="box http">HTTP/1.1 200 OK
 Content-Type: text/turtle; version=1.2
@@ -789,9 +789,9 @@ Content-Type: text/turtle; version=1.2
       "be conservative in what you send, be liberal in what you accept".
       In this context, it means the following:
       <ul>
-        <li>implementations that produce data should announce the minimal version of RDF this data complies with,
-          in any way that is compatible with that version; and that</li>
-        <li>implementations that consume data should be ready to accept the data
+        <li>Implementations that produce data should announce the minimal version of RDF this data complies with,
+          in any way that is compatible with that version.</li>
+        <li>Implementations that consume data should be ready to accept the data
           even if no version is announced
           or the announced version is not consistent with the RDF features used in this data.</li>
       </ul>
@@ -2131,7 +2131,7 @@ Content-Type: text/turtle; version=1.2
 <section id="sec-version-conneg" class="appendix informative">
   <h2>RDF versions and HTTP content-negotiation</h2>
 
-    <p>In addition to supporting inline version announcement,
+    <p>In addition to supporting inline version announcements,
     concrete syntaxes for RDF 1.2, such as [[[RDF12-TURTLE]]] [[RDF12-TURTLE]],
     accept a `version` parameter in their media type.
     This enables servers (or clients sending data)
@@ -2142,8 +2142,9 @@ Content-Type: text/turtle; version=1.2
 Content-Type: text/turtle; version=1.2
     </pre>
 
-    <p>This also enables clients to request a specific version
-      using <a data-cite="webarch#frag-coneg">content negotiation</a> [[WEBARCH]],
+    <p>This also enables clients to use
+      <a data-cite="webarch#frag-coneg">content negotiation</a> [[WEBARCH]]
+      to request a specific version,
       by including it in the <code>Accept</code> request header,
       as illustrated in the following example request:</p>
 
@@ -2157,14 +2158,18 @@ Accept: text/turtle; version=1.2
       of the requested media type but potentially having a `version` other than what was
       requested.</p>
 
-    <p>Note that a client does not have to use the `version` parameter in the `Accept` header. A request can simply look like this:</p>
+    <p>Note that a client does not have to use the `version` parameter in
+      the `Accept` header. A request can simply look like this:</p>
+
 
     <pre class="box http">GET /document HTTP/1.1
 Host: example.com
 Accept: text/turtle
     </pre>
 
-    <p>This carries no implication about the parsing capabilities of the client. However, a conservative approach would be to assume that this client only supports Turtle 1.1.
+    <p>This carries no implication about the parsing capabilities of the client.
+      However, a conservative approach would be to assume that this client only
+      supports Turtle 1.1.
     </p>
 
     <section id="server-considerations" class="informative">
@@ -2192,8 +2197,10 @@ Accept: text/turtle
 
       <p>The strategies above are not an exhaustive list.
         Neither are they exclusive.
-        For example, an implementation may chose to rewrite <a>triple terms</a> and truncate <a>base directions</a>,
-        or to rewrite <a>directional language-tagged strings</a> but return `406 "Not Acceptable"` in the presence of <a>triple terms</a>.
+        For example, an implementation may choose to rewrite <a>triple terms</a>
+        and truncate <a>base directions</a>,
+        or to rewrite <a>directional language-tagged strings</a>
+        but return `406 "Not Acceptable"` in the presence of <a>triple terms</a>.
       </p>
 
     </section>
@@ -2208,7 +2215,7 @@ Accept: text/turtle
       <ul>
         <li>Ignore the version directive.</li>
         <li>Raise an error and abort.</li>
-        <li>Issue a warning and ignore the triples using unrecognized features.</li>
+        <li>Issue a warning and ignore the triples that use unrecognized features.</li>
         <li>Parse the structure and only emit triples consistent with the declared version.</li>
       </ul>
     </section>
