@@ -152,7 +152,7 @@
     <li>the formal model-theoretic semantics for RDF [[RDF12-SEMANTICS]]</li>
 
     <li>serialization syntaxes for storing and exchanging RDF such as [[[RDF12-TURTLE]]] [[RDF12-TURTLE]], 
-      [[[JSON-LD11]]] [[JSON-LD11]], and [[[RDF12-XML]]] [[RDF12-XML]].</li>
+      [[[JSON-LD11]]] [[JSON-LD11]], and [[[RDF12-XML]]] [[RDF12-XML]]</li>
 
     <li>the [[[SPARQL12-QUERY]]] [[SPARQL12-QUERY]]</li>
 
@@ -789,7 +789,7 @@ Content-Type: text/turtle; version=1.2
       "be conservative in what you send, be liberal in what you accept".
       In this context, it means the following:
       <ul>
-        <li>Implementations that produce data should announce the minimal version of RDF this data complies with,
+        <li>Implementations that produce data should announce the minimum version of RDF this data complies with,
           in any way that is compatible with that version.</li>
         <li>Implementations that consume data should be ready to accept the data
           even if no version is announced
@@ -877,7 +877,7 @@ Content-Type: text/turtle; version=1.2
 
     <p><dfn>Triple equality</dfn>:
       Two triples (|s|, |p|, |o|) and (<var>s'</var>, <var>p'</var>, <var>o'</var>)
-      are equal (the same [=RDF triple=]) if and only if all of the following three conditions hold.</p>
+      are equal (the same [=RDF triple=]) if and only if all of the following three conditions hold:</p>
 
     <ul>
       <li>|s| and <var>s'</var> are [=RDF term equality|equal=].</li>
@@ -919,12 +919,15 @@ Content-Type: text/turtle; version=1.2
     <p>The set of [=RDF terms=] <dfn class=export data-lt="appear">appearing</dfn> in an [=RDF triple=] |t| is defined inductively as follows:</p>
 
     <ul>
-      <li>The [=subject=], [=predicate=] and [=object=] of |t| [=appear=] in |t|.
-      <li>If the [=object=] of |t| is an [=RDF triple=] |t2|, then any [=RDF term=] [=appearing=] in |t2| also [=appears=] in |t|.
+      <li>The [=subject=], [=predicate=], and [=object=] of |t| [=appear=] in |t|.</li>
+      <li>If the [=object=] of |t| is an [=RDF triple=] |t2|,
+		then any [=RDF term=] [=appearing=] in |t2| also [=appears=] in |t|.</li>
     </ul>
 
-    <p>By extension, an [=RDF term=] is said to [=appear=] in an [=RDF graph=] if it appears in an [=asserted triple=] of that graph. 
-      An [=RDF triple=] is said to [=appear=] in an [=RDF graph=] if it is either an [=asserted triple=] of that graph or a 
+    <p>By extension, an [=RDF term=] is said to [=appear=] in an [=RDF graph=]
+      if it appears in an [=asserted triple=] of that graph.
+      An [=RDF triple=] is said to [=appear=] in an [=RDF graph=]
+      if it is either an [=asserted triple=] of that graph or a
       [=triple term=] [=appearing=] in that graph.</p>
 
     <p>
@@ -938,8 +941,8 @@ Content-Type: text/turtle; version=1.2
     </ul>
 
     <p>
-      By extension, an [=RDF triple=] is said to be [=ground=] if its [=subject=], [=predicate=], and [=object=]
-      are all ground.
+      By extension, an [=RDF triple=] is said to be [=ground=]
+      if its [=subject=], [=predicate=], and [=object=] are all ground.
       An [=RDF graph=] is said to be [=ground=] if all its [=asserted=] triples are [=ground=].
     </p>
 
@@ -1103,7 +1106,7 @@ Content-Type: text/turtle; version=1.2
     <ol>
       <li>A <dfn class="export">lexical form</dfn>, being an <a data-lt="string">RDF string</a>.</li>
       <li>A <dfn class="export">datatype IRI</dfn>, being an <a>IRI</a>
-        identifying a datatype that determines how the lexical form maps
+        identifying a datatype that determines the way the lexical form maps
         to a <a>literal value</a>.</li>
       <li>If and only if the <a>datatype IRI</a> is
         <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#langString</code> or
@@ -1915,8 +1918,8 @@ Content-Type: text/turtle; version=1.2
             to the input string, without a context element.</li>
           <li>Let <code>domfrag</code> be a DOM
             <a data-cite="DOM#interface-documentfragment"><code>DocumentFragment</code></a> [[DOM]]
-            whose <code>childNodes</code> attribute is equal to <code>domnodes</code></li>
-            <li>Return <code>domfrag.{{Node/normalize()}}</code>.</li>
+            whose <code>childNodes</code> attribute is equal to <code>domnodes</code>.</li>
+          <li>Return <code>domfrag.{{Node/normalize()}}</code>.</li>
         </ul>
       </dd>
     </dl>
@@ -2188,8 +2191,11 @@ Accept: text/turtle
           (downgrading from version "1.2" or "1.2-basic" to "1.1").</li>
           </ul></li>
         <li>Truncate the data to remove the incompatible features:<ul>
-          <li>Drop any <a>triple</a> that contains a <a>triple term</a> (downgrading from version "1.2" to "1.2-basic").</li>
-          <li>Turn <a>directional language-tagged strings</a> into <a>language-tagged string</a> by dropping their <a>base direction</a> (downgrading from version "1.2" or "1.2-basic" to "1.1").</li>
+          <li>Drop any <a>triple</a> that contains a <a>triple term</a>
+            (downgrading from version "1.2" to "1.2-basic").</li>
+          <li>Turn <a>directional language-tagged strings</a> into
+            <a>language-tagged string</a> by dropping their <a>base direction</a>
+            (downgrading from version "1.2" or "1.2-basic" to "1.1").</li>
           </ul></li>
         <li>Return `406 "Not Acceptable"`.</li>
         <li>Ignore the requested version and return a native representation.</li>
@@ -2480,7 +2486,8 @@ Accept: text/turtle
       in [[?JSON-LD11]].
       Note that the <a href="#JSON-value-space">value space</a> defined here
       updates the <a>value space</a> of the
-      <a data-cite="JSON-LD11#the-rdf-json-datatype">`rdf:JSON`</a> datatype defined in [[[JSON-LD11]]] [[JSON-LD11]]</li>
+      <a data-cite="JSON-LD11#the-rdf-json-datatype">`rdf:JSON`</a> datatype
+      defined in [[[JSON-LD11]]] [[JSON-LD11]].</li>
     <li>Clarify Unicode terminology,
       using <a data-cite="I18N-GLOSSARY#dfn-code-point" class="lint-ignore">Unicode code points</a>,
       and restriction to the XML <a data-cite="XML11#charsets">Char</a> production.
