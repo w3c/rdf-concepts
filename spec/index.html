@@ -2275,6 +2275,11 @@ Accept: text/turtle
     The security considerations in the media type registration for XML ([[RFC3023]] section 10)
     provide additional guidance around the expression of arbitrary data and markup.</p>
 
+  <p>When producing RDF data for interchange, content creators are advised to consider
+    the discussion of Unicode code points identified as problematic in Section 2.2 of
+    [[RFC9839]]. This advice does not change which <a>RDF strings</a> or <a>IRIs</a>
+    are permitted by this specification.</p>
+
   <p>RDF uses <a>IRIs</a> as term identifiers.
     Applications interpreting data expressed in RDF ought to address the security issues of
     [[[RFC3987]]] [[RFC3987]] Section 8, as well as
