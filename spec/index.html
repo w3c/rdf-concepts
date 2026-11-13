@@ -702,7 +702,7 @@ Content-Type: text/turtle; version=1.2
 
     <p>Servers are also expected to announce the version in-line,
       when the format supports in-line version announcement
-      (such as <a data-cite="RDF12-TURTLE#sec-version"></a> [[RDF12-TURTLE]]).</p>
+      (such as <a data-cite="RDF12-TURTLE#sec-version" data-noindex></a> [[RDF12-TURTLE]]).</p>
 
     <p>When the version is indicated both in a media type parameter and in syntax,
       they are expected to be the same.
@@ -958,7 +958,7 @@ Content-Type: text/turtle; version=1.2
 
     <p>An IRI in the RDF <a>abstract syntax</a>
       MUST be <a data-cite="RFC3986#section-5">resolved</a> per [[RFC3986]] and
-      MUST NOT be a <a data-cite="RFC3986#section-4.2">relative reference</a>.
+      MUST NOT be a <a data-cite="RFC3986#section-4.2" data-noindex>relative reference</a>.
       An IRI MAY contain a <a data-cite="RFC3986#section-3.5">fragment identifier</a>.
       An IRI SHOULD follow rules defined by the <a data-cite="RFC3986#section-3.1">IRI scheme</a>.
     </p>
@@ -967,7 +967,7 @@ Content-Type: text/turtle; version=1.2
       Two IRIs are equal if and only if they consist of the same sequence of
       <a data-cite="I18N-GLOSSARY#dfn-code-point" class="lint-ignore">Unicode code points</a>,
       as in Simple String Comparison in
-      <a data-cite="rfc3987#section-5.3.1">section 5.3.1</a> of [[!RFC3987]].
+      <a data-cite="rfc3987#section-5.3.1" data-noindex>section 5.3.1</a> of [[!RFC3987]].
       (This is done in the abstract syntax, so the IRIs are resolved
       IRIs with no escaping or encoding.)
       Further normalization MUST NOT be performed before this comparison. </p>
@@ -982,7 +982,7 @@ Content-Type: text/turtle; version=1.2
         [[RFC3986]] that permits a wider range of Unicode characters [[UNICODE]].
         Every URI and URL is an IRI, but not every IRI is an URI.
         In RDF, IRIs are used as <dfn data-lt="iri reference">IRI references</dfn>, as defined in [[RFC3987]]
-        <a data-cite="RFC3987#section-1.3">section 1.3</a>.
+        <a data-cite="RFC3987#section-1.3" data-noindex>section 1.3</a>.
         An IRI reference is common usage of an Internationalized Resource Identifier.
         An IRI reference refers to either a resolved <a>IRI</a> or <a>relative IRI reference</a>,
         as described by the <em>IRI-reference</em> production in <a href="#iri-abnf" class="sectionRef"></a>.
@@ -990,7 +990,7 @@ Content-Type: text/turtle; version=1.2
         When IRIs are used in operations that are only
         defined for URIs, they must first be converted according to
         the mapping defined in
-        <a data-cite="rfc3987#section-3.1">section 3.1</a>
+        <a data-cite="rfc3987#section-3.1" data-noindex>section 3.1</a>
         of [[!RFC3987]]. A notable example is retrieval over the HTTP
         protocol. The mapping involves UTF-8 encoding of non-ASCII
         characters, %-encoding of octets not allowed in URIs, and
@@ -1066,7 +1066,7 @@ Content-Type: text/turtle; version=1.2
         <strong>IRI normalization:</strong>
         Interoperability problems can be avoided by minting
         only IRIs that are normalized according to
-        <a data-cite="rfc3987#section-5">Section 5</a>
+        <a data-cite="rfc3987#section-5" data-noindex>Section 5</a>
         of [[!RFC3987]]. 
       </p>
 
@@ -1113,7 +1113,7 @@ Content-Type: text/turtle; version=1.2
         <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#dirLangString</code>, there is a
         non-empty <dfn class="export">language tag</dfn> as defined by [[!BCP47]].
         The language tag MUST be well-formed according to
-        <a data-cite="bcp47#section-2.2.9">section 2.2.9</a>
+        <a data-cite="bcp47#section-2.2.9" data-noindex>section 2.2.9</a>
         of [[!BCP47]],
         and MUST be treated accordingly, that is, in a case-insensitive manner.
         Two [[!BCP47]]-complying strings that differ only by case represent the same [=language tag=].</li>
@@ -1177,7 +1177,7 @@ Content-Type: text/turtle; version=1.2
         Any [=string=] complying with [[!BCP47]] MAY be used to represent a [=language tag=] in concrete syntaxes or implementations.
         Such strings MAY be case normalized
         (for example, by canonicalizing as defined by
-        <a data-cite="bcp47#section-4.5">BCP 47 section 4.5</a>).
+        <a data-cite="bcp47#section-4.5" data-noindex>BCP 47 section 4.5</a>).
         Alternatively, an implementation MAY preserve the case from the original representation,
         provided that it processes it in a case-insensitive manner.
       </p>
@@ -1417,8 +1417,8 @@ Content-Type: text/turtle; version=1.2
       can avoid interoperability issues by not ascribing importance to
       the presence or absence of empty named graphs.</p>
 
-    <p>SPARQL version 1.2 [[SPARQL12-CONCEPTS]] uses 
-      <a data-cite="SPARQL12-QUERY#sparqlDataset">the same concept of an RDF Dataset</a>
+    <p>SPARQL version 1.2 [[SPARQL12-CONCEPTS]] uses the same concept of an
+      <a data-cite="SPARQL12-QUERY#sparqlDataset">RDF Dataset</a>
       as RDF versions 1.1 and 1.2,
       in which the graph names of named graphs may be IRIs or blank nodes.
       In contrast, version 1.1 of the SPARQL Query Language [[SPARQL11-QUERY]]
@@ -2487,7 +2487,7 @@ Accept: text/turtle
       and moved the sections about the <a>rdf:HTML</a> and <a>rdf:XMLLiteral</a>
       datatypes to this appendix.</li>
     <li>Added the <a>rdf:JSON</a> datatype, the definition of which is adopted
-      from <a data-cite="?JSON-LD11#the-rdf-json-datatype">Section&nbsp;10.2 The `rdf:JSON` Datatype</a>
+      from <a data-cite="?JSON-LD11#the-rdf-json-datatype" data-noindex>Section&nbsp;10.2 The `rdf:JSON` Datatype</a>
       in [[?JSON-LD11]].
       Note that the <a href="#JSON-value-space">value space</a> defined here
       updates the <a>value space</a> of the
